@@ -1,0 +1,15 @@
+#Name	DIR/UNDIR/IGNORE
+controls-state-change-of	DIR
+controls-transport-of	DIR
+controls-phosphorylation-of	DIR		
+controls-expression-of	DIR
+catalysis-precedes	DIR
+in-complex-with	UNDIR
+interacts-with	UNDIR
+neighbor-of	IGNORE
+consumption-controlled-by	DIR
+controls-production-of	DIR
+controls-transport-of-chemical	DIR
+chemical-affects	DIR
+reacts-with	UNDIR
+used-to-produce	DIR
