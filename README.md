@@ -16,6 +16,9 @@ java -jar paxtools.jar toSBGN reactome-signaling-by-wnt.owl reactome-signaling-b
 java -jar paxtools.jar toGSEA reactome-signaling-by-wnt.owl reactome-signaling-by-wnt.gmt uniprot -subPathways
 ```
 
+To make a [SIF graph](http://www.pathwaycommons.org/pc2/formats#sif_relations), use the directionality rules from the URL. Ignore "neighborhood of" relationships.
+
+```
 ## Parsing Hypergraph
 
 In `/Users/aritz/git/biopax-parsers/java/bin`:

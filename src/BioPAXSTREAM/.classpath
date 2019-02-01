@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="/Users/annaritz/git/biopax-hypergraph/biopax-hypergraph/jars/paxtools-5.0.0-beta1.jar"/>
+	<classpathentry kind="lib" path="/Users/annaritz/git/biopax-hypergraph/biopax-hypergraph/jars/cpath-client-6.1.0-20150321.002752-1-fat-jar.jar"/>
+	<classpathentry kind="lib" path="/Users/annaritz/git/biopax-hypergraph/biopax-hypergraph/jars/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="/Users/annaritz/git/biopax-hypergraph/biopax-hypergraph/jars/jopt-simple-6.0-alpha-1.jar"/>
+	<classpathentry kind="lib" path="/Users/annaritz/git/biopax-hypergraph/biopax-hypergraph/jars/junit-4.12.jar"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
