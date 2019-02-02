@@ -18,7 +18,7 @@ java -jar paxtools.jar toGSEA reactome-signaling-by-wnt.owl reactome-signaling-b
 
 To make a [SIF graph](http://www.pathwaycommons.org/pc2/formats#sif_relations), use the directionality rules from the URL. Ignore "neighborhood of" relationships.
 
-```
+
 ## Parsing Hypergraph
 
 In `/Users/aritz/git/biopax-parsers/java/bin`:
@@ -34,6 +34,34 @@ python src/make-signaling-hypergraph.py hypergraph/ hypergraph/
 ```
 
 Makes `Signaling-by-WNT-hyperedges.txt` and `Signaling-by-WNT-hypernodes.txt` files in the `hypergraph/` directory.
+
+## Get example from the HALP poster
+
+```
+http://www.pathwaycommons.org/pc2/get?uri=http://identifiers.org/reactome/R-HSA-4641262&subpw=true
+mv ~/Downloads/get destruction-complex-disassembly.owl
+java -jar paxtools.jar toSIF destruction-complex-disassembly.owl destruction-complex-disassembly.extended -extended  -andSIF seqDb=uniprot 
+cd /Users/aritz/git/biopax-parsers/java/bin
+java PathwayCommonsParser /Users/aritz/Documents/github/pathway-connectivity/destruction-complex-disassembly.owl /Users/aritz/Documents/github/pathway-connectivity/hypergraph/ http://identifiers.org/reactome/R-HSA-4641262 verbose
+cd /Users/aritz/Documents/github/pathway-connectivity/
+python src/make-signaling-hypergraph.py hypergraph/ hypergraph/
+```
+
+Make the OWL and SIF formats consistent (remove CHEBI elements; remove things with non-UniProt)
+
+```
+python3 src/make-formats-consistent.py hypergraph/Disassembly-of-the-destruction-complex-and-recruitment-of-AXIN-to-the-membrane-hyperedges.txt hypergraph/Disassembly-of-the-destruction-complex-and-recruitment-of-AXIN-to-the-membrane-hypernodes.txt destruction-complex-disassembly.extended.sif consistent-destruction-complex-assembly
+```
+
+## Get single reaction
+
+http://www.pathwaycommons.org/pc2/get?uri=http://identifiers.org/reactome/R-HSA-201717&subpw=true
+mv ~/Downloads/get R-HSA-201717.owl
+java -jar paxtools.jar toSIF R-HSA-201717.owl R-HSA-201717.extended -extended  -andSIF seqDb=uniprot 
+cd /Users/aritz/git/biopax-parsers/java/bin
+java PathwayCommonsParser /Users/aritz/Documents/github/pathway-connectivity/R-HSA-201717.owl /Users/aritz/Documents/github/pathway-connectivity/hypergraph/ http://identifiers.org/reactome/R-HSA-201717 verbose
+cd /Users/aritz/Documents/github/pathway-connectivity/
+python src/make-signaling-hypergraph.py hypergraph/ hypergraph/
 
 ## Receptors
 
