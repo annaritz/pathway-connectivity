@@ -1,0 +1,1 @@
+python connectivity-survey.py ../../hypergraph/reactome_hypergraph_full/reactome output/
