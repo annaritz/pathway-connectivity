@@ -12,12 +12,12 @@ def plot_hist(graph,compound_graph,hypergraph_nodes,hypergraph_edges,outprefix):
 	hgraph_vals = read_file(hypergraph_nodes)
 	hedge_vals = read_file(hypergraph_edges)
 
-	fig, ((ax1,ax2),(ax3,ax4)) = plt.subplots(ncols=2, nrows=2, figsize=(10,10))
+	fig, ((ax1,ax2),(ax3,ax4)) = plt.subplots(ncols=2, nrows=2, figsize=(10,8))
 
 	add_ax_hist(fig,ax1,graph_vals,'Graph Connectivity',nbins=1000,broken=True)
 	add_ax_hist(fig,ax2,cgraph_vals,'Compound Graph Connectivity',nbins=30,broken=False)
 	add_ax_hist(fig,ax3,hgraph_vals,'Hypergraph Connectivity',nbins=30,broken=False)
-	add_ax_hist(fig,ax4,hedge_vals,'Hyperedge Connectivity',nbins=30,broken=False)
+	add_ax_hist(fig,ax4,hedge_vals,'Hyperedge Connectivity',nbins=30,broken=False,ylabel='# of Hyperedge Tails')
 
 	plt.tight_layout()
 	plt.savefig(outprefix+'.png')
@@ -27,14 +27,15 @@ def plot_hist(graph,compound_graph,hypergraph_nodes,hypergraph_edges,outprefix):
 	print('saved to '+outprefix+'.pdf')
 	return
 
-def add_ax_hist(fig,ax,vals,title,nbins=10,broken=True):
+def add_ax_hist(fig,ax,vals,title,nbins=10,broken=True,ylabel='# of Source Nodes'):
 	vals = sorted(vals)
 	#nbins = 1000 # number of bins
 	shift = 100 # how far in to make the broken axis from last coodinates
 	d = .01  # how big to make the diagonal lines in axes coordinates
 
-	ax.set_ylabel('# of Source Nodes')
-	ax.set_xlabel('# of Reachable Nodes (%d total)' % (len(vals)))
+	ax.set_ylabel(ylabel)
+	#ax.set_xlabel('# of Reachable Nodes (%d total)' % (len(vals)))
+	ax.set_xlabel('# of Reachable Nodes')
 	ax.set_title(title)
 	if broken:
 		# get break limits
