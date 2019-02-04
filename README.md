@@ -90,3 +90,16 @@ $ tail -n +53763 pathways.txt | cut -f 2 | sort | uniq -c
  745 pid
 ```
 I am interested in all pathway sources except for the [Small Molecule Pathway Database](http://smpdb.ca/) (SMPDB) and [Integrating Network Objects with Hierarchies](http://inoh.hgc.jp/), which has a broken link.
+
+## Entire Reactome
+
+```
+# mv and gunzip PathwayCommons10.reactome.BIOPAX.owl
+cd /Users/aritz/git/biopax-parsers/java/bin
+java PathwayCommonsParser /Users/aritz/Documents/github/pathway-connectivity/data/OWL/PathwayCommons10.reactome.BIOPAX.owl /Users/aritz/Documents/github/pathway-connectivity/hypergraph/reactome_hypergraphs/ verbose > /Users/aritz/Documents/github/pathway-connectivity/hypergraph/reactome_hypergraphs/out.log
+python src/hypergraph/make-signaling-hypergraph.py hypergraph/reactome_hypergraphs/ hypergraph/reactome_hypergraphs_parsed/
+cd /Users/aritz/Documents/github/pathway-connectivity/hypergraph/reactome_hypergraph_full
+cat ../reactome_hypergraphs_parsed/*-hypernodes.txt | sort -u > reactome-hypernodes.txt
+cat ../reactome_hypergraphs_parsed/*-hyperedges.txt | sort -u > reactome-hyperedges.txt
+
+```
