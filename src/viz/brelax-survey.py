@@ -10,7 +10,6 @@ import numpy, scipy
 import scipy.cluster.hierarchy as hier
 import scipy.spatial.distance as dist
 
-## get data
 def main(infile,outprefix):
 	print('making matrix...')
 	dataMatrix =[]
@@ -19,7 +18,44 @@ def main(infile,outprefix):
 			if line[0] == '#': 
 				continue
 			row =line.strip().split('\t')
-			row = [int(i) for i in row[1:]] # skip first element (hid name)
+			row = [int(i) for i in row[2:]] # skip first element (hid name) and second element (time)
+			dataMatrix.append(row)
+	print('data is %d by %d' % (len(dataMatrix),len(dataMatrix[0])))
+
+	#get your data into a 2d array where rows are genes, and columns 
+	#are conditions
+	data = numpy.array(dataMatrix)
+
+	# only get the first five columns
+	inds = numpy.lexsort((data[:,0],data[:,5],data[:,10]))
+
+	data = data[inds]
+
+	numpy.seterr(divide='ignore')
+	data = numpy.log10(data)
+	numpy.seterr(divide='warn')# https://stackoverflow.com/questions/21752989/numpy-efficiently-avoid-0s-when-taking-logmatrix
+
+	fig, (ax1,ax2) = plt.subplots(ncols=2, nrows=1, figsize=(5,8))
+	ax1.matshow(data, aspect='auto', origin='lower') 
+	ax2.matshow(data, aspect='auto', origin='lower') 
+	#plt.colorbar()
+	plt.tight_layout()
+	plt.savefig(outprefix+'.png')
+	print('saved to '+outprefix+'.png')
+	plt.savefig(outprefix+'.pdf')
+	os.system('pdfcrop %s.pdf %s.pdf' % (outprefix,outprefix))
+	print('saved to '+outprefix+'.pdf')
+	return
+
+def clustering(infile,outprefix):
+	print('making matrix...')
+	dataMatrix =[]
+	with open(infile) as fin:
+		for line in fin:
+			if line[0] == '#': 
+				continue
+			row =line.strip().split('\t')
+			row = [int(i) for i in row[2:]] # skip first element (hid name)
 			dataMatrix.append(row)
 	print('data is %d by %d' % (len(dataMatrix),len(dataMatrix[0])))
 
@@ -33,9 +69,12 @@ def main(infile,outprefix):
 	#are conditions
 	data = numpy.array(dataMatrix)
 
+	# only get the first five columns
+	smalldata = data[:100,:10]
+
 	print('calculating distances...')
 	#calculate a distance matrix
-	distMatrix = dist.pdist(data)
+	distMatrix = dist.pdist(smalldata)
 
 	#convert the distance matrix to square form. The distance matrix 
 	#calculated above contains no redundancies, you want a square form 
@@ -51,6 +90,7 @@ def main(infile,outprefix):
 
 	#get the order of rows according to the dendrogram 
 	leaves = dendro['leaves'] 
+	print(leaves)
 
 	print('reorder...')
 	#reorder the original data according to the order of the 
@@ -64,8 +104,11 @@ def main(infile,outprefix):
 	## log transform
 	for i in range(len(dataMatrix)):
 		for j in range(len(dataMatrix[i])):
-			dataMatrix[i][j] = log(dataMatrix[i][j],10)
+			if dataMatrix[i][j] != 0:
+				dataMatrix[i][j] = log(dataMatrix[i][j],10)
+	numpy.seterr(divide='ignore')
 	transformedData = numpy.log10(transformedData)
+	numpy.seterr(divide='warn')# https://stackoverflow.com/questions/21752989/numpy-efficiently-avoid-0s-when-taking-logmatrix
 
 	fig, (ax1,ax2) = plt.subplots(ncols=2, nrows=1, figsize=(5,8))
 	ax1.matshow(dataMatrix, aspect='auto', origin='lower') 

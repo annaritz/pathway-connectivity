@@ -7,10 +7,10 @@ from halp.utilities import directed_graph_transformations as transform
 import hgraph_utils
 
 def main(prefix,outprefix):
-	H = hgraph_utils.make_hypergraph(prefix)
-	print('skipping both. uncomment one of the surveys: nodes or hedges.')
+	H, identifier2id, id2identifier = hgraph_utils.make_hypergraph(prefix)
+	#print('skipping both. uncomment one of the surveys: nodes or hedges.')
 	#survey_nodes(H,outprefix+'reactome.txt')
-	#survey_hedges(H,outprefix+'reactome_hedges.txt')
+	survey_hedges(H,id2identifier,outprefix+'reactome_hedges.txt')
 
 	return
 
@@ -29,20 +29,21 @@ def survey_nodes(H,outfile):
 	print('wrote to %s' % (outfile))
 	return
 
-def survey_hedges(H,outfile):
+def survey_hedges(H,id2identifier,outfile):
 	out1 = open(outfile,'w')
-	out1.write('#Name\tNumBVisit\tBVisitNodes\tTraversedHedges\tRestrictiveHedges\n')
+	out1.write('#HyperedgeIdentifier\tNumBVisit\tBVisitNodes\tTraversedHedges\tRestrictiveHedges\n')
 	i = 0
 	for hedge_id in H.hyperedge_id_iterator():
+		identifier = H.get_hyperedge_attribute(hedge_id,'identifier')
 		i+=1
 		if i % 100 == 0:
 			print('hyperedge %d of %d' % (i,stats.number_of_hyperedges(H)))
-		bconn, traversed, restrictive = hpaths.b_visit_restrictive(H,H.get_hyperedge_tail(hedge_id))
+		bconn, traversed, restrictive = hpaths.b_visit_restrictive(H,H.get_hyperedge_head(hedge_id))
 		out1.write('%s\t%d\t%s\t%s\t%s\n' % \
-			(hedge_id,len(bconn),
+			(identifier,len(bconn),
 				';'.join([n for n in bconn]),
-				';'.join([e for e in traversed]),
-				';'.join([e for e in restrictive])))
+				';'.join([id2identifier[e] for e in traversed]),
+				';'.join([id2identifier[e] for e in restrictive])))
 	out1.close()
 	print('wrote to %s' % (outfile))
 	return
