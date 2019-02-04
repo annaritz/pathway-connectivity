@@ -23,26 +23,53 @@ def main(infile,outprefix):
 			dataMatrix.append(row)
 	print('data is %d by %d' % (len(dataMatrix),len(dataMatrix[0])))
 
+	# pull off all zeros
+	num_zero_rows = sum([dataMatrix[i][-1]==0 for i in range(len(dataMatrix))])
+	print('there are %d zeroed-out rows. Ignore.' % (num_zero_rows))
+	dataMatrix = [dataMatrix[i] for i in range(len(dataMatrix)) if dataMatrix[i][-1]!=0 ]
+	print('data is now %d by %d' % (len(dataMatrix),len(dataMatrix[0])))
+
 	#get your data into a 2d array where rows are genes, and columns 
 	#are conditions
 	data = numpy.array(dataMatrix)
-	
-	coarse_data = dataMatrix
+
+	print('calculating distances...')
+	#calculate a distance matrix
+	distMatrix = dist.pdist(data)
+
+	#convert the distance matrix to square form. The distance matrix 
+	#calculated above contains no redundancies, you want a square form 
+	#matrix where the data is mirrored across the diagonal.
+	distSquareMatrix = dist.squareform(distMatrix)
+
+	print('linkage matrix...')
+	#calculate the linkage matrix 
+	linkageMatrix = hier.linkage(distSquareMatrix)
+
+	print('dendrogram...')
+	dendro = hier.dendrogram(linkageMatrix)
+
+	#get the order of rows according to the dendrogram 
+	leaves = dendro['leaves'] 
+
+	print('reorder...')
+	#reorder the original data according to the order of the 
+	#dendrogram. Note that this slice notation is numpy specific.
+	#It just means for every row specified in the 'leaves' array,
+	#get all the columns. So it effectively remakes the data matrix
+	#using the order from the 'leaves' array.
+	transformedData = data[leaves,:]
+
+	print('log transform...')
+	## log transform
 	for i in range(len(dataMatrix)):
 		for j in range(len(dataMatrix[i])):
-			coarse_data[i][j] = int(coarse_data[i][j]*1000)/1000.0
-	cdata = numpy.array(coarse_data)
+			dataMatrix[i][j] = log(dataMatrix[i][j],10)
+	transformedData = numpy.log10(transformedData)
 
-	ind =numpy.lexsort((cdata[:,0],cdata[:,1]))
-
-	data = data[ind]
-
-	## log transform
-	data = numpy.log10(data)
-
-	fig, (ax1,ax2) = plt.subplots(ncols=2, nrows=1, figsize=(8,5))
-	cax = ax1.matshow(data, aspect='auto') 
-	fig.colorbar(cax)
+	fig, (ax1,ax2) = plt.subplots(ncols=2, nrows=1, figsize=(5,8))
+	ax1.matshow(dataMatrix, aspect='auto', origin='lower') 
+	ax2.matshow(transformedData, aspect='auto', origin='lower') 
 
 	plt.tight_layout()
 	plt.savefig(outprefix+'.png')
