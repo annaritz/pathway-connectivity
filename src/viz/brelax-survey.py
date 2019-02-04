@@ -27,17 +27,17 @@ def main(infile,outprefix):
 	data = numpy.array(dataMatrix)
 
 	# only get the first five columns
-	inds = numpy.lexsort((data[:,0],data[:,5],data[:,10]))
+	inds = numpy.lexsort((data[:,0],data[:,5],data[:,10],data[:,30],data[:,40]))
 
 	data = data[inds]
 
-	numpy.seterr(divide='ignore')
-	data = numpy.log10(data)
-	numpy.seterr(divide='warn')# https://stackoverflow.com/questions/21752989/numpy-efficiently-avoid-0s-when-taking-logmatrix
+	#numpy.seterr(divide='ignore')
+	#data = numpy.log2(data)
+	#numpy.seterr(divide='warn')# https://stackoverflow.com/questions/21752989/numpy-efficiently-avoid-0s-when-taking-logmatrix
 
 	fig, (ax1,ax2) = plt.subplots(ncols=2, nrows=1, figsize=(5,8))
-	ax1.matshow(data, aspect='auto', origin='lower') 
-	ax2.matshow(data, aspect='auto', origin='lower') 
+	ax1.matshow(data, aspect='auto') 
+	ax2.matshow(numpy.log2(data), aspect='auto') 
 	#plt.colorbar()
 	plt.tight_layout()
 	plt.savefig(outprefix+'.png')
