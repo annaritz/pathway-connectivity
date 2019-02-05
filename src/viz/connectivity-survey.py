@@ -6,18 +6,24 @@ import matplotlib.pyplot as plt
 # from https://stackoverflow.com/questions/44731152/matplotlib-create-broken-axis-in-subplot
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
-def plot_hist(graph,compound_graph,hypergraph_nodes,hypergraph_edges,outprefix):
-	graph_vals = read_file(graph)
-	cgraph_vals = read_file(compound_graph)
-	hgraph_vals = read_file(hypergraph_nodes)
-	hedge_vals = read_file(hypergraph_edges)
+def plot_hist(file1,file2,file3,file4,outprefix):
+	a = read_file(file1)
+	b = read_file(file2)
+	c = read_file(file3)
+	d = read_file(file4)
 
 	fig, ((ax1,ax2),(ax3,ax4)) = plt.subplots(ncols=2, nrows=2, figsize=(10,8))
 
-	add_ax_hist(fig,ax1,graph_vals,'Graph Connectivity',nbins=1000,broken=True)
-	add_ax_hist(fig,ax2,cgraph_vals,'Compound Graph Connectivity',nbins=30,broken=False)
-	add_ax_hist(fig,ax3,hgraph_vals,'Hypergraph Connectivity',nbins=30,broken=False)
-	add_ax_hist(fig,ax4,hedge_vals,'Hyperedge Connectivity',nbins=30,broken=False,ylabel='# of Hyperedge Tails')
+	n1,bins1,patches1,js1,je1 = add_ax_hist(fig,ax1,a,'Graph Connectivity',nbins=1000,broken=True)
+	n2,bins2,patches2,js2,je2 = add_ax_hist(fig,ax2,b,'Bipartite Graph Connectivity',nbins=1000,broken=True)
+	n3,bins3,patches3,js3,je3 = add_ax_hist(fig,ax3,c,'Compound Graph Connectivity',nbins=30,broken=False)
+	n4,bins4,patches4,js4,je4 = add_ax_hist(fig,ax4,d,'Hyperedge Connectivity',nbins=30,broken=False)
+
+	## overwrite jump start & end for 3 & 4
+	js3,j3e = [1000,2500]
+	je3 = 2500
+	js4 = 10
+	je4 = 25
 
 	plt.tight_layout()
 	plt.savefig(outprefix+'.png')
@@ -25,10 +31,28 @@ def plot_hist(graph,compound_graph,hypergraph_nodes,hypergraph_edges,outprefix):
 	plt.savefig(outprefix+'.pdf')
 	os.system('pdfcrop %s.pdf %s.pdf' % (outprefix,outprefix))
 	print('saved to '+outprefix+'.pdf')
+
+	print('computing statistics...')
+	print_stats('graph', file1,n1,bins1,js1,je1,len(a))
+	print_stats('bipartite graph',file2,n2,bins2,js2,je2,len(b))
+	print_stats('compound graph',file3,n3,bins3,js3,je3,len(c))
+	print_stats('hypergraph',file4,n4,bins4,js4,je4,len(d))
+
 	return
 
-def add_ax_hist(fig,ax,vals,title,nbins=10,broken=True,ylabel='# of Source Nodes'):
+def print_stats(name,filename,n,bins,js,je,num_vals):
+	print("FILE %s: %s.  %d total nodes surveyed." % (name,filename,num_vals))
+	binrange = [i for i in range(len(bins)) if bins[i] >= js and bins[i] <= je]
+	js = binrange[0]
+	je = binrange[-1]
+	print(' %d (%f) <= %.2f ' % (sum(n[:js]),sum(n[:js])/num_vals),js)
+	print(' Number >= %.2f (%.2f percent reached): %d (%f)' % (je,je/float(num_vals),sum(n[je:]),sum(n[je:])/num_vals))
+	return
+
+def add_ax_hist(fig,ax,vals,title,nbins=10,broken=True,ylabel='# of Source Nodes',log=False):
 	vals = sorted(vals)
+	jump_start = None
+	jump_end = None
 	#nbins = 1000 # number of bins
 	shift = 100 # how far in to make the broken axis from last coodinates
 	d = .01  # how big to make the diagonal lines in axes coordinates
@@ -45,6 +69,8 @@ def add_ax_hist(fig,ax,vals,title,nbins=10,broken=True,ylabel='# of Source Nodes
 				i = j
 
 		print('biggest jump:',i,vals[i],vals[i+1])
+		jump_start = vals[i]
+		jump_end = vals[i+1]
 		# make them equal distances
 		range_to_keep = max(vals[i],max(vals)-vals[i+1])+shift
 
@@ -52,11 +78,11 @@ def add_ax_hist(fig,ax,vals,title,nbins=10,broken=True,ylabel='# of Source Nodes
 		ax2 = divider.new_horizontal(size="100%", pad=0.2)
 		fig.add_axes(ax2)
 
-		ax.hist(vals,bins=nbins,color='#4C8DD6',edgecolor='k')
+		n,bins,patches = ax.hist(vals,bins=nbins,color='#4C8DD6',edgecolor='k',log=log)
 		ax.set_xlim(-10,range_to_keep)
 		ax.spines['right'].set_visible(False)
 
-		ax2.hist(vals,bins=nbins,color='#4C8DD6',edgecolor='k')
+		ax2.hist(vals,bins=nbins,color='#4C8DD6',edgecolor='k',log=log)
 		ax2.set_xlim(max(vals)-range_to_keep,max(vals))
 		ax2.tick_params(left="off", labelleft='off')
 		ax2.spines['left'].set_visible(False)
@@ -72,9 +98,9 @@ def add_ax_hist(fig,ax,vals,title,nbins=10,broken=True,ylabel='# of Source Nodes
 		ax.plot((1 - d, 1 + d), (-d, +d), **kwargs)  # bottom-left diagonal
 		ax.plot((1 - d, 1 + d), (1 - d, 1 + d), **kwargs)  # bottom-right diagona
 	else:
-		ax.hist(vals,bins=nbins,color='#4C8DD6',edgecolor='k')
+		n,bins,patches = ax.hist(vals,bins=nbins,color='#4C8DD6',edgecolor='k',log=log)
 
-	return 
+	return n,bins,patches, jump_start, jump_end
 
 
 def read_file(infile):
@@ -88,11 +114,11 @@ def read_file(infile):
 			else:
 				row = line.strip().split('\t')
 				if len(row) >= 2:
-					entries[row[0]]= int(row[1])
+					entries[row[0]] = int(row[1])
 	return list(entries.values())
 
 if __name__ == '__main__':
 	if len(sys.argv) != 6:
-		print('USAGE: python3 connectivity-survey.py <GRAPH> <COMPOUND_GRAPH> <HYPERGRAPH_NODES> <HYPERGRAPH_EDGES> <OUTPREFIX>')
+		print('USAGE: python3 connectivity-survey.py <GRAPH> <BIPARTITE_GRAPH> <COMPOUND_GRAPH> <HYPERGRAPH> <OUTPREFIX>')
 
 	plot_hist(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5])
