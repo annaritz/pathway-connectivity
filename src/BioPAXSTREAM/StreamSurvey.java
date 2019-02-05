@@ -55,23 +55,30 @@ public class StreamSurvey {
 
 	public HashMap<String,String> getDownstream(Model model) throws IOException {
 		Set<PhysicalEntity> entitySet = model.getObjects(PhysicalEntity.class);
+		System.out.println(entitySet.size() + " entity sets.");
+		int size = entitySet.size();
+		int i = 0;
 		HashMap<String,String> id2name = new HashMap<String,String>();
 		
 		BufferedWriter out = new BufferedWriter(new FileWriter(outfile));
-		out.write("#Entity\tNumDownstream\tDownstreamElements\n");
+		out.write("#Entity\tNumDownstream\n");
 		
-		int limit = 10;
+		int limit = 30;
 		Direction downstream = Direction.DOWNSTREAM;
 		Set<BioPAXElement> source;
 		for (PhysicalEntity entity: entitySet) {
-			id2name.put(entity.getUri(),entity.getDisplayName());
+			i++;
+			if (i % 100 == 0){
+				System.out.println(" "+i+" of "+size);
+			}
+			id2name.put(entity.getRDFId(),entity.getDisplayName());
 			source = new HashSet<BioPAXElement>();
 			source.add(entity);
 			Set<BioPAXElement> result = QueryExecuter.runNeighborhood(source, model, limit, downstream);
-			System.out.println("Entity: "+entity.getDisplayName()+": "+result.size()+" downstream elements");
+			//System.out.println("Entity: "+entity.getDisplayName()+": "+result.size()+" downstream elements");
 			Set<String> members = new HashSet<String>();
 			for (BioPAXElement e : result) {
-				members.add(e.getUri());
+				members.add(entity.getRDFId());
 				/**
 				if (e instanceof PhysicalEntity) 
 					System.out.println("  "+((PhysicalEntity)e).getDisplayName());
@@ -79,7 +86,8 @@ public class StreamSurvey {
 					System.out.println("  "+e.getUri());
 				**/
 			}
-			out.write(entity.getUri()+"\t"+result.size()+"\t"+String.join(",", members)+"\n");
+			//out.write(entity.getUri()+"\t"+result.size()+"\t"+String.join(",", members)+"\n");
+			out.write(entity.getRDFId()+"\t"+result.size()+"\n");
 			
 			//System.exit(0);
 		}
