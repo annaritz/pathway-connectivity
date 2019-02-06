@@ -8,22 +8,30 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 def plot_hist(file1,file2,file3,file4,outprefix):
 	a = read_file(file1)
+	a = [e/len(a) for e in a]
 	b = read_file(file2)
+	b = [e/len(b) for e in b]
 	c = read_file(file3)
+	c = [e/len(c) for e in c]
 	d = read_file(file4)
+	d = [e/len(d) for e in d]
 
 	fig, ((ax1,ax2),(ax3,ax4)) = plt.subplots(ncols=2, nrows=2, figsize=(10,8))
 
-	n1,bins1,patches1,js1,je1 = add_ax_hist(fig,ax1,a,'Graph Connectivity',nbins=1000,broken=True)
-	n2,bins2,patches2,js2,je2 = add_ax_hist(fig,ax2,b,'Bipartite Graph Connectivity',nbins=1000,broken=True)
-	n3,bins3,patches3,js3,je3 = add_ax_hist(fig,ax3,c,'Compound Graph Connectivity',nbins=30,broken=False)
-	n4,bins4,patches4,js4,je4 = add_ax_hist(fig,ax4,d,'Hyperedge Connectivity',nbins=30,broken=False)
+	n1,bins1,patches1,js1,je1 = add_ax_hist(fig,ax1,a,'Graph Connectivity\n%d nodes surveyed' % \
+		(len(a)),nbins=500,broken=True, shift=0.02)
+	n2,bins2,patches2,js2,je2 = add_ax_hist(fig,ax2,b,'Bipartite Graph Connectivity\n%d nodes surveyed' % \
+		(len(b)),nbins=500,broken=True,shift=0.01)
+	n3,bins3,patches3,js3,je3 = add_ax_hist(fig,ax3,c,'Compound Graph Connectivity\n%d nodes surveyed' % \
+		(len(c)),nbins=50,broken=False)#True,shift=0.01)
+	n4,bins4,patches4,js4,je4 = add_ax_hist(fig,ax4,d,'Hyperedge Connectivity\n%d nodes surveyed' % \
+		(len(d)),nbins=30,broken=False)
 
 	## overwrite jump start & end for 3 & 4
-	js3,j3e = [1000,2500]
-	je3 = 2500
-	js4 = 10
-	je4 = 25
+	js1,je1 = [.01,.80]
+	js2,je2 = [.01,.40]
+	js3,je3 = [.10,.80]
+	js4,je4 = [.001,.001]
 
 	plt.tight_layout()
 	plt.savefig(outprefix+'.png')
@@ -33,33 +41,33 @@ def plot_hist(file1,file2,file3,file4,outprefix):
 	print('saved to '+outprefix+'.pdf')
 
 	print('computing statistics...')
-	print_stats('graph', file1,n1,bins1,js1,je1,len(a))
-	print_stats('bipartite graph',file2,n2,bins2,js2,je2,len(b))
-	print_stats('compound graph',file3,n3,bins3,js3,je3,len(c))
-	print_stats('hypergraph',file4,n4,bins4,js4,je4,len(d))
+	print_stats('graph',file1,a,js1,je1)
+	print_stats('bipartite graph',file2,b,js2,je2)
+	print_stats('compound graph',file3,c,js3,je3)
+	print_stats('hypergraph',file4,d,js4,je4)
 
 	return
 
-def print_stats(name,filename,n,bins,js,je,num_vals):
+def print_stats(name,filename,vals,js,je):
+	num_vals = len(vals)
 	print("FILE %s: %s.  %d total nodes surveyed." % (name,filename,num_vals))
-	binrange = [i for i in range(len(bins)) if bins[i] >= js and bins[i] <= je]
-	js = binrange[0]
-	je = binrange[-1]
-	print(' %d (%f) <= %.2f ' % (sum(n[:js]),sum(n[:js])/num_vals),js)
-	print(' Number >= %.2f (%.2f percent reached): %d (%f)' % (je,je/float(num_vals),sum(n[je:]),sum(n[je:])/num_vals))
+	num_lower_tail = len([v for v in vals if v <= js])
+	num_upper_tail = len([v for v in vals if v >= je])
+	print(' %d source nodes (%f) <= %f reached nodes' % (num_lower_tail,num_lower_tail/num_vals,js))
+	print(' %d source nodes (%f) >= %f reached nodes' % (num_upper_tail,num_upper_tail/num_vals,je))
 	return
 
-def add_ax_hist(fig,ax,vals,title,nbins=10,broken=True,ylabel='# of Source Nodes',log=False):
+def add_ax_hist(fig,ax,vals,title,nbins=10,broken=True,ylabel='# of Source Nodes',log=False,shift=0.05, d = 0.01):
 	vals = sorted(vals)
 	jump_start = None
 	jump_end = None
 	#nbins = 1000 # number of bins
-	shift = 100 # how far in to make the broken axis from last coodinates
-	d = .01  # how big to make the diagonal lines in axes coordinates
+	#shift = .05 # how far in to make the broken axis from last coodinates
+#	d = .01  # how big to make the diagonal lines in axes coordinates
 
 	ax.set_ylabel(ylabel)
 	#ax.set_xlabel('# of Reachable Nodes (%d total)' % (len(vals)))
-	ax.set_xlabel('# of Reachable Nodes')
+	ax.set_xlabel('Percent of Reachable Nodes')
 	ax.set_title(title)
 	if broken:
 		# get break limits
@@ -79,11 +87,11 @@ def add_ax_hist(fig,ax,vals,title,nbins=10,broken=True,ylabel='# of Source Nodes
 		fig.add_axes(ax2)
 
 		n,bins,patches = ax.hist(vals,bins=nbins,color='#4C8DD6',edgecolor='k',log=log)
-		ax.set_xlim(-10,range_to_keep)
+		ax.set_xlim(-range_to_keep/10,range_to_keep)
 		ax.spines['right'].set_visible(False)
 
 		ax2.hist(vals,bins=nbins,color='#4C8DD6',edgecolor='k',log=log)
-		ax2.set_xlim(max(vals)-range_to_keep,max(vals))
+		ax2.set_xlim(max(vals)-range_to_keep,max(vals)+range_to_keep/10)
 		ax2.tick_params(left="off", labelleft='off')
 		ax2.spines['left'].set_visible(False)
 
