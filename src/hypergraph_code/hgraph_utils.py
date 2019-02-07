@@ -16,11 +16,12 @@ def make_hypergraph(file_prefix,delim=';',sep='\t'):
 	identifier2id = {}
 	id2identifier = {}
 	H = directed_hypergraph.DirectedHypergraph()	
+	skipped1 = 0
+	skipped2 = 0
 	with open(file_prefix+'-hyperedges.txt') as fin:
 		for line in fin:
 			if line[0] == '#':
 				continue
-
 			row = line.strip().split(sep)
 			tail = set()
 			head = set()
@@ -37,13 +38,20 @@ def make_hypergraph(file_prefix,delim=';',sep='\t'):
 				tail.update(row[3].split(delim))
 			hedge_id = row[4]
 
-			if len(tail) > 0 and len(head) > 0:
+			## THIS IS A HACK FOR NOW ( should be incorporated in the make-hypergraph.py code)
+			## IGnore any reactions that have a Reactome Identifier (e.g. has "HSA") instead of 
+			## a PAthway Commons identifier.
+			if any(['HSA' in s for s in tail]+['HSA' in s for s in head]):
+				skipped1+=1
+			elif len(tail)==0 or len(head)==0:
+				skipped2+=1
+			else:
 				hid = H.add_hyperedge(tail,head,identifier=hedge_id)
 				identifier2id[hedge_id] = hid 
 				id2identifier[hid] = hedge_id
-			else:
-				print('WARNING: skipping hyperedge',hedge_id)
-
+				
+	print('%d reactions skipped because of Reactome identifier' % (skipped1))
+	print('%d reactions skipped because of an empty tail or head' % (skipped2))
 	## annotate nodes
 	num_hypernodes = 0
 	for node in H.get_node_set():
@@ -56,7 +64,7 @@ def make_hypergraph(file_prefix,delim=';',sep='\t'):
 			H.add_node(node,hypernode_members=hypernodes[node],is_hypernode=True)
 			num_hypernodes+=1
 		else:
-			H.add_node(node,is_hypernode=False)
+			H.add_node(node,is_hypernode=False,hypernode_members=[])
 
 		H.add_node(node)
 
@@ -95,3 +103,35 @@ def make_b_visit_dict(hedge_connectivity_file,identifier2id):
 
 	print('%d hyperedges processed' % (len(b_visit_dict)))
 	return b_visit_dict
+
+def filter_by_blacklisted_entities(H,blacklist_file,outfile=None):
+	blacklisted = set()
+	with open(blacklist_file) as fin:
+		for line in fin: # take first column of blacklist file
+			blacklisted.add(line.strip().split()[0])
+	print('%d entities blacklisted' % (len(blacklisted)))
+
+	## remove blacklisted entities, retaining hyperedges if they have nonempty
+	## heads and tails. Can't use the halp remove_node() function because that
+	## removes any hyperedge that contains the node.
+	## also have to check hypernodes, removing them if all members are blacklisted.
+	nodes_to_remove = set()
+	for node in H.get_node_set():
+		if node in blacklisted: # node is in blacklisted set
+			nodes_to_remove.add(node)
+		if H.get_node_attribute(node,'is_hypernode'):
+			#print('checking hypernode %s' % (node))
+			members = H.get_node_attribute(node,'hypernode_members')
+			num_blacklisted = sum([e in blacklisted for e in members])
+			if num_blacklisted == len(members):
+				nodes_to_remove.add(node)
+				print('adding hypernode to removed nodes.')
+	print('set to remove %d nodes' % (len(nodes_to_remove)))
+	if outfile:
+		out = open(outfile,'w')
+		for n in nodes_to_remove:
+			out.write('%s\n'% (n))
+		out.close()
+		print('wrote to %s' % (outfile))
+
+	return H

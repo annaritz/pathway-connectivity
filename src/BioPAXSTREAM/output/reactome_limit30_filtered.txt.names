@@ -5,7 +5,6 @@ http://pathwaycommons.org/pc2/Complex_183bb1144599d4bfaf20f0a3357015bf	DREAM com
 http://pathwaycommons.org/pc2/Complex_86dba5646a7156efc4e58a884faa4032	Ub-Cys632-UBA1
 http://pathwaycommons.org/pc2/SmallMolecule_c87627d182be5d6edd45674ba918b3b2	LTC4
 http://pathwaycommons.org/pc2/Complex_f47c092810f66d8594dd7e566d10e7d2	NEDD8-CRL4 E3 ubiquitin ligase:COMMDs:CCDC22:DCUN1D1,2,4,5
-http://pathwaycommons.org/pc2/Protein_5046ab07e741935bb889845e4b70e01c	IA1
 http://pathwaycommons.org/pc2/Complex_009c8eb10cf3aa00a6621d0f5f9df27b	Extended microhomologous 3'-ssDNA overhangs-flap-DSB:MRN:RBBP8:PARP1,PARP2:FEN1:POLQ
 http://pathwaycommons.org/pc2/SmallMolecule_b8a7ac8f34eb815661edc5b0a244b1a6	Lac
 http://pathwaycommons.org/pc2/Complex_c6fd38daae0004e6964e8b7a1a701b56	6xMeR-PIWIL2:cleaved transposon RNA:TDRD1:TDRD12:DDX4:ASZ:MOV10L1
@@ -885,7 +884,6 @@ http://pathwaycommons.org/pc2/Complex_d57419c5b3fe4e1ff4942117b0502b89	VEGF dime
 http://pathwaycommons.org/pc2/Protein_492cdb9168de568fad1b56a5f87bdb21	HBEGF
 http://pathwaycommons.org/pc2/Complex_f375fb2ff50f023cde72198700ed83d6	CD30L:CD30
 http://pathwaycommons.org/pc2/PhysicalEntity_3846b001e08f2d9d3041161a2d89fa87	isocitrate-oxoglutarate transporter
-http://pathwaycommons.org/pc2/Protein_fe6cd79ec720198e9c24885b6d4ee6db	NR5A2-1
 http://pathwaycommons.org/pc2/Complex_bd23a3b8798ff6e146e06682d8b6af18	multiubiquitinated Cdh1 associated with APC/C
 http://pathwaycommons.org/pc2/Protein_14a81b4d1dc334b7a06d5677c7ecc41d	Opticin
 http://pathwaycommons.org/pc2/Complex_22d5c79560ba924e44018032bb84ce38	p-Y693-STAT4:p-Y701-STAT1:IL12A gene
@@ -1470,7 +1468,6 @@ http://pathwaycommons.org/pc2/Complex_b8eeb1c72ea12e7213f0346ee1c58fd0	RUNX1:CBF
 http://pathwaycommons.org/pc2/SmallMolecule_ba1caf59958d82dcda3a58e93e9593f5	ligands of SLC28A1
 http://pathwaycommons.org/pc2/Complex_2c7e25f1a1f5e5d1acff118558b65195	Exon Junction Complex
 http://pathwaycommons.org/pc2/PhysicalEntity_e283c220e422dd8fdd37e7ae3d89f5a7	MeR4-histone H2A, Histone H2A
-http://pathwaycommons.org/pc2/Protein_e9ee3fd70f6513024fe7dfaf88105801	GJB2
 http://pathwaycommons.org/pc2/Complex_e08c55f2dd55059ea2136829ed9229b3	RAC1:GTP,CDC42:GTP:IQGAPs:CALM1:4Ca2+
 http://pathwaycommons.org/pc2/Protein_ad8e02b321020cf76e99aca772c2830b	CBL
 http://pathwaycommons.org/pc2/Protein_17f74bf3e05aa98f50f385d4cc46c29e	KCNN4
@@ -1855,7 +1852,6 @@ http://pathwaycommons.org/pc2/Complex_37f1f93109e0a875b9c0a6ee8329a4cd	ACACA:2Mn
 http://pathwaycommons.org/pc2/Protein_84030674368feeeeb964a31d3b5368cc	CDK11p58
 http://pathwaycommons.org/pc2/Complex_9556448b7499e97fe4ab11c85de63ae7	EXT1:EXT2
 http://pathwaycommons.org/pc2/Complex_ba1600cd9a4c1fa762a804d023e2521d	CNDP2 homodimer
-http://pathwaycommons.org/pc2/Protein_1dd2f5a1cfb2ebf6db23b5f299cb22e2	HNF-4-alpha
 http://pathwaycommons.org/pc2/Protein_2f4e0bd083eca25bab0544c332cbc5f0	Active MAPKAP kinase
 http://pathwaycommons.org/pc2/Protein_f36676c702b8deb3866f1c8e87078528	AZGP1
 http://pathwaycommons.org/pc2/Protein_c631087364ebe6d1e9a36042ed6c3d24	AANAT
@@ -2048,7 +2044,6 @@ http://pathwaycommons.org/pc2/Complex_081e7b012d79518e000e2c5fda74160f	ADIPOQ tr
 http://pathwaycommons.org/pc2/SmallMolecule_0e29842eb3ff7cf29bacead218d057c2	Gly
 http://pathwaycommons.org/pc2/SmallMolecule_e421c467fd8232a57738a91f0f75841b	MVA
 http://pathwaycommons.org/pc2/Protein_7503267ab51c2d0005b63de8d6948442	REV (P04618) protein
-http://pathwaycommons.org/pc2/Protein_fd2436535d8a0ada46049ee9521387a5	ACLY
 http://pathwaycommons.org/pc2/Complex_514c446129f39d52b4b82589cadbed6c	VRK3:DUSP3
 http://pathwaycommons.org/pc2/Complex_92821901e6fe87af4fb0b30279784fdb	fl-TLR9:unmethylated CpG DNA
 http://pathwaycommons.org/pc2/Protein_4ef7e00f79a3d68150a7bb2040cd4b26	iPLA2
@@ -2623,7 +2618,6 @@ http://pathwaycommons.org/pc2/SmallMolecule_bb0ea0c849f392e6704b089c5ccd080e	TPN
 http://pathwaycommons.org/pc2/Complex_553677768504b63125edaa18e2c56213	CUBN:GC:25(OH)D
 http://pathwaycommons.org/pc2/SmallMolecule_7089814a8d49e5b282e38b2e8a79c1aa	NAADP
 http://pathwaycommons.org/pc2/Protein_3e7c91f5edfbf6643a0964a6f413b6c9	ST3GAL1-4
-http://pathwaycommons.org/pc2/Protein_b0f8169a81b63e532c7233578bd0124b	HNF6
 http://pathwaycommons.org/pc2/Complex_b54a5d3fcd2831a02a934f8e699ff6ba	RUNX1:CBFB:TAL1 core complex
 http://pathwaycommons.org/pc2/Dna_7e5f0968c5c7c6607fa08cc052c2357b	AXIN1 gene
 http://pathwaycommons.org/pc2/SmallMolecule_f37ec5025fd91acf7a641ac02e2e8a1b	18(S)-RvE1,E2,E3
@@ -3006,7 +3000,6 @@ http://pathwaycommons.org/pc2/Dna_984c2d93f7138fbb2a178672a373e228	HSPA8 gene, A
 http://pathwaycommons.org/pc2/SmallMolecule_46be08de01cd9ca1e4b004bf9d967bfc	MSNO
 http://pathwaycommons.org/pc2/Protein_6c94412ea284b9e7ccbca77c2d9108b8	MCM3
 http://pathwaycommons.org/pc2/Complex_6732cba9b2a14edde5e72f83b185295c	GYG2 dimer
-http://pathwaycommons.org/pc2/Protein_acacb761f6c6e7381c507ac29bb29d51	IFNB1
 http://pathwaycommons.org/pc2/Complex_dad5308c49812a795dc3870b109c9b00	sBAFF,sAPRIL:3xTAC1,BCMA
 http://pathwaycommons.org/pc2/Protein_e5d15def748a9feed351f50ebde1ce34	phospho-ERK-2
 http://pathwaycommons.org/pc2/SmallMolecule_f407fc91bc144272310e3c0219f51a5c	O2
@@ -3545,7 +3538,6 @@ http://pathwaycommons.org/pc2/Protein_d0b765f89c4345dc60bdea520dd9fe0b	TPO
 http://pathwaycommons.org/pc2/Protein_96dd9ac0409cac2524065d4500d7049c	LMNA
 http://pathwaycommons.org/pc2/Protein_1420cb6e57022bf1d6240273d31359a3	GLRX5
 http://pathwaycommons.org/pc2/Protein_020e55890d903b97246151b3cd7fc728	OTUD3
-http://pathwaycommons.org/pc2/Protein_bb46e48ae1e341479f32c84aeeadd816	NEUROD1
 http://pathwaycommons.org/pc2/Protein_a60a11f31ef21ab31e062acf21e2d0d4	SFN
 http://pathwaycommons.org/pc2/Complex_4e3f6fdf128412cf59a8f82cb9b82e86	PIKFYVE:VAC14:FIG4
 http://pathwaycommons.org/pc2/Complex_24aaed33b506819dd50149837771ef24	EEFSEC:GDP
@@ -5491,7 +5483,6 @@ http://pathwaycommons.org/pc2/Complex_7696c4a01e996340ed5152ec420c3b48	Phosphory
 http://pathwaycommons.org/pc2/Complex_08a531b208ee125b11753301310912eb	p-5Y-PKC-theta:DAG
 http://pathwaycommons.org/pc2/PhysicalEntity_a42154ce31b34abd52c18ab6d52c94d0	tRNA(Leu,Lys,Ser) containing 1-methylA-58
 http://pathwaycommons.org/pc2/Protein_51e451056ed3e2322986c4d349859882	pro-SFTPB
-http://pathwaycommons.org/pc2/Protein_b7e200f199464e0358b968a8f5e488f0	NGN3
 http://pathwaycommons.org/pc2/SmallMolecule_a0385c97208b33664107d8634dfc1b37	K+
 http://pathwaycommons.org/pc2/Complex_106807fe6f089881ef059034d39cf3e4	CANX:EBI3:IL27
 http://pathwaycommons.org/pc2/Complex_bc90b148bc7ca54c48d25b441565f469	RTC with minus strand DNA synthesis initiated from 3'-end
@@ -5594,7 +5585,6 @@ http://pathwaycommons.org/pc2/PhysicalEntity_8c555df67c0052b9fb0dbe4b425c22b8	Da
 http://pathwaycommons.org/pc2/SmallMolecule_40de0fed69949241e46784c6e7fa0f5d	1-PP-IP5
 http://pathwaycommons.org/pc2/Protein_6efcbe5aa8c885205ad28ee87b962936	N-glycan-protein
 http://pathwaycommons.org/pc2/Protein_4c5d57ad258c38c2cc954f73e060b562	DOK1,DOK2,DOK4,DOK5,DOK6
-http://pathwaycommons.org/pc2/Protein_43c5430a5afa5027e79b45dacd1dbfad	ONECUT3
 http://pathwaycommons.org/pc2/Complex_13ee1d694bc3862a568555db0007e126	pTie2 and SHP2 complex
 http://pathwaycommons.org/pc2/Complex_e549a8a95c128bad34b47921bd651d4d	E2F4,E2F5:TFDP1,TFDP2
 http://pathwaycommons.org/pc2/Complex_5a62d98691426f9681eaf3ff7fe2abae	ACAT2 tetramer
@@ -6110,7 +6100,6 @@ http://pathwaycommons.org/pc2/SmallMolecule_0f0679aed68ea121d739e2ac78ed9bd5	EtO
 http://pathwaycommons.org/pc2/Protein_3ee8fb5e621d0a546539cbf151e7674e	LIPT1
 http://pathwaycommons.org/pc2/PhysicalEntity_e7e4bd0b78ff97f43988c7e3d1d3cf5e	microtubule
 http://pathwaycommons.org/pc2/PhysicalEntity_5a668caba5dbd902dd9c771977b6534d	dsDNA with inter-SSA deletion
-http://pathwaycommons.org/pc2/Protein_a96a8b11d3a745a16280aced59db8ff3	ACC
 http://pathwaycommons.org/pc2/Complex_1e8dd576ebfcf07ccfb41527799fbc9b	Contactin1:CASPR complex
 http://pathwaycommons.org/pc2/Protein_5c8f09d527857601c48cfb4695889fce	S100B
 http://pathwaycommons.org/pc2/Protein_53d9421ea8843fc2453033b209866deb	p-Y348-SYK
@@ -7194,7 +7183,6 @@ http://pathwaycommons.org/pc2/Complex_c183f0a2b864ab39945b86e59de8a733	Sema3A:Nr
 http://pathwaycommons.org/pc2/SmallMolecule_80e966bbc425ee740573f8f0308ecdac	(d)C, T, (d)U
 http://pathwaycommons.org/pc2/Complex_8335168b841175e63c03acb858d4bf29	PRDM4:Histone deacetylase
 http://pathwaycommons.org/pc2/SmallMolecule_9528929d0ea13fe43069cd0ce71df915	trans,cis-Lauro-2,6-dienoyl-CoA
-http://pathwaycommons.org/pc2/Protein_a2026d860a454e22e3d2a59b2d4afc8d	Monomeric connexin protein
 http://pathwaycommons.org/pc2/Complex_f181f7a4d07500cba19ef293af0bd1d0	TEAD:WWTR1(TAZ)
 http://pathwaycommons.org/pc2/Complex_78cd7df9efd65200c8f4ea6c72d64f12	Talin:RIAM complex
 http://pathwaycommons.org/pc2/Complex_55366f03a8f8d30a719c7f281b9c9fb1	TUFM:GTP:aminoacyl-tRNA
@@ -7496,7 +7484,6 @@ http://pathwaycommons.org/pc2/PhysicalEntity_bb5984d3e3d65dfa6ce13132c172cb86	DG
 http://pathwaycommons.org/pc2/Complex_18d186722a3865bd897603b671b0731b	dsDNA:ZBP1:pS-172,K48polyUb-TBK1
 http://pathwaycommons.org/pc2/Protein_dd6f199765dc1d61a0618d64ab82e318	MAOA
 http://pathwaycommons.org/pc2/Complex_edd4548e4646218f1f7089b38bb2d12d	OTC trimer
-http://pathwaycommons.org/pc2/Protein_0deb60cd10e1e6c5bcb9525e1522f250	GLUT2
 http://pathwaycommons.org/pc2/Complex_6e0e6c2971796d2c00d5e1a4a2a81d21	RAP1A:GDP
 http://pathwaycommons.org/pc2/Complex_80f7da6912833065afecb9b8c5b4b211	CK octamers
 http://pathwaycommons.org/pc2/Complex_5109614f3aedbdc45be0e4b045344dab	Nectin-1:PVRL3 trans heterodimer
@@ -8470,7 +8457,6 @@ http://pathwaycommons.org/pc2/Protein_060fdfd1e88190d3a1daae4365dfe2fa	HSPG2
 http://pathwaycommons.org/pc2/Complex_12bc030a4c28346f6b3a0681915f41d1	OXER1:5-oxoETE
 http://pathwaycommons.org/pc2/Complex_737b95fa13cc227bd6f6751c92fc1e3d	PP2A-PPP2R2A
 http://pathwaycommons.org/pc2/PhysicalEntity_4ab120b938f69406d5a70453fa61ad17	RIP1:RIP3 oligomer
-http://pathwaycommons.org/pc2/Protein_87ba79bda2f17caa2460bc87cc824c64	FOXA3
 http://pathwaycommons.org/pc2/Protein_042f0fec8328191670056eab644100b2	ETFBKMT
 http://pathwaycommons.org/pc2/Complex_218114583d84da8795b5f5248848eaf5	2xIgA:JCHAIN
 http://pathwaycommons.org/pc2/Protein_e2bc78bd503ff58dc52cfd7bfbae2d60	SLC25A10
@@ -10644,7 +10630,6 @@ http://pathwaycommons.org/pc2/Complex_c85d5a19a4e20caa8d0fb13374632150	6xMeR-PIW
 http://pathwaycommons.org/pc2/Complex_58e045294a2b8e234ad8e4aacade9b3f	HLA-C group 1 interacting with KIR2DS2
 http://pathwaycommons.org/pc2/Complex_8b280d0b39f5a1684a432348ce7b13c6	MYC gene:ESR1:ESTG:JUND:FOSB:Cohesin Complex
 http://pathwaycommons.org/pc2/Protein_f57e975779c7917a0f820b83e96ff8be	p14-ARF
-http://pathwaycommons.org/pc2/Protein_a31645062e7ed87e5f13a79e72d10f80	HNF1B
 http://pathwaycommons.org/pc2/Protein_9f6d52a1299f8b215181075482a64766	NRAGE
 http://pathwaycommons.org/pc2/SmallMolecule_5499c6112f6fdd210bee762377be0433	NRPE
 http://pathwaycommons.org/pc2/SmallMolecule_4b8040f2f3fabde1d83621603fb49c3c	ADP
@@ -10799,7 +10784,6 @@ http://pathwaycommons.org/pc2/Protein_0bd7c4378ceafc20238ac968971dfb44	SHPRH
 http://pathwaycommons.org/pc2/Complex_16f08fa3b0b5ac363fa970031f5e60a8	UCK2 tetramer
 http://pathwaycommons.org/pc2/Complex_7881f16bfe18db233c097a5168ff81ef	NPC:NXF1,2:NXT1:EJC:CBC:mRNA
 http://pathwaycommons.org/pc2/Complex_fe52ce69303bb29634242c8f933654c9	eIF4F:mRNP
-http://pathwaycommons.org/pc2/Protein_2abbfebc40eb765311bb2389960d3238	PKLR-1
 http://pathwaycommons.org/pc2/Complex_23749fb9731f1fdbd94fd5f7de92ffda	Cleaved collagen type IX
 http://pathwaycommons.org/pc2/Complex_92648f862256b8acefd839b06a36ab8a	Ub-ERBB2:ERBB2IP:HSP90:CDC37
 http://pathwaycommons.org/pc2/Protein_9936771c3e0edaab9772cb155efe5f4b	EEF1D
@@ -11329,7 +11313,6 @@ http://pathwaycommons.org/pc2/Complex_0d567de3c33302444db0a6ca35424bc3	Tight Jun
 http://pathwaycommons.org/pc2/Protein_05da90bae1a7bba4ba88186c0f2863fb	CD86
 http://pathwaycommons.org/pc2/SmallMolecule_1c390eaaba60bd09d6972e7e62ee21ca	Ins
 http://pathwaycommons.org/pc2/Protein_f4f2cb084896f8cc9760e7be8eb6b0a9	UBB(153-228)
-http://pathwaycommons.org/pc2/Protein_766c80156c2b0919beddd84a0e279a43	IAPP
 http://pathwaycommons.org/pc2/Complex_c6372fb6f7b451a0d4983f3411313263	Small conductance Ca2+ activated potassium channel
 http://pathwaycommons.org/pc2/Protein_5cbb821a6466ffdb39cac62c0e77cc51	FST
 http://pathwaycommons.org/pc2/Protein_bd8b3d991186b5353c0806e5d9b6b759	FGFR2 mutants with enhanced kinase activity
@@ -12770,7 +12753,6 @@ http://pathwaycommons.org/pc2/Protein_57561eef0b1366e4487e798f9bc4562a	RHO
 http://pathwaycommons.org/pc2/Complex_83e81ec20fead8ee4c87872427b1059d	RELN:VLDLR:DAB1
 http://pathwaycommons.org/pc2/Protein_8b7ae77a8ea3009a6cd99bf048733bd0	VPU (P05919)
 http://pathwaycommons.org/pc2/Protein_2963c132cef60e8539f18c2f26a30da1	PHAX
-http://pathwaycommons.org/pc2/Protein_b57f3d10685c37ecbe255bd7b161365d	PKLR-2
 http://pathwaycommons.org/pc2/Complex_775402a6bc723c974899eae2f730ae18	KAT6A:ING5:MEAF6:BRPF1,(2,3):PML:p-S15,S20-TP53
 http://pathwaycommons.org/pc2/Complex_3e691418f2217cc11503ab3ca8815b31	GGC-RAB6:GDP:GDIs,CHMs
 http://pathwaycommons.org/pc2/Protein_6629e47ad7a0b95e5d54ed2700666fc0	UTS2,UTS2B
@@ -13770,7 +13752,6 @@ http://pathwaycommons.org/pc2/Protein_af34e96cfb5788a7f5d88e2903ce8471	WLS
 http://pathwaycommons.org/pc2/Complex_98a763591505253c57ae9b3f80a9390c	E2F1:TFDP1,TFDP2:CDC45 gene
 http://pathwaycommons.org/pc2/PhysicalEntity_8c7c3c94e19cf966a5a848201048cbcd	Histone H2B, H4
 http://pathwaycommons.org/pc2/Complex_337d6e54caeabbfc3c8667f75e698b77	Fibrinogen
-http://pathwaycommons.org/pc2/Protein_d3c79e30fd72e6e21cce245f04c73e29	HNF4G
 http://pathwaycommons.org/pc2/Protein_50cdbad4e6ee15b7de33f6f40f09aa94	AGT
 http://pathwaycommons.org/pc2/Complex_f025894e8f739cc8ecc41c5f5936eab0	Cleaved collagen type XXIII
 http://pathwaycommons.org/pc2/Complex_1d44e7b5a76665a0810c57e864a8d304	AURKB:NOC2L:p-S15,S20,S269,T284-TP53
@@ -14392,7 +14373,6 @@ http://pathwaycommons.org/pc2/Complex_3e0e82ca8becd018be1690b0700b2119	SULT dime
 http://pathwaycommons.org/pc2/Complex_07305712091c8d52279f79cba897541f	3SUMO1:WRN
 http://pathwaycommons.org/pc2/PhysicalEntity_ee1314a5ce18a4289f9e50eb718946f4	(ethanolamineP) mannose (a1-4) glucosaminyl-acyl-PI
 http://pathwaycommons.org/pc2/Complex_91679def66edd9e8937ad5905b9b6af3	NCAM1:T- and L-type VDCC
-http://pathwaycommons.org/pc2/Protein_48598c70f89fbcea33ba51b6e5014b9c	PTF1A
 http://pathwaycommons.org/pc2/Complex_3216cfc40c28201ca37b3eb2e28f87c0	FOXH1:DRAP1
 http://pathwaycommons.org/pc2/SmallMolecule_7db7630b7f2b22abbd00dccb610fb73c	E4P
 http://pathwaycommons.org/pc2/Complex_8083c4b90c774baa699744b77a263184	proPDGF-AB dimer
@@ -14905,7 +14885,6 @@ http://pathwaycommons.org/pc2/Complex_3e87e6e4887eba4253c2387e36757c7c	p-Y1105-A
 http://pathwaycommons.org/pc2/Protein_9cbe48cbca7c8fc9a0903033d03ce4ac	BGN
 http://pathwaycommons.org/pc2/Protein_d7f9e1156c5fd74b98445a042a3af65a	XCL1,XCL2
 http://pathwaycommons.org/pc2/Protein_eb8788aab9873e3188b6a3d3e5a5f432	ALYREF, FYTTD1, LUZP4
-http://pathwaycommons.org/pc2/Protein_30cd29a640008386c8fdd44012a0a79b	PAX4
 http://pathwaycommons.org/pc2/Complex_8efafda1f4fd63c4882d73192eda07d4	Trimeric gp120:gp41 oligomer
 http://pathwaycommons.org/pc2/Complex_ad6dcabc53e550bc40372511a7721f8d	TACR2:TAC1(98-107)
 http://pathwaycommons.org/pc2/Protein_9cd254388b59cc9a10394d7a7c922661	ABCA5
@@ -17702,7 +17681,6 @@ http://pathwaycommons.org/pc2/Complex_72272e0613112a8dd38d950b75a5cf0d	EFNBs:p-E
 http://pathwaycommons.org/pc2/Protein_10be1ee0be572cd5916b8e5755b2eb76	FBXL3
 http://pathwaycommons.org/pc2/Complex_af637c4c3892245dd5e72d63f61b0c81	p-RASGRP1,3:DAG
 http://pathwaycommons.org/pc2/Complex_a50a9c8223faf05e034c7b329894b4d3	AGO2:miRNA
-http://pathwaycommons.org/pc2/Protein_99ff333fde916133ceb22e2967b9cc61	NKX6-1
 http://pathwaycommons.org/pc2/Complex_bd1c9b17e1a95c735cc5f01105cae90c	LIG1:POLB:SSB(3'poly-dNMP)-dsDNA
 http://pathwaycommons.org/pc2/Protein_37a4816052e34f52bd75386744824fd1	OCRL
 http://pathwaycommons.org/pc2/Complex_868538d59711d5d344d98a022b6270de	CDA tetramer
@@ -18903,7 +18881,6 @@ http://pathwaycommons.org/pc2/Complex_97489d39d45187b1db8d5cca1e359886	p-2S-SMAD
 http://pathwaycommons.org/pc2/Protein_57d957a13724ee3232e56f6948c87830	IL7R
 http://pathwaycommons.org/pc2/SmallMolecule_0fa466538a633da15c407a276eadde19	Ac5HT
 http://pathwaycommons.org/pc2/Protein_7f13c385d386ca4538b93357d9d42a00	REEPs
-http://pathwaycommons.org/pc2/Protein_4802fcf9405e0247879e4639c1494bc1	AGPAT1
 http://pathwaycommons.org/pc2/SmallMolecule_5cf3af902a6a0e385f450ca7f1cbfa19	glycan G10595
 http://pathwaycommons.org/pc2/Complex_29aadcb834dd38d04b652031be3146d8	RHOA:GTP:ROCK1,ROCK2
 http://pathwaycommons.org/pc2/SmallMolecule_ba534173f598007aa2951961a9634b55	PAPS

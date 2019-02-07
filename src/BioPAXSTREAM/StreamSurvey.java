@@ -1,6 +1,8 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
@@ -23,17 +25,26 @@ import org.biopax.paxtools.query.algorithm.Direction;
 
 
 public class StreamSurvey {
-	String infile,outfile;
+	String infile,outfile,entityFile;
+	int limit;
 	
 	public StreamSurvey(String[] args) {
-		if(args.length != 2) {
-			System.out.println("USAGE: java StreamSurvey <OWL File> <Output File>");
+		if(args.length != 3 && args.length != 4) {
+			System.out.println("USAGE: java StreamSurvey <OWL File> <Output File> <LIMIT> <Entities_OPTIONAL>");
 			System.exit(0);
 		}
 		
 		infile = args[0];
 		outfile = args[1];
-		System.out.println("Infile: "+infile+"\nOutfile: "+outfile);
+		limit = Integer.parseInt(args[2]);
+		if (args.length == 4) 
+			entityFile = args[3];
+		else
+			entityFile = null;
+		System.out.println("Infile: "+infile);
+		System.out.println("Outfile: "+outfile);
+		System.out.println("Limit: " + limit);
+		System.out.println("Entity File: " + entityFile);
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -43,7 +54,8 @@ public class StreamSurvey {
 		BioPAXIOHandler handler = new SimpleIOHandler(BioPAXLevel.L3);
 		Model model = handler.convertFromOWL(new FileInputStream(SS.infile));
 		SS.getStats(model);
-		HashMap<String,String> id2name = SS.getDownstream(model);
+		HashSet<String> entityFilter = SS.getFilteredEntities(SS.entityFile);
+		HashMap<String,String> id2name = SS.getDownstream(model,SS.limit,entityFilter);
 		String namefile = SS.outfile+".names";
 		BufferedWriter out = new BufferedWriter(new FileWriter(namefile));
 		for (String key: id2name.keySet()) {
@@ -53,7 +65,22 @@ public class StreamSurvey {
 		System.out.println("Wrote "+id2name.size()+" names to " + namefile);
 	}
 
-	public HashMap<String,String> getDownstream(Model model) throws IOException {
+	public HashSet<String> getFilteredEntities(String entityFile) throws IOException {
+		if(entityFile == null)
+			return null;
+		HashSet<String> entityFilter = new HashSet<String>();
+		try (BufferedReader br = new BufferedReader(new FileReader(entityFile))) {
+		    String line;
+		    while ((line = br.readLine()) != null) {
+		       if (line.startsWith("#"))
+		    	   continue;
+		       entityFilter.add(line.split("\t")[0]);
+		    }
+		}
+		return entityFilter;	
+	}
+	
+	public HashMap<String,String> getDownstream(Model model, int limit, HashSet<String> entityFilter) throws IOException {
 		Set<PhysicalEntity> entitySet = model.getObjects(PhysicalEntity.class);
 		System.out.println(entitySet.size() + " entity sets.");
 		int size = entitySet.size();
@@ -63,14 +90,16 @@ public class StreamSurvey {
 		BufferedWriter out = new BufferedWriter(new FileWriter(outfile));
 		out.write("#Entity\tNumDownstream\n");
 		
-		int limit = 30;
 		Direction downstream = Direction.DOWNSTREAM;
 		Set<BioPAXElement> source;
 		for (PhysicalEntity entity: entitySet) {
 			i++;
 			if (i % 100 == 0){
 				System.out.println(" "+i+" of "+size);
+				break;
 			}
+			if(entityFilter != null && !entityFilter.contains(entity)) 
+				continue;
 			id2name.put(entity.getRDFId(),entity.getDisplayName());
 			source = new HashSet<BioPAXElement>();
 			source.add(entity);
@@ -78,13 +107,8 @@ public class StreamSurvey {
 			//System.out.println("Entity: "+entity.getDisplayName()+": "+result.size()+" downstream elements");
 			Set<String> members = new HashSet<String>();
 			for (BioPAXElement e : result) {
-				members.add(entity.getRDFId());
-				/**
-				if (e instanceof PhysicalEntity) 
-					System.out.println("  "+((PhysicalEntity)e).getDisplayName());
-				else
-					System.out.println("  "+e.getUri());
-				**/
+				if(entityFilter == null || entityFilter.contains(entity.getRDFId())) 
+					members.add(entity.getRDFId());
 			}
 			//out.write(entity.getUri()+"\t"+result.size()+"\t"+String.join(",", members)+"\n");
 			out.write(entity.getRDFId()+"\t"+result.size()+"\n");
