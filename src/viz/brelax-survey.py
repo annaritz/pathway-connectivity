@@ -10,7 +10,42 @@ import numpy, scipy
 import scipy.cluster.hierarchy as hier
 import scipy.spatial.distance as dist
 
-def main(infile,outprefix):
+def main(infile,infile_filtered,outprefix):
+
+	data1 = sort_by_col(infile)
+	data2 = sort_by_col(infile_filtered)
+
+	fig, (ax1,ax2) = plt.subplots(ncols=2, nrows=1, figsize=(8,4))
+	ca1 = ax1.matshow(data1, aspect='auto') 
+	ax1.set_title('Nodes with B-relaxation distance $\leq k$\n(Full Hypergraph)')
+	ax1.set_xlabel('k')
+	ax1.set_ylabel('Source Nodes (%d)' % len(data1))
+	fig.colorbar(ca1,ax=ax1)
+	ax1.xaxis.set_ticks_position('bottom')
+	ax1.set_yticklabels([])
+	#fig.colorbar(ax1)
+	#cbar = fig.colorbar(cax, ticks=[-1, 0, 1])
+	#cbar.ax.set_yticklabels(['< -1', '0', '> 1'])  # vertically oriented colorbar
+
+	#ax2.matshow(numpy.log2(data), aspect='auto') 
+	ca2 = ax2.matshow(data2, aspect='auto') 
+	ax2.set_title('Nodes with B-relaxation distance $\leq k$\n(Blacklisted Nodes Removed)')
+	ax2.set_xlabel('k')
+	ax2.set_ylabel('Source Nodes (%d)' % len(data2))
+	fig.colorbar(ca2,ax=ax2)
+	ax2.xaxis.set_ticks_position('bottom')
+	ax2.set_yticklabels([])
+
+	#plt.colorbar()
+	plt.tight_layout()
+	plt.savefig(outprefix+'.png')
+	print('saved to '+outprefix+'.png')
+	plt.savefig(outprefix+'.pdf')
+	os.system('pdfcrop %s.pdf %s.pdf' % (outprefix,outprefix))
+	print('saved to '+outprefix+'.pdf')
+	return
+
+def sort_by_col(infile):
 	print('making matrix...')
 	dataMatrix =[]
 	with open(infile) as fin:
@@ -25,27 +60,16 @@ def main(infile,outprefix):
 	#get your data into a 2d array where rows are genes, and columns 
 	#are conditions
 	data = numpy.array(dataMatrix)
-
 	# only get the first five columns
 	inds = numpy.lexsort((data[:,0],data[:,5],data[:,10],data[:,30],data[:,40]))
-
 	data = data[inds]
 
 	#numpy.seterr(divide='ignore')
 	#data = numpy.log2(data)
 	#numpy.seterr(divide='warn')# https://stackoverflow.com/questions/21752989/numpy-efficiently-avoid-0s-when-taking-logmatrix
 
-	fig, (ax1,ax2) = plt.subplots(ncols=2, nrows=1, figsize=(5,8))
-	ax1.matshow(data, aspect='auto') 
-	ax2.matshow(numpy.log2(data), aspect='auto') 
-	#plt.colorbar()
-	plt.tight_layout()
-	plt.savefig(outprefix+'.png')
-	print('saved to '+outprefix+'.png')
-	plt.savefig(outprefix+'.pdf')
-	os.system('pdfcrop %s.pdf %s.pdf' % (outprefix,outprefix))
-	print('saved to '+outprefix+'.pdf')
-	return
+	return data
+
 
 def clustering(infile,outprefix):
 	print('making matrix...')
@@ -123,6 +147,6 @@ def clustering(infile,outprefix):
 
 if __name__ == '__main__':
 	
-	if len(sys.argv) != 3:
-		print('USAGE: python3 brelax-survey.py <BRELAX_FILE> <OUTPREFIX>')
-	main(sys.argv[1],sys.argv[2])
+	if len(sys.argv) != 4:
+		print('USAGE: python3 brelax-survey.py <BRELAX_FILE> <BRELAX_FILE_FILTERED> <OUTPREFIX>')
+	main(sys.argv[1],sys.argv[2],sys.argv[3])

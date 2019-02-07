@@ -5,16 +5,16 @@ import sys
 import itertools
 import hgraph_utils
 from halp import directed_hypergraph
+from halp.directed_hypergraph import DirectedHypergraph
 from halp.algorithms import directed_paths as hpaths
 from halp.utilities import directed_statistics as stats
 from halp.utilities import directed_graph_transformations as transform
 
 def main(inprefix,outfile):
-	H = hgraph_utils.make_hypergraph(inprefix)
+	H, identifier2id, id2identifier = hgraph_utils.make_hypergraph(inprefix)
 	G = transform.to_networkx_digraph(H)
 	nx.write_edgelist(G,outfile+'.graph',delimiter='\t',data=False)
 	print('wrote networkx graph to %s.graph' % (outfile))
-	sys.exit()
 	print('Graph has %d nodes and %d edges' % (nx.number_of_nodes(G),nx.number_of_edges(G)))
 	survey_graph(G,outfile)
 	return
