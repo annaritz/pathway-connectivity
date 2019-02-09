@@ -28,3 +28,7 @@ This gives us the number and type of relationships:
  568 reacts-with
 3271 used-to-produce
 ```
+
+```
+python3 GraphSurvey.py PathwayCommons10.reactome.hgnc.sif outfiles/reactome.txt conversion-types.txt 
+```

@@ -10,7 +10,6 @@ import time
 def main(inprefix,outfile,hedge_connectivity_file):
 	H, identifier2id, id2identifier = hgraph_utils.make_hypergraph(inprefix)
 	b_visit_dict = hgraph_utils.make_b_visit_dict(hedge_connectivity_file,identifier2id)
-
 	#b_relaxation_survey_nodes(H,b_visit_dict,report_single='http://pathwaycommons.org/pc2/Complex_55497fa4d1ef49e815559a8878a00b28')
 	#sys.exit()
 	all_dist_dicts,times,max_val = b_relaxation_survey_nodes(H,b_visit_dict)
@@ -79,6 +78,6 @@ def dist2hist(dist_dict):
 
 if __name__ == '__main__':
 	if len(sys.argv) != 4:
-		print('USAGE: python b-relaxation-survey.py <INPREFIX> <outfile> <HEDGE_CONNECTIVITY_FILE')
+		print('USAGE: python b-relaxation-survey.py <INPREFIX> <outfile> <HEDGE_CONNECTIVITY_FILE>')
 		sys.exit()
 	main(sys.argv[1],sys.argv[2],sys.argv[3])
