@@ -47,11 +47,6 @@ def make_hypergraph(file_prefix,delim=';',sep='\t'):
 	## annotate nodes
 	num_hypernodes = 0
 	for node in H.get_node_set():
-
-		## only add node if it currently exists
-		#if not H.has_node(node):
-	#		continue
-
 		if node in hypernodes and hypernodes[node] != [node]:
 			H.add_node(node,hypernode_members=hypernodes[node],is_hypernode=True)
 			num_hypernodes+=1
