@@ -1,7 +1,11 @@
 ## takes hyperedges file and a blacklist file and returns a hyperedges filtered file.
 
 import sys
-ADDITIONAL_MOLECULES = set([])
+ADDITIONAL_MOLECULES = set([
+	'http://pathwaycommons.org/pc2/Protein_fa92e525bc3eb51cffd7786a1f19e317', # Ub
+	'http://pathwaycommons.org/pc2/Complex_6ae49f2fe344df4b6985f2f372910a77', # Nuclear Pore Complex
+	'http://pathwaycommons.org/pc2/Protein_80c9e4746b9a9261c9c7b174d2cf8292', # Ub
+	])
 
 def main(infile,blacklist_file):
 	blacklisted = set()
@@ -53,7 +57,7 @@ def small_mols(infile):
 	## blacklisted molecules.
 	out = open(infile+'.small_molecule_filter','w')
 	num_altered = 0
-	blacklisted_nodes = set()
+	blacklisted_nodes = set([m for m in ADDITIONAL_MOLECULES])
 	with open(infile) as fin:
 		for line in fin:
 			if line[0] == '#':
@@ -66,7 +70,7 @@ def small_mols(infile):
 					if row[i] == 'None':
 						continue
 					items = row[i].split(';')
-					newitems = [item for item in items if 'SmallMolecule' not in item]
+					newitems = [item for item in items if 'SmallMolecule' not in item and item not in ADDITIONAL_MOLECULES]
 					blacklisted_nodes.update(set([item for item in items if'SmallMolecule' in item]))
 					if len(items) != len(newitems):
 						affected = True

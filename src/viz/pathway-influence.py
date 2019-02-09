@@ -47,18 +47,19 @@ NAMES = {
 'TNF-signaling':'TNF',
 'TRAIL-signaling':'TRAIL'
 }
-sorted_pathways = ['Signaling-by-MET', 'Signaling-by-Type-1-Insulin-like-Growth-Factor-1-Receptor-(IGF1R)', 
-'Signaling-by-Insulin-receptor', 
-'Signaling-by-EGFR', 'Signaling-by-ERBB2', 'Signaling-by-ERBB4', 'Signaling-by-SCF-KIT', 
+sorted_pathways = ['Signaling-by-EGFR', 'Signaling-by-ERBB2', 'Signaling-by-ERBB4', 'Signaling-by-SCF-KIT', 
 'Signaling-by-FGFR', 'ERK1-ERK2-pathway','Signaling-by-GPCR','Signaling-by-PDGF', 
 'Signaling-by-VEGF',  'DAG-and-IP3-signaling', 
-'Signaling-by-NTRKs',  'PI3K-AKT-Signaling', 'Signaling-by-WNT', 'Integrin-signaling',
+'Signaling-by-NTRKs',  'PI3K-AKT-Signaling', 'Signaling-by-WNT', 
+'Integrin-signaling',
+'Signaling-by-MET', 'Signaling-by-Type-1-Insulin-like-Growth-Factor-1-Receptor-(IGF1R)', 
+'Signaling-by-Insulin-receptor', 
 'TNF-signaling', 'TRAIL-signaling',  'FasL--CD95L-signaling', 
 'Signaling-by-Activin', 'Signaling-by-TGF-beta-Receptor-Complex', 'Signaling-by-NOTCH', 'Signaling-by-PTK6', 
 'Signaling-by-Rho-GTPases',  'MAPK6-MAPK4-signaling', 
- 'p75-NTR-receptor-mediated-signalling', 'Signaling-by-Hippo',
+ 'p75-NTR-receptor-mediated-signalling', 'Signaling-by-MST1',
 'mTOR-signalling', 'Signaling-by-Hedgehog',
-'Signaling-by-Nuclear-Receptors', 'Signaling-by-Leptin', 'Signaling-by-BMP', 'Signaling-by-MST1']
+'Signaling-by-Nuclear-Receptors', 'Signaling-by-Leptin', 'Signaling-by-BMP', 'Signaling-by-Hippo']
 
 def main(inprefix,outprefix):
 	pathways = read_files(inprefix)
@@ -86,11 +87,11 @@ def main(inprefix,outprefix):
 		ca = ax.matshow(M, aspect='auto', vmin=0.0, vmax=1)
 		fig.colorbar(ca,ax=ax)
 		if k == -1:
-			ax.set_title('Initial Node Overlap')
+			ax.set_title('Pathway Member Overlap (Asymmetric Jaccard)')
 			pathway_outprefix = outprefix+'_init'
 		else:
 			ax.set_title('Influence Score $S_{%d}$' % (k))
-			pathway_outprefix = outprefix+'_k_%d' % (k)
+			pathway_outprefix = outprefix+'_k_%s' % (str(k).zfill(2))
 
 		ax.xaxis.set_ticks_position('bottom')
 		ax.set_xticks(range(num))

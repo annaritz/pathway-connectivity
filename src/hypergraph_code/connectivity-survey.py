@@ -9,8 +9,9 @@ import hgraph_utils
 def main(prefix,outprefix):
 	H, identifier2id, id2identifier = hgraph_utils.make_hypergraph(prefix)
 	#print('skipping both. uncomment one of the surveys: nodes or hedges.')
-	#survey_nodes(H,outprefix+'reactome.txt')
+	survey_nodes(H,outprefix+'reactome.txt')
 	survey_hedges(H,id2identifier,outprefix+'reactome_hedges.txt')
+	survey_hubs(H,outprefix+'reactome_hubs.txt')
 
 	return
 
@@ -25,6 +26,23 @@ def survey_nodes(H,outfile):
 
 		bconn, ignore, ignore, ignore = hpaths.b_visit(H,node)
 		out.write('%s\t%d\n' % (node,len(bconn)))
+	out.close()
+	print('wrote to %s' % (outfile))
+	return
+
+def survey_hubs(H,outfile):
+	out = open(outfile,'w')
+	out.write('#Name\tNumInForwardStar\tNumBConnectedNodes\n')
+	i = 0
+	for node in H.node_iterator():
+		i+=1
+		if i % 100 == 0:
+			print('node %d of %d' % (i,stats.number_of_nodes(H)))
+		source_set = set()
+		for hedge_id in H.get_forward_star(node):
+			source_set.update(H.get_hyperedge_head(hedge_id))
+		bconn, traversed, restrictive = hpaths.b_visit_restrictive(H,source_set)
+		out.write('%s\t%d\t%d\n' % (node,len(H.get_forward_star(node)),len(bconn)))
 	out.close()
 	print('wrote to %s' % (outfile))
 	return
