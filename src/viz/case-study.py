@@ -72,8 +72,10 @@ def main(inprefix,outprefix):
 	max_k = max([len(pathways[p]) for p in sorted_pathways])
 	#max_k = 20
 	print('max k is ',max_k)
-	pathways_to_run = ['Signaling-by-MET','Signaling-by-MST1'] # <-- list of pathways to generate these figs for
-	pathway_thres = {'Signaling-by-MET':600,'Signaling-by-MST1':200}
+	pathways_to_run = ['Signaling-by-MET','Signaling-by-MST1','Integrin-signaling'] # <-- list of pathways to generate these figs for
+	pathway_thres = {'Signaling-by-MET':600,'Signaling-by-MST1':200,'Integrin-signaling':300}
+	percent_pathway_thres = {'Signaling-by-MET':.5,'Signaling-by-MST1':.3,'Integrin-signaling':.4}
+	
 
 	print('MST1:',len(pathway_inits['Signaling-by-MST1']))
 	print('MET:',len(pathway_inits['Signaling-by-MET']))
@@ -104,12 +106,24 @@ def main(inprefix,outprefix):
 			pathways_to_highlight.append('Signaling-by-MST1')
 		if p == 'Signaling-by-MST1' and 'Signaling-by-MET' not in pathways_to_highlight:
 			pathways_to_highlight.append('Signaling-by-MET')
-		print('highlighting:')
-		for pa in pathways_to_highlight:
-			print(pa,overlap[pa][-1])
+		print('highlighting %d pathways' % (len(pathways_to_highlight)))
+		#for pa in pathways_to_highlight:
+	#		print(pa,overlap[pa][-1])
 		this_outfile_prefix = outprefix+p+'.png'
 		make_figure(pathways,pathway_inits,p,this_outfile_prefix,overlap,pathways_to_highlight,thres)
 		
+
+		this_outfile_prefix = outprefix+p+'_percent.png'
+		for name in overlap:
+			overlap[name] = [i/len(pathway_inits[name]) for i in overlap[name]]
+		thres = percent_pathway_thres[p]
+		pathways_to_highlight = [pa for pa in sorted_pathways if pa in overlap and overlap[pa][-1] >= thres]
+		if p == 'Signaling-by-MET' and 'Signaling-by-MST1' not in pathways_to_highlight:
+			pathways_to_highlight.append('Signaling-by-MST1')
+		if p == 'Signaling-by-MST1' and 'Signaling-by-MET' not in pathways_to_highlight:
+			pathways_to_highlight.append('Signaling-by-MET')
+		print('highlighting %d pathways' % (len(pathways_to_highlight)))
+		make_figure(pathways,pathway_inits,p,this_outfile_prefix,overlap,pathways_to_highlight,thres,percent=True)	
 	
 	return
 
@@ -132,24 +146,13 @@ def influence_score_print(initp1,initp2,p1,p2,k):
 	print('k=%d: init_intersect=%d, cumu_intersect=%d, numerator=%f, denom=%f, SCORE=%f' % (k,len(init_intersection),len(cumulative1.intersection(cumulative2)),numerator,denominator,score))
 	return score
 
-def make_figure(pathways,pathway_inits,pathway,filename,overlap,pathways_to_highlight,thres):
-	if pathway == 'Signaling-by-MST1':
-		plt.figure(figsize=(8,6))
-		buff = 50
-		scale = 0.7
-	elif pathway == 'Signaling-by-MET':
-		plt.figure(figsize=(8,6))
-		buff = 50
-		scale=0.7
+def make_figure(pathways,pathway_inits,pathway,filename,overlap,pathways_to_highlight,thres,percent=False):
+	plt.figure(figsize=(8,6))
+	if percent==True: 
+		buff = 0.05
 	else:
-		plt.figure(figsize=(7,5))
-		buff = 7
-		scale=0.8
+		buff = 50
 	ax = plt.subplot(1,1,1)
-	# from https://stackoverflow.com/questions/8971834/matplotlib-savefig-with-a-legend-outside-the-plot?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
-	#box = ax.get_position()
-	#print(box.width,box.height)
-	#ax.set_position([.15,1-scale+0.1, box.width, box.height*scale])
 	
 	max_k = max([len(pathways[p]) for p in sorted_pathways])
 	#max_k = 20
@@ -162,8 +165,6 @@ def make_figure(pathways,pathway_inits,pathway,filename,overlap,pathways_to_high
 		num = len(pathway_inits[n])
 		perc = int(overlap[n][-1]/num*10000)/100.0
 		if n in pathways_to_highlight:
-			#print(x)
-			#print(overlap[n])
 			ax.plot(x,overlap[n],color=COLORS[i],lw=3,label='Target: %s ($n=%d$)' % (NAMES[n],num))
 			text_list.append([n,i,perc,overlap[n][-1]])
 			i+=1
@@ -171,27 +172,40 @@ def make_figure(pathways,pathway_inits,pathway,filename,overlap,pathways_to_high
 			ax.plot(x,overlap[n],color=[0.8,0.8,0.8],lw=1,label='_nolegend_')
 	# adjust text_list to be at least 3 spaces apart
 	text_list.sort(key=lambda x:x[3])
-	median = int(len(text_list)/2)
+	if percent:
+		median = 0.3
+		jump = 0.01
+	else:
+		median = int(len(text_list)/2)
+		jump = 1
+
 	for i in range(len(text_list)):
 		if i < median:
 			while text_list[i][3] > text_list[i+1][3]-buff:
 				for j in range(i+1):
 					if text_list[j][3] > text_list[i+1][3]-(i-j+1)*buff:
-						text_list[j][3] = text_list[j][3] - 1
+						text_list[j][3] = text_list[j][3] - jump
 		if i > median:
 			while text_list[i][3] < text_list[i-1][3]+buff:
 				for j in range(i,len(text_list)):
 					if text_list[j][3] < text_list[i-1][3]+(i-j+1)*buff:
-						text_list[j][3] = text_list[j][3] + 1
+						text_list[j][3] = text_list[j][3] + jump
 	for i in range(len(text_list)):
-		ax.text(max_k+1,text_list[i][3],'%s (%.1f)' % (NAMES[text_list[i][0]],text_list[i][2])+'%',backgroundcolor=COLORS[text_list[i][1]],color=TEXT_COLORS[text_list[i][1]],fontsize=8)
+		if percent:
+			label = '%s' % (NAMES[text_list[i][0]])
+		else:
+			label = '%s (%.1f)' % (NAMES[text_list[i][0]],text_list[i][2])+'%'
+		ax.text(max_k+1,text_list[i][3],label,backgroundcolor=COLORS[text_list[i][1]],color=TEXT_COLORS[text_list[i][1]],fontsize=8)
 		ax.plot([max_k-1,max_k+1],[overlap[text_list[i][0]][-1],text_list[i][3]],color=COLORS[text_list[i][1]],label='_nolegend_')
 
 	ax.plot(range(max_k+15),[thres]*len(range(max_k+15)),'--k',label='_nolegend_')
 	#ax.legend(ncol=2,bbox_to_anchor=(.9, -.15),fontsize=10)
 	ax.set_title('Source Pathway %s' % (NAMES[pathway]),fontsize=14)
 	ax.set_xlabel('$k$')
-	ax.set_ylabel('# of Target Nodes in $kB$-Connected Set')
+	if percent:
+		ax.set_ylabel('Percent of Target Nodes in $kB$-Connected Set')
+	else:
+		ax.set_ylabel('# of Target Nodes in $kB$-Connected Set')
 	ax.set_xlim(0,max_k+15)
 	#plt.tight_layout()
 	plt.savefig(filename)

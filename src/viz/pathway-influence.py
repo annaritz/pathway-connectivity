@@ -63,10 +63,10 @@ sorted_pathways = ['Signaling-by-MET', 'Signaling-by-Type-1-Insulin-like-Growth-
 def main(inprefix,outprefix):
 	pathways = read_files(inprefix)
 	num = len(pathways)
-	max_k = 20
+	k_range = [-1,0,1,2,3,4,5,6,7,8,9,10,15,20,30,40]
 	#sorted_pathways = sorted(pathways.keys())
 	
-	for k in range(-1,max_k):
+	for k in k_range:
 		M = []
 		for i in range(num):
 			M.append([0]*num)
@@ -83,7 +83,7 @@ def main(inprefix,outprefix):
 						M[i][j] = influence_score(pathways[p1],pathways[p2],k)
 
 		fig, ax = plt.subplots(ncols=1, nrows=1, figsize=(6,6))
-		ca = ax.matshow(M, aspect='auto', vmin=0.01, vmax=1)
+		ca = ax.matshow(M, aspect='auto', vmin=0.0, vmax=1)
 		fig.colorbar(ca,ax=ax)
 		if k == -1:
 			ax.set_title('Initial Node Overlap')
@@ -138,8 +138,10 @@ def influence_score(p1,p2,k):
 	cumulative1 = set()
 	cumulative2 = set()
 	for dist in range(-1,k+1):
-		cumulative1.update(p1[dist])
-		cumulative2.update(p2[dist])
+		if dist in p1:
+			cumulative1.update(p1[dist])
+		if dist in p2:
+			cumulative2.update(p2[dist])
 
 	numerator = len(cumulative1.intersection(initp2).difference(init_intersection))
 	denominator = len(cumulative1.difference(init_intersection))

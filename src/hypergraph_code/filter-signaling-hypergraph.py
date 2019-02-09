@@ -1,6 +1,7 @@
 ## takes hyperedges file and a blacklist file and returns a hyperedges filtered file.
 
 import sys
+ADDITIONAL_MOLECULES = set([])
 
 def main(infile,blacklist_file):
 	blacklisted = set()
