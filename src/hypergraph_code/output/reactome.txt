@@ -38,7 +38,7 @@ http://pathwaycommons.org/pc2/Protein_2a458b540cd996f9212bcb3a3380e224	1
 http://pathwaycommons.org/pc2/PhysicalEntity_2dd2b3b9dae6d3aff88894308328a38f	1
 http://pathwaycommons.org/pc2/Protein_a0e054aac8cf3b6cec39bfd17607c581	1
 http://pathwaycommons.org/pc2/Protein_616ef5a97be41f97e540ab2b753de203	1
-http://pathwaycommons.org/pc2/Protein_a31645062e7ed87e5f13a79e72d10f80	1
+http://pathwaycommons.org/pc2/SmallMolecule_b1b8508baec372c605c188c3e7200789	1
 http://pathwaycommons.org/pc2/Complex_1949980f227b459c6d4097fd2c49dac5	1
 http://pathwaycommons.org/pc2/SmallMolecule_7c3fc14bd0076c715698d03f727e45c6	1
 http://pathwaycommons.org/pc2/SmallMolecule_d8b31491e392eb8cb486ca4a5ca42d6e	1
@@ -386,7 +386,7 @@ http://pathwaycommons.org/pc2/Complex_cfaa78ff722e240eca0e4ad715ff1c75	3
 http://pathwaycommons.org/pc2/SmallMolecule_8875a9d38c18903ea06ab976bbeea9d8	1
 http://pathwaycommons.org/pc2/Complex_3031d1f95342333648faef2a3687cbb0	1
 http://pathwaycommons.org/pc2/Complex_dde9b5474c370055ebddbf3b6fb381b2	1
-http://pathwaycommons.org/pc2/Protein_43c5430a5afa5027e79b45dacd1dbfad	1
+http://pathwaycommons.org/pc2/Protein_309b13c43c5f60e20420cc7116b35736	2
 http://pathwaycommons.org/pc2/SmallMolecule_93b0919f408712c33a0afa926331b28a	1
 http://pathwaycommons.org/pc2/PhysicalEntity_b3cdecc3c96bbde3bd509dfeccc435bc	1
 http://pathwaycommons.org/pc2/Complex_7f7a7d02c2d780b2c5a4211830ddc6ed	1
@@ -647,7 +647,7 @@ http://pathwaycommons.org/pc2/Complex_6f4431ec1a0fb97c6898e767edf88c06	1
 http://pathwaycommons.org/pc2/SmallMolecule_cdff4384775b3ff5df69af8954ba1e40	1
 http://pathwaycommons.org/pc2/Complex_0dae1aacd2ac769d1cc85ef60bfb4a09	1
 http://pathwaycommons.org/pc2/Complex_9514d3d2338bdf9c2d97c785420e5cdb	2
-http://pathwaycommons.org/pc2/SmallMolecule_a3220a1db3d11b98dc9b123391ce51bd	3
+http://pathwaycommons.org/pc2/SmallMolecule_b929fc3e8dda6118bb12327166d32346	2
 http://pathwaycommons.org/pc2/Protein_0a82df5ff71a6b344366fc9ab0c62fe2	1
 http://pathwaycommons.org/pc2/Complex_77134bdf067cf78240a5e8ff69ccd4d7	4
 http://pathwaycommons.org/pc2/PhysicalEntity_f3866689d7ac71e455599e8f24f507dc	1
@@ -943,11 +943,10 @@ http://pathwaycommons.org/pc2/SmallMolecule_7be629a48074a6957a5196341df18f07	1
 http://pathwaycommons.org/pc2/Protein_05e343621ea2f5e4887f6e8e1f2532e7	1
 http://pathwaycommons.org/pc2/Protein_963b889a3b9d2b68d8c53e08cd71e26a	1
 http://pathwaycommons.org/pc2/Dna_83d5060b52c45a1294b7bcc1a2824130	1
-http://pathwaycommons.org/pc2/Complex_38b22fcc3694989ac8279976c3a08b11	1
+http://pathwaycommons.org/pc2/Complex_066cb8c76cd3d1e9ca2e5f52081e0ee3	1
 http://pathwaycommons.org/pc2/Complex_ab497b18144015dd16cbf6ebe4d84c34	2
 http://pathwaycommons.org/pc2/SmallMolecule_0018824c6ca71f0f3c908d0a14c359b1	1
 http://pathwaycommons.org/pc2/Protein_1c207df2cb9f2e56b820cb9d4068e87a	1
-http://pathwaycommons.org/pc2/Complex_6c9cf1db9f9b23fb7d4173b4e341f7d8	1
 http://pathwaycommons.org/pc2/Protein_89472dcdaf73ff320874b2ef2dc45159	1
 http://pathwaycommons.org/pc2/Complex_c8dbb3f36fd621aed0a1833e928bd527	1
 http://pathwaycommons.org/pc2/Protein_20ba69656638056f3988eb87cc83be6c	1
@@ -1083,7 +1082,6 @@ http://pathwaycommons.org/pc2/Complex_5c3150b486159e2e1c54a6e9cbb344fa	1
 http://pathwaycommons.org/pc2/Complex_82898aadbac0c75e85b4954b4f648154	1
 http://pathwaycommons.org/pc2/Complex_51b481d47ce7ad5646551d6de6f204d2	1
 http://pathwaycommons.org/pc2/PhysicalEntity_508609b4870a78a6d68eb3c5313beec9	1
-http://pathwaycommons.org/pc2/Protein_99ff333fde916133ceb22e2967b9cc61	1
 http://pathwaycommons.org/pc2/Complex_19b4c8e5e09f1f33dfbb4c8634a99072	1
 http://pathwaycommons.org/pc2/PhysicalEntity_93f76f1f733ff78af1cbeef6679cbafc	1
 http://pathwaycommons.org/pc2/Complex_e31fb918cccc95cbe63e01a43a362c70	1
@@ -1398,7 +1396,6 @@ http://pathwaycommons.org/pc2/Complex_8fb4e2e14613dd471e87860017a4fbf3	1
 http://pathwaycommons.org/pc2/PhysicalEntity_14b38072505e462d49e7a6d5e8015dd3	1
 http://pathwaycommons.org/pc2/Dna_c5fefe3adc14cac6cb75a69d5d82054f	1
 http://pathwaycommons.org/pc2/PhysicalEntity_4146d4189b6101a37d054d440d43cf74	1
-http://identifiers.org/reactome/R-HSA-210773	2
 http://pathwaycommons.org/pc2/Protein_6215ae5eb84b615a5ebd9b334fa1d131	1
 http://pathwaycommons.org/pc2/Complex_baa3b9b68979d95987f7888dbb164d11	1
 http://pathwaycommons.org/pc2/PhysicalEntity_061527a43586f5b96ee417520a1a8c75	2
@@ -1417,7 +1414,6 @@ http://pathwaycommons.org/pc2/SmallMolecule_158e38640ab81d87fc93d153348c9239	1
 http://pathwaycommons.org/pc2/Complex_51790c3dd3d13954adb50cc2844627c1	1
 http://pathwaycommons.org/pc2/SmallMolecule_96479f6f9c0492245e21ba724264f093	1
 http://pathwaycommons.org/pc2/PhysicalEntity_39ced44fe67d2400b35879cf884ed850	1
-http://pathwaycommons.org/pc2/SmallMolecule_5facd3fd5081983c06b555d212f437e5	1
 http://pathwaycommons.org/pc2/Complex_a0ea95be3bac55b1d1c47d738ce3b986	1
 http://pathwaycommons.org/pc2/Complex_09c32415bf24e07afc91f66c442eebc7	1
 http://pathwaycommons.org/pc2/Protein_6cb9065f8942d908887278b3f21ae609	1
@@ -1471,7 +1467,6 @@ http://pathwaycommons.org/pc2/Protein_58e0c2c2d911032271c1052e02065f92	1
 http://pathwaycommons.org/pc2/SmallMolecule_2e6276df4b9637f861c44db3aeba6c53	2
 http://pathwaycommons.org/pc2/Protein_8f7c91b2b6896516324c3ea03d2e587e	1
 http://pathwaycommons.org/pc2/Protein_e5e04f0a230fb2d23379486479abeaea	1
-http://pathwaycommons.org/pc2/Complex_52f535ae08b5e15443f8a5718c0806d8	1
 http://pathwaycommons.org/pc2/SmallMolecule_eeb20751cd7731a51da3de396f13781b	1
 http://pathwaycommons.org/pc2/Complex_9b14aa214fd1e68e70e4bb0c2687cc25	2
 http://pathwaycommons.org/pc2/SmallMolecule_55a3899e0cb6eb907519fed3c2d5e95d	1
@@ -1484,7 +1479,6 @@ http://pathwaycommons.org/pc2/Protein_9a0d89f11069fd484ea87f93e59ea3d4	1
 http://pathwaycommons.org/pc2/Complex_8d14bc7b60b09be5eadcb0a7085f22f4	3
 http://pathwaycommons.org/pc2/Protein_ad2fbbded50b3ea5ccdda832705be245	1
 http://pathwaycommons.org/pc2/Complex_73353c7d8973a413565f5d67523aa6f4	1
-http://identifiers.org/reactome/R-HSA-190682	2
 http://pathwaycommons.org/pc2/Complex_cf4f678bfee15af058c10ce7a7f8f1fb	1
 http://pathwaycommons.org/pc2/SmallMolecule_6487d27a7163a0dfb7b9659bfab43b3f	1
 http://pathwaycommons.org/pc2/SmallMolecule_19e8c58e69a92ae70fc79350f2188acc	1
@@ -1599,7 +1593,7 @@ http://pathwaycommons.org/pc2/Protein_d3259b6c59b41deca781f7953ddb58b2	1
 http://pathwaycommons.org/pc2/Complex_ed6a5eb635fc7f8eb94bca2d6583732b	1
 http://pathwaycommons.org/pc2/Complex_708df1ab1fc637875cfde7e293f8e0a3	6
 http://pathwaycommons.org/pc2/PhysicalEntity_3846b001e08f2d9d3041161a2d89fa87	1
-http://pathwaycommons.org/pc2/Complex_939d2514e9cab201465142d520fbc1c0	3
+http://pathwaycommons.org/pc2/Complex_5f7d87c3020cc99a52475c6fbe855603	1
 http://pathwaycommons.org/pc2/SmallMolecule_3567f389e3e4420679d7e49bd906ff5d	1
 http://pathwaycommons.org/pc2/Protein_e4bed657aca2b1e9ed3be2f180b2e2de	1
 http://pathwaycommons.org/pc2/Complex_633b6565e429c0d5954046cece270811	1
@@ -1789,7 +1783,6 @@ http://pathwaycommons.org/pc2/SmallMolecule_40f33bd0516fcf35552e8747f87ab003	1
 http://pathwaycommons.org/pc2/Complex_f8b63dd4300c8b64a4200205bc4c7015	1
 http://pathwaycommons.org/pc2/Protein_8d9ae4e0bc4d4b0a57ee4ef8b4e79248	1
 http://pathwaycommons.org/pc2/SmallMolecule_3d5f9b8afcdc740620a4e32f232df345	1
-http://pathwaycommons.org/pc2/SmallMolecule_47e61fa4133a94308a0ee49ed94d3a2c	1
 http://pathwaycommons.org/pc2/Complex_88219c39f6e57492e6d416d6ece839a7	1
 http://pathwaycommons.org/pc2/Protein_b86989fd1699d401f03fe651d3d04b48	1
 http://pathwaycommons.org/pc2/Complex_5c36ee7fee55ba5ae34882286468d532	2
@@ -1808,7 +1801,6 @@ http://pathwaycommons.org/pc2/Protein_9e2b15468e75efc685844a830cbdd19c	1
 http://pathwaycommons.org/pc2/Protein_449f525b948c5a88734629f52768dceb	1
 http://pathwaycommons.org/pc2/SmallMolecule_a8fd70ce099a374bcfef962bee1aa1ca	1
 http://pathwaycommons.org/pc2/Protein_8c70aab3c608276703f61cbcf8324292	1
-http://pathwaycommons.org/pc2/SmallMolecule_9dd92b0664fed0e8dcc935d338b0c992	1
 http://pathwaycommons.org/pc2/SmallMolecule_29b8fe97c0b7977e1e8a74ebbb9edc8c	1
 http://pathwaycommons.org/pc2/Protein_096549542c970cf654694c75cedb0e37	1
 http://pathwaycommons.org/pc2/Protein_25a86d33d9e8a3e53cf6a468ae3ec5c6	1
@@ -1828,7 +1820,6 @@ http://pathwaycommons.org/pc2/Protein_83d830ecc88e139e16a3204c499d3f50	1
 http://pathwaycommons.org/pc2/Complex_33d1d32cd07c7d54c74a8b31a633b713	1
 http://pathwaycommons.org/pc2/PhysicalEntity_6c62ac8844372715f72a66e6fe11fdf6	1
 http://pathwaycommons.org/pc2/Complex_97f6649e24b93d8940613078fd4d5d8a	1
-http://identifiers.org/reactome/R-HSA-211346	2
 http://pathwaycommons.org/pc2/Complex_cf888b559cac684641cb17ae073c0891	1
 http://pathwaycommons.org/pc2/Complex_a90ee01f4e2b7fb843c378d15749e11f	3
 http://pathwaycommons.org/pc2/Complex_cc378be3483829414bdfb1c1bb1ef700	1
@@ -1883,10 +1874,8 @@ http://pathwaycommons.org/pc2/Complex_6ce938a8c04db62fc3a4f4840c19292b	2
 http://pathwaycommons.org/pc2/Complex_8dc44fb229024779e51106a2e95fb1ff	1
 http://pathwaycommons.org/pc2/SmallMolecule_f1a5d5b0852598d35b34fb0662e28373	1
 http://pathwaycommons.org/pc2/Protein_97ef66c8d48e320eb898203559606ccb	1
-http://identifiers.org/reactome/R-HSA-210834	2
 http://pathwaycommons.org/pc2/Protein_0a20000e90733e763863c0040f08c70f	1
-http://identifiers.org/reactome/R-HSA-210836	2
-http://identifiers.org/reactome/R-HSA-210837	2
+http://pathwaycommons.org/pc2/PhysicalEntity_a835bc25a83f0b15f657c34daed828b5	3
 http://pathwaycommons.org/pc2/Complex_b1c9e6993f5b55cc9ce42f3f45124a5c	1
 http://pathwaycommons.org/pc2/SmallMolecule_eec6ce51fcf108eebdb181b90d30782c	1
 http://pathwaycommons.org/pc2/Complex_49f2bbfb91445bf695b8c179fcc6d70d	1
@@ -1913,6 +1902,7 @@ http://pathwaycommons.org/pc2/Complex_d92bd7ea06839613c956e45253d0649a	1
 http://pathwaycommons.org/pc2/Complex_0294bdb1eef24038d5ae63a34fe9cd13	1
 http://pathwaycommons.org/pc2/Complex_684ba0356751c0be357dd80ef7118437	1
 http://pathwaycommons.org/pc2/PhysicalEntity_4267805369c92b15c116c0f8286b9086	1
+http://pathwaycommons.org/pc2/Complex_5d886336e73d8ce5c8a72093ff4b72c0	1
 http://pathwaycommons.org/pc2/Protein_09a7957b0fc0f91880c6b16043d0ffa1	1
 http://pathwaycommons.org/pc2/Complex_58a39dfbabfd1021c5bdc1efae53d627	1
 http://pathwaycommons.org/pc2/SmallMolecule_cd68117b913c22d71cd0951fb4187593	1
@@ -2074,7 +2064,7 @@ http://pathwaycommons.org/pc2/Complex_80649aa5045b03df67d604f73a115b41	1
 http://pathwaycommons.org/pc2/Complex_be6a3742fa98093b5e56f5e3a0568a10	1
 http://pathwaycommons.org/pc2/Complex_d461680e015d908be90cbfbacacb19dc	1
 http://pathwaycommons.org/pc2/Complex_9ff3b4c1bd55c1614fa28c036e88c516	1
-http://pathwaycommons.org/pc2/Complex_b73905d13155718ef2dd6c0093f43277	2
+http://pathwaycommons.org/pc2/Complex_f6519f906ef61e39cc3ab67d3de48ccb	1
 http://pathwaycommons.org/pc2/Complex_f1af6191fb0b8044547f8f67df054f74	1
 http://pathwaycommons.org/pc2/SmallMolecule_d91619112fd3dcc5f4f8f10b1ad7d3e0	1
 http://pathwaycommons.org/pc2/Complex_183264e45dcf002a570460b411b494d2	1
@@ -2144,7 +2134,7 @@ http://pathwaycommons.org/pc2/Protein_ca53104c0d8f5a48a77dafb403ddbc84	1
 http://pathwaycommons.org/pc2/Complex_ff8f0c2d615372e1d0f207f4abc67032	6
 http://pathwaycommons.org/pc2/Complex_7483f34b05030af1c4a5bdb60bb4bf8f	1
 http://pathwaycommons.org/pc2/Complex_e0eb204f26bf52ef3a5f10e1c47c5fe8	1
-http://pathwaycommons.org/pc2/Protein_5046ab07e741935bb889845e4b70e01c	1
+http://pathwaycommons.org/pc2/Protein_d0e199375166a024b3735627cca96f35	1
 http://pathwaycommons.org/pc2/Complex_c1b9c328f34db901083ba4cc67e2b9ed	1
 http://pathwaycommons.org/pc2/Protein_825bb6ca0b1b544843c99efa675e9b03	1
 http://pathwaycommons.org/pc2/Complex_a831082615473190719132ff1ffa91dd	1
@@ -2255,7 +2245,7 @@ http://pathwaycommons.org/pc2/Protein_1dffbef51a5673302ad7a8ae4fb736b2	1
 http://pathwaycommons.org/pc2/Complex_d60fdf66e6a717fae86533e8b9a520c9	5
 http://pathwaycommons.org/pc2/SmallMolecule_0160e1ef291f664230f36bf57e6ec28a	1
 http://pathwaycommons.org/pc2/Complex_44d351504aa75025f143405f9e9c0ede	1
-http://pathwaycommons.org/pc2/Protein_309b13c43c5f60e20420cc7116b35736	2
+http://pathwaycommons.org/pc2/Protein_ffa8c47d944fb046f13dcf6a0aecf601	1
 http://pathwaycommons.org/pc2/Protein_1c7731dc87bb0df6558986a5929e63c5	1
 http://pathwaycommons.org/pc2/PhysicalEntity_c213a6f235a06909cb3dfc9b0d0cca50	1
 http://pathwaycommons.org/pc2/Complex_0dd08e9cafcf94f6f99c9cd7d751d815	1
@@ -3130,7 +3120,6 @@ http://pathwaycommons.org/pc2/Complex_123bd2072789357c0df64e568dcfadf7	1
 http://pathwaycommons.org/pc2/Complex_edbe671eb259b3ce14ad9af3bc9e9de4	1
 http://pathwaycommons.org/pc2/Protein_6fdd5c52fab35cfcab01284dd18ea033	1
 http://pathwaycommons.org/pc2/Protein_812bd21407a1577c5cc3dedaa0aab378	1
-http://pathwaycommons.org/pc2/Protein_d0e199375166a024b3735627cca96f35	1
 http://pathwaycommons.org/pc2/SmallMolecule_3ee7ad93e7117d11dead4cb12855130b	1
 http://pathwaycommons.org/pc2/SmallMolecule_7720a839b1aabdf64e9f378471099b94	5
 http://pathwaycommons.org/pc2/Complex_13ee1d694bc3862a568555db0007e126	1
@@ -3168,7 +3157,7 @@ http://pathwaycommons.org/pc2/Protein_2fcb24dc0d2894d3b0e4b2a56a281f4e	1
 http://pathwaycommons.org/pc2/Complex_aae849d1ce8cdd5cc61eab7b9f7d7221	1
 http://pathwaycommons.org/pc2/Protein_81ab0d95be0df20204006d069196884a	1
 http://pathwaycommons.org/pc2/Complex_5aa01cf37f4d9b3d26f71c42486934d5	1
-http://identifiers.org/reactome/R-HSA-211301	2
+http://pathwaycommons.org/pc2/Complex_844d4d8e1e32094e7770676e156275a8	1
 http://pathwaycommons.org/pc2/Protein_480a0a51d6a3a89bec7cfc8df2d1a24b	1
 http://pathwaycommons.org/pc2/PhysicalEntity_9ebd90e49a5a0c00fd2586f3bcc96f44	1
 http://pathwaycommons.org/pc2/Protein_c390339c02cd2f4391dd3fbdc2a5fe4a	1
@@ -3525,7 +3514,6 @@ http://pathwaycommons.org/pc2/Complex_c797de5992efb2b7978c4e597999bed1	1
 http://pathwaycommons.org/pc2/Protein_cbf1ce4169d3f023bfa0f186d65a2837	1
 http://pathwaycommons.org/pc2/Complex_ca56141c88dab969c11ac9550d753dad	1
 http://pathwaycommons.org/pc2/Protein_459915fedeccb74717e048c5f5b03555	1
-http://pathwaycommons.org/pc2/Complex_db3c3fdd607ce86d4068234402fe9a14	1
 http://pathwaycommons.org/pc2/Protein_ebc8984dcde4df867e69f2de57207765	1
 http://pathwaycommons.org/pc2/Complex_7b17e99f1ffe3a5316982bdeff62ff2a	1
 http://pathwaycommons.org/pc2/PhysicalEntity_dd914e5cf1e1204712766e0814d019b7	1
@@ -3834,7 +3822,7 @@ http://pathwaycommons.org/pc2/Protein_80fe53c33248f0758eca8afb6e34659e	1
 http://pathwaycommons.org/pc2/Protein_b414ad7ccdec4edb45eaeaa40fd3130d	1
 http://pathwaycommons.org/pc2/SmallMolecule_ddf627cbe2e6f58655f5483b2595a467	1
 http://pathwaycommons.org/pc2/Protein_44c48095b15750da518a164903a79899	1
-http://pathwaycommons.org/pc2/Complex_dd7384692ad552be29d7427748971142	1
+http://pathwaycommons.org/pc2/Protein_2a709f668a5cd5d0394d158053cf5380	1
 http://pathwaycommons.org/pc2/Protein_f8b92c5cc7e0dfe71fe9e69a7adbd422	1
 http://pathwaycommons.org/pc2/Protein_c78001c7cd79b33d1fc5d32e3c98b8ba	1
 http://pathwaycommons.org/pc2/Complex_ae9f28a65afeaad17b4857a854a88692	1
@@ -3923,7 +3911,6 @@ http://pathwaycommons.org/pc2/Protein_9c043583d5b5a57d148039e050bfbe56	1
 http://pathwaycommons.org/pc2/SmallMolecule_edcc5b8b8d26c712720bf73e764ced92	1
 http://pathwaycommons.org/pc2/Protein_f831ccc22cb7443ea06b32ce4be43c60	1
 http://pathwaycommons.org/pc2/Protein_0a9db071384ee7a2df88ab22b0eb447a	1
-http://pathwaycommons.org/pc2/Protein_560ac5f6705d620d1e41974f80306268	1
 http://pathwaycommons.org/pc2/Complex_10758c884efc629f4be454de646cf120	1
 http://pathwaycommons.org/pc2/Complex_b774409ef5493ca62992675e5fa6ff52	1
 http://pathwaycommons.org/pc2/Complex_e67ad20a7350b39d50e93376342fb9f8	1
@@ -3956,6 +3943,7 @@ http://pathwaycommons.org/pc2/Complex_5d02c70ee1cbb5f96e52c0e5aa006bda	1
 http://pathwaycommons.org/pc2/Protein_7956a03ef240b1ced0a92da1be53f8b1	1
 http://pathwaycommons.org/pc2/Complex_43d5c862cf667484ce841afbd5cc1e0a	1
 http://pathwaycommons.org/pc2/Complex_a7c2e8d1ed5b7d273ac02d74bf936aa6	1
+http://pathwaycommons.org/pc2/Complex_986e380940c201772e2a5dbc8020be54	2
 http://pathwaycommons.org/pc2/Complex_a704bc62d3aa0787ba27eccbb1deaca0	1
 http://pathwaycommons.org/pc2/Complex_0c5084b08ce80e6db37baaf017896a84	1
 http://pathwaycommons.org/pc2/Complex_489de66d423854a620b7e66ac2546953	1
@@ -3963,10 +3951,9 @@ http://pathwaycommons.org/pc2/Protein_68920090226b2d1d08cc5b396a6149f9	1
 http://pathwaycommons.org/pc2/Complex_c1a9cc7642b29f3f95cd2c77e7bd7746	1
 http://pathwaycommons.org/pc2/Complex_5c05ba45d06fdc84ea89a4637d014724	3
 http://pathwaycommons.org/pc2/SmallMolecule_e4c899c9a079806b4e9319779668a92e	1
-http://pathwaycommons.org/pc2/Dna_20ae95204dec37e0f254797f18139c9c	1
+http://pathwaycommons.org/pc2/Complex_48f781e66a4f30d33c3435b0da7c4e25	1
 http://pathwaycommons.org/pc2/SmallMolecule_70ad570b5aac3b0d59defb67895ca03f	1
 http://pathwaycommons.org/pc2/Complex_0e505be9171e5f46b3c594dcfd1d8e13	3
-http://pathwaycommons.org/pc2/Complex_f6519f906ef61e39cc3ab67d3de48ccb	1
 http://pathwaycommons.org/pc2/Complex_fe77b37a05ccbd4890962a1189f6b5e0	5
 http://pathwaycommons.org/pc2/Protein_5a8be4366593528a2f7a6d4077a191ed	1
 http://pathwaycommons.org/pc2/Complex_f0058793058bf1b2c0759a67d82a6481	1
@@ -4084,7 +4071,6 @@ http://pathwaycommons.org/pc2/PhysicalEntity_278609db74fda61afb3920c02516d3f0	1
 http://pathwaycommons.org/pc2/Protein_7c628d57f5f2a5e36bc3d84077f8175d	1
 http://pathwaycommons.org/pc2/Protein_3761c7202658d5ad6f4735d1e5ccc7bd	1
 http://pathwaycommons.org/pc2/Protein_21abd3c3c7115140ccdeb6131caafb0d	1
-http://pathwaycommons.org/pc2/Complex_48f781e66a4f30d33c3435b0da7c4e25	1
 http://pathwaycommons.org/pc2/Rna_211a517f0d8b999a79da911606baaa0b	1
 http://pathwaycommons.org/pc2/Complex_56bc2991ae13b8e16f0667c48bf5820e	1
 http://pathwaycommons.org/pc2/SmallMolecule_ea9b1eb2cb052b4615a078c27b1aef1e	1
@@ -4319,7 +4305,6 @@ http://pathwaycommons.org/pc2/Complex_264b88cd6342bcb658fa40c9e99f3d59	1
 http://pathwaycommons.org/pc2/Protein_a41fad21cd8c37b0677e9b5a64e2171c	1
 http://pathwaycommons.org/pc2/Protein_999635c570c2f7e171a33628af6852d9	1
 http://pathwaycommons.org/pc2/Protein_aa474e912e092377aa8032ff86e96d47	1
-http://pathwaycommons.org/pc2/Protein_48598c70f89fbcea33ba51b6e5014b9c	1
 http://pathwaycommons.org/pc2/Complex_f0336ee001601b5edb9231a06a16a242	1
 http://pathwaycommons.org/pc2/SmallMolecule_0bd8d9a0e920e63fd1505f943bd84f35	1
 http://pathwaycommons.org/pc2/Protein_f4412e929bc126c82336ca29661d1570	1
@@ -4343,7 +4328,6 @@ http://pathwaycommons.org/pc2/Complex_c1667b4a32534bd532e3e8c103eba3e0	1
 http://pathwaycommons.org/pc2/SmallMolecule_efc306c70869914b178f8c135e7d084c	1
 http://pathwaycommons.org/pc2/SmallMolecule_65dc826380716d2f73ddb20cb7ff523e	1
 http://pathwaycommons.org/pc2/Protein_a8a53cd2ab60e23c7b398f1047a43870	1
-http://pathwaycommons.org/pc2/Protein_0deb60cd10e1e6c5bcb9525e1522f250	1
 http://pathwaycommons.org/pc2/PhysicalEntity_709840f1b303916302dff767abdfd18b	1
 http://pathwaycommons.org/pc2/Complex_e7671f774486f2c394d3c46c5df71ae6	1
 http://pathwaycommons.org/pc2/Complex_a238b5bf525aeaace8b684f5d9152b3d	1
@@ -4504,7 +4488,6 @@ http://pathwaycommons.org/pc2/Complex_c10d2f933fd8dbb3250087360f89c074	1
 http://pathwaycommons.org/pc2/Protein_1f24054f43ce936ec54c9052b3015659	1
 http://pathwaycommons.org/pc2/PhysicalEntity_c9167963080733f495ce005e14c20fec	1
 http://pathwaycommons.org/pc2/Protein_abbfa0035b284427fca98f6bf3578e64	1
-http://pathwaycommons.org/pc2/Protein_87ba79bda2f17caa2460bc87cc824c64	1
 http://pathwaycommons.org/pc2/Complex_4fff6d7fd37882e58dc4ac20fbb94879	1
 http://pathwaycommons.org/pc2/Complex_40746df866e5a1fc0d46b4b0ef5d1b5f	1
 http://pathwaycommons.org/pc2/Complex_448a0aa8d437237bf3dfd2daa6a24ecb	4
@@ -4516,7 +4499,7 @@ http://pathwaycommons.org/pc2/Complex_33c17bca678f8d5865d1de00f9270207	1
 http://pathwaycommons.org/pc2/PhysicalEntity_c65aae12b08f4e8ba84871f52de45018	1
 http://pathwaycommons.org/pc2/Dna_b304f090f2cb1c80b6c0f49514ac3a31	1
 http://pathwaycommons.org/pc2/Complex_a70707e316fbb9041495fb23a467a628	1
-http://pathwaycommons.org/pc2/SmallMolecule_d6ae7269422d4e05726bcc175feea7cf	1
+http://pathwaycommons.org/pc2/Protein_d48b7f70409e5b9f1a5dd8e5194d9418	1
 http://pathwaycommons.org/pc2/Complex_d52bf48050b9016af78de75fab2d4b16	1
 http://pathwaycommons.org/pc2/SmallMolecule_a07c0be4880ddbd880361adb5acba075	1
 http://pathwaycommons.org/pc2/Protein_47918c3a7f87fbb7def66e548741d9b7	1
@@ -4663,7 +4646,7 @@ http://pathwaycommons.org/pc2/PhysicalEntity_c0a65c8b4454f5139534ced386c7ea34	1
 http://pathwaycommons.org/pc2/Protein_055112bcd1d672d4e3fff84a9ad8b5c8	1
 http://pathwaycommons.org/pc2/Complex_cfeed3520da152093a7a16da22d09c39	1
 http://pathwaycommons.org/pc2/Protein_10462e11f3e2a67fc2622314c1db4471	1
-http://pathwaycommons.org/pc2/Complex_ee4cf79be6a574c1787e4f0e233e97c3	1
+http://pathwaycommons.org/pc2/Complex_971a74751096feccf5b4f6fc2686f4ad	1
 http://pathwaycommons.org/pc2/Dna_2580eb7589d22ff661cf7bda08e49455	1
 http://pathwaycommons.org/pc2/SmallMolecule_9f25e3596bc2cf3225714c643cc6deed	1
 http://pathwaycommons.org/pc2/Complex_1d2c9337952a012a1c989800e5cc28d0	1
@@ -4908,7 +4891,6 @@ http://pathwaycommons.org/pc2/PhysicalEntity_95cb68c298b377939f2b7fc6ce6bec20	1
 http://pathwaycommons.org/pc2/Complex_882cffa2c4bdeaddd22c29884c85bc45	1
 http://pathwaycommons.org/pc2/SmallMolecule_470ad5cafb83381cc3b6b675922af828	1
 http://pathwaycommons.org/pc2/Complex_c5e9465c2e786aa7c6a123dde7c2b244	1
-http://pathwaycommons.org/pc2/Protein_e208b1acf4fbc7c45b983e6a4f29c722	1
 http://pathwaycommons.org/pc2/Protein_93e4726a9699f16258a01f54c01c0148	1
 http://pathwaycommons.org/pc2/Complex_f35d2eaac54ba60686b60a420dbd6c42	1
 http://pathwaycommons.org/pc2/Complex_fa78c3cbc89668c66eff3fdd00c63aa3	1
@@ -5013,7 +4995,7 @@ http://pathwaycommons.org/pc2/SmallMolecule_339e355ac6033d9baea07b9b58e893e6	1
 http://pathwaycommons.org/pc2/Complex_8ed31f5d65aedba85815ef33fc306f13	1
 http://pathwaycommons.org/pc2/Protein_dad6f64e66a1a716baf3c9ef821087b6	1
 http://pathwaycommons.org/pc2/Complex_e3d2f1c2be53d5aff893a95f49f1cad6	1
-http://pathwaycommons.org/pc2/Complex_7328a4d918c6e76afdfb9de005c3b59e	1
+http://pathwaycommons.org/pc2/Protein_5c28802c523ed3ab8b22f267d2a145ac	1
 http://pathwaycommons.org/pc2/Complex_920417df39273e2e50ff81fc6874bc11	1
 http://pathwaycommons.org/pc2/SmallMolecule_7776d998b2bbaf0520e5c74c939b95b3	1
 http://pathwaycommons.org/pc2/SmallMolecule_5ee4e7cbf90cf53d9691af056a7c2857	1
@@ -5027,7 +5009,7 @@ http://pathwaycommons.org/pc2/Complex_6a3a4575008b2b95c3bd31da3944d4ac	1
 http://pathwaycommons.org/pc2/PhysicalEntity_d3a2d63104bf85b7c4211b4698887789	1
 http://pathwaycommons.org/pc2/Complex_7ea68d3924144429505af63be19afa67	1
 http://pathwaycommons.org/pc2/Protein_5bea98e6358981e9de72549b7decd0eb	1
-http://pathwaycommons.org/pc2/Complex_aeb64a2dcdb08d4ea71427b615bc62dd	1
+http://pathwaycommons.org/pc2/Complex_87b4d6536e28b17c578ba108b5ae80c2	1
 http://pathwaycommons.org/pc2/Protein_e00ffb9de199f0ae455d86ba9a9f61ff	1
 http://pathwaycommons.org/pc2/Complex_11f7207eb332b22ffd16ecaba521b487	1
 http://pathwaycommons.org/pc2/Complex_cc96627048a01395a9649def7c3e63b8	1
@@ -5228,7 +5210,6 @@ http://pathwaycommons.org/pc2/Protein_cdcbb09fa91d55e1189b03c955be846c	1
 http://pathwaycommons.org/pc2/Complex_3cf9174fa555c0b048c988660f4a09c8	1
 http://pathwaycommons.org/pc2/Complex_769678b62072c2ac79b3c09679cddd8b	1
 http://pathwaycommons.org/pc2/SmallMolecule_616f7be15089c280b1b5e55bdd52a78c	1
-http://pathwaycommons.org/pc2/SmallMolecule_eb4c6cf3a09592125e4c622300b0d901	1
 http://pathwaycommons.org/pc2/Complex_7570b6b096db84a8c985f66d7aafde8b	1
 http://pathwaycommons.org/pc2/SmallMolecule_f215151256aebcf218dc6f53c5c26664	1
 http://pathwaycommons.org/pc2/Protein_ca4c56633f52e4b705e3665167195d96	1
@@ -5334,7 +5315,7 @@ http://pathwaycommons.org/pc2/PhysicalEntity_953bd871bd87b5f2a563067034dbf5f8	1
 http://pathwaycommons.org/pc2/Complex_860ffbac7b423d2137b91219df06689b	1
 http://pathwaycommons.org/pc2/Complex_427b28fa3af8fb736f84a2ff233c650e	1
 http://pathwaycommons.org/pc2/SmallMolecule_0680dbf41ba4355b218ac313c8743018	1
-http://pathwaycommons.org/pc2/Protein_e89332e4c2f4c1423214e334aca731ab	1
+http://pathwaycommons.org/pc2/Complex_fdae13c52741d3bb447c7eb61a337335	1
 http://pathwaycommons.org/pc2/Protein_2cf96857d3c97c7c4aaace04bd0dfc02	2
 http://pathwaycommons.org/pc2/SmallMolecule_5b33d98107242883a50769cb4d33676c	1
 http://pathwaycommons.org/pc2/Protein_d1b114d6a8eee1c904f7c5737f5a2bff	1
@@ -5550,7 +5531,6 @@ http://pathwaycommons.org/pc2/Complex_ef918466ecae688af7edef6362a52d67	1
 http://pathwaycommons.org/pc2/Complex_15c0c71864c80e6ceaa1463ab31bc319	1
 http://pathwaycommons.org/pc2/Protein_1003e109933a977159a4515603b54c7a	2
 http://pathwaycommons.org/pc2/Protein_ec10d74e33c8a9fe484eddfe27f6e92e	1
-http://pathwaycommons.org/pc2/SmallMolecule_cf5388cddf69c4265af44bfca6a7da59	1
 http://pathwaycommons.org/pc2/SmallMolecule_fd88c1837856b1c463d40cd7b1662edb	1
 http://pathwaycommons.org/pc2/Complex_289675163898aebb0de8f516da01f568	1
 http://pathwaycommons.org/pc2/Protein_44adcb8e7ce32d94939e5cb5ae11077e	1
@@ -5659,7 +5639,7 @@ http://pathwaycommons.org/pc2/Protein_f7fa596c4c40735ea41a6cb97ca78d05	1
 http://pathwaycommons.org/pc2/SmallMolecule_4a8cf29e7d4e23e27fe3091d2182ce83	1
 http://pathwaycommons.org/pc2/Complex_4e74f3164af53e135368ddc72cde8e2e	1
 http://pathwaycommons.org/pc2/Complex_336c4224e7906b7b98f4b67183e010fd	1
-http://pathwaycommons.org/pc2/Complex_066cb8c76cd3d1e9ca2e5f52081e0ee3	1
+http://pathwaycommons.org/pc2/Complex_38b22fcc3694989ac8279976c3a08b11	1
 http://pathwaycommons.org/pc2/SmallMolecule_c149a728043698fb473963063b5b82c1	1
 http://pathwaycommons.org/pc2/Protein_4b6923c163df0e2e8c691d1c1a83466d	1
 http://pathwaycommons.org/pc2/SmallMolecule_73a2f600e43a45d53cee9a32f65a7f7d	1
@@ -5675,7 +5655,7 @@ http://pathwaycommons.org/pc2/Complex_e7299622adbe8ae17217dac922aea023	1
 http://pathwaycommons.org/pc2/Complex_62d3324e336f03156007ad351bb87906	1
 http://pathwaycommons.org/pc2/Complex_695cf15cdb861b524d0e16f165636096	1
 http://pathwaycommons.org/pc2/Complex_3342a59920d26c42a85b0a9c6b4da394	8
-http://pathwaycommons.org/pc2/Protein_2abbfebc40eb765311bb2389960d3238	1
+http://pathwaycommons.org/pc2/Complex_a53f4b6bdba8b32d4f1ff6d1c403165f	1
 http://pathwaycommons.org/pc2/Protein_04e58e08d7e75c49f2d7f9cb117b880f	1
 http://pathwaycommons.org/pc2/SmallMolecule_b4c369d46c2bf250768b4c6c0c7ffc97	1
 http://pathwaycommons.org/pc2/Protein_5e41483f8f1bdf3038f7880b6aa5c6f0	1
@@ -5721,12 +5701,12 @@ http://pathwaycommons.org/pc2/Protein_385de604fdf109672134a7dcbedf2ef0	1
 http://pathwaycommons.org/pc2/Protein_f6409132024c58e1936d20c5ac9acb3d	2
 http://pathwaycommons.org/pc2/SmallMolecule_dc6a3ddbd4e111c4776ac4e31926af4e	1
 http://pathwaycommons.org/pc2/SmallMolecule_dcfe676f46351fac0e48ab1a9b837f63	1
+http://pathwaycommons.org/pc2/Protein_d4eaca24c35a3280e0267e46478c7b41	1
 http://pathwaycommons.org/pc2/Complex_40e3ac0590a40dee535f0703cdd262c4	1
 http://pathwaycommons.org/pc2/Complex_4b21f569fb03cd8bc2e58f6b0f09e807	1
 http://pathwaycommons.org/pc2/SmallMolecule_7b15a9f16c5fa83b81e4ea3d798caae3	1
 http://pathwaycommons.org/pc2/Protein_877bb4ce0e9d72657e0e4b67ce6af137	1
-http://pathwaycommons.org/pc2/Protein_d75f4597693d787f331316e08e035adf	1
-http://identifiers.org/reactome/R-HSA-1028812	2
+http://pathwaycommons.org/pc2/Protein_3f8d6dc4cd8fbf786d58a35cd2db4186	1
 http://pathwaycommons.org/pc2/Complex_26002255bdce314ec6d02c20a9235683	1
 http://pathwaycommons.org/pc2/Complex_970fa728479489748c7d44ce001e5b56	1
 http://pathwaycommons.org/pc2/Protein_f6f7295f7ca9de5218a83d5a41df305c	1
@@ -5798,7 +5778,6 @@ http://pathwaycommons.org/pc2/Protein_5408238e6ffd2cc1b606c1b27ca20cf6	1
 http://pathwaycommons.org/pc2/Complex_c2dec5b9dc4d448fa5246f83c765bec6	1
 http://pathwaycommons.org/pc2/Complex_5ab024180dbb62fd7b8774053dc5577f	1
 http://pathwaycommons.org/pc2/Complex_d4a2d0c11c29864d11e1a6a693316670	1
-http://pathwaycommons.org/pc2/SmallMolecule_3d23b44f79cac0c43b0ca368e0695a5f	1
 http://pathwaycommons.org/pc2/Protein_75e703581cfedcc8a57285a90f05ac51	1
 http://pathwaycommons.org/pc2/Complex_ac70e7911aef0ca0617f6be40b588f3b	1
 http://pathwaycommons.org/pc2/SmallMolecule_7b6a90960384639ae4b96c281794100b	1
@@ -5814,7 +5793,6 @@ http://pathwaycommons.org/pc2/Protein_ef570f9b2969f8fe0b665f2c8444bc79	1
 http://pathwaycommons.org/pc2/Complex_260644ca28cbb1c8e6fe471a177e1a8e	1
 http://pathwaycommons.org/pc2/Complex_af9354372ae4b11ffde8ac0c26c06484	1
 http://pathwaycommons.org/pc2/Protein_eac112fc52007fc53d32f2202f1a9c57	1
-http://pathwaycommons.org/pc2/Complex_e3bb3f173d28018c3205951768c05621	1
 http://pathwaycommons.org/pc2/Protein_fad93e86b74d0ca72e6f8fd81ea2770f	1
 http://pathwaycommons.org/pc2/Complex_c244fa1e9ed6633f2cc42af71964a829	1
 http://pathwaycommons.org/pc2/Complex_198687f30a1bfe1a7be90eb165a7fbca	1
@@ -5910,7 +5888,7 @@ http://pathwaycommons.org/pc2/Protein_296870dde4bc8d80794f49ce1b7e1961	1
 http://pathwaycommons.org/pc2/Protein_39658e435339a518f44e5e78f10a94a0	1
 http://pathwaycommons.org/pc2/Complex_61b6b2b00455cd82c1ffb40b32abbe94	1
 http://pathwaycommons.org/pc2/SmallMolecule_da57e031aba9b8370988b5cec56c0662	2
-http://pathwaycommons.org/pc2/Dna_d332a0aa6a98c84dbdc71e077683b231	1
+http://pathwaycommons.org/pc2/Complex_d58b2e4450e9c4055d741f661d0397f0	6
 http://pathwaycommons.org/pc2/SmallMolecule_8bc038e4f9a6a63061a177514076b0cb	1
 http://pathwaycommons.org/pc2/Protein_9b8dfc58f3eb084d39fc505c5c53cb36	1
 http://pathwaycommons.org/pc2/Protein_956e37a12561bbe9ea8d305c6410c59b	1
@@ -6391,7 +6369,7 @@ http://pathwaycommons.org/pc2/Complex_ac49da509f917c21ca7b7237401b255e	1
 http://pathwaycommons.org/pc2/PhysicalEntity_bfb6692829e4ceecfc351a227e674956	1
 http://pathwaycommons.org/pc2/Complex_38423e6ff7eeaf8fa7dc34e9a6146fb2	1
 http://pathwaycommons.org/pc2/Complex_5229ce45f038a4b04586d19f7b3eb2a9	1
-http://pathwaycommons.org/pc2/Protein_f28333f227ed2ea0de8deeb8d868325c	1
+http://pathwaycommons.org/pc2/Complex_a1fd4731a51458c01a4ef8c0130fc4a8	1
 http://pathwaycommons.org/pc2/SmallMolecule_4eb3d4059ffacdd401881bcd99c960b6	1
 http://pathwaycommons.org/pc2/Rna_8da5ef1ad4394bf66723dd2afbd133da	1
 http://pathwaycommons.org/pc2/Complex_33595493da810c4ddae5e319c8d9097f	3
@@ -6786,12 +6764,11 @@ http://pathwaycommons.org/pc2/Complex_72475dd61e276531f692e59c92921d54	1
 http://pathwaycommons.org/pc2/Complex_07747a036cc1e16130e12d1be8ecccbe	1
 http://pathwaycommons.org/pc2/Complex_b420a240147358a838bc971426467e86	1
 http://pathwaycommons.org/pc2/Complex_d2933abaf361a8663916931b8b0af124	1
-http://pathwaycommons.org/pc2/SmallMolecule_d23448e979026f79573fa7ee665ae3af	1
 http://pathwaycommons.org/pc2/Complex_4d165b5b76c9ab404af7c7ee680a944a	1
 http://pathwaycommons.org/pc2/Complex_69191f24682b7e9b1fe24c529bc91625	1
 http://pathwaycommons.org/pc2/Complex_3120678fe865b6a18a66bce1993319a5	1
 http://pathwaycommons.org/pc2/SmallMolecule_bd9086e9a9224230dc8a3cec48683236	1
-http://identifiers.org/reactome/R-HSA-163770	2
+http://pathwaycommons.org/pc2/Protein_766173b31ebe482804a2f265741b1987	1
 http://pathwaycommons.org/pc2/Complex_f69ca4003516acb01b2b7f525b3a5e8b	1
 http://pathwaycommons.org/pc2/Complex_5157d60454e6a777fa4db572d275de64	1
 http://pathwaycommons.org/pc2/Protein_9fd76a179dc4db967d56132ba3aaf28b	1
@@ -7093,7 +7070,6 @@ http://pathwaycommons.org/pc2/Protein_62a67ee712d5f79f1357c7fed0eb6aeb	1
 http://pathwaycommons.org/pc2/Complex_3467e637d2bd7690f244fc125455ea95	1
 http://pathwaycommons.org/pc2/Protein_08db0a504c8f4e9318e4569ca3383d44	1
 http://pathwaycommons.org/pc2/Complex_c521e8b62124faeb03714f5fe8ba880c	1
-http://pathwaycommons.org/pc2/Protein_6697bc2f8a14703185e4877e8e9dd327	1
 http://pathwaycommons.org/pc2/SmallMolecule_4b99f7513982d29346c136ee916b05ca	1
 http://pathwaycommons.org/pc2/Dna_9803884041ed63f037e66f2b41d23341	1
 http://pathwaycommons.org/pc2/SmallMolecule_7a136cbb816158971bce07222ef103c8	1
@@ -7196,9 +7172,8 @@ http://pathwaycommons.org/pc2/Complex_22f41e826a6bf4455dc543cb68823b6c	1
 http://pathwaycommons.org/pc2/Complex_0a071d45d57bd32fa62efb9ad4b7bc31	1
 http://pathwaycommons.org/pc2/Complex_c7d405314cc4cecbf2893068ffc9c91c	1
 http://pathwaycommons.org/pc2/Protein_cff695b51b88ec77df72874a459d052e	2
-http://identifiers.org/reactome/R-HSA-211466	2
-http://identifiers.org/reactome/R-HSA-211467	2
-http://identifiers.org/reactome/R-HSA-211461	2
+http://pathwaycommons.org/pc2/Complex_9d7601a5ecabbadd6adc108e1ff5b783	1
+http://pathwaycommons.org/pc2/SmallMolecule_593bc4be0f03fe72b0e70481dfd1ca99	1
 http://pathwaycommons.org/pc2/Complex_5e205d5b47805346a891155af7d858e5	5
 http://pathwaycommons.org/pc2/Complex_9fc822629486c286e554bace235d16bc	1
 http://pathwaycommons.org/pc2/Protein_a0caffd8280f5e43d0a733a81e8c9c83	1
@@ -7209,7 +7184,7 @@ http://pathwaycommons.org/pc2/PhysicalEntity_20a5fac39875e43248dc49914766f554	2
 http://pathwaycommons.org/pc2/Protein_2120574890ec01575f483314bbbb00e8	1
 http://pathwaycommons.org/pc2/Protein_670be3cce859292bee4d22d068cd0eb2	1
 http://pathwaycommons.org/pc2/Complex_e8f12f51cbb669069eb49450bce19ed8	1
-http://pathwaycommons.org/pc2/Protein_2a709f668a5cd5d0394d158053cf5380	1
+http://pathwaycommons.org/pc2/Complex_dd7384692ad552be29d7427748971142	1
 http://pathwaycommons.org/pc2/Complex_6d08581b5e41e6bd126bee47e1e03faf	1
 http://pathwaycommons.org/pc2/Complex_972e6221091776c6e3e269575532f7a6	1
 http://pathwaycommons.org/pc2/Complex_c69a1ca269a641207abc9b9934b8e6c7	1
@@ -7400,17 +7375,16 @@ http://pathwaycommons.org/pc2/SmallMolecule_5b87107201792aee315d9f19d0b31090	1
 http://pathwaycommons.org/pc2/SmallMolecule_25f91a7d4cd1b73f4fedda876c55ecac	1
 http://pathwaycommons.org/pc2/Complex_b625540019ca5e132994e12ded014cdf	1
 http://pathwaycommons.org/pc2/SmallMolecule_068ccc268d94e72a2968beebcf1850ca	1
-http://pathwaycommons.org/pc2/Protein_d48b7f70409e5b9f1a5dd8e5194d9418	1
-http://identifiers.org/reactome/R-HSA-210788	2
+http://pathwaycommons.org/pc2/SmallMolecule_d6ae7269422d4e05726bcc175feea7cf	1
 http://pathwaycommons.org/pc2/Protein_260c5bc3e8ad7e94489cb1bd8b176751	1
 http://pathwaycommons.org/pc2/Protein_513240664e96c76ddc8b39d3f5c16d40	1
 http://pathwaycommons.org/pc2/Protein_87a209623ce34312f693f2de6e0e5d46	1
 http://pathwaycommons.org/pc2/Complex_d12571d9d822a9957c7eafceed6397bc	1
 http://pathwaycommons.org/pc2/SmallMolecule_acb2f54f558075f4e7b1e7081658685d	1
 http://pathwaycommons.org/pc2/Complex_5c53ce4db3afe72e74d96bdd48788f53	1
-http://identifiers.org/reactome/R-HSA-210780	2
+http://pathwaycommons.org/pc2/Protein_709f3060f232458e52be7dfb9e4a6249	2
 http://pathwaycommons.org/pc2/Protein_fd675d62914f30de79c28a0c7b05884a	1
-http://identifiers.org/reactome/R-HSA-210784	2
+http://pathwaycommons.org/pc2/Complex_aeb64a2dcdb08d4ea71427b615bc62dd	1
 http://pathwaycommons.org/pc2/Complex_7e8b2ecb22aca1171e0aebd7650df65b	2
 http://pathwaycommons.org/pc2/PhysicalEntity_f23c95c87f2117ff9325f326f728b541	1
 http://pathwaycommons.org/pc2/Complex_dca51ee7bc8f76656c0f8d56150b3a6b	1
@@ -7447,7 +7421,7 @@ http://pathwaycommons.org/pc2/Protein_066906bf3a9a7d832a7109fd88d325a8	1
 http://pathwaycommons.org/pc2/Complex_38dc0e738d384e0b5d9daf22d914c97e	1
 http://pathwaycommons.org/pc2/Complex_94e369bf58aa0eddf3584abb77a38f56	1
 http://pathwaycommons.org/pc2/Protein_16bb44ff02bb2b3f088d7660eb5924bb	1
-http://pathwaycommons.org/pc2/Protein_1b71a75f3d2bdbc545537ab84aa374cd	1
+http://pathwaycommons.org/pc2/Complex_6c9cf1db9f9b23fb7d4173b4e341f7d8	1
 http://pathwaycommons.org/pc2/Protein_599102af1f94f41fe8b35a360fca8b2d	1
 http://pathwaycommons.org/pc2/Complex_6ad35df0ddc3d80ee40bc7203e45db0f	1
 http://pathwaycommons.org/pc2/Protein_14abdd97c18894d444a0c63272f71906	1
@@ -7532,7 +7506,6 @@ http://pathwaycommons.org/pc2/SmallMolecule_3222dacfacd991815d9f49fbd26672d9	1
 http://pathwaycommons.org/pc2/Complex_cff629bbe99687c4f0a3144ecdfbb61a	1
 http://pathwaycommons.org/pc2/Complex_e6dcfd2a37b55b81102bfc29f3ed5383	1
 http://pathwaycommons.org/pc2/SmallMolecule_961133052756a17b30aa26264c425c38	1
-http://pathwaycommons.org/pc2/Protein_e9ee3fd70f6513024fe7dfaf88105801	1
 http://pathwaycommons.org/pc2/Complex_f35e4c254393d35e911cd7e5f7f7d6e2	1
 http://pathwaycommons.org/pc2/Protein_221eb898faf09b5605b2fb5ac0eebf4a	1
 http://pathwaycommons.org/pc2/Complex_04aaa543be4e63325abc34f661a765cb	1
@@ -7614,7 +7587,6 @@ http://pathwaycommons.org/pc2/Complex_60b0e6bf5602da5ae54a72ee0a87c1f2	1
 http://pathwaycommons.org/pc2/Complex_a078cb50704ccd85bdea31b69aef7800	1
 http://pathwaycommons.org/pc2/Complex_d6ecc37b57e1f3e04f9c5149b8a560ac	1
 http://pathwaycommons.org/pc2/SmallMolecule_542a9b1cb3f517af30b44e7e32bee08b	1
-http://pathwaycommons.org/pc2/Rna_900a07ed386d86aef4613f89e0e15402	1
 http://pathwaycommons.org/pc2/Complex_26c38580f31417892ecc3f82aa176906	1
 http://pathwaycommons.org/pc2/Complex_8ff0612aec594e87baf5071948405e64	1
 http://pathwaycommons.org/pc2/Protein_44fa36a4bcd494112f7aa80fee39141d	1
@@ -7682,10 +7654,9 @@ http://pathwaycommons.org/pc2/Complex_38b967e3554a14eae61d9811c8c61918	1
 http://pathwaycommons.org/pc2/SmallMolecule_1f6b2578d395f4aaa4dee2ebd5305627	1
 http://pathwaycommons.org/pc2/SmallMolecule_5bbd443096005af5f367320ef28dea12	1
 http://pathwaycommons.org/pc2/Protein_647566b60bc9e80c53d30f10ec1fc5bb	1
-http://pathwaycommons.org/pc2/Complex_5d886336e73d8ce5c8a72093ff4b72c0	1
+http://pathwaycommons.org/pc2/Protein_1b71a75f3d2bdbc545537ab84aa374cd	1
 http://pathwaycommons.org/pc2/Complex_cd2d4fdf250c7b2fb96da04c90ec36dd	2
 http://pathwaycommons.org/pc2/PhysicalEntity_0fd6282df834136bf04e17180be92dbe	1
-http://pathwaycommons.org/pc2/Protein_da765290f1ab473412a08b61a6c976c5	1
 http://pathwaycommons.org/pc2/SmallMolecule_9c3c39ddef65b126a6ab19fdfeafa82f	1
 http://pathwaycommons.org/pc2/SmallMolecule_78bbe79a65304173bc183dcfed4acd66	1
 http://pathwaycommons.org/pc2/Complex_ad33a22baf1f809a0a1e9800df370713	1
@@ -7759,7 +7730,6 @@ http://pathwaycommons.org/pc2/Protein_a37ec0f1e4f919233870cd2873554f9d	1
 http://pathwaycommons.org/pc2/Protein_1cecac152ae33f1279523913c77627ef	1
 http://pathwaycommons.org/pc2/Protein_62c9493ff2804b997a35c45a57334446	1
 http://pathwaycommons.org/pc2/Protein_0f3c08f478bab561c89dd18de30eeb5e	1
-http://pathwaycommons.org/pc2/Protein_d3c79e30fd72e6e21cce245f04c73e29	1
 http://pathwaycommons.org/pc2/Complex_3a221efd9cac8ce14a2cb2c83322ad09	1
 http://pathwaycommons.org/pc2/SmallMolecule_9e0670466cd24f5f1e51bcad36cb4ee3	1
 http://pathwaycommons.org/pc2/Complex_d7b3e4f0795a8ae9de527fc2f4c65e0b	4
@@ -7874,7 +7844,7 @@ http://pathwaycommons.org/pc2/Complex_ab8738756b6b52282fb04355db61f405	1
 http://pathwaycommons.org/pc2/Complex_b2927cda112df50032bc52cb44125e23	1
 http://pathwaycommons.org/pc2/Protein_43ecb2fcdad0f4b52ddaf0e508ad1710	1
 http://pathwaycommons.org/pc2/PhysicalEntity_c7a1a402a4fe03dd1a40a7e83d0c6e2c	1
-http://pathwaycommons.org/pc2/Protein_2f00a1f310638255048e44e5d318aa86	1
+http://pathwaycommons.org/pc2/SmallMolecule_cf5388cddf69c4265af44bfca6a7da59	1
 http://pathwaycommons.org/pc2/SmallMolecule_259df07b6d8cefc5c57ed9da5e48020e	1
 http://pathwaycommons.org/pc2/Complex_f6b061390a144f1f3eec70b77b085695	1
 http://pathwaycommons.org/pc2/Protein_df9a0f405bbcf418bb5edf04f995dd96	2
@@ -8177,7 +8147,7 @@ http://pathwaycommons.org/pc2/Complex_9ae21fd8af1dd49aa1668e4237ba00e2	1
 http://pathwaycommons.org/pc2/Complex_0e55544fb91f8775ab044efd0a7cd059	1
 http://pathwaycommons.org/pc2/Complex_a76652a9adcbc5d21239e568dc7d6e53	1
 http://pathwaycommons.org/pc2/Complex_a825e51ccc4aca2f9964ab5e03665f74	1
-http://identifiers.org/reactome/R-HSA-163733	3
+http://pathwaycommons.org/pc2/Protein_b1661b33f42c52e6dc5ee3aeabff0c95	1
 http://pathwaycommons.org/pc2/Complex_c8674c11e78df4e3e20af2ebf7757e3b	1
 http://pathwaycommons.org/pc2/SmallMolecule_377e749042b1ff0b7da8176ac0d40191	1
 http://pathwaycommons.org/pc2/PhysicalEntity_643e4f977a1ee792e5b37d38060d295e	1
@@ -8186,7 +8156,7 @@ http://pathwaycommons.org/pc2/Complex_99e0e64c853430286022a56ee19b13bd	1
 http://pathwaycommons.org/pc2/Protein_6122b8bfaf8f4cdcd1334e8105a1ea39	1
 http://pathwaycommons.org/pc2/Protein_c4368f3d9211b6a70a34d0480f86aaa4	2
 http://pathwaycommons.org/pc2/Protein_bce516860c4b7183e9132af3845e6278	1
-http://identifiers.org/reactome/R-HSA-211272	2
+http://pathwaycommons.org/pc2/Complex_9ecb37fb9c72821aed99a5bc779ecae6	1
 http://pathwaycommons.org/pc2/Complex_ea849b973c45c7daad7de2875475db3e	1
 http://pathwaycommons.org/pc2/Complex_23d1b8574fe7f845f8312e2da70aacc9	1
 http://pathwaycommons.org/pc2/Complex_ed6d611732a10e6d436896266ccff40b	1
@@ -8246,7 +8216,7 @@ http://pathwaycommons.org/pc2/Protein_e293531ec6188436a44761d2fb05dcef	1
 http://pathwaycommons.org/pc2/Protein_aa79cdd5a6a5a1c6428876ce1cd9395f	2
 http://pathwaycommons.org/pc2/Complex_c874ff8c4c8471b2d1b73f04e8e8a382	1
 http://pathwaycommons.org/pc2/Complex_7358fb1677e1e437bb5f9923c322130c	1
-http://identifiers.org/reactome/R-HSA-994034	2
+http://pathwaycommons.org/pc2/Protein_d75f4597693d787f331316e08e035adf	1
 http://pathwaycommons.org/pc2/Protein_af9aaabbfe8a1b09c812446454d5c7ec	1
 http://pathwaycommons.org/pc2/Protein_da56e0eb50193612bfcaef26b4a2118e	1
 http://pathwaycommons.org/pc2/Protein_b9c059b234fb838af1a0edc589707b5a	1
@@ -8283,7 +8253,7 @@ http://pathwaycommons.org/pc2/Complex_f2255c77a1ada70239cb363494204f3b	1
 http://pathwaycommons.org/pc2/Protein_fc8d0ffff40c778c6f27cd7c11866b0e	1
 http://pathwaycommons.org/pc2/Complex_1e9eea7f4c20fc53c6026969e8d661cf	1
 http://pathwaycommons.org/pc2/Complex_42b662821d32e4c897331ec255129069	1
-http://pathwaycommons.org/pc2/Complex_971a74751096feccf5b4f6fc2686f4ad	1
+http://pathwaycommons.org/pc2/Dna_20ae95204dec37e0f254797f18139c9c	1
 http://pathwaycommons.org/pc2/Protein_aaff0945220adc12c70c78b8f2a284eb	1
 http://pathwaycommons.org/pc2/Complex_0c217b7da7e81eefaf81ad23acb9276f	1
 http://pathwaycommons.org/pc2/Protein_bc0cc867a9321d2d2214d69ec7f1b04c	1
@@ -8656,7 +8626,6 @@ http://pathwaycommons.org/pc2/Complex_1a987a323f75f3351ad800659aae5c68	1
 http://pathwaycommons.org/pc2/PhysicalEntity_b5d6b8b92ee62da7e78f7e5a7b94d522	1
 http://pathwaycommons.org/pc2/Protein_b073ead36de1916e735a90488a1a158f	2
 http://pathwaycommons.org/pc2/Complex_ece9099bd67ae5dd3439950f67b2adc4	1
-http://pathwaycommons.org/pc2/Complex_9d7601a5ecabbadd6adc108e1ff5b783	1
 http://pathwaycommons.org/pc2/Protein_e076e2b66b46649f543ffe3b46d4802f	1
 http://pathwaycommons.org/pc2/Complex_bd7409a6f07628a833b8073790f18c5b	1
 http://pathwaycommons.org/pc2/Protein_3d47c130664c41288870fd5493607a86	1
@@ -8935,8 +8904,7 @@ http://pathwaycommons.org/pc2/Protein_4a49fe87957eb4e0ca9dc1dd16e716e6	1
 http://pathwaycommons.org/pc2/Protein_05da90bae1a7bba4ba88186c0f2863fb	1
 http://pathwaycommons.org/pc2/Protein_360327ff852bef92090b32b8ece32423	1
 http://pathwaycommons.org/pc2/Complex_b5e53291ef99a0c7a2dce9a141e33afb	1
-http://identifiers.org/reactome/R-HSA-210920	2
-http://identifiers.org/reactome/R-HSA-210921	2
+http://pathwaycommons.org/pc2/Dna_127101ba858d6b731a5a35777aea75a4	1
 http://pathwaycommons.org/pc2/Complex_614c7d37ed73e16492ba23dfa6719f0f	1
 http://pathwaycommons.org/pc2/Protein_624e3bb3bed54a60e1346ee484d7664c	1
 http://pathwaycommons.org/pc2/Complex_7d1507edb180e75ec1334aa2ebb44246	1
@@ -9169,7 +9137,6 @@ http://pathwaycommons.org/pc2/Protein_9d467c942746d7d50fdbba72f9f06bd7	1
 http://pathwaycommons.org/pc2/Complex_5b748eb3830be3943fa8b1cdcb47c901	1
 http://pathwaycommons.org/pc2/Complex_324686c6795c28e48009cc81ac46dcd8	1
 http://pathwaycommons.org/pc2/SmallMolecule_d81f98b748e82a8a66e7a35f3f0e0cca	1
-http://pathwaycommons.org/pc2/Rna_4f8fcc3896b30707bbeb701fb9193400	1
 http://pathwaycommons.org/pc2/Complex_f79284f07f6f62b8baf5c2884763087d	1
 http://pathwaycommons.org/pc2/SmallMolecule_ce7766522bb33d89e0da59feb204ab2f	1
 http://pathwaycommons.org/pc2/Protein_113a5d1fe0b8dac44ae6ceb0fc5e9309	1
@@ -9355,7 +9322,7 @@ http://pathwaycommons.org/pc2/Protein_7e5c591898c596e21f0e531e544cc988	1
 http://pathwaycommons.org/pc2/Complex_ea61e4cd5252da52eb84445efb92faa9	1
 http://pathwaycommons.org/pc2/Protein_962e2492f7725d2ee50ffa6f5862b49c	1
 http://pathwaycommons.org/pc2/Complex_d202f69f6bc3a57e99a96dd34657cc69	1
-http://pathwaycommons.org/pc2/Complex_50c1ff7c9d8a4a93fdfb12f2fa72a7c2	1
+http://pathwaycommons.org/pc2/Complex_f9645bbf4f8cbbdbdf465cf5122aae3f	1
 http://pathwaycommons.org/pc2/Protein_97d185b5b56b00f5245b42e65d174480	1
 http://pathwaycommons.org/pc2/Protein_2f34b6b08a36f1962ea216f59946d6e3	1
 http://pathwaycommons.org/pc2/Protein_4af4c21179a4575853f42dc0a008788f	1
@@ -9460,7 +9427,6 @@ http://pathwaycommons.org/pc2/Complex_65d1cdca94501776af11cc699f45bae1	1
 http://pathwaycommons.org/pc2/Complex_b0198cd221cb58c7c4f3f4bd1a5aaa51	1
 http://pathwaycommons.org/pc2/Protein_e2a5458c9b36a8bc4f60272965e3963f	1
 http://pathwaycommons.org/pc2/Complex_08c20c10773184e02ec4597e31081d36	1
-http://pathwaycommons.org/pc2/Protein_0b3845902165b922f03b274882e0aaf7	1
 http://pathwaycommons.org/pc2/Complex_eb09112e35f493c21367ca9a14ba20bb	2
 http://pathwaycommons.org/pc2/Complex_321ecb480b182be469d38ac886e5a1b0	1
 http://pathwaycommons.org/pc2/Complex_1cb11e76f08c16f75668aa075fc36526	1
@@ -9472,7 +9438,7 @@ http://pathwaycommons.org/pc2/Protein_56e28e344b9274cabbe3afe922a2ddc1	1
 http://pathwaycommons.org/pc2/PhysicalEntity_fdb64f436bbf1870cf14ddddc47e5da2	1
 http://pathwaycommons.org/pc2/Protein_c73b0a26de7bf633a88fb85659c565a8	1
 http://pathwaycommons.org/pc2/Complex_1afc16ab2b7f82e4b0e566eaa2c44f4b	1
-http://pathwaycommons.org/pc2/Complex_0326bf5e8e131e8ac0c6bd062218b75e	1
+http://pathwaycommons.org/pc2/Complex_939d2514e9cab201465142d520fbc1c0	3
 http://pathwaycommons.org/pc2/Complex_3f22f414243c186a84ba78a50e0438d4	3
 http://pathwaycommons.org/pc2/SmallMolecule_652c702958f2c197e79dc5cbf6645e38	1
 http://pathwaycommons.org/pc2/SmallMolecule_4123b08b4c6d933106267a91e18d03b1	1
@@ -9513,9 +9479,8 @@ http://pathwaycommons.org/pc2/Complex_cf0c24bf02a6290974afab8d67fca0eb	1
 http://pathwaycommons.org/pc2/PhysicalEntity_1f9f36f243bd8ded72b72560c881fbcf	1
 http://pathwaycommons.org/pc2/Complex_409133491eaf944b3d9a572af9545094	1
 http://pathwaycommons.org/pc2/SmallMolecule_e81f8617e7c62d7a3a5430e13b8f2688	2
-http://pathwaycommons.org/pc2/Protein_b0f8169a81b63e532c7233578bd0124b	1
+http://pathwaycommons.org/pc2/SmallMolecule_47e61fa4133a94308a0ee49ed94d3a2c	1
 http://pathwaycommons.org/pc2/Complex_8e2ad87ae67f49a3d0d3bdf3cbd37a77	1
-http://pathwaycommons.org/pc2/Complex_5b1dfffc73f1bdecd7c84728547f80cf	1
 http://pathwaycommons.org/pc2/Complex_31b1a24eb19b0a071c58fce7fb9699d0	3
 http://pathwaycommons.org/pc2/Complex_07f87cd0ebb67316a72711500386d520	1
 http://pathwaycommons.org/pc2/SmallMolecule_7bb5fdd76775f5952f64cbbd5d1a6866	1
@@ -9626,7 +9591,6 @@ http://pathwaycommons.org/pc2/Protein_3046a0e50143a398bccd419c8f64f7c2	1
 http://pathwaycommons.org/pc2/Complex_90af7b0c90f8bc93be133fd8b94b4fef	1
 http://pathwaycommons.org/pc2/Protein_86f25eb053f6e73c138d2ceb264338b5	1
 http://pathwaycommons.org/pc2/Protein_09b46fa4f2b34cd8b5d3b2220ddc2b3a	2
-http://pathwaycommons.org/pc2/Protein_b1661b33f42c52e6dc5ee3aeabff0c95	1
 http://pathwaycommons.org/pc2/Complex_aa5b9d357ad0d8135885d59e79e1a6d3	1
 http://pathwaycommons.org/pc2/SmallMolecule_220d3a7372d51d3c81d02605775949e9	1
 http://pathwaycommons.org/pc2/Protein_903a9014464b5e15fa84f0b041f83c7b	1
@@ -9849,6 +9813,7 @@ http://pathwaycommons.org/pc2/Complex_a035d5e1ef1fa286e3b3232a6ced2c46	1
 http://pathwaycommons.org/pc2/Protein_7794e2fdd8605e409eab8ff2fcb653a4	1
 http://pathwaycommons.org/pc2/Protein_ee5c45d0cb4e6400aa25b1f53e117580	1
 http://pathwaycommons.org/pc2/Protein_96b2a44d022fd059e776991f425e9fa3	1
+http://pathwaycommons.org/pc2/Complex_8cee3e558fd5ed299b318a05771f7aac	1
 http://pathwaycommons.org/pc2/Protein_4af21426bc58f7c3961fc8f9a607fa2c	1
 http://pathwaycommons.org/pc2/Protein_9390e450863af5b08a0e5b9b11bf9d1e	1
 http://pathwaycommons.org/pc2/Complex_134cc4329f4230cae84c11a5fc10975c	1
@@ -10162,7 +10127,7 @@ http://pathwaycommons.org/pc2/Complex_c49f55a4077af25e59590fa557cc052e	3
 http://pathwaycommons.org/pc2/Complex_c1213755b21c4a571d2ec0a431c681bf	1
 http://pathwaycommons.org/pc2/Dna_3b6373f4c1a3cc9c2ed4620022be11df	1
 http://pathwaycommons.org/pc2/Protein_826b61373c684eff09b2814ce26ac43d	1
-http://pathwaycommons.org/pc2/Complex_d58b2e4450e9c4055d741f661d0397f0	6
+http://pathwaycommons.org/pc2/Complex_57ec73213ed7d8da2c921a600f6a3e3c	1
 http://pathwaycommons.org/pc2/Complex_5c9c37244bb28cdee099bdad2917a538	1
 http://pathwaycommons.org/pc2/SmallMolecule_9d611014ccf66313e745559c4da0dd20	1
 http://pathwaycommons.org/pc2/SmallMolecule_a9b196608d8189bb657fd7587e356348	1
@@ -10433,7 +10398,7 @@ http://pathwaycommons.org/pc2/Complex_c96f61d57e23298427704dd2e56aff2b	1
 http://pathwaycommons.org/pc2/Protein_c5fab48e0458daf8c7608dcf6227c9d6	1
 http://pathwaycommons.org/pc2/Protein_eb8eda9cd2844818025b02bbbf2c382e	1
 http://pathwaycommons.org/pc2/Complex_4c0c91b2c8c3a682ac65a585ca03a52c	1
-http://pathwaycommons.org/pc2/Protein_5c28802c523ed3ab8b22f267d2a145ac	1
+http://pathwaycommons.org/pc2/Complex_7328a4d918c6e76afdfb9de005c3b59e	1
 http://pathwaycommons.org/pc2/Protein_e30089d1dde8f4f5dcb5aebc0d8ca262	1
 http://pathwaycommons.org/pc2/Protein_5f0aa4d4fa93d12b347a21f97a886e9d	2
 http://pathwaycommons.org/pc2/Protein_ffbda6610945d0bdc235be7548be0d30	1
@@ -10519,7 +10484,7 @@ http://pathwaycommons.org/pc2/SmallMolecule_de325814ea8ae5cbd634ea31358a742d	1
 http://pathwaycommons.org/pc2/Complex_e802a7b9c21da5ad336388bd16a0ed47	1
 http://pathwaycommons.org/pc2/Protein_50048e7243d2d00cae250f26638adbf7	1
 http://pathwaycommons.org/pc2/Complex_23779a0d088e6726f7aeb2b6b7406311	1
-http://pathwaycommons.org/pc2/Complex_87b4d6536e28b17c578ba108b5ae80c2	1
+http://pathwaycommons.org/pc2/Protein_560ac5f6705d620d1e41974f80306268	1
 http://pathwaycommons.org/pc2/SmallMolecule_84bc79be0f4dc7734e738c3b815d9c66	2
 http://pathwaycommons.org/pc2/Complex_097d74d8838d5c009ac1bda67c98629a	9
 http://pathwaycommons.org/pc2/Complex_17092585d93b387a02f270ce5f54556b	1
@@ -10610,7 +10575,7 @@ http://pathwaycommons.org/pc2/Protein_8ffbe01391e0cc428227fc42b8599605	1
 http://pathwaycommons.org/pc2/PhysicalEntity_d04930855c60272f0efa5533ff38cee2	1
 http://pathwaycommons.org/pc2/Protein_08b78f978a9a948feab3ec1e1dab089c	1
 http://pathwaycommons.org/pc2/Complex_ac890176c4379e36b71016a675a02f8c	1
-http://pathwaycommons.org/pc2/Protein_17fce972254fb72c22a64697815e0278	1
+http://pathwaycommons.org/pc2/Complex_befd35e441d3c35ee4e1245a5f206bfa	1
 http://pathwaycommons.org/pc2/SmallMolecule_c58d44edebdabe81b80ae52b06b97e01	1
 http://pathwaycommons.org/pc2/Complex_d7964a2731c5fa2c0078f7c5ab1ba596	1
 http://pathwaycommons.org/pc2/Complex_bf885e475f9de506012579c32ee95b7f	1
@@ -10734,7 +10699,7 @@ http://pathwaycommons.org/pc2/Complex_2fd16bde82c6b0ed0a5cca387b254938	1
 http://pathwaycommons.org/pc2/Protein_8dc87ed22cbbd4b8ee877d124b322196	1
 http://pathwaycommons.org/pc2/Protein_25a7009a640323def2d6363e24a45378	1
 http://pathwaycommons.org/pc2/Complex_7cd18ed2ff87e89a915c0b072a6a9503	1
-http://pathwaycommons.org/pc2/Complex_bcb62606943d5c14d010b61607c75c94	1
+http://pathwaycommons.org/pc2/Protein_01e35fcd6f7d4946dc10fc90e15a875d	2
 http://pathwaycommons.org/pc2/Protein_7a7bc010423154b5795cc0f85f0f2533	1
 http://pathwaycommons.org/pc2/Complex_bb26f0cc6247dc02e9f58f91ba951d05	1
 http://pathwaycommons.org/pc2/Complex_78b28738179aaa144c473259681609af	1
@@ -10821,7 +10786,6 @@ http://pathwaycommons.org/pc2/SmallMolecule_86e9e4589dee02730e875c1649a953ff	1
 http://pathwaycommons.org/pc2/Protein_128e6bdc6dc3197ca9677200effa2885	2
 http://pathwaycommons.org/pc2/Protein_b9ca2bed01d20ec668fd6a7509d3dddc	1
 http://pathwaycommons.org/pc2/Protein_75946b333edcf2ee3fc10b8574fc436a	1
-http://pathwaycommons.org/pc2/SmallMolecule_593bc4be0f03fe72b0e70481dfd1ca99	1
 http://pathwaycommons.org/pc2/Complex_c6f3db7bc9494ea707d45b096ac6ef87	1
 http://pathwaycommons.org/pc2/Complex_89ba2b236eacb623c0692396424f930c	1
 http://pathwaycommons.org/pc2/PhysicalEntity_b97a25511e0a5c2b9052be22437463ea	1
@@ -10834,7 +10798,7 @@ http://pathwaycommons.org/pc2/Protein_6ad3a41767164644502db1007262b23c	1
 http://pathwaycommons.org/pc2/Complex_ea44b620b94f29df1a6aefd304dcfe28	1
 http://pathwaycommons.org/pc2/Protein_af46a6555ac9b2467edbb71c4005fe01	1
 http://pathwaycommons.org/pc2/Complex_86fb995eba4906924b9c22d96161df7e	1
-http://pathwaycommons.org/pc2/PhysicalEntity_122914540b809acecf16434d41224e31	1
+http://pathwaycommons.org/pc2/Protein_a899c9ab1a53898dca0904bd4f98f2db	1
 http://pathwaycommons.org/pc2/Complex_92f991257a5bb273f63f24d59e75dc1d	1
 http://pathwaycommons.org/pc2/Complex_91a4e34730cd769b4125b3ae0b7161f9	1
 http://pathwaycommons.org/pc2/Complex_2f0885dc5a918c040936f93a74d13e22	1
@@ -10860,7 +10824,6 @@ http://pathwaycommons.org/pc2/Complex_de21711601171b8762a4de5285d517c6	1
 http://pathwaycommons.org/pc2/Protein_10b43bf330ae8453334ff77e4478ed9b	1
 http://pathwaycommons.org/pc2/Dna_5b909a6cc0780b7cf1166e929f145403	2
 http://pathwaycommons.org/pc2/Complex_f542502ee226c47693bad0903d6f2b9c	1
-http://pathwaycommons.org/pc2/Protein_887adc529b3e9cab3a7c17c2a56d062f	1
 http://pathwaycommons.org/pc2/Complex_c9f2851262bfee9a1470f8d9341809c1	1
 http://pathwaycommons.org/pc2/Protein_d96637e0a6d8d8b5e3ec5820af617bd5	1
 http://pathwaycommons.org/pc2/Complex_820d6d883c03f65442598b0f85521a32	1
@@ -10882,14 +10845,13 @@ http://pathwaycommons.org/pc2/Complex_a44c710946534dd611021c5010529864	1
 http://pathwaycommons.org/pc2/Complex_fbbf0e911dc0d95141b9169e89f24585	2
 http://pathwaycommons.org/pc2/Complex_72318ff3f17e632c0aebb7c5ffddcb82	1
 http://pathwaycommons.org/pc2/Complex_39e445a986f2d4b69cba6a52ba15e7d2	1
-http://identifiers.org/reactome/R-HSA-210769	2
+http://pathwaycommons.org/pc2/Complex_db3c3fdd607ce86d4068234402fe9a14	1
 http://pathwaycommons.org/pc2/Protein_68a8e895211fa6b2fd96cc6d6ee17375	1
 http://pathwaycommons.org/pc2/Complex_48aa1a1118b6e82158bf2a149a4be84d	1
 http://pathwaycommons.org/pc2/Protein_dcb4a61669ae4a953d0901fae178eb81	1
 http://pathwaycommons.org/pc2/Complex_b7fdab0b81816100d738697ae0a61c54	1
 http://pathwaycommons.org/pc2/Complex_0331230a9f0f5f508d355882792dc040	1
 http://pathwaycommons.org/pc2/Protein_34799c85327a5646c6aafe72a1c983b7	2
-http://identifiers.org/reactome/R-HSA-210767	2
 http://pathwaycommons.org/pc2/Protein_cc7639ae0cbb659d1b9d6f88673b848c	1
 http://pathwaycommons.org/pc2/Complex_7135023cd4d3ad042a061ade04f03edd	1
 http://pathwaycommons.org/pc2/Complex_a4909968b030af198e686e3ecb56dd62	1
@@ -10941,7 +10903,7 @@ http://pathwaycommons.org/pc2/Complex_0eebb17b004c3a89c1e4a0366b75da0b	1
 http://pathwaycommons.org/pc2/Complex_f012b404a8233f0fc9f8cb67691da745	1
 http://pathwaycommons.org/pc2/Protein_36c0542c84e907990d893986483a3724	1
 http://pathwaycommons.org/pc2/SmallMolecule_f9a4d067776730b1401f2d339fc9b519	1
-http://pathwaycommons.org/pc2/Complex_986e380940c201772e2a5dbc8020be54	2
+http://pathwaycommons.org/pc2/Complex_5b1dfffc73f1bdecd7c84728547f80cf	1
 http://pathwaycommons.org/pc2/Protein_0eea28ad5fca26877542795a984a0146	1
 http://pathwaycommons.org/pc2/Complex_faa1dc26c48b3b0169d6b2f7219da0d3	1
 http://pathwaycommons.org/pc2/Protein_207ee4a328fc3fa3a6af3ba07f3743e8	1
@@ -11155,7 +11117,6 @@ http://pathwaycommons.org/pc2/Complex_089b526b5ade451e9942ac8b1a3d6153	1
 http://pathwaycommons.org/pc2/Protein_dac67a6c028a69f0630cc0afdd572303	1
 http://pathwaycommons.org/pc2/PhysicalEntity_81391bb38c644ecd992527df5083a110	1
 http://pathwaycommons.org/pc2/Complex_898d23dd327d5d803ecee31b07021296	1
-http://pathwaycommons.org/pc2/Complex_5f7d87c3020cc99a52475c6fbe855603	1
 http://pathwaycommons.org/pc2/Complex_82da65e0009f39539e1184dce1c35bf6	4
 http://pathwaycommons.org/pc2/Complex_adff52a5fc0d351f1c4a7ea97f49dae6	1
 http://pathwaycommons.org/pc2/Protein_1ef7416665afe96980741bbc49fe7ae1	1
@@ -11173,7 +11134,7 @@ http://pathwaycommons.org/pc2/Complex_70b5967a4494723a1ee1e9883f53b192	1
 http://pathwaycommons.org/pc2/Protein_df932333f299204b9b61fa3e63893aea	1
 http://pathwaycommons.org/pc2/Complex_9cb2473949c194a60ac3839971359544	1
 http://pathwaycommons.org/pc2/Complex_04a43b6fa5bebd95ebb1cc3b7be6c9ef	1
-http://identifiers.org/reactome/R-HSA-195733	3
+http://pathwaycommons.org/pc2/Protein_e208b1acf4fbc7c45b983e6a4f29c722	1
 http://pathwaycommons.org/pc2/SmallMolecule_4557648d44727e52d887d4f2b2404623	1
 http://pathwaycommons.org/pc2/Complex_f333917f1582434b36cce1cc65b53451	1
 http://pathwaycommons.org/pc2/Protein_bc0e81e0c69c24fc2fb1737f5a570248	1
@@ -11292,7 +11253,6 @@ http://pathwaycommons.org/pc2/Complex_5302034348924620838262da4abe47f2	1
 http://pathwaycommons.org/pc2/Complex_d1df075d16565efcf4177a7235483f45	1
 http://pathwaycommons.org/pc2/Complex_965efc0169802d1196acd55f53f2b793	1
 http://pathwaycommons.org/pc2/Complex_15100f76c33bcc7e5b1609ab94f97726	4
-http://identifiers.org/reactome/R-HSA-211350	2
 http://pathwaycommons.org/pc2/Complex_d4f2a12c1500d904e6e618fbf7932692	1
 http://pathwaycommons.org/pc2/Complex_ca0478b0443100c086cf2e65178074f6	1
 http://pathwaycommons.org/pc2/Complex_66692c2e2d2c9d8e72601922c928a710	1
@@ -11318,7 +11278,6 @@ http://pathwaycommons.org/pc2/Protein_b3507c9a2b4c6d02e6077dd52a171de2	1
 http://pathwaycommons.org/pc2/Rna_81ae3171f48052601d90248e3a1dbd57	2
 http://pathwaycommons.org/pc2/Complex_124df403a97ec0f9f505100a6375ce39	1
 http://pathwaycommons.org/pc2/Complex_abfc7ded2ac9e8816e599fbf2b98f88b	1
-http://pathwaycommons.org/pc2/SmallMolecule_95f52ede0457d1ca6a5de429bd0f24bf	1
 http://pathwaycommons.org/pc2/Complex_080df6b155f38c4d04f9a845065c839b	2
 http://pathwaycommons.org/pc2/Complex_b27bc689d4b65cc203f1e34b3b64bbe3	2
 http://pathwaycommons.org/pc2/Protein_7b494c748f37ccf225b84e3dfc08012a	1
@@ -11450,7 +11409,7 @@ http://pathwaycommons.org/pc2/PhysicalEntity_575e8d2c6321f09b883a2fc928a6d7cb	1
 http://pathwaycommons.org/pc2/Complex_d50ead49af4f460467166d7aff75f72f	1
 http://pathwaycommons.org/pc2/Dna_f6b6795f4a34028288e3ed6228878d97	1
 http://pathwaycommons.org/pc2/Protein_9f0af7970d07808c26b36e4916670d9c	1
-http://pathwaycommons.org/pc2/Protein_766173b31ebe482804a2f265741b1987	1
+http://pathwaycommons.org/pc2/SmallMolecule_5facd3fd5081983c06b555d212f437e5	1
 http://pathwaycommons.org/pc2/Complex_e60eb4d05461967066e087b8c5ffade3	1
 http://pathwaycommons.org/pc2/Dna_a0353b8c9df00fcdd0e9d50b4594fefb	1
 http://pathwaycommons.org/pc2/Complex_9fce568d754f86e56dba0f5d26b30aa8	1
@@ -11492,7 +11451,6 @@ http://pathwaycommons.org/pc2/Protein_a1d4d205a2713cbc6d57021e52ae7e4d	1
 http://pathwaycommons.org/pc2/Protein_0fa144dba6ef15f48edd0282f7c3f49b	1
 http://pathwaycommons.org/pc2/Complex_68f51dd766d7d7d32cc6432beafde776	1
 http://pathwaycommons.org/pc2/Protein_fcf81fef3adb917a317891493b5e182e	1
-http://pathwaycommons.org/pc2/Protein_9fb65b4ab98cbdb9b6f70e04ffce7f99	1
 http://pathwaycommons.org/pc2/SmallMolecule_a9a3d61a377087dea75803889ee24221	1
 http://pathwaycommons.org/pc2/Complex_31147a798d405e85476d291c5efa2189	1
 http://pathwaycommons.org/pc2/PhysicalEntity_d00c2bffe7ea67b93a1b00920b97e3ed	1
@@ -11503,7 +11461,6 @@ http://pathwaycommons.org/pc2/Complex_1b75ce780198e0ff9201731c7c4d4bac	1
 http://pathwaycommons.org/pc2/Complex_973cf594e2442e5ea8ab4608a5a0657e	1
 http://pathwaycommons.org/pc2/Protein_d424aa069a39b4bb572bd16037b0b5fe	1
 http://pathwaycommons.org/pc2/Complex_4ea77feee74181afada1edd7fed3a7ec	1
-http://pathwaycommons.org/pc2/Protein_fd4905057ef9ebb50bee20297dbb1041	1
 http://pathwaycommons.org/pc2/SmallMolecule_49fa09a97ecda37840f7007b2b308e6c	1
 http://pathwaycommons.org/pc2/SmallMolecule_c5cd2bd31c05802917b2b6d4363057cb	1
 http://pathwaycommons.org/pc2/Complex_6f6860cc47ca90ee8ed50fe7762b5feb	1
@@ -11672,7 +11629,7 @@ http://pathwaycommons.org/pc2/SmallMolecule_71521fb9637cad8e34e77e756d105dff	1
 http://pathwaycommons.org/pc2/Protein_b1820f7b00e692ced4f75313fc53113a	1
 http://pathwaycommons.org/pc2/Complex_299093f180d4054af9e243807a78ff45	1
 http://pathwaycommons.org/pc2/Complex_dcf068278bc4ced59fa99a0210cadb4a	1
-http://pathwaycommons.org/pc2/Protein_a899c9ab1a53898dca0904bd4f98f2db	1
+http://pathwaycommons.org/pc2/PhysicalEntity_122914540b809acecf16434d41224e31	1
 http://pathwaycommons.org/pc2/SmallMolecule_631d9c2412cbb7eca395e3640fabdcfe	1
 http://pathwaycommons.org/pc2/SmallMolecule_d6a0d0049d7e0a89e4dae17c178e31e1	1
 http://pathwaycommons.org/pc2/Complex_a0293608d258c3dfbc9f9b36abe6830f	1
@@ -11685,7 +11642,6 @@ http://pathwaycommons.org/pc2/Protein_20fc318bbc7e4fd34725f5fa02f492c3	1
 http://pathwaycommons.org/pc2/Complex_9a0d2956d57a2cd3b508df0404ae94db	1
 http://pathwaycommons.org/pc2/SmallMolecule_b3d81acb641fd4fc67e94430a045a6d6	1
 http://pathwaycommons.org/pc2/Complex_c9c4a65d814c37263d1271722f9c782f	1
-http://identifiers.org/reactome/R-HSA-190693	3
 http://pathwaycommons.org/pc2/Complex_1264eccc77814f5daa4499a5f080496b	1
 http://pathwaycommons.org/pc2/Complex_6fcd817f116d646ad9850d4897092cfa	1
 http://pathwaycommons.org/pc2/Protein_289e20fae79d31f5704b811ba19df9e6	1
@@ -11747,7 +11703,7 @@ http://pathwaycommons.org/pc2/Protein_f22d43f87b130aaf04444a4a55eb601a	1
 http://pathwaycommons.org/pc2/SmallMolecule_4ff1897ddf9f21d949d730e2d8f991db	1
 http://pathwaycommons.org/pc2/SmallMolecule_cdf9a86ec6d08079bee4173200a26959	1
 http://pathwaycommons.org/pc2/Complex_65a829b33c0025ebd9ef251d4dcc7250	7
-http://identifiers.org/reactome/R-HSA-168884	2
+http://pathwaycommons.org/pc2/Protein_76d67e2b477331bbaa96270b6e48ef7a	1
 http://pathwaycommons.org/pc2/Protein_1561b7f905eeef910f8b63f4060b38f8	1
 http://pathwaycommons.org/pc2/Protein_7fb430c6444808e60ab3dad19dc15ca5	1
 http://pathwaycommons.org/pc2/Complex_f8678e35dc7a0968db047bf474e4bc13	1
@@ -11781,7 +11737,7 @@ http://pathwaycommons.org/pc2/Complex_5a0a729ff710895ee69f211e42d78fe2	1
 http://pathwaycommons.org/pc2/SmallMolecule_128d4c3695e708b45c1ba23d571cb1fe	1
 http://pathwaycommons.org/pc2/Protein_159436ed51090eb2c7616574e1e89456	1
 http://pathwaycommons.org/pc2/Complex_f375fb2ff50f023cde72198700ed83d6	1
-http://pathwaycommons.org/pc2/Complex_c05933587ca0de13824d0f8d34c0085e	3
+http://pathwaycommons.org/pc2/Protein_9fb65b4ab98cbdb9b6f70e04ffce7f99	1
 http://pathwaycommons.org/pc2/Protein_f5632ccbcc1bcae2780c05019a2a877a	1
 http://pathwaycommons.org/pc2/Complex_7cb896986448b17a88281097135de947	1
 http://pathwaycommons.org/pc2/Complex_d98302a1376d3b571f3573ae1752dd75	1
@@ -11987,7 +11943,7 @@ http://pathwaycommons.org/pc2/SmallMolecule_9b86d1580b8c9e2a444aac8db497a9c7	1
 http://pathwaycommons.org/pc2/Complex_68ffeef8153fd7ca183eae4de1ed40d6	1
 http://pathwaycommons.org/pc2/Protein_80712f441e501c5cd3cbdb1fbaf8dc2a	1
 http://pathwaycommons.org/pc2/Protein_9f585f6a3b6745a897608289ec200f9a	1
-http://pathwaycommons.org/pc2/Complex_3ec227e4ca72eea204e5c7f53cc33121	1
+http://pathwaycommons.org/pc2/Complex_5acc267dc98b5467aa58debe805ee66f	1
 http://pathwaycommons.org/pc2/Complex_051d57dc6f371fe883f15af20dd29268	1
 http://pathwaycommons.org/pc2/Complex_f112c1e5dd09a5f8baa51a90b9a5ce5b	1
 http://pathwaycommons.org/pc2/Complex_be3d732c1538c45437aa3bc6511f186e	1
@@ -12064,7 +12020,6 @@ http://pathwaycommons.org/pc2/Complex_3c4a3b469df1ec524cbab4b4f706bb2a	1
 http://pathwaycommons.org/pc2/Dna_2ceffc2d282fa987e2fe8257a622efa7	1
 http://pathwaycommons.org/pc2/Protein_8abf401ca8db7ebdbb625857321c27e3	1
 http://pathwaycommons.org/pc2/Protein_b55c042cc7454ecc9e12c09c67e3d6fe	1
-http://identifiers.org/reactome/R-HSA-211482	2
 http://pathwaycommons.org/pc2/Protein_3bd8073a1fcafb9980a39187ffdf570d	1
 http://pathwaycommons.org/pc2/Complex_d40e584bde567284b9c75fea72778a5b	1
 http://pathwaycommons.org/pc2/SmallMolecule_ae55c502faf69cd5399c080d5258d63a	1
@@ -12078,7 +12033,6 @@ http://pathwaycommons.org/pc2/PhysicalEntity_1c75cf733dea27e80d746a98b6fdf82d	1
 http://pathwaycommons.org/pc2/Protein_9681a6b74b8c561bb636f2c17b3451fd	1
 http://pathwaycommons.org/pc2/SmallMolecule_0be7f0ca25a9265ea6487955524e3574	1
 http://pathwaycommons.org/pc2/Protein_4958cb0ff46d99f400b0c79d2820e27b	1
-http://pathwaycommons.org/pc2/PhysicalEntity_405592ad4821f4837d67613d0ef45036	1
 http://pathwaycommons.org/pc2/Protein_9cb4fcde80c01597e1481db56db82c94	1
 http://pathwaycommons.org/pc2/SmallMolecule_184b8c78f4aa022fea8c10831b1623ba	1
 http://pathwaycommons.org/pc2/Complex_e0788ab8a66c88fa69b80c8fb6c691a9	1
@@ -12088,7 +12042,6 @@ http://pathwaycommons.org/pc2/Protein_78710e68d54358a096c40ba560c9856d	1
 http://pathwaycommons.org/pc2/Protein_86ab64b60199bdb4ed36771494af02eb	1
 http://pathwaycommons.org/pc2/Complex_b65ba3584909567da52e0f1359fd566e	6
 http://pathwaycommons.org/pc2/Complex_fc4fa97edcd674619d9d3c316ab96118	1
-http://identifiers.org/reactome/R-HSA-210824	2
 http://pathwaycommons.org/pc2/SmallMolecule_15ae9047b82ab53df5f1a36bb28d1241	1
 http://pathwaycommons.org/pc2/Complex_e9f798ae962530ee1ad471c1798f8a80	4
 http://pathwaycommons.org/pc2/Complex_79b6323d3e3607a55314977427e90101	1
@@ -12192,7 +12145,6 @@ http://pathwaycommons.org/pc2/Protein_a0a78ea81c34297d12ff9533fc0f93a2	1
 http://pathwaycommons.org/pc2/Protein_28d05006274bf68ff422c93ae0ec5e89	1
 http://pathwaycommons.org/pc2/SmallMolecule_1851b07019b9f814dbda84aaae6fd594	1
 http://pathwaycommons.org/pc2/Complex_b6a11b057eae3ee56e169f346e930484	1
-http://identifiers.org/reactome/R-HSA-1629787	2
 http://pathwaycommons.org/pc2/Complex_f176cb631eb9e1857d30c7d704500af6	12
 http://pathwaycommons.org/pc2/Protein_353f2bf35552a3231590e8fae21b9ea7	1
 http://pathwaycommons.org/pc2/Protein_f2a1f401292fbb7b44ca479a5a25c2ee	1
@@ -12209,7 +12161,6 @@ http://pathwaycommons.org/pc2/Complex_dcc9cc26db4605d2853cdd933fb73c69	1
 http://pathwaycommons.org/pc2/Complex_a1476bd2bed79885d9f0becdf22181ee	1
 http://pathwaycommons.org/pc2/Protein_b01584f2d5c744a428f6b9d25fed8084	1
 http://pathwaycommons.org/pc2/SmallMolecule_120fd698ba01e3344dedd04cf7f224cc	1
-http://pathwaycommons.org/pc2/Complex_9ecb37fb9c72821aed99a5bc779ecae6	1
 http://pathwaycommons.org/pc2/Protein_f4527b22e363bab82d0051b5a1dc141a	1
 http://pathwaycommons.org/pc2/Complex_4920252e41f000ff1623934b845795e1	1
 http://pathwaycommons.org/pc2/Complex_60faf499755b20dc79ecdc9b6a0da6f0	1
@@ -12384,7 +12335,7 @@ http://pathwaycommons.org/pc2/SmallMolecule_30b44af4f6853355d6d05d960bd2f0b6	1
 http://pathwaycommons.org/pc2/Complex_c5656cef5d8d33ab0e4d9ef72d773f71	1
 http://pathwaycommons.org/pc2/Complex_43d796b05f152d536d7d93b3307c2d4f	1
 http://pathwaycommons.org/pc2/Complex_369abae330ca602909a673935c6a668b	1
-http://pathwaycommons.org/pc2/Complex_fdae13c52741d3bb447c7eb61a337335	1
+http://pathwaycommons.org/pc2/Protein_e89332e4c2f4c1423214e334aca731ab	1
 http://pathwaycommons.org/pc2/PhysicalEntity_1db0bc2e743c84edad871d02cb8b74c9	1
 http://pathwaycommons.org/pc2/Complex_228e8a7a0950765fcb8c628ffed69fdd	1
 http://pathwaycommons.org/pc2/Complex_1c754dd32f7cafc288405078a3f432f9	1
@@ -12519,7 +12470,6 @@ http://pathwaycommons.org/pc2/Complex_828262cd254c655a929458819d4dbb4c	1
 http://pathwaycommons.org/pc2/Complex_cb73dad0fa7b86da6476c617aa68f53c	1
 http://pathwaycommons.org/pc2/SmallMolecule_9050f99cfcb7831f69daa74333ae8a23	1
 http://pathwaycommons.org/pc2/SmallMolecule_4fda873487a3c938b8f7658d8e044259	1
-http://pathwaycommons.org/pc2/Protein_30cd29a640008386c8fdd44012a0a79b	1
 http://pathwaycommons.org/pc2/Complex_d2807db4fc75d8dcc45feb2a5ecaf18e	1
 http://pathwaycommons.org/pc2/Complex_122cfc867a5eeb913f397eb4381076c4	1
 http://pathwaycommons.org/pc2/SmallMolecule_de87bebd3a4be371cf80b689c9873d0d	1
@@ -12570,7 +12520,6 @@ http://pathwaycommons.org/pc2/Complex_f5428125efe7deb11ad4cd5cf49e246c	1
 http://pathwaycommons.org/pc2/Complex_29e55550a85bbcc7bdfabd245f266110	1
 http://pathwaycommons.org/pc2/Dna_e9b5e0071d6886428586e96d0bc30b47	1
 http://pathwaycommons.org/pc2/PhysicalEntity_3c4732e10943a77a04a47ccd166cf6f3	1
-http://pathwaycommons.org/pc2/SmallMolecule_b929fc3e8dda6118bb12327166d32346	2
 http://pathwaycommons.org/pc2/Complex_c37b4ed79b58e2812a0be5a0127389e1	1
 http://pathwaycommons.org/pc2/SmallMolecule_08eeb0d76f4149af25a20709f153da12	1
 http://pathwaycommons.org/pc2/SmallMolecule_aaebcdff23a8dab810e94f85345b2b3d	1
@@ -12750,7 +12699,7 @@ http://pathwaycommons.org/pc2/Complex_bc4e2fef0bdf2a8b34386bffd0d848eb	1
 http://pathwaycommons.org/pc2/Complex_7b54e99a7d8a2ab22c1f9ab5af2d396e	1
 http://pathwaycommons.org/pc2/Complex_7d4ea1c2e2625f637e3d642a2dc4c73c	1
 http://pathwaycommons.org/pc2/Protein_e7f1bf07e12c422688621c4c2e9a287f	1
-http://pathwaycommons.org/pc2/Complex_5acc267dc98b5467aa58debe805ee66f	1
+http://pathwaycommons.org/pc2/Complex_3ec227e4ca72eea204e5c7f53cc33121	1
 http://pathwaycommons.org/pc2/Complex_0cfc62fd11bc1ae160fc4247d385ad89	1
 http://pathwaycommons.org/pc2/Complex_a21286dacf6827aad89957429b0a0199	1
 http://pathwaycommons.org/pc2/SmallMolecule_6b4124ccb978f21416ed6ad1e7844df4	1
@@ -12826,7 +12775,6 @@ http://pathwaycommons.org/pc2/Protein_78cb5c58d0e701664a0d268899f0df91	1
 http://pathwaycommons.org/pc2/Protein_e827ff3afa40adb50a0cddcf71a1c896	1
 http://pathwaycommons.org/pc2/Protein_8bf19bfc68be114e2f4af1fedffc9cde	1
 http://pathwaycommons.org/pc2/Protein_ff855ba1ae397889171c0f7de09b790b	1
-http://pathwaycommons.org/pc2/SmallMolecule_386412203a2bd570ad3b8e28a72c21ce	1
 http://pathwaycommons.org/pc2/Complex_59aa1991b51bf0c98ff726560d21310f	1
 http://pathwaycommons.org/pc2/Protein_40b9a27f270c4e73538682db128a0c58	1
 http://pathwaycommons.org/pc2/Complex_9e3ecd9eaf2d13c5fdfc4de093afcd9a	1
@@ -12954,7 +12902,7 @@ http://pathwaycommons.org/pc2/Complex_96f51c153caa20f508db4ab5756b7098	1
 http://pathwaycommons.org/pc2/Protein_ed41ccc418a52c2bde579f562fe6bc90	1
 http://pathwaycommons.org/pc2/Complex_6a9f1b6402d7bddf8515062d8a20bd47	1
 http://pathwaycommons.org/pc2/Complex_7cda9ee9d20678db0be96cc49268eebc	1
-http://pathwaycommons.org/pc2/Protein_e47d2de9e5e43f1e9d6dfbdddf0d2ed8	1
+http://pathwaycommons.org/pc2/Protein_0b3845902165b922f03b274882e0aaf7	1
 http://pathwaycommons.org/pc2/Complex_62ad8cf680f4f9d5428702f54ac32d44	1
 http://pathwaycommons.org/pc2/Complex_1edf3c6b98c18e309f401dee40111858	1
 http://pathwaycommons.org/pc2/Complex_b8eeb1c72ea12e7213f0346ee1c58fd0	1
@@ -13031,7 +12979,7 @@ http://pathwaycommons.org/pc2/Complex_791626ac0e79ec92218ab92c459494e9	1
 http://pathwaycommons.org/pc2/Protein_0565961b6bf52a3afdaab9df3d419952	1
 http://pathwaycommons.org/pc2/SmallMolecule_3c38c0023d50ac513f0983d6128a7619	1
 http://pathwaycommons.org/pc2/SmallMolecule_73e64e89604f5d0ed3c33d6e77cda6a6	1
-http://pathwaycommons.org/pc2/Protein_709f3060f232458e52be7dfb9e4a6249	2
+http://pathwaycommons.org/pc2/SmallMolecule_1a4db24f3dc9207ee389102762195ce2	1
 http://pathwaycommons.org/pc2/Complex_ea06ae284a46ed575aa402b4827772f4	1
 http://pathwaycommons.org/pc2/Protein_d2af6aa3c09f3636315a7a058a52a75a	1
 http://pathwaycommons.org/pc2/SmallMolecule_54027b6a93c7d6aadaf1601b673a883f	1
@@ -13275,7 +13223,7 @@ http://pathwaycommons.org/pc2/Dna_1b29f03e9fe7e4442b659643c789a917	1
 http://pathwaycommons.org/pc2/SmallMolecule_11ac2947fabbbe8f4f171e386a69f8ec	1
 http://pathwaycommons.org/pc2/Complex_e2e686e6267f4089cd078b639f5414fb	1
 http://pathwaycommons.org/pc2/SmallMolecule_e1af1bef07a99334ab8fba79438cebbc	1
-http://pathwaycommons.org/pc2/Protein_acacb761f6c6e7381c507ac29bb29d51	1
+http://pathwaycommons.org/pc2/PhysicalEntity_a72545a2d6403a568572d41d9d115803	1
 http://pathwaycommons.org/pc2/Complex_dcbad1b23688e21ffca5c0c2aed03246	1
 http://pathwaycommons.org/pc2/Complex_aa977b8d72ad3a608a6e02ccd222bdee	1
 http://pathwaycommons.org/pc2/PhysicalEntity_ad9ac0bb3b92c37010b4943fa2bce972	1
@@ -13293,7 +13241,6 @@ http://pathwaycommons.org/pc2/Dna_8e82e30d6cc2bb091f04cab5e9c2a322	1
 http://pathwaycommons.org/pc2/Complex_16f08fa3b0b5ac363fa970031f5e60a8	1
 http://pathwaycommons.org/pc2/Complex_e4f5ad3a682fe84bc3ecf501ad02350c	2
 http://pathwaycommons.org/pc2/Complex_3aabbcc646571e204485efda10e987a1	1
-http://pathwaycommons.org/pc2/Complex_f9645bbf4f8cbbdbdf465cf5122aae3f	1
 http://pathwaycommons.org/pc2/SmallMolecule_16c09416ce21a79fe3125eeb1d05f1f1	1
 http://pathwaycommons.org/pc2/Complex_23749fb9731f1fdbd94fd5f7de92ffda	1
 http://pathwaycommons.org/pc2/SmallMolecule_b2adf302ab653d4d5af97fac52acd55a	1
@@ -13418,7 +13365,6 @@ http://pathwaycommons.org/pc2/Complex_624825ce3068a5d9bd3d9e5e45c964a5	1
 http://pathwaycommons.org/pc2/Complex_2bb5ffb63828cd4c1ef69cb1efd9cac7	1
 http://pathwaycommons.org/pc2/Complex_e16d42b930c06898f4da48c14fe7a31d	1
 http://pathwaycommons.org/pc2/PhysicalEntity_c2664706612d2408fbdb799d08804743	1
-http://pathwaycommons.org/pc2/Protein_3c24d362764e9640ff71bd46ae14c21b	1
 http://pathwaycommons.org/pc2/Protein_864e392ae5c701f093757e043b61e5e4	1
 http://pathwaycommons.org/pc2/Complex_ffcccf3be26a075aa9734ae518dd17e9	1
 http://pathwaycommons.org/pc2/Protein_8432a10fb58f4a27e45e3083ffa272bf	1
@@ -13466,7 +13412,6 @@ http://pathwaycommons.org/pc2/SmallMolecule_a3955f01d43428f655f0630a44ec9e1d	1
 http://pathwaycommons.org/pc2/Complex_6e2a05e05ed329e1515eee5f6ce69af8	2
 http://pathwaycommons.org/pc2/Complex_34a2930c39dcb0cc5f2a4ad4fba8116b	1
 http://pathwaycommons.org/pc2/Protein_f9b093b46edaec89d5180452ca00f791	1
-http://pathwaycommons.org/pc2/PhysicalEntity_a835bc25a83f0b15f657c34daed828b5	3
 http://pathwaycommons.org/pc2/Complex_bfa923a34c61e6efb7077fd5504d7d55	1
 http://pathwaycommons.org/pc2/Dna_20ad6d58a9acc43372aa6bcf6e827cf0	1
 http://pathwaycommons.org/pc2/Complex_1b52dc142d56790ae4020d99befc94ec	1
@@ -13743,7 +13688,6 @@ http://pathwaycommons.org/pc2/Complex_4f59370de48fbfcc32ab9e4e1cbffa07	1
 http://pathwaycommons.org/pc2/Complex_28ef835f74bdc17340fbd73a93b5520e	1
 http://pathwaycommons.org/pc2/Complex_5a62d98691426f9681eaf3ff7fe2abae	1
 http://pathwaycommons.org/pc2/Complex_7fee927e8dbd112f83c491dde293b6b3	1
-http://pathwaycommons.org/pc2/Protein_ffa8c47d944fb046f13dcf6a0aecf601	1
 http://pathwaycommons.org/pc2/Complex_2ba498ccdaba7a21b5584d4e25bc1898	1
 http://pathwaycommons.org/pc2/SmallMolecule_588454ac4e0bf645d1062c495a855012	1
 http://pathwaycommons.org/pc2/Complex_7818c4b57af32019cd04f5a9f50a52de	1
@@ -13863,7 +13807,7 @@ http://pathwaycommons.org/pc2/Protein_50a11d03c2775a787bf5bfeae25d0b88	1
 http://pathwaycommons.org/pc2/SmallMolecule_917e1964f10a1b6ec307edb77cf735e7	1
 http://pathwaycommons.org/pc2/Complex_6c022b84c44ecc7c9de052e5a0c11d96	1
 http://pathwaycommons.org/pc2/Protein_d91ee53549a1028496720c5ea3eaab93	1
-http://identifiers.org/reactome/R-HSA-163669	2
+http://pathwaycommons.org/pc2/Protein_9219502c6999b7994c95ea6f30e3d2e6	1
 http://pathwaycommons.org/pc2/Dna_6434e5ee4328c8d1892155baf353ffff	1
 http://pathwaycommons.org/pc2/Complex_f36c7fff2fcb9627dbff0fa4f6a077b9	1
 http://pathwaycommons.org/pc2/Protein_f5896acc4435391a06d02b3a06976c39	1
@@ -13904,7 +13848,6 @@ http://pathwaycommons.org/pc2/SmallMolecule_8d09333cefa0e3c59bd682b71a371da2	2
 http://pathwaycommons.org/pc2/Protein_42d8f36444c5176aeadc54338b274ff8	1
 http://pathwaycommons.org/pc2/Protein_8660d8410249bc1f3428ad8baa242ab9	1
 http://pathwaycommons.org/pc2/Complex_9c031bf8019f6650cdcfe11fcc073c12	1
-http://pathwaycommons.org/pc2/SmallMolecule_584b35d101181a61c07a396260010b34	1
 http://pathwaycommons.org/pc2/Complex_51587f299feee2f69e41565a15fbe5a1	6
 http://pathwaycommons.org/pc2/Complex_10c555c02ebdf75d44fe0aabb2443397	1
 http://pathwaycommons.org/pc2/SmallMolecule_05ff41c7c3d78acdb3a3997ed8aca09b	1
@@ -14142,7 +14085,7 @@ http://pathwaycommons.org/pc2/Complex_55cc4ea0a48221fe38bf79a274788a62	2
 http://pathwaycommons.org/pc2/Protein_4546b1fbe47d540f3108c488b62cfa84	1
 http://pathwaycommons.org/pc2/Protein_4ff44294f59358edc41e7f5e95a9febb	1
 http://pathwaycommons.org/pc2/Complex_b42be6671d9e0843a842463a6d148a92	2
-http://pathwaycommons.org/pc2/Protein_d4eaca24c35a3280e0267e46478c7b41	1
+http://pathwaycommons.org/pc2/Complex_57ead262b7ed6904ebee50accd3a73f9	1
 http://pathwaycommons.org/pc2/Complex_e428230885ec5ac6a6bae5d87ce0cae2	1
 http://pathwaycommons.org/pc2/Complex_8e5b578acb87a0e75933d47ff4e826d8	1
 http://pathwaycommons.org/pc2/Protein_b10068b82d4fbda3b3d0536f2b81e4c7	2
@@ -14186,7 +14129,6 @@ http://pathwaycommons.org/pc2/Complex_8114fa6645e3e34340f942195efb1b18	1
 http://pathwaycommons.org/pc2/Complex_379591f32702fb989c24a242f027b183	1
 http://pathwaycommons.org/pc2/SmallMolecule_cd59a0a443909bce6c0c96ce257e7ecd	1
 http://pathwaycommons.org/pc2/Protein_e7f69d3445525746c88db91d68957b77	1
-http://pathwaycommons.org/pc2/Dna_127101ba858d6b731a5a35777aea75a4	1
 http://pathwaycommons.org/pc2/Protein_e1fbc14f5ea7eeb86c5e1eb2180dd45f	1
 http://pathwaycommons.org/pc2/Protein_8651371144bc860b2397310f1db52d45	1
 http://pathwaycommons.org/pc2/Protein_c5499bac388348b8b27a89ad005d224a	1
@@ -14233,7 +14175,7 @@ http://pathwaycommons.org/pc2/Protein_90a5fbfb2a11bb3a08d568818e908060	1
 http://pathwaycommons.org/pc2/Complex_1578d62290a2943ec93d01d35caf876f	1
 http://pathwaycommons.org/pc2/Protein_7ca02bddbc5da656d8fcc4682c625a80	1
 http://pathwaycommons.org/pc2/Protein_4b3ef675df56df16409128ea36c1f71d	1
-http://pathwaycommons.org/pc2/Dna_d7f2c5bac59670094e351d7185127371	1
+http://pathwaycommons.org/pc2/Complex_b855a172f5455cff69ac1e6a3aa2d9b3	1
 http://pathwaycommons.org/pc2/Complex_986d58c4ed8c42d753cb16ebd4e73828	1
 http://pathwaycommons.org/pc2/PhysicalEntity_802082306bbea91f3ae5eac1c05fd72c	1
 http://pathwaycommons.org/pc2/Complex_47e8e66e0e26966dcb991de253e9b9e8	1
@@ -14259,7 +14201,7 @@ http://pathwaycommons.org/pc2/Complex_e5ed71ca6a553d3dea4482d1648fa507	1
 http://pathwaycommons.org/pc2/Complex_3e0b0dc9cadc85c6644184acc79d5f09	1
 http://pathwaycommons.org/pc2/SmallMolecule_c5894c14a0776c29e8161c59834f9a88	1
 http://pathwaycommons.org/pc2/Complex_ebea2d4dc3d6700d511f126f8a7b7411	1
-http://pathwaycommons.org/pc2/Protein_e2c80349de673f11ce273cc844e0154e	1
+http://pathwaycommons.org/pc2/PhysicalEntity_13fb3fa00c9ca04a0d979cc6263acb93	1
 http://pathwaycommons.org/pc2/Protein_40dbcd5fa8bec85ff2a050f4a9be1cc1	1
 http://pathwaycommons.org/pc2/Complex_860fe3dc3a6a20119d6118b3d70b62ca	1
 http://pathwaycommons.org/pc2/Complex_54f2c75735e0c2b155fba5bf8132e819	4
@@ -14417,7 +14359,7 @@ http://pathwaycommons.org/pc2/Protein_dc62e4092fb3fcb3ddad7c7edb662593	1
 http://pathwaycommons.org/pc2/Protein_bb17e8c4b41b931a4fed28cb89e91a13	2
 http://pathwaycommons.org/pc2/Complex_293cf085f3e8a452524a5810081e7d14	1
 http://pathwaycommons.org/pc2/Complex_8fd2b49cc6cf744b85a2847f39b8f706	1
-http://pathwaycommons.org/pc2/Complex_a53f4b6bdba8b32d4f1ff6d1c403165f	1
+http://pathwaycommons.org/pc2/SmallMolecule_95f52ede0457d1ca6a5de429bd0f24bf	1
 http://pathwaycommons.org/pc2/Complex_9ea175e451f428508c2717192c985dbf	1
 http://pathwaycommons.org/pc2/SmallMolecule_de7c90d555b739ce4be99406917eb347	1
 http://pathwaycommons.org/pc2/SmallMolecule_074650b126af054a09f364c2b91b60cc	1
@@ -14544,7 +14486,6 @@ http://pathwaycommons.org/pc2/Complex_ad682b63a9d06fbcc02bdfdb8305e756	1
 http://pathwaycommons.org/pc2/Complex_1e8814245bab613e5495c62201d5b0f1	1
 http://pathwaycommons.org/pc2/Complex_7760b249c6c4a9750e79f09313bb346d	1
 http://pathwaycommons.org/pc2/Complex_fec58714c2325ce7eeaaeca99b850d5d	1
-http://pathwaycommons.org/pc2/Complex_57ead262b7ed6904ebee50accd3a73f9	1
 http://pathwaycommons.org/pc2/Complex_493ec1e05410a31a4b4eacac64e74c2d	1
 http://pathwaycommons.org/pc2/Dna_61f9615f80871b4228069b165cfa1d90	1
 http://pathwaycommons.org/pc2/Complex_590a44b208159bbd490551cc7fe510b4	1
@@ -14625,7 +14566,7 @@ http://pathwaycommons.org/pc2/Protein_36033207763725e26ee39c71d998ddc3	1
 http://pathwaycommons.org/pc2/Complex_a222ede3993f317414c95150e6d04a83	1
 http://pathwaycommons.org/pc2/Complex_7572afda3206acf64c79fe680112fee4	1
 http://pathwaycommons.org/pc2/Protein_baf7493c0420494f7017bb50c5b9ff81	1
-http://identifiers.org/reactome/R-HSA-210886	2
+http://pathwaycommons.org/pc2/SmallMolecule_584b35d101181a61c07a396260010b34	1
 http://pathwaycommons.org/pc2/Complex_2623a0229c9317c270664473d144049e	1
 http://pathwaycommons.org/pc2/Protein_7dcddd9a950547cc8002c689da0073f8	1
 http://pathwaycommons.org/pc2/Protein_ceaa932e1e17189f9e59b49af330e3f9	1
@@ -14734,7 +14675,7 @@ http://pathwaycommons.org/pc2/Complex_59d07513ec253f7c6537c5c03c556144	1
 http://pathwaycommons.org/pc2/SmallMolecule_161da23e8195c62c136ea52b3f7b436a	1
 http://pathwaycommons.org/pc2/Protein_9d1585814638d7a4c2a0df183cf8d667	1
 http://pathwaycommons.org/pc2/Complex_2679401ad326d5b91ff01a7030e2299c	1
-http://pathwaycommons.org/pc2/Protein_3f8d6dc4cd8fbf786d58a35cd2db4186	1
+http://pathwaycommons.org/pc2/Complex_e3bb3f173d28018c3205951768c05621	1
 http://pathwaycommons.org/pc2/Complex_ddabd775434d290a075746795193f63e	1
 http://pathwaycommons.org/pc2/Complex_ef66b76c424f9c19fc7bfaff56271876	1
 http://pathwaycommons.org/pc2/Protein_35f655ff803a22aff656b7d6b6312a1d	1
@@ -14813,7 +14754,7 @@ http://pathwaycommons.org/pc2/Protein_6753648d0ca7a312b932e3f0b2e8444e	1
 http://pathwaycommons.org/pc2/Complex_0ed1743c882108c6a959c64e49289e36	1
 http://pathwaycommons.org/pc2/Complex_963bc31ca04e816913f1d850cf6a4b72	1
 http://pathwaycommons.org/pc2/Complex_c3272dc67c6d63b74d92708e8a96f4cd	3
-http://pathwaycommons.org/pc2/Protein_bb46e48ae1e341479f32c84aeeadd816	1
+http://pathwaycommons.org/pc2/Rna_4f8fcc3896b30707bbeb701fb9193400	1
 http://pathwaycommons.org/pc2/Complex_33c8dc8f40ffb3e16e1a17bffeebd4c5	2
 http://pathwaycommons.org/pc2/Protein_2ebf4e7b1630c5fb103cf4e782f9c21d	1
 http://pathwaycommons.org/pc2/Complex_ae2a9ce9c07259258563f89ef6008e45	1
@@ -14905,7 +14846,7 @@ http://pathwaycommons.org/pc2/Complex_165764f1040c8409f7bf1e2d16fa5758	1
 http://pathwaycommons.org/pc2/Rna_f7deb4c268908df3be5d881f62e73099	1
 http://pathwaycommons.org/pc2/Complex_e1ad0f8d034950654ab41dfd8329941b	1
 http://pathwaycommons.org/pc2/Protein_55abcb3830ccda12b8e89bc89bcfe9a0	1
-http://pathwaycommons.org/pc2/Protein_b7e200f199464e0358b968a8f5e488f0	1
+http://pathwaycommons.org/pc2/Rna_900a07ed386d86aef4613f89e0e15402	1
 http://pathwaycommons.org/pc2/Protein_2865a4aa848f028a9c041577eb8464d7	1
 http://pathwaycommons.org/pc2/SmallMolecule_0c8e9bd0cffdcb233a598b1467dcd95a	1
 http://pathwaycommons.org/pc2/PhysicalEntity_840c6b03f1f12b2c6985492ffc6eb629	1
@@ -15004,7 +14945,7 @@ http://pathwaycommons.org/pc2/SmallMolecule_78513711f63d6f7eec85e7ba1a5bbb1c	1
 http://pathwaycommons.org/pc2/Protein_ce21ea88a4f127e14edf512349d63b7d	1
 http://pathwaycommons.org/pc2/Protein_7dcce39af060d020be58c49e6f5d9b5d	1
 http://pathwaycommons.org/pc2/Protein_f7cbb2aef751df3f51779bcd5bb67f12	1
-http://pathwaycommons.org/pc2/Protein_01e35fcd6f7d4946dc10fc90e15a875d	2
+http://pathwaycommons.org/pc2/Complex_bcb62606943d5c14d010b61607c75c94	1
 http://pathwaycommons.org/pc2/SmallMolecule_ebe449f6bcb7c4e940076cd794d310c9	1
 http://pathwaycommons.org/pc2/SmallMolecule_e32b7b90e4592efce407347a5fd31732	2
 http://pathwaycommons.org/pc2/Complex_813e929800a1161bb5e7b124ffb62dff	1
@@ -15364,7 +15305,7 @@ http://pathwaycommons.org/pc2/Protein_9105e32b425e7a9baacba712d8a74ad4	1
 http://pathwaycommons.org/pc2/Protein_5466ab65798d0b368cdb1b78b529aced	1
 http://pathwaycommons.org/pc2/Complex_c4a60c85fa73b727b5d94267c44c6b59	3
 http://pathwaycommons.org/pc2/SmallMolecule_e8d8a3c4f94e62193dd07ca2901af470	1
-http://identifiers.org/reactome/R-HSA-3223236	2
+http://pathwaycommons.org/pc2/Protein_e47d2de9e5e43f1e9d6dfbdddf0d2ed8	1
 http://pathwaycommons.org/pc2/Complex_deb96540dc730ab8be757f52b90e128a	1
 http://pathwaycommons.org/pc2/Protein_3bd94725dc4bc82342f607a8b11cd8c8	1
 http://pathwaycommons.org/pc2/PhysicalEntity_3d88bc23f6e8b89fa9266608112a8dfe	1
@@ -15589,7 +15530,7 @@ http://pathwaycommons.org/pc2/SmallMolecule_de2faccd9650b56cb3366b992bb4ebbd	1
 http://pathwaycommons.org/pc2/SmallMolecule_7fd64da255ff114ce1efa9f9ebfdca15	1
 http://pathwaycommons.org/pc2/Protein_e2acf4d63eee73cf78a95e25cb40caf5	1
 http://pathwaycommons.org/pc2/Complex_3dd3aad1a384fa7f551632f5facd0067	1
-http://pathwaycommons.org/pc2/Protein_766c80156c2b0919beddd84a0e279a43	1
+http://pathwaycommons.org/pc2/Protein_eac89bb0f5af43ef15e446b8e38f9b6e	1
 http://pathwaycommons.org/pc2/Complex_930afd4b6cfe583be5f9eb2f508d263b	1
 http://pathwaycommons.org/pc2/Complex_9924912e4a6847f41bc6d6a082c2afc8	1
 http://pathwaycommons.org/pc2/Complex_a9bf04a2f664db973dac1542a1ff0bd8	1
@@ -15827,6 +15768,7 @@ http://pathwaycommons.org/pc2/Complex_be058c914ef7df65b36fba86b507fc7b	1
 http://pathwaycommons.org/pc2/Rna_1344be5e989fc31cf89b0e6bcf543f0f	1
 http://pathwaycommons.org/pc2/Protein_eb6ccdc662950559f3a9a847a634ebe2	1
 http://pathwaycommons.org/pc2/SmallMolecule_b1e043e3d661df5fc1e116883eb2081b	1
+http://pathwaycommons.org/pc2/Dna_d332a0aa6a98c84dbdc71e077683b231	1
 http://pathwaycommons.org/pc2/Complex_059ef0174f548e493ba1941d01bb9493	1
 http://pathwaycommons.org/pc2/Complex_fb364d7f7ab779b51d8027fc6ed98b47	1
 http://pathwaycommons.org/pc2/Protein_7749bfa09c6e709a06ee2525ff713f9a	1
@@ -15879,7 +15821,7 @@ http://pathwaycommons.org/pc2/Complex_3589647ec91b9ddabbffe05fd1d7a044	1
 http://pathwaycommons.org/pc2/Complex_1780e2efae1b12a54f17c4f0ed209b53	1
 http://pathwaycommons.org/pc2/SmallMolecule_f744dc220f3c0838dba7d6daad628b0f	1
 http://pathwaycommons.org/pc2/Protein_5e1f6ddaf636e5dca51936233b24ce37	1
-http://identifiers.org/reactome/R-HSA-191072	5
+http://pathwaycommons.org/pc2/Complex_f8528c7d3127b18cac6b0e6492ecbd2b	1
 http://pathwaycommons.org/pc2/Complex_89f4d0efc773143966c4912b1871208e	1
 http://pathwaycommons.org/pc2/PhysicalEntity_d9ca94aa09c6e35ffa0cb82e52bf5987	1
 http://pathwaycommons.org/pc2/PhysicalEntity_e26234dbad80387702d48dbad571f14a	1
@@ -15999,7 +15941,7 @@ http://pathwaycommons.org/pc2/SmallMolecule_677622b206efde7f9460e70d1d2849a6	1
 http://pathwaycommons.org/pc2/Complex_b0e7c53d77879ccc9a4fa073e4e0959b	1
 http://pathwaycommons.org/pc2/Protein_a50f9d703a4165f30d86d0daf25e2b03	1
 http://pathwaycommons.org/pc2/SmallMolecule_24f8500dc57494c76f620f075d0602f1	1
-http://pathwaycommons.org/pc2/Complex_e30c182f705ae00a006509555217ff30	1
+http://pathwaycommons.org/pc2/Complex_d48d301a773b3a327de74c6e00c305bb	1
 http://pathwaycommons.org/pc2/Protein_c7d9dc768c82a36c3f7f7626e26c93db	1
 http://pathwaycommons.org/pc2/Protein_37244e90a3c7dbbf4f7f8dc52a01010d	1
 http://pathwaycommons.org/pc2/Protein_b1caa6a82d8b3b096026dfe9e1446341	1
@@ -16104,7 +16046,7 @@ http://pathwaycommons.org/pc2/Complex_469438a2610d0875b6b484792a942d50	1
 http://pathwaycommons.org/pc2/Complex_52905d25809d9f1bcd723449e268b6a6	1
 http://pathwaycommons.org/pc2/Complex_8292cfd2e468857ce9a7991d53a68837	1
 http://pathwaycommons.org/pc2/Complex_ef7ec4f8958f55c1423adfa04464ba25	1
-http://pathwaycommons.org/pc2/Protein_a2026d860a454e22e3d2a59b2d4afc8d	1
+http://pathwaycommons.org/pc2/Complex_c05933587ca0de13824d0f8d34c0085e	3
 http://pathwaycommons.org/pc2/Protein_2d38a4adec32fd003a926d935f890171	1
 http://pathwaycommons.org/pc2/Protein_8554c38fed4c278df1306ced0d967f4f	1
 http://pathwaycommons.org/pc2/Complex_99abc475817aaf468d14db9fe78f1758	1
@@ -16211,7 +16153,7 @@ http://pathwaycommons.org/pc2/Rna_e7c73d6b0770e283bdc0921bc92f5f25	1
 http://pathwaycommons.org/pc2/Protein_74747f05f981cc97792de1d6c244071d	1
 http://pathwaycommons.org/pc2/Complex_6d50661dfbe325bab049bc9653e09f06	1
 http://pathwaycommons.org/pc2/Complex_e180d5b324a72dcc01de12d08d7d9699	1
-http://pathwaycommons.org/pc2/Complex_f8528c7d3127b18cac6b0e6492ecbd2b	1
+http://pathwaycommons.org/pc2/SmallMolecule_d23448e979026f79573fa7ee665ae3af	1
 http://pathwaycommons.org/pc2/Complex_3ba602fb01d0301c7acab3f430dc19c0	1
 http://pathwaycommons.org/pc2/Protein_fd11d3b7f2649515a5c20bfbe7104e26	1
 http://pathwaycommons.org/pc2/Complex_4ce3ac332f583701355c0925b6867bb7	1
@@ -16314,7 +16256,7 @@ http://pathwaycommons.org/pc2/Dna_559143c831821dc3777596cf971e9fea	1
 http://pathwaycommons.org/pc2/SmallMolecule_0dc26ce98ab3a9d0ed2740b2d55fcea4	1
 http://pathwaycommons.org/pc2/Complex_ab562d803678305f2f99806395fca6c3	1
 http://pathwaycommons.org/pc2/Complex_26266f318e03374c3ed1b3e026682c89	1
-http://pathwaycommons.org/pc2/Complex_2eb320649717c9cf1eb5312361e7a13b	1
+http://pathwaycommons.org/pc2/Protein_f19e5493b304e58b102247eb5a785a18	1
 http://pathwaycommons.org/pc2/Complex_acf3381028ce86fb5322333e5c5ea581	3
 http://pathwaycommons.org/pc2/Protein_b6c92c953649654fba02c16ac4d53ec9	1
 http://pathwaycommons.org/pc2/Protein_a9909c5765672aefe5f8734df3d58893	1
@@ -16472,7 +16414,7 @@ http://pathwaycommons.org/pc2/Complex_9509516800faf1185c93308ad7b2290e	1
 http://pathwaycommons.org/pc2/SmallMolecule_01e0de850f3597bd87b6bf2327f98489	1
 http://pathwaycommons.org/pc2/Protein_3b9e0d7c112d9335a565f83267061496	1
 http://pathwaycommons.org/pc2/Complex_4e18b7d8cb7076c3bd0874c6a97371dd	1
-http://pathwaycommons.org/pc2/SmallMolecule_c8eb953bbe5a4de3128eabe6302d6f95	1
+http://pathwaycommons.org/pc2/Complex_b73905d13155718ef2dd6c0093f43277	2
 http://pathwaycommons.org/pc2/SmallMolecule_abcde762303453f82ada26f68ade01ea	1
 http://pathwaycommons.org/pc2/Protein_781ba9475152dae236f6bb7f6389caae	1
 http://pathwaycommons.org/pc2/SmallMolecule_65b9b9994436fdc06adeb0c59585896c	1
@@ -16633,7 +16575,7 @@ http://pathwaycommons.org/pc2/SmallMolecule_9d0143bc556bb4993e83afa10fdd68c0	1
 http://pathwaycommons.org/pc2/Complex_edf2b109b08c74040baffdf3023cd39b	1
 http://pathwaycommons.org/pc2/Complex_92b1e181b484a929b51de3caa23830ca	1
 http://pathwaycommons.org/pc2/Complex_7dbab0fd0b81b2f0f70b8fe8b88fe297	1
-http://pathwaycommons.org/pc2/Complex_ca5cb743a28a0568afe6945e2007d34d	1
+http://pathwaycommons.org/pc2/Complex_ee4cf79be6a574c1787e4f0e233e97c3	1
 http://pathwaycommons.org/pc2/Protein_01ab53749186e079a553750bbdd86814	1
 http://pathwaycommons.org/pc2/Complex_181d47c9f769a84646ea1f3898e9b202	1
 http://pathwaycommons.org/pc2/Protein_1423f0a82dfa249d95520631369cadc4	1
@@ -16773,7 +16715,7 @@ http://pathwaycommons.org/pc2/Protein_ed4d3eb497ec92164f66e68d75e982fe	1
 http://pathwaycommons.org/pc2/PhysicalEntity_e6f052faa9f89308cf8cf6183f529a11	1
 http://pathwaycommons.org/pc2/SmallMolecule_a056af0b265e189c48c4d2e47b3d6f49	1
 http://pathwaycommons.org/pc2/Protein_4b0f99500d4a1fa7ebff3bc3f4a0a445	1
-http://pathwaycommons.org/pc2/Complex_8cee3e558fd5ed299b318a05771f7aac	1
+http://pathwaycommons.org/pc2/Complex_87344597a724fc86f02df2e68b7327b6	1
 http://pathwaycommons.org/pc2/Protein_1bc7d051efc1162f2ca2d0e0e4d73810	1
 http://pathwaycommons.org/pc2/Complex_f9e935916ae3cbf22cee838cb829b919	1
 http://pathwaycommons.org/pc2/Complex_0f930b0430419890fb4594ceae17b999	1
@@ -16971,7 +16913,6 @@ http://pathwaycommons.org/pc2/SmallMolecule_5f9627d32c9fa01c059368c40fe24446	1
 http://pathwaycommons.org/pc2/Protein_4302ab7eebbff4363297215b3330d0c7	1
 http://pathwaycommons.org/pc2/Protein_d5ade72926e5af57913ec1a3bc657754	1
 http://pathwaycommons.org/pc2/Protein_825de594fe4cd158c2c18662a81de39e	1
-http://pathwaycommons.org/pc2/Complex_d48d301a773b3a327de74c6e00c305bb	1
 http://pathwaycommons.org/pc2/SmallMolecule_a3c203de5dc1c74ea15e6f2b8e76668a	1
 http://pathwaycommons.org/pc2/SmallMolecule_3c9c9d4ba5d86bd1ef4522067242eb85	1
 http://pathwaycommons.org/pc2/Protein_820f56103186be6acbb207efc01ce08a	1
@@ -17169,7 +17110,7 @@ http://pathwaycommons.org/pc2/PhysicalEntity_599cde710cbc8ed862e099e42c145441	1
 http://pathwaycommons.org/pc2/Complex_aabe1559468ce99c1c535f8875d82d1f	1
 http://pathwaycommons.org/pc2/Complex_694de8f8f543914c20ecd7c1652dab8e	1
 http://pathwaycommons.org/pc2/Protein_e1c67565985ad8c972707d2af41b83f6	1
-http://pathwaycommons.org/pc2/SmallMolecule_b1b8508baec372c605c188c3e7200789	1
+http://pathwaycommons.org/pc2/SmallMolecule_a3220a1db3d11b98dc9b123391ce51bd	3
 http://pathwaycommons.org/pc2/Protein_3ae9678ff2789d5c00a462669dccc348	1
 http://pathwaycommons.org/pc2/SmallMolecule_f7db29626d5838b9bd7fccb73c1923a8	1
 http://pathwaycommons.org/pc2/Dna_a57baae4f8fdaca843a9677ba38563f2	1
@@ -17373,7 +17314,6 @@ http://pathwaycommons.org/pc2/Complex_028c2e7b6cfad71d15e9867c63e86790	1
 http://pathwaycommons.org/pc2/Complex_b1b4951365927223ea0f952b3d895998	6
 http://pathwaycommons.org/pc2/Complex_92925d3e5b5c4359275a77f8e3622fd4	1
 http://pathwaycommons.org/pc2/Complex_70aff194f5e4332988e239bc1a9349eb	1
-http://pathwaycommons.org/pc2/Protein_76d67e2b477331bbaa96270b6e48ef7a	1
 http://pathwaycommons.org/pc2/Protein_36f45bdea7732d2f6c2d3fb6f7aaeae3	1
 http://pathwaycommons.org/pc2/Protein_fa92e525bc3eb51cffd7786a1f19e317	1
 http://pathwaycommons.org/pc2/PhysicalEntity_6a132d2b65d84df7a7778ccbb6b25761	1
@@ -17429,7 +17369,7 @@ http://pathwaycommons.org/pc2/SmallMolecule_c6e1232e5f198a19a0b01de3ab7ca0c7	1
 http://pathwaycommons.org/pc2/Complex_767b17ab75cd8de71270d3223de31c08	1
 http://pathwaycommons.org/pc2/Protein_e8dbfc9d21a8b1f95af4e272368b7ca3	1
 http://pathwaycommons.org/pc2/PhysicalEntity_a11b20241731c98b195fddc1b58b8fe5	1
-http://identifiers.org/reactome/R-HSA-211476	2
+http://pathwaycommons.org/pc2/SmallMolecule_3d23b44f79cac0c43b0ca368e0695a5f	1
 http://pathwaycommons.org/pc2/Protein_eb3705b87e9fbbfd5133716d4bb0465e	1
 http://pathwaycommons.org/pc2/Complex_708bdd4ce205b7869f4b573597aa531f	1
 http://pathwaycommons.org/pc2/Complex_7dbc471071e2097bc8554c189fb690b6	1
@@ -17575,7 +17515,7 @@ http://pathwaycommons.org/pc2/PhysicalEntity_29e461ffa69ea076e3c158e8aa26bed2	1
 http://pathwaycommons.org/pc2/Protein_817323abe3ef98f671f528bcf9c8ceba	1
 http://pathwaycommons.org/pc2/Complex_f7ded339ee9f34bd78e08d935a488e0f	1
 http://pathwaycommons.org/pc2/Complex_88d76373c032be816d84845dd1132dd3	1
-http://pathwaycommons.org/pc2/Protein_eac89bb0f5af43ef15e446b8e38f9b6e	1
+http://pathwaycommons.org/pc2/Protein_da765290f1ab473412a08b61a6c976c5	1
 http://pathwaycommons.org/pc2/PhysicalEntity_dc30bcce0829514cbc5173b9e426b2fd	1
 http://pathwaycommons.org/pc2/Complex_a5743f778d90075b37c5b946bd30bf77	1
 http://pathwaycommons.org/pc2/Complex_50d7b21b630e8b5c8394e980225c64a1	1
@@ -17716,10 +17656,10 @@ http://pathwaycommons.org/pc2/SmallMolecule_5eef2d98804281b9aa1af1979cd895a8	1
 http://pathwaycommons.org/pc2/Complex_2d0d843d20c64a5537456dd925da3750	1
 http://pathwaycommons.org/pc2/Complex_2ae1b0e583484ec2657cb6d27b43103b	5
 http://pathwaycommons.org/pc2/Protein_19f1f641665d63c2bb267fe4b887c825	1
-http://identifiers.org/reactome/R-HSA-163743	2
+http://pathwaycommons.org/pc2/SmallMolecule_9dd92b0664fed0e8dcc935d338b0c992	1
 http://pathwaycommons.org/pc2/SmallMolecule_dd626a813bd6758f52403e5fc7bf624f	1
 http://pathwaycommons.org/pc2/Complex_e1f4a8c048c917e57866b79662f3a076	1
-http://identifiers.org/reactome/R-HSA-163748	2
+http://pathwaycommons.org/pc2/Complex_e30c182f705ae00a006509555217ff30	1
 http://pathwaycommons.org/pc2/Protein_59fed1bed8262cba3961903a38f72dc3	3
 http://pathwaycommons.org/pc2/Complex_9060cc3fea424e668a816d718c9800fe	1
 http://pathwaycommons.org/pc2/Complex_61e27a47bd2e3edb8b65bfcb4ce3931b	1
@@ -17939,6 +17879,7 @@ http://pathwaycommons.org/pc2/Complex_fa47cfaac4ec7338ef515cc46f7d01c1	1
 http://pathwaycommons.org/pc2/Protein_1cc713b0fdd487ff37f2ff187c2861b8	1
 http://pathwaycommons.org/pc2/SmallMolecule_dfb3110764443ae0a187c03c44f37bdf	1
 http://pathwaycommons.org/pc2/Protein_81b1647fa3766e562ba961a36ffd087a	1
+http://pathwaycommons.org/pc2/Complex_0326bf5e8e131e8ac0c6bd062218b75e	1
 http://pathwaycommons.org/pc2/Protein_de5cb24058eade07b3d25341788fdf42	1
 http://pathwaycommons.org/pc2/Protein_789113553e582e30d7d2cca9588df94b	1
 http://pathwaycommons.org/pc2/Complex_86836d1a86ac6dd53abdecc187fe8286	1
@@ -18009,7 +17950,7 @@ http://pathwaycommons.org/pc2/Complex_ef6e7ecb16fc2cb4db16023b10bf080c	3
 http://pathwaycommons.org/pc2/Protein_0e4b4c409dd3be366489786f060bdea6	1
 http://pathwaycommons.org/pc2/Dna_abcab76687cace8eb0f9e40f6112a4d4	1
 http://pathwaycommons.org/pc2/Complex_f0ff97dbd000a4279e900f2daf0d0d7d	1
-http://pathwaycommons.org/pc2/Complex_b855a172f5455cff69ac1e6a3aa2d9b3	1
+http://pathwaycommons.org/pc2/Complex_50c1ff7c9d8a4a93fdfb12f2fa72a7c2	1
 http://pathwaycommons.org/pc2/Complex_2f4a4c1aa45832d17adcac3f5de2c802	1
 http://pathwaycommons.org/pc2/Complex_d1c989510f99154d2ce2d43b33f08407	1
 http://pathwaycommons.org/pc2/Complex_6d238ce30838d25c87b93c345084e354	1
@@ -18124,7 +18065,7 @@ http://pathwaycommons.org/pc2/Complex_d0dade763d170841b209c858cbed8bf9	1
 http://pathwaycommons.org/pc2/Protein_983e15fc81e6eb8f623499d2ca4c7ac5	1
 http://pathwaycommons.org/pc2/Protein_fac1b3d66852b64014f36efba9f08eac	1
 http://pathwaycommons.org/pc2/Protein_3515b32db4767a24e98b4820bad8f4a0	1
-http://pathwaycommons.org/pc2/Protein_b57f3d10685c37ecbe255bd7b161365d	1
+http://pathwaycommons.org/pc2/Protein_2f00a1f310638255048e44e5d318aa86	1
 http://pathwaycommons.org/pc2/Protein_ccbc3d1f906071873b29a425fb8f696c	2
 http://pathwaycommons.org/pc2/Complex_ebb3945f689c15db6a3a2920887ed923	1
 http://pathwaycommons.org/pc2/Protein_92e4b629c477af618d848af9fa88e21c	1
@@ -18222,7 +18163,7 @@ http://pathwaycommons.org/pc2/Protein_72de7651752af6f0c22a1311351a51f1	1
 http://pathwaycommons.org/pc2/Protein_bd6039d3c9d2cc90b1317fd57002ac40	1
 http://pathwaycommons.org/pc2/Complex_ec0f8e54b0addbf286b938f1cd449ca8	1
 http://pathwaycommons.org/pc2/Protein_d4c98f5393597e4a5fce3d4e8c279328	1
-http://pathwaycommons.org/pc2/Complex_befd35e441d3c35ee4e1245a5f206bfa	1
+http://pathwaycommons.org/pc2/Protein_17fce972254fb72c22a64697815e0278	1
 http://pathwaycommons.org/pc2/Complex_20558adb66bdc9b2a8a5e9a616b23cd2	1
 http://pathwaycommons.org/pc2/SmallMolecule_95d11a7c6cc29d3619a03ee6332cdd5a	1
 http://pathwaycommons.org/pc2/Complex_0fa233e7ec93a9bccfc6207c1a04e325	1
@@ -18264,7 +18205,7 @@ http://pathwaycommons.org/pc2/SmallMolecule_49b8544b2db97883108bb66d75321800	1
 http://pathwaycommons.org/pc2/Complex_93e08c377060dc957acf4392a1979c42	1
 http://pathwaycommons.org/pc2/Protein_f8cd67eeaae9128163f7b3178e3e721a	1
 http://pathwaycommons.org/pc2/Protein_cad7e4e875d9d3f16a02525e01bc1210	1
-http://pathwaycommons.org/pc2/Complex_d0c59eaaaa76b3aca10d8226780cc016	1
+http://pathwaycommons.org/pc2/Protein_887adc529b3e9cab3a7c17c2a56d062f	1
 http://pathwaycommons.org/pc2/Protein_17b481109ff322583b76e26634e27535	1
 http://pathwaycommons.org/pc2/SmallMolecule_61736d3ebeb7cc8eed7680c5902f14eb	2
 http://pathwaycommons.org/pc2/Protein_f1e772318f39b32fdb48f0bedf3ea593	1
@@ -18404,7 +18345,6 @@ http://pathwaycommons.org/pc2/Complex_e877972104832304f56d61e48bcc5dd3	1
 http://pathwaycommons.org/pc2/Complex_1fe15f77c602f02c6b485fd390a9cf0d	1
 http://pathwaycommons.org/pc2/Complex_7b341e17052ad7f5925344e08002504f	1
 http://pathwaycommons.org/pc2/SmallMolecule_f0c495bc84acffe481d6589ace8913f3	1
-http://identifiers.org/reactome/R-HSA-68637	2
 http://pathwaycommons.org/pc2/Protein_65d0a8990f2d06d081c691a5967aa86d	1
 http://pathwaycommons.org/pc2/SmallMolecule_71c181134fac40cd745764b9053785c9	2
 http://pathwaycommons.org/pc2/Dna_09061aad70faee80b07e32a054e9d8db	1
@@ -18454,7 +18394,7 @@ http://pathwaycommons.org/pc2/Protein_c9a6e89a7be4c6db9a1b1e6c2d0d4e2b	1
 http://pathwaycommons.org/pc2/Protein_be69f89ad498392ed51f32bfad1eb4f6	1
 http://pathwaycommons.org/pc2/Complex_7430d9262836633ea2e6ad0a78899bc5	1
 http://pathwaycommons.org/pc2/Complex_b363c6adda7a7fb62b7bcd698cd7ea73	1
-http://identifiers.org/reactome/R-HSA-210913	2
+http://pathwaycommons.org/pc2/PhysicalEntity_405592ad4821f4837d67613d0ef45036	1
 http://pathwaycommons.org/pc2/Protein_8862976a45adff3df643c613c95e3d4a	1
 http://pathwaycommons.org/pc2/Protein_ad5b26edc7e0c650621b897a8dc52500	1
 http://pathwaycommons.org/pc2/Complex_3486247213f33d6b4ac4ae95572a1cb2	1
@@ -18583,7 +18523,7 @@ http://pathwaycommons.org/pc2/Complex_1c2301c67f7ab48f7eb8b6c499ce3a25	1
 http://pathwaycommons.org/pc2/Protein_14effe79d00d20a8c1c4ebad33ff7581	1
 http://pathwaycommons.org/pc2/Protein_b55f9393d33b80abadac1aba1668b12b	1
 http://pathwaycommons.org/pc2/Complex_77d5e923bcceaf25c79468f6524d1ca9	1
-http://pathwaycommons.org/pc2/Protein_4802fcf9405e0247879e4639c1494bc1	1
+http://pathwaycommons.org/pc2/SmallMolecule_386412203a2bd570ad3b8e28a72c21ce	1
 http://pathwaycommons.org/pc2/Protein_f69e56305c6c0a74e5169a7cfb9e9d87	1
 http://pathwaycommons.org/pc2/Complex_2e0df5841a0ab9d0d886164c19b94b5d	1
 http://pathwaycommons.org/pc2/Complex_c2efdb75c1bf0f09b29919de72eb501a	1
@@ -18676,14 +18616,14 @@ http://pathwaycommons.org/pc2/Protein_55c8b0c34ad065a07856722f334ed325	2
 http://pathwaycommons.org/pc2/Protein_28c3af01437b92593b6fc0c116087df9	1
 http://pathwaycommons.org/pc2/Protein_aaa401ce3d34fc420f13081fda4a3b4a	1
 http://pathwaycommons.org/pc2/Protein_1dc1c19ae566688e9f84c356cc848dc8	1
-http://pathwaycommons.org/pc2/Complex_eecd5b666f74fd887dfb5ef536861170	1
+http://pathwaycommons.org/pc2/Complex_436cb4b42976ec3260c8e3ba6ed98431	1
 http://pathwaycommons.org/pc2/Protein_7cc51ac430cb46845e24cd6b9d856c2f	1
 http://pathwaycommons.org/pc2/Complex_4e46b79403a2beefd6f5c7716a4ec7e0	1
 http://pathwaycommons.org/pc2/Protein_2b449cc3c2c77e749ff7b3adb0764d3e	1
 http://pathwaycommons.org/pc2/Protein_e38fef900c75d189b03a2e43e98f0f7b	1
 http://pathwaycommons.org/pc2/Complex_7472513f2947620b7ff96b6184308c62	1
 http://pathwaycommons.org/pc2/Complex_55481dfbe0e981e4780ebdb33f8bf4c4	1
-http://pathwaycommons.org/pc2/Complex_a1fd4731a51458c01a4ef8c0130fc4a8	1
+http://pathwaycommons.org/pc2/Protein_f28333f227ed2ea0de8deeb8d868325c	1
 http://pathwaycommons.org/pc2/Complex_6095f8026d60fbf96276bbe9f56bf6b0	1
 http://pathwaycommons.org/pc2/Complex_b0ae255663ae59e0e4ac2559243ba98d	1
 http://pathwaycommons.org/pc2/Protein_d627dfdd15c9344f9106b556a3ff6a2b	1
@@ -18770,7 +18710,7 @@ http://pathwaycommons.org/pc2/Protein_bf70c505ba3319ffad8ba50a6561036a	1
 http://pathwaycommons.org/pc2/Complex_8e8a852b5a6a2ee4d49bbba029fd7ac0	1
 http://pathwaycommons.org/pc2/Protein_61adb74ee3ea9bc7709cfa9af0955d79	1
 http://pathwaycommons.org/pc2/Complex_f7e12e26985fd15e4385ab32c58a386e	1
-http://pathwaycommons.org/pc2/Protein_f19e5493b304e58b102247eb5a785a18	1
+http://pathwaycommons.org/pc2/Complex_2eb320649717c9cf1eb5312361e7a13b	1
 http://pathwaycommons.org/pc2/Protein_f7a8c2778f2777877f284bded6185639	1
 http://pathwaycommons.org/pc2/Protein_ab9de16d5e2c0dbe964e5799b616c055	2
 http://pathwaycommons.org/pc2/SmallMolecule_9c2ece76733c5a2696cd7629db5a6443	1
@@ -18797,10 +18737,10 @@ http://pathwaycommons.org/pc2/Complex_11484a20d7c21e1a985d8710be827a35	1
 http://pathwaycommons.org/pc2/SmallMolecule_ad1c5320a468aeb083eb34ffbd040233	1
 http://pathwaycommons.org/pc2/Protein_afdf67f1fdb0c51b71b84e2a073f8ce5	1
 http://pathwaycommons.org/pc2/Protein_9d08bec89a2dc2291e2145b5c4252ed9	1
-http://pathwaycommons.org/pc2/Protein_fe6cd79ec720198e9c24885b6d4ee6db	1
+http://pathwaycommons.org/pc2/Dna_d7f2c5bac59670094e351d7185127371	1
 http://pathwaycommons.org/pc2/SmallMolecule_77a3a6654bd5ce47fe692fc6e7dbeb43	1
 http://pathwaycommons.org/pc2/Complex_59dd2bbfd2f8ea82accbda3a6194aeb9	1
-http://pathwaycommons.org/pc2/PhysicalEntity_13fb3fa00c9ca04a0d979cc6263acb93	1
+http://pathwaycommons.org/pc2/Protein_e2c80349de673f11ce273cc844e0154e	1
 http://pathwaycommons.org/pc2/SmallMolecule_9adc0382cd6c274a4f83baa9affa0f77	1
 http://pathwaycommons.org/pc2/Complex_7cbe9f8b971b020257e30c9249a4796a	1
 http://pathwaycommons.org/pc2/Complex_24e3a58e6e238b89339b5085ca1869e7	1
@@ -18844,7 +18784,7 @@ http://pathwaycommons.org/pc2/Protein_c7fc1e8375f7f98df63de93e963f3737	1
 http://pathwaycommons.org/pc2/Protein_a0d7e1d5b3978004dbfafd453659534b	1
 http://pathwaycommons.org/pc2/Complex_866ee2250d397907a0c0696dbaa2dd7f	1
 http://pathwaycommons.org/pc2/Complex_fc1b695c478f47d6faddb65bb4b384c8	1
-http://pathwaycommons.org/pc2/Protein_1dd2f5a1cfb2ebf6db23b5f299cb22e2	1
+http://pathwaycommons.org/pc2/Complex_d0c59eaaaa76b3aca10d8226780cc016	1
 http://pathwaycommons.org/pc2/SmallMolecule_20972955b1c1076cb697248ed6f29e63	1
 http://pathwaycommons.org/pc2/SmallMolecule_07512588e0dff0aacdcc9b006253ff83	1
 http://pathwaycommons.org/pc2/Protein_06263b97cd9862c46f2b464bec7fc0c2	1
@@ -18999,7 +18939,7 @@ http://pathwaycommons.org/pc2/Complex_7e2fb22a84ae51ff36a42419dc051250	1
 http://pathwaycommons.org/pc2/Complex_86a1834064acc231bf3c8cedd95f788e	1
 http://pathwaycommons.org/pc2/Protein_f4cafee9be22fa280a07cd9bc9f13ba1	1
 http://pathwaycommons.org/pc2/SmallMolecule_ac4f1f1f5e473ca3bdb3b333ac790919	1
-http://pathwaycommons.org/pc2/Protein_9219502c6999b7994c95ea6f30e3d2e6	1
+http://pathwaycommons.org/pc2/SmallMolecule_eb4c6cf3a09592125e4c622300b0d901	1
 http://pathwaycommons.org/pc2/Complex_ee05b5c4b208b29bf0b86569770016ef	1
 http://pathwaycommons.org/pc2/Complex_2576eff8fb6ed92fc767a55704638c16	1
 http://pathwaycommons.org/pc2/Protein_00fd0ed66212a7784d324835c23be775	1
@@ -19010,7 +18950,7 @@ http://pathwaycommons.org/pc2/Protein_e7011b2209a39b72897478d1e1692207	1
 http://pathwaycommons.org/pc2/Protein_9b0f193c556c99e625c98ad5417236aa	1
 http://pathwaycommons.org/pc2/Complex_3e9974fb25a8bfb011915613cfcaf604	3
 http://pathwaycommons.org/pc2/SmallMolecule_933e93cdfb6209dc14d0292522e3e935	1
-http://pathwaycommons.org/pc2/SmallMolecule_1a4db24f3dc9207ee389102762195ce2	1
+http://pathwaycommons.org/pc2/Protein_6697bc2f8a14703185e4877e8e9dd327	1
 http://pathwaycommons.org/pc2/Dna_bea35f0a840255566e089ce38400b61e	1
 http://pathwaycommons.org/pc2/Complex_1a425b9e81b056163fca0de47d6c8614	1
 http://pathwaycommons.org/pc2/Complex_ccc48237a0f94eb06501888370254e19	1
@@ -19125,7 +19065,6 @@ http://pathwaycommons.org/pc2/Complex_7981bc38ea0c814e8abe1943926661b2	1
 http://pathwaycommons.org/pc2/Complex_2ce23af6ee05e047e0111312ae4dea15	1
 http://pathwaycommons.org/pc2/PhysicalEntity_00e681d57acbe05ade351df2b5deb5a8	1
 http://pathwaycommons.org/pc2/SmallMolecule_7a86fb3c0873696bd1aa9547c606d198	1
-http://pathwaycommons.org/pc2/Protein_a96a8b11d3a745a16280aced59db8ff3	1
 http://pathwaycommons.org/pc2/Complex_affc927f9326abf76ef01f917cdd383a	1
 http://pathwaycommons.org/pc2/Rna_50b74ab5eec98bbf1396ddd76486aeba	1
 http://pathwaycommons.org/pc2/Protein_020b39d69f6e3f5790702150010c4889	1
@@ -19156,7 +19095,6 @@ http://pathwaycommons.org/pc2/Protein_dfc95a751c2897de6350725b0906d731	1
 http://pathwaycommons.org/pc2/Complex_09bfc625ba3480e550015cf94e7538e9	1
 http://pathwaycommons.org/pc2/Complex_d90b8f558dd32f9c2a3c202bc709a5c7	5
 http://pathwaycommons.org/pc2/Complex_79aaed4af8d98129c4fbf9d95207e811	1
-http://pathwaycommons.org/pc2/Complex_57ec73213ed7d8da2c921a600f6a3e3c	1
 http://pathwaycommons.org/pc2/Complex_f5e6677d98b92963babadb87f6930a43	1
 http://pathwaycommons.org/pc2/Protein_dab00d89a3487a67f4ecb57a5a2aa415	1
 http://pathwaycommons.org/pc2/Complex_787ca8dab5f821a00cb112f3a9f76fd9	1
@@ -19180,7 +19118,7 @@ http://pathwaycommons.org/pc2/Protein_ce4764b76119d2557a8c6d86af6b392d	1
 http://pathwaycommons.org/pc2/Complex_0234a0e2f482cefa398e996a0a68193d	1
 http://pathwaycommons.org/pc2/Complex_b8f8fe21271ad49723470137eb7c1feb	1
 http://pathwaycommons.org/pc2/Protein_b2af835c414e730efc702f6c9c0507ae	1
-http://identifiers.org/reactome/R-HSA-6790038	2
+http://pathwaycommons.org/pc2/SmallMolecule_c8eb953bbe5a4de3128eabe6302d6f95	1
 http://pathwaycommons.org/pc2/Complex_69acac0007143a72f60a09879e5100d1	1
 http://pathwaycommons.org/pc2/Complex_169fe49eb7bdd79371e0f3f99028e532	1
 http://pathwaycommons.org/pc2/PhysicalEntity_bb5984d3e3d65dfa6ce13132c172cb86	1
@@ -19206,7 +19144,7 @@ http://pathwaycommons.org/pc2/Protein_a73289d1f379d135b6506cc239ac1739	1
 http://pathwaycommons.org/pc2/Protein_179b4faae17c2a0c6f0745439cd37755	1
 http://pathwaycommons.org/pc2/Dna_90832710cea52ca253d98dcd622be156	1
 http://pathwaycommons.org/pc2/Complex_f187d91c6268396723e954015b1d09a1	1
-http://pathwaycommons.org/pc2/Complex_be06b11e514a0499e544d80ed5bea863	1
+http://pathwaycommons.org/pc2/Complex_ca5cb743a28a0568afe6945e2007d34d	1
 http://pathwaycommons.org/pc2/Complex_2949eccfef4f541dcceb2087ab952280	1
 http://pathwaycommons.org/pc2/Protein_803f1d81672e67f1b8ba24e055398438	1
 http://pathwaycommons.org/pc2/Complex_73a13b3938d708292d31f6905684b154	1
@@ -19246,7 +19184,7 @@ http://pathwaycommons.org/pc2/Complex_00bf17dc6890470ed72dd8c09f7f8057	1
 http://pathwaycommons.org/pc2/Protein_0c10b42ee141cd7babf67495d3844907	1
 http://pathwaycommons.org/pc2/Protein_225268fcb3042db25bc831e8b5e863a4	1
 http://pathwaycommons.org/pc2/SmallMolecule_cf4e0dfaebde3ac420f8eea4242c79f9	1
-http://pathwaycommons.org/pc2/Complex_844d4d8e1e32094e7770676e156275a8	1
+http://pathwaycommons.org/pc2/Protein_3c24d362764e9640ff71bd46ae14c21b	1
 http://pathwaycommons.org/pc2/Protein_6c918589843d430e29c91db2f6f051bc	1
 http://pathwaycommons.org/pc2/Protein_68e82b2ed5e62411f31e976ca0ea6166	1
 http://pathwaycommons.org/pc2/Complex_22cdb9cc081584b5d5f616477e646432	1
@@ -19390,7 +19328,6 @@ http://pathwaycommons.org/pc2/Complex_3d600379cecc84913a54f66436bd6dde	1
 http://pathwaycommons.org/pc2/Complex_d9a0132690029e503a412753d4fe0eaf	1
 http://pathwaycommons.org/pc2/Complex_2d5711e2beb2bec149bf7b469b800ef0	1
 http://pathwaycommons.org/pc2/Protein_7cbf21c5460a1db6a1cb712f6d0fa24d	1
-http://pathwaycommons.org/pc2/Protein_fd2436535d8a0ada46049ee9521387a5	1
 http://pathwaycommons.org/pc2/Complex_5a8f31e9edb8e0b49e605f9c667a80cb	1
 http://pathwaycommons.org/pc2/Protein_1e3baa366b73675e7fe1368049a09043	1
 http://pathwaycommons.org/pc2/Complex_e8b69543f35b674bfe1a8547e7971f53	1
@@ -19470,7 +19407,7 @@ http://pathwaycommons.org/pc2/Protein_4e6c1c9a8e65ce9170740cd43e723fcf	1
 http://pathwaycommons.org/pc2/Complex_aae75484187200e349e0376a981d7caf	1
 http://pathwaycommons.org/pc2/Complex_61ae5851b682952741e8380fbb7e9913	1
 http://pathwaycommons.org/pc2/Complex_af69ddf49ec2b5cbcf1bafd757e7c39a	1
-http://pathwaycommons.org/pc2/PhysicalEntity_a72545a2d6403a568572d41d9d115803	1
+http://pathwaycommons.org/pc2/Protein_fd4905057ef9ebb50bee20297dbb1041	1
 http://pathwaycommons.org/pc2/Complex_36d6d72e7c36f41dd9a8c068743b6755	1
 http://pathwaycommons.org/pc2/Protein_ddaa4d88ac57f2ce3330e7bd9e282835	1
 http://pathwaycommons.org/pc2/SmallMolecule_ff3d06b724cb0bb799dfe6ee41c7431e	1
@@ -19500,10 +19437,10 @@ http://pathwaycommons.org/pc2/Complex_d09a087f68222316db9ee973b9185084	1
 http://pathwaycommons.org/pc2/Complex_5db94a0016158fafa97c319899adfd18	1
 http://pathwaycommons.org/pc2/Protein_80b6507802ff52823b86c46f521d2980	1
 http://pathwaycommons.org/pc2/Dna_4ebc6115ebb60081695861e96bd97092	1
-http://identifiers.org/reactome/R-HSA-195734	4
+http://pathwaycommons.org/pc2/Complex_52f535ae08b5e15443f8a5718c0806d8	1
 http://pathwaycommons.org/pc2/Complex_dbb73649ef40a23d1d63bf2e66bd2a7c	1
 http://pathwaycommons.org/pc2/Dna_82249a347b9dec2c1ac8e19303d67d5b	1
-http://pathwaycommons.org/pc2/Complex_87344597a724fc86f02df2e68b7327b6	1
+http://pathwaycommons.org/pc2/Complex_be06b11e514a0499e544d80ed5bea863	1
 http://pathwaycommons.org/pc2/Complex_ad58eb08dea1c9cf253c0978ac853875	1
 http://pathwaycommons.org/pc2/Protein_9f7137edc88944e110a7d9693ab45f9a	1
 http://pathwaycommons.org/pc2/Protein_14e1f45deee7911af5c121293e0c41cb	1
@@ -19549,7 +19486,7 @@ http://pathwaycommons.org/pc2/Protein_b7c0d69b8951b69de1e64fe77688c0b8	1
 http://pathwaycommons.org/pc2/Complex_204e4fdd463d4b8653e28e6bc5052612	1
 http://pathwaycommons.org/pc2/Complex_600dfe224fd8ce9a666e9059f6ca94e3	7
 http://pathwaycommons.org/pc2/Complex_924ad32f5cbdfb2f02f8632bf16371f9	1
-http://pathwaycommons.org/pc2/Complex_436cb4b42976ec3260c8e3ba6ed98431	1
+http://pathwaycommons.org/pc2/Complex_eecd5b666f74fd887dfb5ef536861170	1
 http://pathwaycommons.org/pc2/SmallMolecule_71c20d88ba91af145cb88bf9dd3e055a	1
 http://pathwaycommons.org/pc2/Protein_1252f6475130999cd104c29eaa0f006a	1
 http://pathwaycommons.org/pc2/SmallMolecule_77e3146e34cab81bd92a77fadd979729	1

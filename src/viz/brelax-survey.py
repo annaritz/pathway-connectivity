@@ -10,7 +10,89 @@ import numpy, scipy
 import scipy.cluster.hierarchy as hier
 import scipy.spatial.distance as dist
 
-def main(infile,outprefix):
+def main(infile,infile_filtered,outprefix):
+
+	data1 = sort_by_col(infile)
+	data2 = sort_by_col(infile_filtered)
+
+	fig, (ax1,ax2) = plt.subplots(ncols=2, nrows=1, figsize=(8,4))
+	ca1 = ax1.matshow(data1, aspect='auto') 
+	ax1.set_title('Nodes with B-relaxation distance $\leq k$\n(Full Hypergraph)')
+	ax1.set_xlabel('k')
+	ax1.set_ylabel('Source Nodes (%d)' % len(data1))
+	fig.colorbar(ca1,ax=ax1)
+	ax1.xaxis.set_ticks_position('bottom')
+	ax1.set_yticklabels([])
+	#fig.colorbar(ax1)
+	#cbar = fig.colorbar(cax, ticks=[-1, 0, 1])
+	#cbar.ax.set_yticklabels(['< -1', '0', '> 1'])  # vertically oriented colorbar
+
+	#ax2.matshow(numpy.log2(data), aspect='auto') 
+	ca2 = ax2.matshow(data2, aspect='auto') 
+	ax2.set_title('Nodes with B-relaxation distance $\leq k$\n(Blacklisted Nodes Removed)')
+	ax2.set_xlabel('k')
+	ax2.set_ylabel('Source Nodes (%d)' % len(data2))
+	fig.colorbar(ca2,ax=ax2)
+	ax2.xaxis.set_ticks_position('bottom')
+	ax2.set_yticklabels([])
+
+	#plt.colorbar()
+	plt.tight_layout()
+	plt.savefig(outprefix+'.png')
+	print('saved to '+outprefix+'.png')
+	plt.savefig(outprefix+'.pdf')
+	os.system('pdfcrop %s.pdf %s.pdf' % (outprefix,outprefix))
+	print('saved to '+outprefix+'.pdf')
+	return
+
+def three_panel(infile,infile_filtered,infile_removed,outprefix):
+
+	data1 = sort_by_col(infile)
+	data2 = sort_by_col(infile_filtered)
+	data3 = sort_by_col(infile_removed)
+
+	fig, (ax1,ax2,ax3) = plt.subplots(ncols=3, nrows=1, figsize=(12,4))
+	ca1 = ax1.matshow(numpy.ma.log10(data1).filled(0), aspect='auto') 
+	ax1.set_title('Nodes with B-relaxation distance $\leq k$\n(Full Hypergraph)')
+	ax1.set_xlabel('k')
+	ax1.set_ylabel('Source Nodes (%d)' % len(data1))
+	cbar = fig.colorbar(ca1,ax=ax1)
+	cbar.set_label('$\log_{10}(|B_0 \cup \ldots \cup  B_k|)$')
+	ax1.xaxis.set_ticks_position('bottom')
+	ax1.set_yticklabels([])
+	#fig.colorbar(ax1)
+	#cbar = fig.colorbar(cax, ticks=[-1, 0, 1])
+	#cbar.ax.set_yticklabels(['< -1', '0', '> 1'])  # vertically oriented colorbar
+
+	#ax2.matshow(numpy.log2(data), aspect='auto') 
+	ca2 = ax2.matshow(numpy.ma.log10(data2).filled(0), aspect='auto') 
+	ax2.set_title('Nodes with B-relaxation distance $\leq k$\n(Blacklisted Nodes Removed)')
+	ax2.set_xlabel('k')
+	ax2.set_ylabel('Source Nodes (%d)' % len(data2))
+	cbar = fig.colorbar(ca2,ax=ax2)
+	cbar.set_label('$\log_{10}(|B_0 \cup \ldots \cup  B_k|)$')
+	ax2.xaxis.set_ticks_position('bottom')
+	ax2.set_yticklabels([])
+
+	ca3 = ax3.matshow(numpy.ma.log10(data3).filled(0), aspect='auto') 
+	ax3.set_title('Nodes with B-relaxation distance $\leq k$\n(Small Molecules Removed)')
+	ax3.set_xlabel('k')
+	ax3.set_ylabel('Source Nodes (%d)' % len(data3))
+	cbar = fig.colorbar(ca3,ax=ax3)
+	cbar.set_label('$\log_{10}(|B_0 \cup \ldots \cup B_k|)$')
+	ax3.xaxis.set_ticks_position('bottom')
+	ax3.set_yticklabels([])
+
+	#plt.colorbar()
+	plt.tight_layout()
+	plt.savefig(outprefix+'.png')
+	print('saved to '+outprefix+'.png')
+	plt.savefig(outprefix+'.pdf')
+	os.system('pdfcrop %s.pdf %s.pdf' % (outprefix,outprefix))
+	print('saved to '+outprefix+'.pdf')
+	return
+
+def sort_by_col(infile):
 	print('making matrix...')
 	dataMatrix =[]
 	with open(infile) as fin:
@@ -25,27 +107,16 @@ def main(infile,outprefix):
 	#get your data into a 2d array where rows are genes, and columns 
 	#are conditions
 	data = numpy.array(dataMatrix)
-
 	# only get the first five columns
-	inds = numpy.lexsort((data[:,0],data[:,5],data[:,10],data[:,30],data[:,40]))
-
+	inds = numpy.lexsort((data[:,0],data[:,5],data[:,10],data[:,15],data[:,20],data[:,30],data[:,40]))
 	data = data[inds]
 
 	#numpy.seterr(divide='ignore')
 	#data = numpy.log2(data)
 	#numpy.seterr(divide='warn')# https://stackoverflow.com/questions/21752989/numpy-efficiently-avoid-0s-when-taking-logmatrix
 
-	fig, (ax1,ax2) = plt.subplots(ncols=2, nrows=1, figsize=(5,8))
-	ax1.matshow(data, aspect='auto') 
-	ax2.matshow(numpy.log2(data), aspect='auto') 
-	#plt.colorbar()
-	plt.tight_layout()
-	plt.savefig(outprefix+'.png')
-	print('saved to '+outprefix+'.png')
-	plt.savefig(outprefix+'.pdf')
-	os.system('pdfcrop %s.pdf %s.pdf' % (outprefix,outprefix))
-	print('saved to '+outprefix+'.pdf')
-	return
+	return data
+
 
 def clustering(infile,outprefix):
 	print('making matrix...')
@@ -123,6 +194,10 @@ def clustering(infile,outprefix):
 
 if __name__ == '__main__':
 	
-	if len(sys.argv) != 3:
-		print('USAGE: python3 brelax-survey.py <BRELAX_FILE> <OUTPREFIX>')
-	main(sys.argv[1],sys.argv[2])
+	if len(sys.argv) != 4 and len(sys.argv) != 5:
+		print('USAGE: python3 brelax-survey.py <BRELAX_FILE> <BRELAX_FILE_FILTERED> <OPTIONAL THIRD FILE> <OUTPREFIX>')
+
+	if len(sys.argv) == 4:
+		main(sys.argv[1],sys.argv[2],sys.argv[3])
+	else:
+		three_panel(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4])
