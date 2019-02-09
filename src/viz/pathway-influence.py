@@ -47,12 +47,26 @@ NAMES = {
 'TNF-signaling':'TNF',
 'TRAIL-signaling':'TRAIL'
 }
+sorted_pathways = ['Signaling-by-MET', 'Signaling-by-Type-1-Insulin-like-Growth-Factor-1-Receptor-(IGF1R)', 
+'Signaling-by-Insulin-receptor', 
+'Signaling-by-EGFR', 'Signaling-by-ERBB2', 'Signaling-by-ERBB4', 'Signaling-by-SCF-KIT', 
+'Signaling-by-FGFR', 'ERK1-ERK2-pathway','Signaling-by-GPCR','Signaling-by-PDGF', 
+'Signaling-by-VEGF',  'DAG-and-IP3-signaling', 
+'Signaling-by-NTRKs',  'PI3K-AKT-Signaling', 'Signaling-by-WNT', 'Integrin-signaling',
+'TNF-signaling', 'TRAIL-signaling',  'FasL--CD95L-signaling', 
+'Signaling-by-Activin', 'Signaling-by-TGF-beta-Receptor-Complex', 'Signaling-by-NOTCH', 'Signaling-by-PTK6', 
+'Signaling-by-Rho-GTPases',  'MAPK6-MAPK4-signaling', 
+ 'p75-NTR-receptor-mediated-signalling', 'Signaling-by-Hippo',
+'mTOR-signalling', 'Signaling-by-Hedgehog',
+'Signaling-by-Nuclear-Receptors', 'Signaling-by-Leptin', 'Signaling-by-BMP', 'Signaling-by-MST1']
 
 def main(inprefix,outprefix):
 	pathways = read_files(inprefix)
 	num = len(pathways)
-	sorted_pathways = sorted(pathways.keys())
-	for k in range(-1,10):
+	max_k = 20
+	#sorted_pathways = sorted(pathways.keys())
+	
+	for k in range(-1,max_k):
 		M = []
 		for i in range(num):
 			M.append([0]*num)
@@ -68,20 +82,23 @@ def main(inprefix,outprefix):
 					else:
 						M[i][j] = influence_score(pathways[p1],pathways[p2],k)
 
-		fig, ax = plt.subplots(ncols=1, nrows=1, figsize=(4,4))
-		ca = ax.matshow(M, vmin=0,vmax=1, aspect='auto') 
+		fig, ax = plt.subplots(ncols=1, nrows=1, figsize=(6,6))
+		ca = ax.matshow(M, aspect='auto', vmin=0.01, vmax=1)
 		fig.colorbar(ca,ax=ax)
 		if k == -1:
 			ax.set_title('Initial Node Overlap')
 			pathway_outprefix = outprefix+'_init'
 		else:
-			ax.set_title('Influence Score $S_%d$' % (k))
+			ax.set_title('Influence Score $S_{%d}$' % (k))
 			pathway_outprefix = outprefix+'_k_%d' % (k)
+
 		ax.xaxis.set_ticks_position('bottom')
+		ax.set_xticks(range(num))
+		ax.set_yticks(range(num))
+		ax.set_xticklabels([NAMES[p] for p in sorted_pathways], rotation=270, fontsize=9)
+		ax.set_yticklabels([NAMES[p] for p in sorted_pathways], fontsize=9)
 
 		plt.tight_layout()
-
-		
 		plt.savefig(pathway_outprefix+'.png')
 		print('saved to '+pathway_outprefix+'.png')
 		plt.savefig(pathway_outprefix+'.pdf')
@@ -141,5 +158,5 @@ def asymmetric_jaccard(p1,p2):
 if __name__ == '__main__':
 	
 	if len(sys.argv) != 3:
-		print('USAGE: python3 brelax-survey.py <PATHWAY_OUTPREFIX> <OUTPREFIX')
+		print('USAGE: python3 pathway-influence.py <PATHWAY_OUTPREFIX> <OUTPREFIX')
 	main(sys.argv[1],sys.argv[2])

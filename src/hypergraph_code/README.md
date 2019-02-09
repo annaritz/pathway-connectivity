@@ -40,3 +40,6 @@ python3 b-relaxation-survey.py ../../hypergraph/reactome_hypergraph_full/small_m
 
 ## PATHWAY SURVEY
 python3 b-relaxation-pathways.py ../../hypergraph/reactome_hypergraph_full/small_molecule_filter output/pathways/small_molecule_filter_ output/small_molecule_filter-reactome_hedges.txt  ../../data/pathways/reactome-pathways.txt
+
+
+python3 b-relaxation-pathways.py ../../hypergraph/reactome_hypergraph_full/blacklist_filter output/pathways/blacklist_filter_ output/blacklist_filter-reactome_hedges.txt  ../../data/pathways/reactome-pathways.txt

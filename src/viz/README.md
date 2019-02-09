@@ -10,4 +10,10 @@ python3 brelax-survey.py ../hypergraph_code/output/b_relax_reactome.txt  ../hype
 
 python3 connectivity-transformations.py ../hypergraph/output/reactome.txt ../hypergraph_code/output/graph-reactome.txt transformed-histogram
 
+## PATHWAY INFLUENCE
 python3 pathway-influence.py ../hypergraph_code/output/pathways/small_molecule_filter_ influence-output/small_molecule_filter
+python3 pathway-influence.py ../hypergraph_code/output/pathways/blacklist_filter_ influence-output/blacklist_filter
+
+
+## CASE STUDY
+python3 case-study.py ../hypergraph_code/output/pathways/small_molecule_filter_ case-study-output/small_molecule_filter_
