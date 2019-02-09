@@ -25,21 +25,33 @@ python3 b-relaxation-survey.py ../../hypergraph/reactome_hypergraph_full/blackli
 
 ## SMALL MOLECULE STUFF
 python filter-signaling-hypergraph.py ../../hypergraph/reactome_hypergraph_full/reactome-hyperedges.txt 
+-- BEFORE ADDING 3 ADDITIONAL MOLECULES
 ##4975 reactions pruned to filter small molecules
 ##2778 small nodes in Reactome signailng pathways
+-- AFTER ADDING 3 ADDITIONAL MOLECULES (Ub, Ub, NPC)
+##5180 reactions pruned to filter small molecules
+##2781 small nodes in Reactome signailng pathways
 
 cp ../../hypergraph/reactome_hypergraph_full/reactome-hyperedges.txt.small_molecule_filter ../../hypergraph/reactome_hypergraph_full/small_molecule_filter-hyperedges.txt
 cp ../../hypergraph/reactome_hypergraph_full/reactome-hypernodes.txt ../../hypergraph/reactome_hypergraph_full/small_molecule_filter-hypernodes.txt 
 
 python connectivity-survey.py ../../hypergraph/reactome_hypergraph_full/small_molecule_filter output/small_molecule_filter-
 #40 reactions skipped because of Reactome identifier
-#2326 reactions skipped because of an empty tail or head
-#Hypergraph has 8790 hyperedges and 15446 nodes (8328 of these are hypernodes)
+#2342 reactions skipped because of an empty tail or head
+#Hypergraph has 8773 hyperedges and 15440 nodes (8327 of these are hypernodes)
 
 python3 b-relaxation-survey.py ../../hypergraph/reactome_hypergraph_full/small_molecule_filter output/small_molecule_filter_b_relax.txt output/small_molecule_filter-reactome_hedges.txt
 
 ## PATHWAY SURVEY
 python3 b-relaxation-pathways.py ../../hypergraph/reactome_hypergraph_full/small_molecule_filter output/pathways/small_molecule_filter_ output/small_molecule_filter-reactome_hedges.txt  ../../data/pathways/reactome-pathways.txt
 
-
 python3 b-relaxation-pathways.py ../../hypergraph/reactome_hypergraph_full/blacklist_filter output/pathways/blacklist_filter_ output/blacklist_filter-reactome_hedges.txt  ../../data/pathways/reactome-pathways.txt
+
+
+### HUB STUFF (from connectivity-sruvey.py)
+sort -grk3 output/reactome_hubs.txt | head -n 50 | grep -v SmallMolecule | cut -f 1 > entities_in_top_50_hubs.txt
+grep -f entities_in_top_50_hubs.txt ../BioPAXSTREAM/output/reactome_limit20.txt.names
+#Ub http://pathwaycommons.org/pc2/Protein_fa92e525bc3eb51cffd7786a1f19e317	104	136
+#NPC http://pathwaycommons.org/pc2/Complex_6ae49f2fe344df4b6985f2f372910a77	35	81
+#Ub http://pathwaycommons.org/pc2/Protein_80c9e4746b9a9261c9c7b174d2cf8292	31	73
+
