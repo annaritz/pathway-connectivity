@@ -11,109 +11,123 @@ import numpy, scipy
 import scipy.cluster.hierarchy as hier
 import scipy.spatial.distance as dist
 
-NAMES = {
-'DAG-and-IP3-signaling':'DAG/IP3',
-'ERK1-ERK2-pathway':'ERK1/ERK2',
-'FasL--CD95L-signaling':'FasL/CD95L',
-'Integrin-signaling':'Integrin',
-'MAPK6-MAPK4-signaling':'MAPK4/MAPK6',
-'mTOR-signalling':'mTOR',
-'p75-NTR-receptor-mediated-signalling':'NTR',
-'PI3K-AKT-Signaling':'PI3K/AKT',
-'Signaling-by-Activin':'Activin',
-'Signaling-by-BMP':'BMP',
-'Signaling-by-EGFR':'EGFR',
-'Signaling-by-ERBB2':'ERBB2',
-'Signaling-by-ERBB4':'ERBB4',
-'Signaling-by-FGFR':'FGFR',
-'Signaling-by-GPCR':'GPCR',
-'Signaling-by-Hedgehog':'Hedgehog',
-'Signaling-by-Hippo':'Hippo',
-'Signaling-by-Insulin-receptor':'Insulin',
-'Signaling-by-Leptin':'Leptin',
-'Signaling-by-MET':'MET',
-'Signaling-by-MST1':'MST1',
-'Signaling-by-NOTCH':'Notch',
-'Signaling-by-NTRKs':'NTRKs',
-'Signaling-by-Nuclear-Receptors':'Nuclear',
-'Signaling-by-PDGF':'PDGF',
-'Signaling-by-PTK6':'PTK6',
-'Signaling-by-Rho-GTPases':'Rho GTPases',
-'Signaling-by-SCF-KIT':'SCF-KIT',
-'Signaling-by-TGF-beta-Receptor-Complex':'TGFB',
-'Signaling-by-Type-1-Insulin-like-Growth-Factor-1-Receptor-(IGF1R)':'IGF1R',
-'Signaling-by-VEGF':'VEGF',
-'Signaling-by-WNT':'Wnt',
-'TNF-signaling':'TNF',
-'TRAIL-signaling':'TRAIL'
-}
-sorted_pathways = ['Signaling-by-EGFR', 'Signaling-by-ERBB2', 'Signaling-by-ERBB4', 'Signaling-by-SCF-KIT', 
-'Signaling-by-FGFR', 'ERK1-ERK2-pathway','Signaling-by-GPCR','Signaling-by-PDGF', 
-'Signaling-by-VEGF',  'DAG-and-IP3-signaling', 
-'Signaling-by-NTRKs',  'PI3K-AKT-Signaling', 'Signaling-by-WNT', 
-'Integrin-signaling',
-'Signaling-by-MET', 'Signaling-by-Type-1-Insulin-like-Growth-Factor-1-Receptor-(IGF1R)', 
-'Signaling-by-Insulin-receptor', 
-'TNF-signaling', #'TRAIL-signaling',  'FasL--CD95L-signaling', 
-'Signaling-by-Activin', 'Signaling-by-TGF-beta-Receptor-Complex', 'Signaling-by-NOTCH', 'Signaling-by-PTK6', 
-'Signaling-by-Rho-GTPases',  'MAPK6-MAPK4-signaling', 
- 'p75-NTR-receptor-mediated-signalling', 'Signaling-by-MST1',
-'mTOR-signalling', 'Signaling-by-Hedgehog',
-'Signaling-by-Nuclear-Receptors', 'Signaling-by-Leptin', 'Signaling-by-BMP', 'Signaling-by-Hippo']
+from viz_utils import *
 
 def main(inprefix,outprefix):
 	pathways = read_files(inprefix)
 	num = len(sorted_pathways)
 	k_range = [-1,0,1,2,3,4,5,6,7,8,9,10,15,20,30,40]
-	#sorted_pathways = sorted(pathways.keys())
 	
+	#sorted_pathways = sorted(pathways.keys())
+	all_data = []
 	for k in k_range:
-		M = []
-		for i in range(num):
-			M.append([0]*num)
-			p1 = sorted_pathways[i]
-			for j in range(num):
-				p2 = sorted_pathways[j]
-				#print(k,p1,p2)
-				if k==-1:
-					M[i][j] = asymmetric_jaccard(pathways[p1],pathways[p2])
-				else:
-					if i==j:
-						M[i][j] = 0.0
-					else:
-						M[i][j] = influence_score(pathways[p1],pathways[p2],k)
+		print('k=%d' % (k))
+		M = get_data(k,sorted_pathways,pathways,num)
+		all_data.append(M)
+		plot_single(M,k,outprefix,sorted_pathways,num)
 
-		fig, ax = plt.subplots(ncols=1, nrows=1, figsize=(6,6))
-		ca = ax.matshow(M, aspect='auto', vmin=0.0, vmax=1)
-		fig.colorbar(ca,ax=ax)
-		if k == -1:
-			ax.set_title('Pathway Member Overlap (Asymmetric Jaccard)')
-			pathway_outprefix = outprefix+'_init'
-		else:
-			ax.set_title('Influence Score $S_{%d}$' % (k))
-			pathway_outprefix = outprefix+'_k_%s' % (str(k).zfill(2))
-
-		ax.xaxis.set_ticks_position('bottom')
-		ax.set_xticks(range(num))
-		ax.set_yticks(range(num))
-		ax.set_xticklabels([NAMES[p] for p in sorted_pathways], rotation=270, fontsize=9)
-		ax.set_yticklabels([NAMES[p] for p in sorted_pathways], fontsize=9)
-
-		plt.tight_layout()
-		plt.savefig(pathway_outprefix+'.png')
-		print('saved to '+pathway_outprefix+'.png')
-		plt.savefig(pathway_outprefix+'.pdf')
-		os.system('pdfcrop %s.pdf %s.pdf' % (pathway_outprefix,pathway_outprefix))
-		print('saved to '+pathway_outprefix+'.pdf')
-
-		out = open(pathway_outprefix+'.txt','w')
-		out.write('\t'.join(sorted_pathways)+'\n')
-		for i in range(num):
-			out.write('%s\t%s\n' % (sorted_pathways[i],'\t'.join([str(e) for e in M[i]])))
-		out.close()
-		print('saved output to %s'  %(pathway_outprefix+'.txt'))
-
+	make_summary_plot(k_range[1:],all_data[1:],outprefix+'_full')
+	make_summary_plot(k_range[1:],all_data[1:],outprefix+'_full_log',logvals=True)
 	return
+
+
+def make_summary_plot(k_range,all_data,outprefix,logvals=False):
+	nrows = 4
+	fig, axes_box = plt.subplots(ncols=int((len(k_range)+1)/nrows), nrows=nrows, figsize=(8,8))
+	axes = []
+	for a1 in axes_box:
+		for a2 in a1:
+			axes.append(a2)
+	max_val = 0
+
+	for i in range(len(all_data)):
+		for j in range(len(all_data[i])):
+			max_val = max(max_val,max(all_data[i][j]))
+			if logvals:
+				for k in range(len(all_data[i][j])):
+					#if all_data[i][j][k] == 0:
+					#	all_data[i][j][k] = 0.00000001 # small epsilon
+					all_data[i][j][k] = log(all_data[i][j][k]+1,10)
+
+	print('MAX VAL IS',max_val)
+	for i in range(len(axes)):
+		if len(all_data) == i:
+			axes[i].axis('off')
+			continue
+		ax = axes[i]
+		k = k_range[i]
+		M = all_data[i]
+		if logvals:
+			ca = ax.matshow(M, aspect='auto', vmin=log(1,10), vmax=log(2,10))
+		else:
+			ca = ax.matshow(M, aspect='auto', vmin=0.0, vmax=max_val)
+		fig.colorbar(ca,ax=ax)
+		ax.set_xticks([])
+		ax.set_yticks([])
+		ax.set_title('$S_{%d}$' % (k),fontsize=14)
+
+	plt.tight_layout(w_pad=0)
+	plt.savefig(outprefix+'.png')
+	print('saved to '+outprefix+'.png')
+	plt.savefig(outprefix+'.pdf')
+	os.system('pdfcrop %s.pdf %s.pdf' % (outprefix,outprefix))
+	print('saved to '+outprefix+'.pdf')
+	return
+
+def plot_single(M,k,outprefix,sorted_pathways,num):
+	fig, ax = plt.subplots(ncols=1, nrows=1, figsize=(6,6))
+	ca = ax.matshow(M, aspect='auto', vmin=0.0, vmax=1)
+	fig.colorbar(ca,ax=ax)
+	if k == -1:
+		ax.set_title('Pathway Overlap')
+		pathway_outprefix = outprefix+'_init'
+	else:
+		ax.set_title('Influence Score $S_{%d}$' % (k))
+		pathway_outprefix = outprefix+'_k_%s' % (str(k).zfill(2))
+
+	ax.xaxis.set_ticks_position('bottom')
+	ax.set_xticks(range(num))
+	ax.set_yticks(range(num))
+	ax.set_xticklabels([NAMES[p] for p in sorted_pathways], rotation=270, fontsize=9)
+	ax.set_yticklabels([NAMES[p] for p in sorted_pathways], fontsize=9)
+
+	plt.tight_layout()
+	plt.savefig(pathway_outprefix+'.png')
+	print('saved to '+pathway_outprefix+'.png')
+	plt.savefig(pathway_outprefix+'.pdf')
+	os.system('pdfcrop %s.pdf %s.pdf' % (pathway_outprefix,pathway_outprefix))
+	print('saved to '+pathway_outprefix+'.pdf')
+
+	out = open(pathway_outprefix+'.txt','w')
+	out.write('\t'.join(sorted_pathways)+'\n')
+	for i in range(num):
+		out.write('%s\t%s\n' % (sorted_pathways[i],'\t'.join([str(e) for e in M[i]])))
+	out.close()
+	print('saved output to %s'  %(pathway_outprefix+'.txt'))
+	return
+
+def get_data(k,sorted_pathways,pathways,num):
+	M = []
+	for i in range(num):
+		M.append([0]*num)
+		p1 = sorted_pathways[i]
+		for j in range(num):
+			p2 = sorted_pathways[j]
+			
+			if k==-1:
+				# if 'Leptin' in p1 and 'IGF' in p2:
+				# 	print(p1,len(pathways[p1][-1]))
+				# 	print(p2,len(pathways[p2][-1]))
+				# 	print(len(pathways[p1][-1].intersection(pathways[p2][-1])))
+				# 	print(asymmetric_jaccard(pathways[p1],pathways[p2]))
+				# 	sys.exit()
+				M[i][j] = asymmetric_jaccard(pathways[p1],pathways[p2])
+			else:
+				if i==j:
+					M[i][j] = 0.0
+				else:
+					M[i][j] = influence_score(pathways[p1],pathways[p2],k)
+	return M
 
 def read_files(prefix):
 	files = glob.glob(prefix+'*')
@@ -155,7 +169,7 @@ def influence_score(p1,p2,k):
 def asymmetric_jaccard(p1,p2):
 	initp1 = p1[-1]
 	initp2 = p2[-1]
-	jaccard = len(initp1.intersection(initp2))/len(initp2)
+	jaccard = len(initp1.intersection(initp2))/len(initp1)
 	return jaccard
 
 if __name__ == '__main__':

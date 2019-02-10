@@ -43,10 +43,18 @@ python connectivity-survey.py ../../hypergraph/reactome_hypergraph_full/small_mo
 python3 b-relaxation-survey.py ../../hypergraph/reactome_hypergraph_full/small_molecule_filter output/small_molecule_filter_b_relax.txt output/small_molecule_filter-reactome_hedges.txt
 
 ## PATHWAY SURVEY
-python3 b-relaxation-pathways.py ../../hypergraph/reactome_hypergraph_full/small_molecule_filter output/pathways/small_molecule_filter_ output/small_molecule_filter-reactome_hedges.txt  ../../data/pathways/reactome-pathways.txt
 
-python3 b-relaxation-pathways.py ../../hypergraph/reactome_hypergraph_full/blacklist_filter output/pathways/blacklist_filter_ output/blacklist_filter-reactome_hedges.txt  ../../data/pathways/reactome-pathways.txt
+## traversal-based pathways
+#python3 b-relaxation-pathways.py ../../hypergraph/reactome_hypergraph_full/reactome output/pathways/full_reactome_ output/reactome_hedges.txt  ../../data/pathways/reactome-pathways.txt
 
+#python3 b-relaxation-pathways.py ../../hypergraph/reactome_hypergraph_full/small_molecule_filter output/pathways/small_molecule_filter_ output/small_molecule_filter-reactome_hedges.txt  ../../data/pathways/reactome-pathways.txt
+
+#python3 b-relaxation-pathways.py ../../hypergraph/reactome_hypergraph_full/blacklist_filter output/pathways/blacklist_filter_ output/blacklist_filter-reactome_hedges.txt  ../../data/pathways/reactome-pathways.txt
+
+## hypergraph-based pathways (PARSING)
+python3 b-relaxation-pathways.py ../../hypergraph/reactome_hypergraph_full/reactome output/pathways/full_reactome_ output/reactome_hedges.txt   ../../data/pathways/reactome-pathways-from-hypergraphs.txt
+
+python3 b-relaxation-pathways.py ../../hypergraph/reactome_hypergraph_full/small_molecule_filter output/pathways/small_molecule_filter_ output/small_molecule_filter-reactome_hedges.txt  ../../data/pathways/reactome-pathways-from-hypergraphs.txt
 
 ### HUB STUFF (from connectivity-sruvey.py)
 sort -grk3 output/reactome_hubs.txt | head -n 50 | grep -v SmallMolecule | cut -f 1 > entities_in_top_50_hubs.txt

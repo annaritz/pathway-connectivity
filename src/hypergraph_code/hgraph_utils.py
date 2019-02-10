@@ -13,6 +13,7 @@ def make_hypergraph(file_prefix,delim=';',sep='\t'):
 				hypernodes[row[0]] = ['OtherComplexes-FIX']
 			else:
 				hypernodes[row[0]] = row[1].split(delim)
+	print('%d hypernodes from hypernodes file' % (len(hypernodes)))
 	identifier2id = {}
 	id2identifier = {}
 	H = directed_hypergraph.DirectedHypergraph()	
