@@ -57,15 +57,18 @@ sorted_pathways = ['Signaling-by-MET', 'Signaling-by-Type-1-Insulin-like-Growth-
 'mTOR-signalling', 'Signaling-by-Hedgehog',
 'Signaling-by-Nuclear-Receptors', 'Signaling-by-Leptin', 'Signaling-by-BMP', 'Signaling-by-MST1']
 
-pathways_to_highlight = ['Integrin-signaling','Signaling-by-MET','Signaling-by-MST1','Signaling-by-EGFR', 'Signaling-by-ERBB2', 'Signaling-by-ERBB4','Signaling-by-GPCR']
-
+#pathways_to_highlight = ['Integrin-signaling','Signaling-by-MET','Signaling-by-MST1','Signaling-by-EGFR', 'Signaling-by-ERBB2', 'Signaling-by-ERBB4','Signaling-by-GPCR']
+pathways_to_highlight = ['Signaling-by-Activin', 'Signaling-by-TGF-beta-Receptor-Complex']
+pathways_to_highlight = ['Signaling-by-MET','Signaling-by-MST1','Signaling-by-EGFR']
 COLORS = {'Signaling-by-MET':'#FA7171',
 	'Signaling-by-MST1':'#95A5D5',
 	'Signaling-by-EGFR':'#A8381A',
 	'Signaling-by-ERBB2':'#0008AF',
 	'Signaling-by-ERBB4':'#AF0060',
 	'Signaling-by-GPCR':'#47AF00',
-	'Integrin-signaling':'#A27A9B'
+	'Integrin-signaling':'#A27A9B',
+	'Signaling-by-Activin':'#FA7171',
+	'Signaling-by-TGF-beta-Receptor-Complex':'#95A5D5'
 	}
 # from https://htmlcolorcodes.com/color-picker/
 #COLORS = ['#FA7171','#95A5D5','#A8381A','#A87F1A','#0008AF','#AF0060','#47AF00','#FAB571','#A27A9B','#71FAB5']
@@ -94,8 +97,8 @@ def main(inprefix,outprefix):
 	
 	for p in pathways_to_run:
 		print('Running ',p)
-		if 'Integrin' in p:
-			max_k = 10
+		if 'Integrin' in p or 'Activin' in p or 'TGF' in p:
+			max_k = 5
 		else:
 			max_k = 20
 	
@@ -179,8 +182,8 @@ def make_figure(pathways,pathway_inits,pathway,filename,overlap,\
 	ax = plt.subplot(1,1,1)
 	
 	#max_k = max([len(pathways[p]) for p in sorted_pathways])
-	if 'Integrin' in pathway:
-		max_k = 10
+	if 'Integrin' in pathway or 'Activin' in pathway or 'TGF' in pathway:
+		max_k = 5
 	else:
 		max_k = 20
 	
@@ -193,11 +196,12 @@ def make_figure(pathways,pathway_inits,pathway,filename,overlap,\
 		num = len(pathway_inits[n])
 		perc = int(overlap[n][-1]/num*10000)/100.0
 		if n in pathways_to_highlight:
-			ax.plot(x,overlap[n],color=COLORS[n],lw=3,label='Target: %s ($n=%d$)' % (NAMES[n],num))
+			label='Target: %s ($n=%d$)' % (NAMES[n],num)
+			ax.plot(x,overlap[n],color=COLORS[n],lw=3,label=label,zorder=2)
 			text_list.append([n,i,perc,overlap[n][-1]])
 			i+=1
 		else:
-			ax.plot(x,overlap[n],color=[0.8,0.8,0.8],lw=1,label='_nolegend_')
+			ax.plot(x,overlap[n],color=[0.8,0.8,0.8],lw=1,label='_nolegend_',zorder=1)
 	# adjust text_list to be at least 3 spaces apart
 	text_list.sort(key=lambda x:x[3])
 	if percent:
@@ -223,25 +227,43 @@ def make_figure(pathways,pathway_inits,pathway,filename,overlap,\
 		if percent:
 			label = '%s' % (NAMES[text_list[i][0]])
 		else:
-			label = '%s (%.1f)' % (NAMES[text_list[i][0]],text_list[i][2])+'%'
-		ax.text(max_k+1,text_list[i][3],label,backgroundcolor=COLORS[text_list[i][0]],color='w',fontsize=8)
-		ax.plot([max_k-1,max_k+1],[overlap[text_list[i][0]][-1],text_list[i][3]],color=COLORS[text_list[i][0]],label='_nolegend_')
+			#label = '%s (%.1f)' % (NAMES[text_list[i][0]],text_list[i][2])+'%'
+			label = '%s' % (NAMES[text_list[i][0]])
+		if max_k == 5:
+			ax.text(max_k+.25,text_list[i][3],label,backgroundcolor=COLORS[text_list[i][0]],color='w',fontsize=14)
+			ax.plot([max_k,max_k+.25],[overlap[text_list[i][0]][-1],text_list[i][3]],color=COLORS[text_list[i][0]],label='_nolegend_')
+		else:
+			ax.text(max_k+1,text_list[i][3],label,backgroundcolor=COLORS[text_list[i][0]],color='w',fontsize=14)
+			ax.plot([max_k,max_k+1],[overlap[text_list[i][0]][-1],text_list[i][3]],color=COLORS[text_list[i][0]],label='_nolegend_')
 
 
 	#ax.plot(range(max_k+15),[thres]*len(range(max_k+15)),'--k',label='_nolegend_')
 	if running_tot:
 		ax.plot(range(len(running_tot)),running_tot,'--k',label='_nolegend_')
-		ax.text(max_k+1,running_tot[-1],'All Nodes',backgroundcolor='k',color='w',fontsize=8)
+		if max_k == 5:
+			ax.text(max_k+.25,running_tot[-1],'All Nodes',backgroundcolor='k',color='w',fontsize=14)
+			ax.plot([max_k,max_k+.25],[running_tot[-1],running_tot[-1]],color='k',label='_nolegend_')
+		else:
+			ax.text(max_k+1,running_tot[-1],'All Nodes',backgroundcolor='k',color='w',fontsize=14)
 		ax.plot([max_k,max_k+1],[running_tot[-1],running_tot[-1]],color='k',label='_nolegend_')
 
 	#ax.legend(ncol=2,bbox_to_anchor=(.9, -.15),fontsize=10)
-	ax.set_title('Source Pathway %s' % (NAMES[pathway]),fontsize=14)
-	ax.set_xlabel('$k$')
+	ax.set_title('Source Pathway %s' % (NAMES[pathway]),fontsize=21)
+	ax.set_xlabel('$k$',fontsize=18)
+	ax.set_xticks(range(max_k+1))
+	for tick in ax.xaxis.get_major_ticks():
+		tick.label.set_fontsize(12)
+	for tick in ax.yaxis.get_major_ticks():
+		tick.label.set_fontsize(12) 
+	#ax.set_xtick_labels(range(max_k+1))
 	if percent:
 		ax.set_ylabel('Percent of Target Nodes in $kB$-Connected Set')
 	else:
-		ax.set_ylabel('# of Target Nodes in $kB$-Connected Set')
-	ax.set_xlim(0,max_k+5)
+		ax.set_ylabel('# of Nodes',fontsize=18)
+	if max_k == 20:
+		ax.set_xlim(0,max_k+5)
+	elif max_k == 5:
+		ax.set_xlim(0,max_k+2)
 	#plt.tight_layout()
 	plt.savefig(filename)
 	print('wrote to '+filename)

@@ -70,7 +70,7 @@ def small_mols(infile):
 					if row[i] == 'None':
 						continue
 					items = row[i].split(';')
-					newitems = [item for item in items if 'SmallMolecule' not in item and item not in ADDITIONAL_MOLECULES]
+					newitems = [item for item in items if 'SmallMolecule' not in item and item not in ADD]
 					blacklisted_nodes.update(set([item for item in items if'SmallMolecule' in item]))
 					if len(items) != len(newitems):
 						affected = True

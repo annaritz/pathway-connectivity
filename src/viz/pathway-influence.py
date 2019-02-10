@@ -54,7 +54,7 @@ sorted_pathways = ['Signaling-by-EGFR', 'Signaling-by-ERBB2', 'Signaling-by-ERBB
 'Integrin-signaling',
 'Signaling-by-MET', 'Signaling-by-Type-1-Insulin-like-Growth-Factor-1-Receptor-(IGF1R)', 
 'Signaling-by-Insulin-receptor', 
-'TNF-signaling', 'TRAIL-signaling',  'FasL--CD95L-signaling', 
+'TNF-signaling', #'TRAIL-signaling',  'FasL--CD95L-signaling', 
 'Signaling-by-Activin', 'Signaling-by-TGF-beta-Receptor-Complex', 'Signaling-by-NOTCH', 'Signaling-by-PTK6', 
 'Signaling-by-Rho-GTPases',  'MAPK6-MAPK4-signaling', 
  'p75-NTR-receptor-mediated-signalling', 'Signaling-by-MST1',
@@ -63,7 +63,7 @@ sorted_pathways = ['Signaling-by-EGFR', 'Signaling-by-ERBB2', 'Signaling-by-ERBB
 
 def main(inprefix,outprefix):
 	pathways = read_files(inprefix)
-	num = len(pathways)
+	num = len(sorted_pathways)
 	k_range = [-1,0,1,2,3,4,5,6,7,8,9,10,15,20,30,40]
 	#sorted_pathways = sorted(pathways.keys())
 	
@@ -155,7 +155,7 @@ def influence_score(p1,p2,k):
 def asymmetric_jaccard(p1,p2):
 	initp1 = p1[-1]
 	initp2 = p2[-1]
-	jaccard = len(initp1.intersection(initp2))/len(initp1)
+	jaccard = len(initp1.intersection(initp2))/len(initp2)
 	return jaccard
 
 if __name__ == '__main__':
