@@ -16,6 +16,7 @@ python3 brelax-survey.py ../hypergraph_code/output/b_relax_reactome.txt  ../hype
 python3 brelax-survey.py ../hypergraph_code/output/b_relax_reactome.txt  ../hypergraph_code/output/blacklist_filter_b_relax.txt ../hypergraph_code/output/small_molecule_filter_b_relax.txt b_relax-histogram_threepanel
 
 ## PATHWAY INFLUENCE
+python3 pathway-influence.py ../hypergraph_code/output/pathways/full_reactome_ influence-output/full_reactome
 python3 pathway-influence.py ../hypergraph_code/output/pathways/small_molecule_filter_ influence-output/small_molecule_filter
 ##python3 pathway-influence.py ../hypergraph_code/output/pathways/blacklist_filter_ influence-output/blacklist_filter
 

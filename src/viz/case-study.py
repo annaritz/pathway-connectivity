@@ -7,65 +7,20 @@ import numpy as np
 import sys
 import scipy.cluster.hierarchy as sch
 import glob
-
-NAMES = {
-'DAG-and-IP3-signaling':'DAG/IP3',
-'ERK1-ERK2-pathway':'ERK1/ERK2',
-'FasL--CD95L-signaling':'FasL/CD95L',
-'Integrin-signaling':'Integrin',
-'MAPK6-MAPK4-signaling':'MAPK4/MAPK6',
-'mTOR-signalling':'mTOR',
-'p75-NTR-receptor-mediated-signalling':'NTR',
-'PI3K-AKT-Signaling':'PI3K/AKT',
-'Signaling-by-Activin':'Activin',
-'Signaling-by-BMP':'BMP',
-'Signaling-by-EGFR':'EGFR',
-'Signaling-by-ERBB2':'ERBB2',
-'Signaling-by-ERBB4':'ERBB4',
-'Signaling-by-FGFR':'FGFR',
-'Signaling-by-GPCR':'GPCR',
-'Signaling-by-Hedgehog':'Hedgehog',
-'Signaling-by-Hippo':'Hippo',
-'Signaling-by-Insulin-receptor':'Insulin',
-'Signaling-by-Leptin':'Leptin',
-'Signaling-by-MET':'MET',
-'Signaling-by-MST1':'MST1',
-'Signaling-by-NOTCH':'Notch',
-'Signaling-by-NTRKs':'NTRKs',
-'Signaling-by-Nuclear-Receptors':'Nuclear',
-'Signaling-by-PDGF':'PDGF',
-'Signaling-by-PTK6':'PTK6',
-'Signaling-by-Rho-GTPases':'Rho GTPases',
-'Signaling-by-SCF-KIT':'SCF-KIT',
-'Signaling-by-TGF-beta-Receptor-Complex':'TGFB',
-'Signaling-by-Type-1-Insulin-like-Growth-Factor-1-Receptor-(IGF1R)':'IGF1R',
-'Signaling-by-VEGF':'VEGF',
-'Signaling-by-WNT':'Wnt',
-'TNF-signaling':'TNF',
-'TRAIL-signaling':'TRAIL'
-}
-sorted_pathways = ['Signaling-by-MET', 'Signaling-by-Type-1-Insulin-like-Growth-Factor-1-Receptor-(IGF1R)', 
-'Signaling-by-Insulin-receptor', 
-'Signaling-by-EGFR', 'Signaling-by-ERBB2', 'Signaling-by-ERBB4', 'Signaling-by-SCF-KIT', 
-'Signaling-by-FGFR', 'ERK1-ERK2-pathway','Signaling-by-GPCR','Signaling-by-PDGF', 
-'Signaling-by-VEGF',  'DAG-and-IP3-signaling', 
-'Signaling-by-NTRKs',  'PI3K-AKT-Signaling', 'Signaling-by-WNT', 'Integrin-signaling',
-'TNF-signaling', 'TRAIL-signaling',  'FasL--CD95L-signaling', 
-'Signaling-by-Activin', 'Signaling-by-TGF-beta-Receptor-Complex', 'Signaling-by-NOTCH', 'Signaling-by-PTK6', 
-'Signaling-by-Rho-GTPases',  'MAPK6-MAPK4-signaling', 
- 'p75-NTR-receptor-mediated-signalling', 'Signaling-by-Hippo',
-'mTOR-signalling', 'Signaling-by-Hedgehog',
-'Signaling-by-Nuclear-Receptors', 'Signaling-by-Leptin', 'Signaling-by-BMP', 'Signaling-by-MST1']
+import viz_utils
 
 #pathways_to_highlight = ['Integrin-signaling','Signaling-by-MET','Signaling-by-MST1','Signaling-by-EGFR', 'Signaling-by-ERBB2', 'Signaling-by-ERBB4','Signaling-by-GPCR']
-pathways_to_highlight = ['Signaling-by-Activin', 'Signaling-by-TGF-beta-Receptor-Complex']
-pathways_to_highlight = ['Signaling-by-MET','Signaling-by-MST1','Signaling-by-EGFR']
+pathways_to_highlight = ['Signaling-by-Activin', 'Signaling-by-TGF-beta-Receptor-Complex','Signaling-by-BMP']
+#pathways_to_highlight = ['Signaling-by-MET','Signaling-by-MST1','ERK1-ERK2-pathway','PI3K-AKT-Signaling']
+
+
+
 COLORS = {'Signaling-by-MET':'#FA7171',
 	'Signaling-by-MST1':'#95A5D5',
-	'Signaling-by-EGFR':'#A8381A',
-	'Signaling-by-ERBB2':'#0008AF',
+	'PI3K-AKT-Signaling':'#A8381A',
+	'Signaling-by-BMP':'#0008AF',
 	'Signaling-by-ERBB4':'#AF0060',
-	'Signaling-by-GPCR':'#47AF00',
+	'ERK1-ERK2-pathway':'#47AF00',
 	'Integrin-signaling':'#A27A9B',
 	'Signaling-by-Activin':'#FA7171',
 	'Signaling-by-TGF-beta-Receptor-Complex':'#95A5D5'
@@ -97,10 +52,7 @@ def main(inprefix,outprefix):
 	
 	for p in pathways_to_run:
 		print('Running ',p)
-		if 'Integrin' in p or 'Activin' in p or 'TGF' in p:
-			max_k = 5
-		else:
-			max_k = 20
+		max_k = 10
 	
 		overlap = {}
 		for name in sorted_pathways:
@@ -181,11 +133,7 @@ def make_figure(pathways,pathway_inits,pathway,filename,overlap,\
 			buff = 250
 	ax = plt.subplot(1,1,1)
 	
-	#max_k = max([len(pathways[p]) for p in sorted_pathways])
-	if 'Integrin' in pathway or 'Activin' in pathway or 'TGF' in pathway:
-		max_k = 5
-	else:
-		max_k = 20
+	max_k = 10
 	
 	x = range(max_k+1) ## max_k+1 for max_k
 	i=0
@@ -233,8 +181,8 @@ def make_figure(pathways,pathway_inits,pathway,filename,overlap,\
 			ax.text(max_k+.25,text_list[i][3],label,backgroundcolor=COLORS[text_list[i][0]],color='w',fontsize=14)
 			ax.plot([max_k,max_k+.25],[overlap[text_list[i][0]][-1],text_list[i][3]],color=COLORS[text_list[i][0]],label='_nolegend_')
 		else:
-			ax.text(max_k+1,text_list[i][3],label,backgroundcolor=COLORS[text_list[i][0]],color='w',fontsize=14)
-			ax.plot([max_k,max_k+1],[overlap[text_list[i][0]][-1],text_list[i][3]],color=COLORS[text_list[i][0]],label='_nolegend_')
+			ax.text(max_k+.25,text_list[i][3],label,backgroundcolor=COLORS[text_list[i][0]],color='w',fontsize=14)
+			ax.plot([max_k,max_k+.25],[overlap[text_list[i][0]][-1],text_list[i][3]],color=COLORS[text_list[i][0]],label='_nolegend_')
 
 
 	#ax.plot(range(max_k+15),[thres]*len(range(max_k+15)),'--k',label='_nolegend_')
@@ -245,7 +193,7 @@ def make_figure(pathways,pathway_inits,pathway,filename,overlap,\
 			ax.plot([max_k,max_k+.25],[running_tot[-1],running_tot[-1]],color='k',label='_nolegend_')
 		else:
 			ax.text(max_k+1,running_tot[-1],'All Nodes',backgroundcolor='k',color='w',fontsize=14)
-		ax.plot([max_k,max_k+1],[running_tot[-1],running_tot[-1]],color='k',label='_nolegend_')
+			ax.plot([max_k,max_k+1],[running_tot[-1],running_tot[-1]],color='k',label='_nolegend_')
 
 	#ax.legend(ncol=2,bbox_to_anchor=(.9, -.15),fontsize=10)
 	ax.set_title('Source Pathway %s' % (NAMES[pathway]),fontsize=21)
@@ -260,8 +208,8 @@ def make_figure(pathways,pathway_inits,pathway,filename,overlap,\
 		ax.set_ylabel('Percent of Target Nodes in $kB$-Connected Set')
 	else:
 		ax.set_ylabel('# of Nodes',fontsize=18)
-	if max_k == 20:
-		ax.set_xlim(0,max_k+5)
+	if max_k == 10:
+		ax.set_xlim(0,max_k+3)
 	elif max_k == 5:
 		ax.set_xlim(0,max_k+2)
 	#plt.tight_layout()

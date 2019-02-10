@@ -31,7 +31,7 @@ def main(infile,outfile,conversions):
 				print('ERROR:',ntype,conversions[ntype])
 				sys.exit()
 	print('Graph has %d nodes and %d edges' % (nx.number_of_nodes(G),nx.number_of_edges(G)))
-
+	nx.write_edgelist(G,outfile+'.graph',delimiter='\t',data=False)
 	survey_graph(G,outfile)
 
 	return
@@ -39,8 +39,12 @@ def main(infile,outfile,conversions):
 def survey_graph(G,outfile):
 	out = open(outfile,'w')
 	out.write('#Name\tNumConnected\n')
-	for n in G.nodes:
-		print(n)
+	i = 0
+	for n in G.nodes():
+		i+=1
+		if i % 100 == 0:
+			print(' %d of %d' % (i,nx.number_of_nodes(G)))
+		#print(n)
 		edges = nx.bfs_edges(G,n)
 		nset = set()
 		for u,v in edges:

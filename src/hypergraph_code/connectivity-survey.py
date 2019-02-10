@@ -8,6 +8,7 @@ import hgraph_utils
 
 def main(prefix,outprefix):
 	H, identifier2id, id2identifier = hgraph_utils.make_hypergraph(prefix)
+	
 	#print('skipping both. uncomment one of the surveys: nodes or hedges.')
 	survey_nodes(H,outprefix+'reactome.txt')
 	survey_hedges(H,id2identifier,outprefix+'reactome_hedges.txt')

@@ -16,6 +16,17 @@ def main(inprefix,outfile):
 	nx.write_edgelist(G,outfile+'.graph',delimiter='\t',data=False)
 	print('wrote networkx graph to %s.graph' % (outfile))
 	print('Graph has %d nodes and %d edges' % (nx.number_of_nodes(G),nx.number_of_edges(G)))
+
+	print('MAKING BIPARTITE GRAPH')
+	B = nx.DiGraph()
+	B.add_node_set(H.get_nodes())
+	B.add_node_set(H.get_hyperedge_ids())
+	nx.write_edgelist(B,outfile+'.bipartite_graph',delimiter='\t',data=False)
+	print('wrote networkx graph to %s.graph' % (outfile))
+	print('Graph has %d nodes and %d edges' % (nx.number_of_nodes(B),nx.number_of_edges(B)))
+
+	print('EXITING BEFORE SURVEY')
+	sys.exit()
 	survey_graph(G,outfile)
 	return
 
