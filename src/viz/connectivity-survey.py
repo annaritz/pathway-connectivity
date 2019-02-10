@@ -30,7 +30,7 @@ def plot_hist(file1,file2,file3,file4,outprefix):
 	## overwrite jump start & end for 3 & 4
 	js1,je1 = [.01,.80]
 	js2,je2 = [.01,.40]
-	js3,je3 = [.10,.80]
+	js3,je3 = [.10,.50]
 	js4,je4 = [.001,.001]
 
 	plt.tight_layout()
