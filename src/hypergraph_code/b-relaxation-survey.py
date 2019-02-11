@@ -46,7 +46,7 @@ def b_relaxation_survey_nodes(H,b_visit_dict,report_single=None):
 			print('node %d of %d' % (i,stats.number_of_nodes(H)))
 			#break
 		start_time = time.time()
-		dist_dict = hpaths.b_relaxation(H,set([node]),b_visit_dict=b_visit_dict)
+		dist_dict,ignore = hpaths.b_relaxation(H,set([node]),b_visit_dict=b_visit_dict)
 		end_time = time.time()
 		#print(node,end_time-start_time)
 		times[node] = end_time-start_time
