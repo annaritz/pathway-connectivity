@@ -7,7 +7,7 @@ import numpy as np
 import sys
 import scipy.cluster.hierarchy as sch
 import glob
-import viz_utils
+from viz_utils import *
 
 #pathways_to_highlight = ['Integrin-signaling','Signaling-by-MET','Signaling-by-MST1','Signaling-by-EGFR', 'Signaling-by-ERBB2', 'Signaling-by-ERBB4','Signaling-by-GPCR']
 pathways_to_highlight = ['Signaling-by-Activin', 'Signaling-by-TGF-beta-Receptor-Complex','Signaling-by-BMP']
@@ -144,6 +144,7 @@ def make_figure(pathways,pathway_inits,pathway,filename,overlap,\
 		num = len(pathway_inits[n])
 		perc = int(overlap[n][-1]/num*10000)/100.0
 		if n in pathways_to_highlight:
+			print(n,x)
 			label='Target: %s ($n=%d$)' % (NAMES[n],num)
 			ax.plot(x,overlap[n],color=COLORS[n],lw=3,label=label,zorder=2)
 			text_list.append([n,i,perc,overlap[n][-1]])

@@ -24,16 +24,16 @@ def main(inprefix,outprefix):
 		print('k=%d' % (k))
 		M = get_data(k,sorted_pathways,pathways,num)
 		all_data.append(M)
-		plot_single(M,k,outprefix,sorted_pathways,num)
+		#plot_single(M,k,outprefix,sorted_pathways,num)
 
 	make_summary_plot(k_range[1:],all_data[1:],outprefix+'_full')
-	make_summary_plot(k_range[1:],all_data[1:],outprefix+'_full_log',logvals=True)
+	#make_summary_plot(k_range[1:],all_data[1:],outprefix+'_full_log',logvals=True)
 	return
 
 
 def make_summary_plot(k_range,all_data,outprefix,logvals=False):
-	nrows = 4
-	fig, axes_box = plt.subplots(ncols=int((len(k_range)+1)/nrows), nrows=nrows, figsize=(8,8))
+	nrows = 5
+	fig, axes_box = plt.subplots(ncols=int((len(k_range)+1)/nrows), nrows=nrows, figsize=(4,8))
 	axes = []
 	for a1 in axes_box:
 		for a2 in a1:
@@ -49,7 +49,7 @@ def make_summary_plot(k_range,all_data,outprefix,logvals=False):
 					#	all_data[i][j][k] = 0.00000001 # small epsilon
 					all_data[i][j][k] = log(all_data[i][j][k]+1,10)
 
-	print('MAX VAL IS',max_val)
+	#print('MAX VAL IS',max_val)
 	for i in range(len(axes)):
 		if len(all_data) == i:
 			axes[i].axis('off')
@@ -60,11 +60,11 @@ def make_summary_plot(k_range,all_data,outprefix,logvals=False):
 		if logvals:
 			ca = ax.matshow(M, aspect='auto', vmin=log(1,10), vmax=log(2,10))
 		else:
-			ca = ax.matshow(M, aspect='auto', vmin=0.0, vmax=max_val)
-		fig.colorbar(ca,ax=ax)
+			ca = ax.matshow(M, aspect='auto', vmin=0, vmax=1,cmap=plt.get_cmap('Blues'))
+		#fig.colorbar(ca,ax=ax)
 		ax.set_xticks([])
 		ax.set_yticks([])
-		ax.set_title('$S_{%d}$' % (k),fontsize=14)
+		ax.set_title('$s_{%d}$' % (k),fontsize=14)
 
 	plt.tight_layout(w_pad=0)
 	plt.savefig(outprefix+'.png')
@@ -76,13 +76,13 @@ def make_summary_plot(k_range,all_data,outprefix,logvals=False):
 
 def plot_single(M,k,outprefix,sorted_pathways,num):
 	fig, ax = plt.subplots(ncols=1, nrows=1, figsize=(6,6))
-	ca = ax.matshow(M, aspect='auto', vmin=0.0, vmax=1)
+	ca = ax.matshow(M, aspect='auto', vmin=0.0, vmax=1,cmap=plt.get_cmap('Blues'))
 	fig.colorbar(ca,ax=ax)
 	if k == -1:
 		ax.set_title('Pathway Overlap')
 		pathway_outprefix = outprefix+'_init'
 	else:
-		ax.set_title('Influence Score $S_{%d}$' % (k))
+		ax.set_title('Influence Score $s_{%d}$' % (k))
 		pathway_outprefix = outprefix+'_k_%s' % (str(k).zfill(2))
 
 	ax.xaxis.set_ticks_position('bottom')

@@ -24,32 +24,35 @@ def main(inprefix,outprefix,hedge_connectivity_file,pathway_file):
 			pathway_members = pathway_members.intersection(nodes)
 			pathway_num = len(pathway_members)
 			print(pathway_name,pathway_id,pathway_num)
-
-			hist_dict = b_relaxation_survey_nodes(H,b_visit_dict,pathway_members)
-
+			if 'MST1' in pathway_name:
+				v = True
+			else:
+				v = False
+			hist_dict,traversed = b_relaxation_survey_nodes(H,b_visit_dict,pathway_members,v=v)
+			
 			outfile = outprefix+pathway_name.replace(' ','-').replace('/','-')+'_b_relax.txt'					
 			out = open(outfile,'w')
-			out.write('#k\t#Members\tMembers\n')
-			out.write('-1\t%d\t%s\n' % (len(pathway_members),';'.join(pathway_members))) # write original set
+			out.write('#k\t#Members\tMembers\tIncidentNodes\n')
+			out.write('-1\t%d\t%s\t%s\n' % (len(pathway_members),';'.join(pathway_members),'None')) # write original set
 			for dist in range(max(hist_dict)+1):
 				if dist in hist_dict:
-					out.write('%d\t%d\t%s\n' % (dist,len(hist_dict[dist]),';'.join(hist_dict[dist])))
+					out.write('%d\t%d\t%s\t%s\n' % (dist,len(hist_dict[dist]),';'.join(hist_dict[dist]),';'.join(traversed[dist])))
 				else:
-					out.write('%s\t0\t\t\n' % (dist))
+					out.write('%s\t0\t\t\t\n' % (dist))
 			out.close()
 			print('wrote to %s' % (outfile))
 
 	print('Done')
 	return
 
-def b_relaxation_survey_nodes(H,b_visit_dict,pathway_members):
+def b_relaxation_survey_nodes(H,b_visit_dict,pathway_members,v=False):
 	i = 0
 	max_val = 0
 	all_dist_dicts = {}
 	times = {}
-	dist_dict = hpaths.b_relaxation(H,pathway_members,b_visit_dict=b_visit_dict)
+	dist_dict,traversed = hpaths.b_relaxation(H,pathway_members,b_visit_dict=b_visit_dict,verbose=v)
 	hist_dict = dist2hist(dist_dict)
-	return hist_dict
+	return hist_dict,traversed
 
 def dist2hist(dist_dict):
 	## get histogram of distances.
