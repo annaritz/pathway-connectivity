@@ -2,7 +2,7 @@ To run on Wnt pathway:
 
 
 ```
-python3 GraphSurvey.py ../../reactome-signaling-by-wnt.extended.sif outfiles/reactome-signaling-by-wnt.txt conversion-types.txt 
+python3 GraphSurvey.py ../../..//pathway-connectivity/data/SIF/reactome-signaling-by-wnt.extended.sif outfiles/reactome-signaling-by-wnt.txt conversion-types.txt 
 ```
 
 Get PC v10 files available [here](http://www.pathwaycommons.org/archives/PC2/v10/) -- download /PathwayCommons10.reactome.hgnc.sif.gz (version 2018-05-07)
@@ -32,3 +32,15 @@ This gives us the number and type of relationships:
 ```
 python3 GraphSurvey.py PathwayCommons10.reactome.hgnc.sif outfiles/reactome.txt conversion-types.txt 
 ```
+
+
+## FILTER BY SMALL MOLECULES
+python3 GraphSurvey.py PathwayCommons10.reactome.hgnc.sif outfiles/reactome_filtered.txt conversion-types.txt true
+
+## to get proteins.txt from elements.txt file... in hypergraphs_parsed/
+cat *-elements.txt | cut -f 4 | sort -u | grep hgnc | sed 's/.*symbol://g' | sed 's/;.*//g' | sort -u > proteins.txt
+
+Graph has 12086 nodes and 444204 edges
+Graph has 10225 nodes and 393980 edges
+
+## 1861 small molecules removed.

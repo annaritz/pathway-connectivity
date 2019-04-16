@@ -17,7 +17,6 @@ def main(inprefix,outprefix):
 	pathways = read_files(inprefix)
 	num = len(sorted_pathways)
 	k_range = [-1,0,1,2,3,4,5,6,7,8,9,10,15,20,30,40]
-	
 	#sorted_pathways = sorted(pathways.keys())
 	all_data = []
 	for k in k_range:
@@ -26,9 +25,38 @@ def main(inprefix,outprefix):
 		all_data.append(M)
 		#plot_single(M,k,outprefix,sorted_pathways,num)
 
-	make_summary_plot(k_range[1:],all_data[1:],outprefix+'_full')
+	#make_summary_plot(k_range[1:],all_data[1:],outprefix+'_full')
 	#make_summary_plot(k_range[1:],all_data[1:],outprefix+'_full_log',logvals=True)
+
+	get_top_vals(all_data)
 	return
+
+def get_top_vals(d):
+	all_data = []
+	for i in range(1,len(d)):
+		all_data.append([])
+		print(i)
+		for j in range(len(d[i])):
+			all_data[i-1].append([])
+			for k in range(len(d[i][j])):
+				all_data[i-1][j].append(d[i][j][k])
+
+	for m in range(10):
+		max_val = 0
+		mi=0
+		mj=0
+		max_k = 0
+		for i in range(len(all_data)):
+			for j in range(len(all_data[i])):
+				#print(max(all_data[i][j]))
+				if max(all_data[i][j]) > max_val:
+					max_val = max(all_data[i][j])
+					max_k = i
+					mi=j
+					mj=[w for w in range(len(all_data[i][j])) if all_data[i][j][w]==max_val][0]
+
+		print(m,'MAX VAL IS',max_val,'AT K=',max_k,sorted_pathways[mi],sorted_pathways[mj])
+		all_data[max_k][mi][mj]=0
 
 
 def make_summary_plot(k_range,all_data,outprefix,logvals=False):
@@ -39,17 +67,20 @@ def make_summary_plot(k_range,all_data,outprefix,logvals=False):
 		for a2 in a1:
 			axes.append(a2)
 	max_val = 0
-
+	max_k = 0
 	for i in range(len(all_data)):
 		for j in range(len(all_data[i])):
-			max_val = max(max_val,max(all_data[i][j]))
+			if max(all_data[i][j]) > max_val:
+				max_val = max(all_data[i][j])
+				max_k = i
+			
 			if logvals:
 				for k in range(len(all_data[i][j])):
 					#if all_data[i][j][k] == 0:
 					#	all_data[i][j][k] = 0.00000001 # small epsilon
 					all_data[i][j][k] = log(all_data[i][j][k]+1,10)
 
-	#print('MAX VAL IS',max_val)
+	#print('MAX VAL IS',max_val,'AT K=',max_k)
 	for i in range(len(axes)):
 		if len(all_data) == i:
 			axes[i].axis('off')

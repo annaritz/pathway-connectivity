@@ -70,7 +70,7 @@ def small_mols(infile):
 					if row[i] == 'None':
 						continue
 					items = row[i].split(';')
-					newitems = [item for item in items if 'SmallMolecule' not in item and item not in ADD]
+					newitems = [item for item in items if 'SmallMolecule' not in item and item not in ADDITIONAL_MOLECULES]
 					blacklisted_nodes.update(set([item for item in items if'SmallMolecule' in item]))
 					if len(items) != len(newitems):
 						affected = True
@@ -85,6 +85,13 @@ def small_mols(infile):
 	print('%d reactions pruned to filter small molecules' % (num_altered))
 	print('%d small nodes in Reactome signailng pathways' % (len(blacklisted_nodes)))
 	print('wrote to '+infile+'.small_molecule_filter')
+	outfile = infile+'.small_molecule_filter.blacklisted'
+	out = open(outfile,'w')
+	for b in blacklisted_nodes:
+		out.write(b+'\n')
+	out.close()
+	print('wrote blacklisted nodes to '+outfile)
+	
 	return
 
 if __name__ == '__main__':
