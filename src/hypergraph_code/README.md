@@ -63,3 +63,7 @@ grep -f entities_in_top_50_hubs.txt ../BioPAXSTREAM/output/reactome_limit20.txt.
 #NPC http://pathwaycommons.org/pc2/Complex_6ae49f2fe344df4b6985f2f372910a77	35	81
 #Ub http://pathwaycommons.org/pc2/Protein_80c9e4746b9a9261c9c7b174d2cf8292	31	73
 
+
+
+## filter Graphw with Complexes by small molecules
+python3 graph-with-complexes-survey.py ../../hypergraph/reactome_hypergraph_full/reactome output/graph-reactome.txt

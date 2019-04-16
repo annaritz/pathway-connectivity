@@ -39,7 +39,7 @@ def plot_hist(file1,file2,file3,file4,outprefix):
 		(len(b)),nbins=100,broken=True,shift=0.05)
 	n3,bins3,patches3,js3,je3 = add_ax_hist(fig,ax3,c,'Compound Graph Connectivity\n%d nodes surveyed' % \
 		(len(c)),nbins=30,shift=0.01,broken=False)#True,shift=0.01)
-	n4,bins4,patches4,js4,je4 = add_ax_hist(fig,ax4,d,'Hyperedge Connectivity\n%d nodes surveyed' % \
+	n4,bins4,patches4,js4,je4 = add_ax_hist(fig,ax4,d,'Hypergraph Connectivity\n%d nodes surveyed' % \
 		(len(d)),nbins=30,broken=False)
 
 	## overwrite jump start & end for 3 & 4
