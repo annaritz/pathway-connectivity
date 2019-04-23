@@ -11,12 +11,11 @@ import shortest_hyperpath
 def main(inprefix,outfile):
 	H, identifier2id, id2identifier = hgraph_utils.make_hypergraph(inprefix)
 
-	all_dist_dicts = bconn_param(H)
-
 	out = open(outfile,'w')
 	out.write('#Node\td=1\td=2\td=3\t...\n')
-	for node in all_dist_dicts:
-		out.write('%s\t%s\n' % (node,times[node],'\t'.join([str(i) for i in cumulist])))
+	
+	bconn_param(H,out)
+		
 	out.close()
 	print('wrote to %s' % (outfile))
 
@@ -24,11 +23,10 @@ def main(inprefix,outfile):
 	## all_dist_dicts,times,max_val = b_relaxation_survey(H,b_visit_dict)
 	return
 
-def bconn_param(H):
+def bconn_param(H,out):
 	i = 0
-	all_dist_dicts = {}
 	for node in H.node_iterator():
-		print('Node',node)
+		#print('Node',node)
 		i+=1
 		if i % 50 == 0:
 			print('node %d of %d' % (i,stats.number_of_nodes(H)))
@@ -36,7 +34,7 @@ def bconn_param(H):
 		bconn, ignore, ignore, ignore = hpaths.b_visit(H,node)
 		#print('B-conn',bconn)
 		if len(bconn) == 1: ## only one node; skip
-			all_dist_dicts[node] = [0]
+			out.write('%s\t1\n' % (node))
 			continue
 
 		G = H.get_induced_subhypergraph(bconn)
@@ -45,10 +43,9 @@ def bconn_param(H):
 		dist_dict = {}
 		for t in bconn:		
 			# get distance from node to t using ILP
-			objective = shortest_hyperpath.runILP(G,node,t)
-			dist_dict[t] = objective
+			dist_dict[t] = shortest_hyperpath.runILP(G,node,t)
 			#sys.exit()
-		print(dist_dict)
+		#print(dist_dict)
 
 		
 		## convert distances to cumulative list.
@@ -56,7 +53,9 @@ def bconn_param(H):
 		max_val = int(max(hist_dict.keys()))
 		distlist = [hist_dict.get(i,0) for i in range(max_val+1)]
 		cumulist = [sum(distlist[:i+1]) for i in range(max_val+1)]
-		all_dist_dicts[node] = cumulist
+		#all_dist_dicts[node] = cumulist
+		out.write('%s\t%s\n' % (node,'\t'.join([str(i) for i in cumulist])))
+
 		#print(node)
 		#print('B-conn hypergraph has %d hyperedges and %d nodes' % (stats.number_of_hyperedges(G),stats.number_of_nodes(G)))
 		#print(hist_dict)
@@ -64,7 +63,7 @@ def bconn_param(H):
 		#print(cumulist)
 		#sys.exit()
 
-	return all_dist_dicts
+	return 
 
 def dist2hist(dist_dict):
 	## get histogram of distances.
@@ -78,7 +77,7 @@ def dist2hist(dist_dict):
 	return h
 
 if __name__ == '__main__':
-	if len(sys.argv) != 4:
+	if len(sys.argv) != 3:
 		print('USAGE: python3 parametereized-shortest-path <INPREFIX> <outfile>')
 		sys.exit()
 	main(sys.argv[1],sys.argv[2])
