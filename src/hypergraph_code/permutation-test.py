@@ -48,6 +48,11 @@ def main(inprefix,outprefix,num_perms,num_swaps):
 		# swap edges
 		H = swap_edges(G,set_names,num_swaps)
 
+		# check to make sure they're different. They are!
+		#CHECK = nx.difference(G,H)
+		#print(nx.info(CHECK))
+		#sys.exit()
+
 		# split data 
 		perm_pathways = {p:set() for p in pathways.keys()}
 		for p in set_names:
@@ -58,7 +63,7 @@ def main(inprefix,outprefix,num_perms,num_swaps):
 				perm_pathways[pathway].update(nodes_to_add)
 
 		# write
-		fname = '%s%d_pathways.txt' % (outprefix,permutation)
+		fname = '%s%d_perms_%d_swaps.txt' % (outprefix,permutation,num_swaps)
 		out = open(fname,'w')
 		out.write('#Pathway\tName\tNumMembers\tMembers\n')
 		for p in perm_pathways:
@@ -70,47 +75,51 @@ def main(inprefix,outprefix,num_perms,num_swaps):
 
 def swap_edges(G,set_names,num_swaps):
 	
-		# start with a new copy of the graph
-		H = nx.Graph()
-		H.add_nodes_from(G)
-		H.add_edges_from(G.edges())
+	# start with a new copy of the graph
+	H = nx.Graph()
+	for n in G.nodes():
+		H.add_node(n)
+	for e in G.edges():
+		H.add_edge(e[0],e[1])
 
-		## swap edges. Can't use swap() methods in networkx because we need to make sure
-		## bipartite graph remains bipartite.
-		## MOdified from double_edge_swap
-		## https://networkx.github.io/documentation/stable/reference/algorithms/generated/networkx.algorithms.swap.double_edge_swap.html#networkx.algorithms.swap.double_edge_swap
-		## https://networkx.github.io/documentation/stable/_modules/networkx/algorithms/swap.html#double_edge_swap
-		successful_swaps = 0
-		n = 0
-		while successful_swaps < num_swaps:
-			n+=1
-			if n % 10 == 0:
-				print('%d tries & %d successful swaps' % (n,successful_swaps))
-			if n > MAX_TRIES:
-				print('MAX TRIES REACHED!! Quitting.')
-				sys.exit()
+	## swap edges. Can't use swap() methods in networkx because we need to make sure
+	## bipartite graph remains bipartite.
+	## MOdified from double_edge_swap
+	## https://networkx.github.io/documentation/stable/reference/algorithms/generated/networkx.algorithms.swap.double_edge_swap.html#networkx.algorithms.swap.double_edge_swap
+	## https://networkx.github.io/documentation/stable/_modules/networkx/algorithms/swap.html#double_edge_swap
+	successful_swaps = 0
+	n = 0
+	while successful_swaps < num_swaps:
+		n+=1
+		if n % int(num_swaps/10) == 0:
+			print('%d tries & %d successful swaps' % (n,successful_swaps))
+		if n > MAX_TRIES:
+			print('MAX TRIES REACHED!! Quitting.')
+			sys.exit()
 
-			# pick two random edges without creating edge list
-			# choose two source source nodes from pathway nodes.
-			u = random.choice(set_names)
-			x = random.choice(set_names)
-			if u == x: # skip if they're the same node.
-				continue
-			# choose target uniformly from neighbors
-			v = random.choice(list(H[u]))
-			y = random.choice(list(H[x]))
-			if v == y: # same target; skip
-				continue
-			# we now have (u,v) and (x,y).  
-			if (x in H[u]) or (y in H[v]): # if edge already exists in G, skip.
-				continue
-			# swapping these edges won't result in parallel edges.
-			H.add_edge(u,y)
-			H.add_edge(x,v) 
-			H.remove_edge(u,v)
-			H.remove_edge(x,y)
-			successful_swaps+=1
-		return G
+		# pick two random edges without creating edge list
+		# choose two source source nodes from pathway nodes.
+		u = random.choice(set_names)
+		x = random.choice(set_names)
+		if u == x: # skip if they're the same node.
+			continue
+		# choose target uniformly from neighbors
+		v = random.choice(list(H[u]))
+		y = random.choice(list(H[x]))
+		if v == y: # same target; skip
+			continue
+		# we now have (u,v) and (x,y).  
+		if (x in H[u]) or (y in H[v]): # if edge already exists in G, skip.
+			continue
+		# swapping these edges won't result in parallel edges.
+		H.add_edge(u,y)
+		H.add_edge(x,v) 
+		H.remove_edge(u,v)
+		H.remove_edge(x,y)
+		successful_swaps+=1
+		#print('swapped (%s,%s) and (%s,%s)' % (u,v,x,y))		
+	print('FINAL: %d tries and %d successful swaps' % (n,successful_swaps))
+	return H
 
 def make_set_label(pathway_set):
 	return '|'.join(sorted(list(pathway_set)))
