@@ -5,6 +5,7 @@ from halp.algorithms import directed_paths as hpaths
 from halp.utilities import directed_statistics as stats
 from halp.utilities import directed_graph_transformations as transform
 import cplex 
+import sys
 
 EPSILON=0.0001
 CONSTANT=1000000
@@ -34,11 +35,11 @@ def runILP(H,s,t):
 	if t not in node_set:
 		sys.exit('ERROR: target %s is not a hypernode in H.' % (t))
 
-	print('Original Signaling Hypergraph has %d nodes and %d hyperedges' % (stats.number_of_nodes(H),stats.number_of_hyperedges(H)))
+	#print('Original Signaling Hypergraph has %d nodes and %d hyperedges' % (stats.number_of_nodes(H),stats.number_of_hyperedges(H)))
 	populate_maps(H)
 
 	# write the .lp file - cplex files have an '.lp' suffix.
-	print('\nWriting ILP...')
+	#print('\nWriting ILP...')
 	out = open(outprefix+'.lp','w')
 	out = writeObjective(H,out)
 	out.write('SUBJECT TO\n')
@@ -53,12 +54,12 @@ def runILP(H,s,t):
 	out = writeActivityVariableTypes(H,out)
 	out.write('END\n')
 	out.close()
-	print('%d Constraints Written.' % (c))
-	print('Done Writing ILP.')
+	#print('%d Constraints Written.' % (c))
+	#print('Done Writing ILP.')
 
 	# solve the ILP for a single, optimal solution.
 	objective = solveILP(outprefix) 
-	print('Done: objective is %d' % (objective))
+	#print('Done: objective is %d' % (objective))
 	
 	## return variables (first solution indexed at 0)
 	return objective
@@ -184,9 +185,9 @@ def writeActivityVariableTypes(H,out):
 
 ################################
 def solveILP(outprefix):
-	print('\nSolving ILP...')
+	#print('\nSolving ILP...')
 
-	print('\n' + '-'*20 + 'Cplex Output Start' + '-'*20)
+	#print('\n' + '-'*20 + 'Cplex Output Start' + '-'*20)
 	ilp = cplex.Cplex()
 	ilp.read('%s.lp' % (outprefix))
 
@@ -195,18 +196,24 @@ def solveILP(outprefix):
 	maxobj = None
 	allvars = []
 	
+	## disable all output streams
+	ilp.set_log_stream(None)
+	ilp.set_error_stream(None)
+	ilp.set_warning_stream(None)
+	ilp.set_results_stream(None)
+
 	## Solve ILP
-	print('-'*10 + 'Looking for Solution' )
+	#print('-'*10 + 'Looking for Solution' )
 	ilp.solve()
-	print('-'*10 + 'Done Looking for Solution')
+	#print('-'*10 + 'Done Looking for Solution')
 		
 	if ilp.solution.pool.get_num()>0:
-		print('Solution Found.'      )
+		#print('Solution Found.'      )
 		objective = ilp.solution.pool.get_objective_value(0)
 	else:
-		print('Infeasible Solution. quitting.')
-		sys.exit()
+		print('WARNING: Infeasible Solution.')
+		objective=-1
 		
-	print('-'*20 + 'Cplex Output End' + '-'*20 + '\n')
+	#rint('-'*20 + 'Cplex Output End' + '-'*20 + '\n')
 	return objective
 

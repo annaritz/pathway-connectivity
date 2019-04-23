@@ -67,3 +67,7 @@ grep -f entities_in_top_50_hubs.txt ../BioPAXSTREAM/output/reactome_limit20.txt.
 
 ## filter Graphw with Complexes by small molecules
 python3 graph-with-complexes-survey.py ../../hypergraph/reactome_hypergraph_full/reactome output/graph-reactome.txt
+
+########## PERMUTATION TEST ############
+
+python3 permutation-test.py output/pathways/small_molecule_filter_ permutations/small_molecule_filter_ 5 50
