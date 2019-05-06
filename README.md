@@ -101,5 +101,6 @@ python src/hypergraph/make-signaling-hypergraph.py hypergraph/reactome_hypergrap
 cd /Users/aritz/Documents/github/pathway-connectivity/hypergraph/reactome_hypergraph_full
 cat ../reactome_hypergraphs_parsed/*-hypernodes.txt | sort -u > reactome-hypernodes.txt
 cat ../reactome_hypergraphs_parsed/*-hyperedges.txt | sort -u > reactome-hyperedges.txt
-
+cd ../../
+cat hypergraph/reactome_hypergraphs/*-entitysets.txt | sort -u > reactome-entitysets.txt
 ```

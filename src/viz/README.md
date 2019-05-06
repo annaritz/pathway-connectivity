@@ -20,6 +20,13 @@ python3 pathway-influence.py ../hypergraph_code/output/pathways/full_reactome_ i
 python3 pathway-influence.py ../hypergraph_code/output/pathways/small_molecule_filter_ influence-output/small_molecule_filter
 ##python3 pathway-influence.py ../hypergraph_code/output/pathways/blacklist_filter_ influence-output/blacklist_filter
 
+## PERMUTATION TEST!!
+python3 significant-pathway-influence.py ../hypergraph_code/output/pathways/small_molecule_filter_ influence-output/significant_small_molecule_filter_ ../hypergraph_code/output/pathways/permutations/small_molecule_filter_ 100 1000
+
+## COMBINED SCORES & SIGS - single plot
+python3 significant-pathway-scores.py single influence-output/small_molecule_filter_k_03.txt influence-output/significant_small_molecule_filter_100_perms_10000_swaps_k_03.txt influence-output/circles_small_molecule_filter_100_perms_10000_swaps_k_03
+
+python3 significant-pathway-scores.py summary influence-output/small_molecule_filter_k_ influence-output/significant_small_molecule_filter_100_perms_10000_swaps_k_ influence-output/circles_small_molecule_filter_100_perms_10000_swaps_summary
 
 ## CASE STUDY
 python3 case-study.py ../hypergraph_code/output/pathways/small_molecule_filter_ case-study-output/small_molecule_filter_

@@ -1,7 +1,8 @@
 from halp import directed_hypergraph
 from halp.utilities import directed_statistics as stats
+import glob
 
-def make_hypergraph(file_prefix,delim=';',sep='\t'):
+def make_hypergraph(file_prefix,delim=';',sep='\t',keep_singleton_nodes=False):
 	hypernodes = {}
 	with open(file_prefix+'-hypernodes.txt') as fin:
 		for line in fin:
@@ -17,6 +18,10 @@ def make_hypergraph(file_prefix,delim=';',sep='\t'):
 	identifier2id = {}
 	id2identifier = {}
 	H = directed_hypergraph.DirectedHypergraph()	
+	if keep_singleton_nodes:
+		for n in hypernodes:
+			H.add_node(n)
+
 	skipped1 = 0
 	skipped2 = 0
 	with open(file_prefix+'-hyperedges.txt') as fin:
@@ -68,6 +73,24 @@ def make_hypergraph(file_prefix,delim=';',sep='\t'):
 		(stats.number_of_hyperedges(H),stats.number_of_nodes(H),num_hypernodes))
 
 	return H, identifier2id, id2identifier
+
+def add_entity_set_info(H):
+	## adds entity set information (like complexes)
+	## hard -coded in for now. 
+	entitysetfile = '/Users/aritz/Documents/github/pathway-connectivity/reactome-entitysets.txt'
+	es = {}
+	with open(entitysetfile) as fin:
+		for line in fin:
+			if line[0] == '#':
+				continue
+			row = line.strip().split()
+			es[row[0]] = row[2].split(';')
+	for node in H.get_node_set():
+		if node in es:
+			H.add_node(node,is_entityset=True,entityset_members=es[row[0]])
+		else:
+			H.add_node(node,is_entityset=False,entityset_members=[])
+	return H
 
 def make_b_visit_dict(hedge_connectivity_file,identifier2id):
 	# make a dictionary where the key is a hyperedge ID and the value is a 
@@ -131,3 +154,27 @@ def filter_by_blacklisted_entities(H,blacklist_file,outfile=None):
 		print('wrote to %s' % (outfile))
 
 	return H
+
+
+def get_id_map(prefix):
+	## reads ALL of reactome pathways and generates a PC2 identifier to uniprot.  
+	pcid2uid = {}
+	uid2pcid = {}
+	files = glob.glob('%s*-elements.txt' % (prefix))
+	for f in files:
+		with open(f) as fin:
+			for line in fin:
+				if line[0] == '#':
+					continue
+				row = line.strip().split()
+				if row[0] in pcid2uid:
+					continue
+				items = row[3].split(';')
+				for i in items:
+					if 'uniprot-knowledgebase' in i:
+						#print(row[3].split(':'))
+						uid = i.split(':')[1]
+						pcid2uid[row[0]] = uid
+						uid2pcid[uid] = row[0]
+	print('Read mappings for %d pathway commons identifiers' % (len(pcid2uid)))
+	return pcid2uid, uid2pcid
