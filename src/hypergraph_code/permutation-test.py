@@ -6,7 +6,7 @@ import glob
 import networkx as nx
 import random
 
-MAX_TRIES = 10000
+MAX_TRIES = 1000000
 def main(inprefix,outprefix,num_perms,num_swaps):
 	pathways = read_files(inprefix)
 	print('%d pathways' % (len(pathways)))
@@ -59,7 +59,7 @@ def main(inprefix,outprefix,num_perms,num_swaps):
 			pathway_set = split_set_label(p)
 			nodes_to_add = H[p]
 			for pathway in pathway_set:
-				print('ADDING %d to PATHWAY %s' % (len(nodes_to_add),pathway))
+				#print('ADDING %d to PATHWAY %s' % (len(nodes_to_add),pathway))
 				perm_pathways[pathway].update(nodes_to_add)
 
 		# write
