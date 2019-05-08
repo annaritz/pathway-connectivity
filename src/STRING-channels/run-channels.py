@@ -12,7 +12,7 @@ import time
 
 LARGE_VAL = 10000000
 
-def main(inprefix,hedge_connectivity_file,pathway_prefix,infix):
+def main(inprefix,hedge_connectivity_file,pathway_prefix,infix,run_all):
 	start = time.time()
 	H, identifier2id, id2identifier = hgraph_utils.make_hypergraph(inprefix,keep_singleton_nodes=True)
 	H = hgraph_utils.add_entity_set_info(H)
@@ -48,7 +48,7 @@ def main(inprefix,hedge_connectivity_file,pathway_prefix,infix):
 	pc2uniprot,uniprot2pc = hgraph_utils.get_id_map('../../hypergraph/reactome_hypergraphs/')
 
 	## get pathway information
-	pathway_nodes,all_pathway_nodes = get_pathways(pathway_prefix)
+	pathway_nodes,all_pathway_nodes = get_pathways(pathway_prefix,run_all=run_all)
 	#print('%d pathway nodes (including hypernode members)' % (len(all_pathway_nodes)))
 	#print(list(all_pathway_nodes)[:10])
 
@@ -230,9 +230,9 @@ def get_pathway_interactions(interactions_in_reactome,pathway_prefix,pathway_nod
 # 		all_pathway_nodes.update(pathway_nodes[p])
 # 	return pathway_nodes,all_pathway_nodes
 
-def get_pathways(pathway_prefix):
+def get_pathways(pathway_prefix,run_all=False):
 
-		# these are the "top lvel" reactome pathways.
+	# these are the "top lvel" reactome pathways - they are too general. Ignore.
 	TO_IGNORE = ['Circadian-Clock', 'Cell-Cycle', 'Disease',  'Programmed-Cell-Death',  'Extracellular-matrix-organization',  'Vesicle-mediated-transport', \
 	 'Cellular-responses-to-external-stimuli',  'Organelle-biogenesis-and-maintenance',  'Neuronal-System',  'NICD-traffics-to-nucleus',  'Signaling-Pathways',  \
 	 'Metabolism-of-RNA',  'DNA-Repair',  'Metabolism',  'Mitophagy',  'Gene-expression-(Transcription)',  'Developmental-Biology',  'Chromatin-organization', \
@@ -252,7 +252,7 @@ def get_pathways(pathway_prefix):
 	for f in files:
 		name = f.replace(pathway_prefix,'').replace('-hypernodes.txt','')
 		# to only do the 34 originals
-		if name not in ORIG_34:
+		if not run_all and name not in ORIG_34:
 			continue
 		#print(name)
 		pathway_nodes[name] = set()
@@ -268,22 +268,22 @@ def get_pathways(pathway_prefix):
 	
 	print('%d pathways' % (len(pathway_nodes)))
 
-	# to ignore top-level ones
-	#for i in TO_IGNORE:
-	#	del pathway_nodes[i]
-	#print('%d pathways after removing top-level pathways' % (len(pathway_nodes)))
-	
-	# to remove redundants
-	#to_remove = set()
-	#pathway_list = list(pathway_nodes.keys())
-	#for i in pathway_list:
-	#	for j in pathway_list:
-	#		if i != j and len(pathway_nodes[i].intersection(pathway_nodes[j])) == len(pathway_nodes[i]):
-	#			to_remove.add(i)
-	#			break
-	#print('Removing %d redundant sets' % (len(to_remove)))
-	#for t in to_remove:
-	#	del pathway_nodes[t]
+	if run_all: # ignore top-level ones and remove redundants.
+		for i in TO_IGNORE:
+			del pathway_nodes[i]
+		print('%d pathways after removing top-level pathways' % (len(pathway_nodes)))
+
+		#to remove redundants
+		to_remove = set()
+		pathway_list = list(pathway_nodes.keys())
+		for i in pathway_list:
+			for j in pathway_list:
+				if i != j and len(pathway_nodes[i].intersection(pathway_nodes[j])) == len(pathway_nodes[i]):
+					to_remove.add(i)
+					break
+		print('Removing %d redundant sets' % (len(to_remove)))
+		for t in to_remove:
+			del pathway_nodes[t]
 
 
 	print('%d pathways remain' % (len(pathway_nodes)))
@@ -325,6 +325,9 @@ def read_pathways_from_brelax(prefix):
 	return pathways
 
 if __name__ == '__main__':
-	if len(sys.argv) != 5:
-		print('Usage: python3 run-benchmark.py <HYPERGRAPH_PREFIX> <hedge_connectivity_file> <pathway_brelax_prefix> <infix>')
-	main(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4])
+	if len(sys.argv) != 5 and len(sys.argv) != 6:
+		print('Usage: python3 run-channels.py <HYPERGRAPH_PREFIX> <hedge_connectivity_file> <pathway_brelax_prefix> <infix> <RUN_ALL - optional, any word here is ok>')
+	if len(sys.argv)==5:
+		main(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],False)
+	elif len(sys.argv) == 6:
+		main(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],True)

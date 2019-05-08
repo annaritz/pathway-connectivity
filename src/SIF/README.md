@@ -44,3 +44,15 @@ Graph has 12086 nodes and 444204 edges
 Graph has 10225 nodes and 393980 edges
 
 ## 1861 small molecules removed.
+
+
+############### Permutation Test Analysis
+
+# get original connectivity
+python3 graph-pathways.py PathwayCommons10.reactome.hgnc.sif outfiles/pathways/reactome_filtered_ conversion-types.txt ../../data/pathways/reactome-pathways-from-SIF.txt true  
+
+## generate permutations
+python3 ../hypergraph_code/permutation-test.py outfiles/pathways/reactome_filtered_ permutations/reactome_filtered_ 100 10000
+
+## calculate permutations
+python3 graph-permutation.py PathwayCommons10.reactome.hgnc.sif outfiles/pathways/permutations/reactome_filtered conversion-types.txt permutations/reactome_filtered  100 10000 true

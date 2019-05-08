@@ -178,3 +178,26 @@ def get_id_map(prefix):
 						uid2pcid[uid] = row[0]
 	print('Read mappings for %d pathway commons identifiers' % (len(pcid2uid)))
 	return pcid2uid, uid2pcid
+
+def get_id_map_common_name(prefix):
+	## reads ALL of reactome pathways and generates a PC2 identifier to uniprot.  
+	pcid2hgnc = {}
+	hgnc2pcid = {}
+	files = glob.glob('%s*-elements.txt' % (prefix))
+	for f in files:
+		with open(f) as fin:
+			for line in fin:
+				if line[0] == '#':
+					continue
+				row = line.strip().split()
+				if row[0] in pcid2hgnc:
+					continue
+				items = row[3].split(';')
+				for i in items:
+					if 'hgnc-symbol' in i:
+						#print(row[3].split(':'))
+						hgnc = i.split(':')[1]
+						pcid2hgnc[row[0]] = hgnc
+						hgnc2pcid[hgnc] = row[0]
+	print('Read mappings for %d pathway commons identifiers' % (len(pcid2hgnc)))
+	return pcid2hgnc, hgnc2pcid

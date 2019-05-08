@@ -23,7 +23,7 @@ def main(inprefix,outprefix):
 		print('k=%d' % (k))
 		M = get_data(k,sorted_pathways,pathways,num)
 		all_data.append(M)
-		#plot_single(M,k,outprefix,sorted_pathways,num)
+		plot_single(M,k,outprefix,sorted_pathways,num)
 
 	#make_summary_plot(k_range[1:],all_data[1:],outprefix+'_full')
 	#make_summary_plot(k_range[1:],all_data[1:],outprefix+'_full_log',logvals=True)
@@ -165,7 +165,7 @@ def read_files(prefix):
 	print('%d files' % (len(files)))
 	pathways = {}
 	for f in files:
-		pathway_name = f.replace(prefix,'').replace('_b_relax.txt','')
+		pathway_name = f.replace(prefix,'').replace('_b_relax.txt','').replace('_parameterized.txt','').replace('.txt','')
 		print('reading %s' % (pathway_name))
 		pathways[pathway_name] = {}
 		with open(f) as fin:
