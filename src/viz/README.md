@@ -38,6 +38,10 @@ python3 significant-pathway-scores.py summary influence-output/small_molecule_fi
 
 #### for graphs
 python3 pathway-influence.py ../SIF/outfiles/pathways/reactome_filtered_ influence-output/reactome_filtered_graph
+python3 significant-pathway-influence.py ../SIF/outfiles/pathways/reactome_filtered_ influence-output/significant_reactome_filtered_graph ../SIF/outfiles/pathways/permutations/reactome_filtered_ 100 10000
+python3 significant-pathway-scores.py summary influence-output/reactome_filtered_graph_k_ influence-output/significant_reactome_filtered_graph100_perms_10000_swaps_k_ influence-output/circles_reactome_filtered_graph_100_perms_10000_swaps_summary
+python3 significant-pathway-scores.py single influence-output/reactome_filtered_graph_k_01.txt influence-output/significant_reactome_filtered_graph100_perms_10000_swaps_k_01.txt influence-output/circles_reactome_filtered_graph_100_perms_10000_swaps_k_01
+python3 significant-pathway-scores.py single influence-output/reactome_filtered_graph_k_03.txt influence-output/significant_reactome_filtered_graph100_perms_10000_swaps_k_03.txt influence-output/circles_reactome_filtered_graph_100_perms_10000_swaps_k_03
 
 ######
 

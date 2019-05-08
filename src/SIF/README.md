@@ -55,4 +55,4 @@ python3 graph-pathways.py PathwayCommons10.reactome.hgnc.sif outfiles/pathways/r
 python3 ../hypergraph_code/permutation-test.py outfiles/pathways/reactome_filtered_ permutations/reactome_filtered_ 100 10000
 
 ## calculate permutations
-python3 graph-permutation.py PathwayCommons10.reactome.hgnc.sif outfiles/pathways/permutations/reactome_filtered conversion-types.txt permutations/reactome_filtered  100 10000 true
+python3 graph-permutation.py PathwayCommons10.reactome.hgnc.sif outfiles/pathways/permutations/reactome_filtered_ conversion-types.txt permutations/reactome_filtered_  100 10000 true
