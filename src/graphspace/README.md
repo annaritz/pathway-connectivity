@@ -1,0 +1,1 @@
+python post_to_graphspace.py ../../hypergraph/reactome_hypergraph_full/small_molecule_filter ../hypergraph_code/output/pathways/ outfile

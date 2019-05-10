@@ -8,6 +8,7 @@ import glob
 import networkx as nx
 import time
 # library
+import os
 
 
 LARGE_VAL = 10000000
@@ -56,12 +57,17 @@ def main(inprefix,hedge_connectivity_file,pathway_prefix,infix,run_all):
 	files = glob.glob('../../data/STRING/processed/*.txt')
 	print('%d files:' % (len(files)),files)
 
-	processed_edges = {}
+	processed_nodes = {}
 
 	for f in files:
 		print('FILE %s' % (f))
 		name = f.replace('../../data/STRING/processed/','').replace('.txt','')
 		print('NAME %s' % (name))
+
+		outfile_name = 'outfiles/%s-%s-positive_sets.txt' % (infix,name)
+		if os.path.isfile(outfile_name):
+			print('FILE %s EXISTS! Skipping.'  %(outfile_name))
+			continue
 
 		interactions = []
 		missing = {}
@@ -113,7 +119,8 @@ def main(inprefix,hedge_connectivity_file,pathway_prefix,infix,run_all):
 		sys.stdout.flush()
 
 		## NOTE: to do whole thing replace "intearactions-in_pathways" with "interactions-in_reactome"
-		interactions_brelax = get_bconn_interactions(H,G,interactions_in_pathways,node_membership,b_visit_dict,processed_edges)
+		brelax_dicts,processed_nodes = preprocess_brelax_dicts(H,interactions_in_pathways,node_membership,b_visit_dict,processed_nodes)
+		interactions_brelax = get_bconn_interactions(brelax_dicts,interactions_in_pathways,node_membership)
 		interactions_bipartite = list(interactions_brelax.keys())
 		interactions_bconn = [e for e in interactions_bipartite if interactions_brelax[e] == 0]
 
@@ -121,14 +128,9 @@ def main(inprefix,hedge_connectivity_file,pathway_prefix,infix,run_all):
 		print('  %d INTERACTIONS ARE B-CONNECTED IN REACTOME' % (len(interactions_bconn)))
 		sys.stdout.flush()
 
-		out = open('outfiles/%s-%s-positive_sets.txt' % (infix,name),'w')
+		out = open(outfile_name,'w')
 		out.write('#Node1\tNode2\tScore\tAnyPathway\tSamePathway\tBipartite\tBRelaxDist\n')
 		for n1,n2,val in interactions_in_reactome:
-			if (n1,n2) in processed_edges:
-				vals = processed_edges[(n1,n2)]
-				out.write('%s\t%s\t%s\t%d\t%d\t%d\t%d\n' % (n1,n2,val,vals[0],vals[1],vals[2],vals[3]))
-				continue
-
 			vals = []
 			if (n1,n2) in interactions_in_pathways:
 				vals.append(1)
@@ -144,57 +146,58 @@ def main(inprefix,hedge_connectivity_file,pathway_prefix,infix,run_all):
 			else:
 				vals.append(0)
 				vals.append(-1)
-			processed_edges[(n1,n2)] = vals
 			out.write('%s\t%s\t%s\t%d\t%d\t%d\t%d\n' % (n1,n2,val,vals[0],vals[1],vals[2],vals[3]))
 		out.close()
-		print('  wrote %d mismapped nodes to outfiles/%s-%s-positive_sets.txt' % (len(missing),infix,name))
+		print('  wrote outfile to %s' (outfile_name))
 		sys.stdout.flush()
 	end = time.time()
 	print('FINAL TIME:',end-start)
-		
-def get_bconn_interactions(H,G,interactions_in_pathways,node_membership,b_visit_dict,processed_edges):
+
+def preprocess_brelax_dicts(H,interactions_in_pathways,node_membership,b_visit_dict,processed_nodes):
+	node_brelax = {}
+	i=0
+	prev = time.time()
+	
+	n1_node_set = set([n1 for (n1,n2) in interactions_in_pathways])
+	
+	for n1 in n1_node_set:
+		i+=1
+		if i % 100 == 0:
+			now = time.time()
+			print('     %d of %d nodes (%.4f): %d have non-zero brelaxdist: %f elapsed' % (i,len(n1_node_set),i/len(n1_node_set),len(node_brelax.keys()),now-prev))
+			prev = now
+			sys.stdout.flush()
+
+		if n1 in processed_nodes:
+			node_brelax[n1] = processed_nodes[n1]
+		else:
+			n1_nodes = node_membership[n1]
+			node_brelax[n1],ignore = hpaths.b_relaxation(H,n1_nodes,b_visit_dict=b_visit_dict)
+			processed_nodes[n1] = node_brelax[n1]
+
+	return node_brelax,processed_nodes
+
+def get_bconn_interactions(brelax_dicts,interactions_in_pathways,node_membership):
 	interactions_brelax = {}
 	i=0
 	prev = time.time()
 	for n1,n2 in interactions_in_pathways:
 		i+=1
-		if i % 500 == 0:
+		if i % 10000 == 0:
 			now = time.time()
 			print('     %d of %d (%.4f): %d have non-zero brelaxdist: %f elapsed' % (i,len(interactions_in_pathways),i/len(interactions_in_pathways),len(interactions_brelax.keys()),now-prev))
 			prev = now
 			sys.stdout.flush()
 
-		if (n1,n2) in processed_edges:
-			vals = processed_edges[(n1,n2)]
-			interactions_brelax[vals[2]] = vals[3]
-			continue
-
-		n1_nodes = node_membership[n1]
+		dist_dict = brelax_dicts[n1]
 		n2_nodes = node_membership[n2]
-		#print('n1',n1,n1_nodes)
-		#print('n2',n2,n2_nodes)
 
-		## first try BFS on graph
-		for n in n1_nodes:
-			if n not in G.nodes():
-				continue
-			edges = nx.bfs_edges(G,n)
-			nset = set()
-			for u,v in edges:
-				nset.add(u)
-				nset.add(v)
-			if len(nset.intersection(n2_nodes)) > 0:
-				#print('HEY! Found.')
-
-				dist_dict,ignore = hpaths.b_relaxation(H,n1_nodes,b_visit_dict=b_visit_dict)
-				score = LARGE_VAL
-				for n in n2_nodes:
-					if dist_dict[n] != None:
-						score = min(score,dist_dict[n])
-				if score < LARGE_VAL:
-					interactions_brelax[(n1,n2)] = score
-
-				break # done. 
+		score = LARGE_VAL
+		for n in n2_nodes:
+			if dist_dict[n] != None:
+				score = min(score,dist_dict[n])
+		if score < LARGE_VAL:
+			interactions_brelax[(n1,n2)] = score
 
 	return interactions_brelax
 

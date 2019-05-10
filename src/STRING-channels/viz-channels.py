@@ -4,9 +4,16 @@ import glob
 import sys
 import operator 
 
+## to draw rectangles
+# https://matplotlib.org/examples/shapes_and_collections/artist_reference.html
+import matplotlib.path as mpath
+import matplotlib.lines as mlines
+import matplotlib.patches as mpatches
+from matplotlib.collections import PatchCollection
+
 def main(infix):
 	files = glob.glob('outfiles/%s-*-positive_sets.txt' % (infix))
-	#files = ['outfiles/small_molecule_filter-database-positive_sets.txt']
+	#files = ['outfiles/small_molecule_filter_allpathways-cooccurence-positive_sets.txt']
 	print('FILES:',files)
 	for f in files:
 		print('FILE %s' % (f))
@@ -47,21 +54,27 @@ def main(infix):
 	return
 
 def viz(interactions,pos_sets,short_names,pos_names,infix,name,brelax=None):
-	plt.figure(figsize=(14,5))
-	resolution=0.001 ## set to 0 to keep all data points.
+	plt.figure(figsize=(10,10))
+	#resolution=0.001 ## set to 0 to keep all data points.
+	resolution=0.0
 
-	ax = plt.subplot(1,3,1)
+	ax = plt.subplot(2,2,1)
 	vd = venn3(pos_sets[:3],set_labels=tuple(short_names[:3]))
-	# reposition labels
-	
+	# reposition labels	
 	lbl = vd.get_label_by_id('A')
 	x, y = lbl.get_position()
 	lbl.set_position((x, y-0.1))
 	lbl = vd.get_label_by_id('B')
 	x, y = lbl.get_position()
 	lbl.set_position((x-0.1, y-0.1))
-	plt.title('STRING\'s "%s" channel\n(%d interactions)\n' % (name,len(interactions)))
+	plt.title('STRING\'s "%s" channel\n(%d interactions map to Reactome)\n' % (name,len(interactions)))
 	
+
+	### NEW: Make the "Pair in Any Pathway" the universe
+	interactions = {e:interactions[e] for e in pos_sets[0]}
+	pos_sets = pos_sets[1:]
+	pos_names = pos_names[1:]
+
 	items = sorted(interactions.items(), key=operator.itemgetter(1), reverse=True)
 	node_list = [i[0] for i in items]
 	tie_list = [0]*len(node_list)
@@ -110,6 +123,9 @@ def viz(interactions,pos_sets,short_names,pos_names,infix,name,brelax=None):
 		b_fpr = [0]*len(brelax_thresholds)
 
 	for i in range(len(pos_sets)):
+		tmp_file = 'tmpfiles/'+infix+'-%d.txt' % (i)
+		tmp_out = open(tmp_file,'w')
+		tmp_out.write('#%s\n' % (pos_names[i]))
 		xs_recall[i] = []
 		xs_fpr[i] = []
 		ys_prec[i] = []
@@ -122,9 +138,11 @@ def viz(interactions,pos_sets,short_names,pos_names,infix,name,brelax=None):
 			if tie_list[j] and j != len(counts[i])-1: # skip if there's a tie
 				continue
 
-			FP = j-TP
+			FP = (j+1)-TP
 			FN = P-TP
 			TN = N-FP
+			
+			tmp_out.write('j=%d: P=%d, N=%d, TP=%d, FP=%d, FN=%d, TN=%d\n' % (j,P,N,TP,FP,FN,TN))
 
 			if len(xs_recall[i]) == 0 or not ( abs(xs_recall[i][-1]-TP/(TP+FN)) <= resolution and abs(ys_prec[i][-1]-TP/(TP+FP)) <= resolution ):
 				xs_recall[i].append(TP/(TP+FN))
@@ -132,10 +150,16 @@ def viz(interactions,pos_sets,short_names,pos_names,infix,name,brelax=None):
 					ys_prec[i].append(0)
 				else:	
 					ys_prec[i].append(TP/(TP+FP))
+				tmp_out.write('     REC=%.2f, PREC=%.2f\n' % (xs_recall[i][-1],ys_prec[i][-1]))
 			if len(xs_fpr[i]) == 0 or not ( abs(xs_fpr[i][-1]-FP/(FP+TN)) <= resolution and abs(ys_tpr[i][-1]-TP/(TP+FN)) <= resolution ):
 				xs_fpr[i].append(FP/(FP+TN))
 				ys_tpr[i].append(TP/(TP+FN))
+				
+				tmp_out.write('     FPR=%.2f, TPR=%.2f\n' % (xs_fpr[i][-1],ys_tpr[i][-1]))
 
+			assert ys_tpr[i][-1] == xs_recall[i][-1]
+		tmp_out.close()
+		print('wrote to %s' % (tmp_file))
 		print('  %d: dimensions are %d and %d' % (i,len(xs_recall[i]),len(xs_fpr[i])))
 
 	if brelax:
@@ -150,7 +174,7 @@ def viz(interactions,pos_sets,short_names,pos_names,infix,name,brelax=None):
 				TP+=brelax_counts[i][j]
 				if tie_list[j] and j != len(brelax_counts[i])-1: # skip if there's a tie
 					continue
-				FP = j-TP
+				FP = (j+1)-TP
 				FN = P-TP
 				TN = N-FP
 
@@ -160,32 +184,65 @@ def viz(interactions,pos_sets,short_names,pos_names,infix,name,brelax=None):
 			print('  %d: dimensions are %d' % (i,len(b_tpr[i])))
 
 
-	ax = plt.subplot(1,3,2)
+	ax = plt.subplot(2,2,2)
 	for i in range(len(pos_sets)):
-		ax.plot(xs_recall[i],ys_prec[i],lw=3,label='%s\n(|P|=%d)' % (pos_names[i],len(pos_sets[i])))
+		ax.plot(xs_recall[i],ys_prec[i],lw=2,label='%s\n(|P|=%d; |N|=%d)' % (pos_names[i],len(pos_sets[i]),len(interactions)-len(pos_sets[i])))
 	ax.set_xlabel('Recall')
 	ax.set_ylabel('Precision')
-	ax.set_title('Precision and Recall of\nSTRING\'s "%s" channel\n(%d interactions)' % (name,len(interactions)))
+	ax.set_title('Precision and Recall of\nSTRING\'s "%s" channel\n(%d interactions in any Reactome pathway)' % (name,len(interactions)))
 	ax.set_xlim(0,1)
 	ax.set_ylim(0,1)
 	ax.legend()
 
-	ax = plt.subplot(1,3,3)
-	ax.plot([0,0],[1,1],'--k',label='__nolabel__')
+	ax = plt.subplot(2,2,3)
+	
+	patches = []
+	prop_cycle = plt.rcParams['axes.prop_cycle']
+	colors = prop_cycle.by_key()['color']
+	for i in range(len(pos_sets)):
+		P = len(pos_sets[i])
+		N = len(interactions)-len(pos_sets[i])
+		b_x = xs_fpr[i][0]*N
+		t_x = xs_fpr[i][-1]*N
+		b_y = ys_tpr[i][0]*P
+		t_y = ys_tpr[i][-1]*P
+		ax.add_patch(mpatches.Rectangle([b_x,b_y],t_x-b_x, t_y-b_y,alpha=0.2,color=colors[i]))
+
+
+	#if brelax:
+	#	for i in range(len(brelax_thresholds)):
+	#		ax.plot(b_fpr[i],b_tpr[i],color=[.8,.8,.8],lw=2,label='__nolabel__')#label='BDist$\leq$%d\n(|P|=%d)' % (brelax_thresholds[i],brelax_nums[i]))
+	for i in range(len(pos_sets)):
+		P = len(pos_sets[i])
+		N = len(interactions)-len(pos_sets[i])
+		ax.plot([x*N for x in xs_fpr[i]],[y*P for y in ys_tpr[i]],lw=2,label='%s\n(|P|=%d; |N|=%d)' % (pos_names[i],P,N))
+	#if brelax:
+	#	if len(brelax_thresholds) < 10:
+	#		ax.plot(0,0,color=[.8,.8,.8],label='B-Relaxation Thresholds\nd=[%s]' % (','.join([str(s) for s in brelax_thresholds])))
+	#	else:
+	#		ax.plot(0,0,color=[.8,.8,.8],label='B-Relaxation Thresholds\nd=%d...%d' % (brelax_thresholds[0],brelax_thresholds[-1]))
+	ax.set_xlabel('# of False Positives')
+	ax.set_ylabel('# of True Positives')
+	ax.set_title('False Positives and True Positives of\nSTRING\'s "%s" channel\n(%d interactions in any Reactome pathway)' % (name,len(interactions)))
+	ax.legend()
+
+	ax = plt.subplot(2,2,4)
+	#ax.plot([0,1],[0,1],'--k',label='__nolabel__')
 	if brelax:
 		for i in range(len(brelax_thresholds)):
 			ax.plot(b_fpr[i],b_tpr[i],color=[.8,.8,.8],lw=2,label='__nolabel__')#label='BDist$\leq$%d\n(|P|=%d)' % (brelax_thresholds[i],brelax_nums[i]))
 	for i in range(len(pos_sets)):
-		ax.plot(xs_fpr[i],ys_tpr[i],lw=2,label='%s\n(|P|=%d)' % (pos_names[i],len(pos_sets[i])))
+		P = len(pos_sets[i])
+		N = len(interactions)-len(pos_sets[i])
+		ax.plot(xs_fpr[i],ys_tpr[i],lw=2,label='%s\n(|P|=%d; |N|=%d)' % (pos_names[i],P,N))
 	if brelax:
 		if len(brelax_thresholds) < 10:
 			ax.plot(0,0,color=[.8,.8,.8],label='B-Relaxation Thresholds\nd=[%s]' % (','.join([str(s) for s in brelax_thresholds])))
 		else:
 			ax.plot(0,0,color=[.8,.8,.8],label='B-Relaxation Thresholds\nd=%d...%d' % (brelax_thresholds[0],brelax_thresholds[-1]))
-	
 	ax.set_xlabel('False Positive Rate')
 	ax.set_ylabel('True Positive Rate')
-	ax.set_title('ROC of\nSTRING\'s "%s" channel\n(%d interactions)' % (name,len(interactions)))
+	ax.set_title('ROC of\nSTRING\'s "%s" channel\n(%d interactions in any Reactome pathway)' % (name,len(interactions)))
 	ax.set_xlim(0,1)
 	ax.set_ylim(0,1)
 	ax.legend()
