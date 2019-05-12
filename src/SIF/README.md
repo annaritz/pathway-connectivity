@@ -29,6 +29,22 @@ This gives us the number and type of relationships:
 3271 used-to-produce
 ```
 
+UPDATE: May 2019: 
+```
+263342 catalysis-precedes
+15473 chemical-affects
+8079 consumption-controlled-by
+3733 controls-expression-of
+3184 controls-phosphorylation-of
+8052 controls-production-of
+113558 controls-state-change-of
+5232 controls-transport-of
+5105 controls-transport-of-chemical
+140302 in-complex-with
+1922 reacts-with
+5888 used-to-produce
+```
+
 ```
 python3 GraphSurvey.py PathwayCommons10.reactome.hgnc.sif outfiles/reactome.txt conversion-types.txt 
 ```

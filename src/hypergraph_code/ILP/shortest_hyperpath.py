@@ -1,5 +1,6 @@
 ## Modified from /Users/aritz/Research/VT/vt-svn/src/python/SignalingHypergraphs/minHyperpathILP.py
-import hgraph_utils as hgraph_utils
+#import hgraph_utils as hgraph_utils
+import hypergraph_code.hgraph_utils as hgraph_utils
 from halp import directed_hypergraph
 from halp.algorithms import directed_paths as hpaths
 from halp.utilities import directed_statistics as stats
