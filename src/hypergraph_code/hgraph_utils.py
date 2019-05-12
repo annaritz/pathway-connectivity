@@ -1,6 +1,7 @@
 from halp import directed_hypergraph
 from halp.utilities import directed_statistics as stats
 import glob
+import networkx as nx
 
 def make_hypergraph(file_prefix,delim=';',sep='\t',keep_singleton_nodes=False):
 	hypernodes = {}
@@ -92,6 +93,26 @@ def add_entity_set_info(H):
 			H.add_node(node,is_entityset=False,entityset_members=[])
 	return H
 
+def to_digraph(H):
+	## simple function so we convert to graph by calling an hgraph_utils function.
+	G = transform.to_networkx_digraph(H)
+	return G
+
+def to_bipartite_graph(H):
+	G = nx.DiGraph()
+
+	for node in H.node_iterator():
+		G.add_node(node, hedge_node = False)
+
+	for hyperedge_id in H.hyperedge_id_iterator():
+		# add hyperedge id node
+		G.add_node(hyperedge_id, hedge_node = True)
+		for tail_node in H.get_hyperedge_tail(hyperedge_id):
+			G.add_edge(tail_node,hyperedge_id)
+		for head_node in H.get_hyperedge_head(hyperedge_id):
+			G.add_edge(hyperedge_id,head_node)
+	return G
+
 def make_b_visit_dict(hedge_connectivity_file,identifier2id):
 	# make a dictionary where the key is a hyperedge ID and the value is a 
 	# 3-tuple of (bconnected nodes, traversed hedges, restrictive hedges). 
@@ -156,7 +177,7 @@ def filter_by_blacklisted_entities(H,blacklist_file,outfile=None):
 	return H
 
 
-def get_id_map(prefix):
+def get_id_map(prefix,common_name=False):
 	## reads ALL of reactome pathways and generates a PC2 identifier to uniprot.  
 	pcid2uid = {}
 	uid2pcid = {}
@@ -171,33 +192,20 @@ def get_id_map(prefix):
 					continue
 				items = row[3].split(';')
 				for i in items:
-					if 'uniprot-knowledgebase' in i:
-						#print(row[3].split(':'))
-						uid = i.split(':')[1]
-						pcid2uid[row[0]] = uid
-						uid2pcid[uid] = row[0]
-	print('Read mappings for %d pathway commons identifiers' % (len(pcid2uid)))
+					if common_name:
+						if 'hgnc-symbol' in i:
+							#print(row[3].split(':'))
+							hgnc = i.split(':')[1]
+							pcid2uid[row[0]] = hgnc
+							uid2pcid[hgnc] = row[0]
+					else:
+						if 'uniprot-knowledgebase' in i:
+							#print(row[3].split(':'))
+							uid = i.split(':')[1]
+							pcid2uid[row[0]] = uid
+							uid2pcid[uid] = row[0]
+	if common_name:
+		print('Read mappings for %d pathway commons identifiers to HGNC symbol (common name)' % (len(pcid2uid)))
+	else:
+		print('Read mappings for %d pathway commons identifiers to UniProt ID' % (len(pcid2uid)))
 	return pcid2uid, uid2pcid
-
-def get_id_map_common_name(prefix):
-	## reads ALL of reactome pathways and generates a PC2 identifier to uniprot.  
-	pcid2hgnc = {}
-	hgnc2pcid = {}
-	files = glob.glob('%s*-elements.txt' % (prefix))
-	for f in files:
-		with open(f) as fin:
-			for line in fin:
-				if line[0] == '#':
-					continue
-				row = line.strip().split()
-				if row[0] in pcid2hgnc:
-					continue
-				items = row[3].split(';')
-				for i in items:
-					if 'hgnc-symbol' in i:
-						#print(row[3].split(':'))
-						hgnc = i.split(':')[1]
-						pcid2hgnc[row[0]] = hgnc
-						hgnc2pcid[hgnc] = row[0]
-	print('Read mappings for %d pathway commons identifiers' % (len(pcid2hgnc)))
-	return pcid2hgnc, hgnc2pcid
