@@ -21,7 +21,7 @@ To make a [SIF graph](http://www.pathwaycommons.org/pc2/formats#sif_relations), 
 
 ## Parsing Hypergraph
 
-java PathwayCommonsParserIn `/Users/aritz/git/biopax-parsers/java/bin`:
+java PathwayCommonsParser In `/Users/aritz/git/biopax-parsers/java/bin`:
 
 ```
  /Users/aritz/Documents/github/pathway-connectivity/reactome-signaling-by-wnt.owl /Users/aritz/Documents/github/pathway-connectivity/hypergraph/ http://identifiers.org/reactome/R-HSA-195721 verbose
