@@ -79,13 +79,19 @@ def bfs_histogram(G,s):
 		to_traverse = traverse_next
 	return dist_sets
 
-def dist2hist(dist_dict):
+def dist2hist(dist_dict,counts=False):
 	## get histogram of distances.
 	h = {} # distance: # of nodes
 	for n,val in dist_dict.items():
 		if val == None: # skip 'None' type (these are infinity)
 			continue
 		if val not in h:
-			h[val] = set()
-		h[val].add(n)
+			if counts:
+				h[val] = 0
+			else:
+				h[val] = set()
+		if counts:
+			h[val]+=1
+		else:
+			h[val].add(n)
 	return h
