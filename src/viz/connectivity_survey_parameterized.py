@@ -10,6 +10,33 @@ import numpy, scipy
 import scipy.cluster.hierarchy as hier
 import scipy.spatial.distance as dist
 
+def single_panel(infile,title,outprefix,norm=False):
+	fig, ax1 = plt.subplots(ncols=1, nrows=1, figsize=(6,6))
+	if norm:
+		data1 = sort_by_col(infile,norm=True)
+		ca1 = ax1.matshow(data1,vmin=0,vmax=1, aspect='auto') 
+	else:
+		data1 = sort_by_col(infile)
+		ca1 = ax1.matshow(numpy.ma.log10(data1).filled(0), aspect='auto') 
+
+	ax1.set_title('%s\n%d nodes surveyed' % (title,len(data1)))
+	ax1.set_xlabel('Distance')
+	ax1.set_ylabel('Source Nodes')
+	ax1.xaxis.set_ticks_position('bottom')
+
+	cbar = fig.colorbar(ca1,ax=ax1)
+	if norm:
+		cbar.ax.set_title('Percentage',fontsize=10)
+	else:
+		cbar.ax.set_title('$\log_{10}$(#)',fontsize=10)
+
+	plt.tight_layout()
+	plt.savefig(outprefix+'.png')
+	print('saved to '+outprefix+'.png')
+	plt.savefig(outprefix+'.pdf')
+	os.system('pdfcrop %s.pdf %s.pdf' % (outprefix,outprefix))
+	print('saved to '+outprefix+'.pdf')
+	
 
 def three_panel(graph_file,bipartite_file,compound_file,hgraph_file,outprefix):
 
@@ -25,7 +52,7 @@ def three_panel(graph_file,bipartite_file,compound_file,hgraph_file,outprefix):
 	ax1.set_xlabel('Distance')
 	ax1.set_ylabel('Source Nodes')
 	cbar = fig.colorbar(ca1,ax=ax1)
-	cbar.ax.set_title('$\log_{10}$(# of Nodes)',fontsize=10)
+	cbar.ax.set_title('$\log_{10}$(#)',fontsize=10)
 	ax1.xaxis.set_ticks_position('bottom')
 	#ax1.set_yticklabels([])
 	#fig.colorbar(ax1)
@@ -38,7 +65,7 @@ def three_panel(graph_file,bipartite_file,compound_file,hgraph_file,outprefix):
 	ax2.set_xlabel('Distance/2')
 	ax2.set_ylabel('Source Nodes')
 	cbar = fig.colorbar(ca2,ax=ax2)
-	cbar.ax.set_title('$\log_{10}$(# of Nodes)',fontsize=10)
+	cbar.ax.set_title('$\log_{10}$(#)',fontsize=10)
 	ax2.xaxis.set_ticks_position('bottom')
 	#ax2.set_yticklabels([])
 
@@ -47,7 +74,7 @@ def three_panel(graph_file,bipartite_file,compound_file,hgraph_file,outprefix):
 	ax3.set_xlabel('Distance')
 	ax3.set_ylabel('Source Nodes')
 	cbar = fig.colorbar(ca3,ax=ax3)
-	cbar.ax.set_title('$\log_{10}$(# of Nodes)',fontsize=10)
+	cbar.ax.set_title('$\log_{10}$(#)',fontsize=10)
 	ax3.xaxis.set_ticks_position('bottom')
 	#ax3.set_yticklabels([])
 
@@ -56,7 +83,7 @@ def three_panel(graph_file,bipartite_file,compound_file,hgraph_file,outprefix):
 	ax4.set_xlabel('Distance')
 	ax4.set_ylabel('Source Nodes')
 	cbar = fig.colorbar(ca4,ax=ax4)
-	cbar.ax.set_title('$\log_{10}$(# of Nodes)',fontsize=10)
+	cbar.ax.set_title('$\log_{10}$(#)',fontsize=10)
 	ax4.xaxis.set_ticks_position('bottom')
 	#ax3.set_yticklabels([])
 
@@ -93,7 +120,7 @@ def three_panel_percentage(graph_file,bipartite_file,compound_file,hgraph_file,o
 	#ax2.matshow(numpy.log2(data), aspect='auto') 
 	ca2 = ax2.matshow(data2,vmin=0,vmax=1, aspect='auto') 
 	ax2.set_title('Bipartite Graph Connectivity\n%d nodes surveyed' % (len(data2)))
-	ax2.set_xlabel('Distance/2')
+	ax2.set_xlabel('Distance')
 	ax2.set_ylabel('Source Nodes')
 	cbar = fig.colorbar(ca2,ax=ax2)
 	cbar.ax.set_title('Percentage',fontsize=10)

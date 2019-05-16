@@ -2,7 +2,55 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 import sys
 import os
-from viz_utils import *
+#from viz_utils import *
+
+def main_single(scores_file,sigs_file,outprefix):
+	print('SCORES FILE',scores_file)
+	print('SIGS FILE',sigs_file)
+
+	scores,pathways = read_table(scores_file)
+	sigs,ignore = read_table(sigs_file)
+	print('SCORES: %d by %d' % (len(scores),len(scores[0])))
+	print('SIGS: %d by %d' % (len(sigs),len(sigs[0])))
+
+	## make grid of scatter plots.
+	x = []
+	y = []
+	areas = []
+	colors = []
+	for i in range(len(pathways)):
+		for j in range(len(pathways)):
+			x.append(i)
+			y.append(j)
+			areas.append(get_area(sigs[i][j]))
+			colors.append(scores[i][j])
+
+
+	fig, ax = plt.subplots(ncols=1, nrows=1, figsize=(6.1,6))
+	plt.gca().invert_yaxis()
+
+	ca = ax.scatter(x,y,s=areas,c=colors,cmap=cm.get_cmap('Blues'),vmin=0,vmax=1.0, edgecolors='k',linewidths=0.1)
+	ax.set_xlim(-0.5,len(pathways)-0.5)
+	ax.set_ylim(len(pathways)-0.5,-0.5)
+	ax.set_xticks(range(len(pathways)))
+	ax.set_yticks(range(len(pathways)))
+	ax.set_xticklabels([NAMES[p] for p in pathways], rotation=270, fontsize=9)
+	ax.set_yticklabels([NAMES[p] for p in pathways], fontsize=9)
+
+	fig.colorbar(ca, ax=ax, fraction=0.1, aspect=30)
+
+	# get title
+	k = int(scores_file.split('_')[-1].split('.')[0])
+	ax.set_title('Influence Score $s_{%d}$' % (k))
+
+	plt.tight_layout()
+	plt.savefig(outprefix+'.png')
+	print('saved to '+outprefix+'.png')
+	plt.savefig(outprefix+'.pdf')
+	os.system('pdfcrop %s.pdf %s.pdf' % (outprefix,outprefix))
+	print('saved to '+outprefix+'.pdf')
+
+	return
 
 def main_single(scores_file,sigs_file,outprefix):
 	print('SCORES FILE',scores_file)
