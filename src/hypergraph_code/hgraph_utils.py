@@ -1,5 +1,6 @@
 from halp import directed_hypergraph
 from halp.utilities import directed_statistics as stats
+from halp.utilities import directed_graph_transformations as transform
 import glob
 import networkx as nx
 
@@ -141,7 +142,7 @@ def make_b_visit_dict(hedge_connectivity_file,identifier2id):
 
 			b_visit_dict[name] = (bconn,traversed,restrictive)
 
-	print('%d hyperedges processed' % (len(b_visit_dict)))
+	#print('%d hyperedges processed' % (len(b_visit_dict)))
 	return b_visit_dict
 
 def filter_by_blacklisted_entities(H,blacklist_file,outfile=None):
