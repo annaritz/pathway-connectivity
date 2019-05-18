@@ -23,6 +23,7 @@ import STRING_channels.run_channels as run_channels
 import STRING_channels.viz_channels as viz_channels
 
 # TODO cplex is broken for python 3.7 on home laptop
+## TODO there's one reaction off in reactome files. Fix.
 import hypergraph_code.ILP.shortest_hyperpath as shortest_hyperpath 
 import hypergraph_code.permutation_test as permutation_test
 ## halp
@@ -221,10 +222,13 @@ def main():
 		files = glob.glob('%s*.txt' % (PROCESSED_STRING_DIR))
 		processed_nodes = {}
 		for f in files:
-			name,interactions = get_STRING_channel_interactions(f)
+			name = f.replace(PROCESSED_STRING_DIR,'').replace('.txt','')
+			print('NAME %s' % (name))
 
 			outfile = make_outfile(opts,OUT_TXT_CHANNEL_DIR,name)
 			if FORCE or not os.path.isfile(outfile):
+				interactions = get_STRING_channel_interactions(f)
+
 				interactions_in_reactome = get_STRING_interactions_in_reactome(interactions,uniprot2pc,name,nodes,opts)
 				interactions_in_pathways,interactions_in_same_pathway = run_channels.get_pathway_interactions(interactions_in_reactome,pathway_nodes,all_pathway_nodes)
 				print('  %d INTERACTIONS HAVE BOTH NODES IN THE REACTOME PATHWAYS' % (len(interactions_in_pathways)))
@@ -270,9 +274,9 @@ def main():
 			connected_set = set(interactions_brelax.keys())
 			bconn_set = set([key for key in interactions_brelax.keys() if interactions_brelax[key]==0])
 			outfile = make_outfile(opts,OUT_VIZ_CHANNEL_DIR,name,filetype='')
-			viz_channels.viz(interactions_in_reactome,[interactions_in_pathways,interactions_in_same_pathway,connected_set,bconn_set],\
-			['Pair in\nAny Pathway','Pair in\nSame Pathway','Pair\nConnected','Pair\nB-Connected'],\
-			['Pair in Any Pathway','Pair in Same Pathway','Pair Connected','Pair B-Connected'],outfile,name,brelax=interactions_brelax)
+			#viz_channels.viz(interactions_in_reactome,[interactions_in_pathways,interactions_in_same_pathway,connected_set,bconn_set],\
+			#['Pair in\nAny Pathway','Pair in\nSame Pathway','Pair\nConnected','Pair\nB-Connected'],\
+			#['Pair in Any Pathway','Pair in Same Pathway','Pair Connected','Pair B-Connected'],outfile,name,brelax=interactions_brelax)
 	return
 
 
@@ -323,9 +327,19 @@ def get_node_memberships(H):
 	return nodes,node_membership
 
 def get_STRING_interactions_in_reactome(interactions,uniprot2pc,infix,nodes,opts):
+	## check to see if these are singletons.  Get all nodes from singletons.
+	if opts.small_molecule_filter:
+		H_singletons, ignore, ignore= hgraph_utils.make_hypergraph(HGRAPH_SMALLMOL_PREFIX,keep_singleton_nodes=True)
+	elif opts.blacklist_filter:
+		H_singletons, ignore, ignore = hgraph_utils.make_hypergraph(HGRAPH_BLACKLIST_PREFIX,keep_singleton_nodes=True)
+	else:
+		H_singletons, ignore, ignore = hgraph_utils.make_hypergraph(HGRAPH_PREFIX,keep_singleton_nodes=True)
+	singleton_nodes = H_singletons.get_node_set()
+
 	interactions_in_reactome = []
 	mismapped = 0
 	notinreactome = 0
+	singleton = 0
 	missing = {}
 	for n1,n2,val in interactions:
 		if n1 in uniprot2pc and n2 in uniprot2pc:
@@ -333,27 +347,43 @@ def get_STRING_interactions_in_reactome(interactions,uniprot2pc,infix,nodes,opts
 			un2 = uniprot2pc[n2]
 		else:
 			if n1 not in uniprot2pc:
-				missing[n1] = ('NA','NotInPC')
+				missing[n1] = ('NA','NotInPC','NA')
 			if n2 not in uniprot2pc:
-				missing[n2] = ('NA','NotInPC')
+				missing[n2] = ('NA','NotInPC','NA')
 			mismapped+=1
 			continue
 		
 		if un1 in nodes and un2 in nodes:
 			interactions_in_reactome.append([un1,un2,val])
 		else:
+			s = False
 			if un1 not in nodes:
-				missing[n1] = (un1,'NotInHypergraph')
-			if un2 not in nodes:
-				missing[n2] = (un2,'NotInHypergraph')
-			notinreactome+=1
+				if un1 in singleton_nodes:
+					missing[n1] = (un1,'NotInHypergraph','YES')
+					s = True
+				else:
+					missing[n1] = (un1,'NotInHypergraph','NO')
 
-	print('  %d INTERACTIONS HAVE BOTH NODES IN REACTOME\n  %d interactions not in PathwayCommons Reactome mapping\n  %d interactions are not in this hypergraph' % (len(interactions_in_reactome),mismapped,notinreactome))
+			if un2 not in nodes:
+				if un2 in singleton_nodes:
+					missing[n2] = (un2,'NotInHypergraph','YES')	
+					s = True
+				else:
+					missing[n2] = (un2,'NotInHypergraph','NO')
+			if s:
+				singleton+=1
+			else:
+				notinreactome+=1
+
+	print('  %d INTERACTIONS HAVE BOTH NODES IN REACTOME' % (len(interactions_in_reactome)))
+	print('%d interactions not in PathwayCommons Reactome mapping' % (mismapped))
+	print('%d interactions have at least one singleton node in hypergraph (& ignored)' % (singleton))
+	print('%d interactions are not in this hypergraph' % (notinreactome))
 	outfile = make_outfile(opts,OUT_TXT_CHANNEL_DIR,infix+'-mismapped')
 	out = open(outfile,'w')
-	out.write('#UniProtID\tPathwayCommonsID\tMismappingReason\n')
+	out.write('#UniProtID\tPathwayCommonsID\tMismappingReason\tSingleton?\n')
 	for m in missing:
-		out.write('%s\t%s\t%s\n' % (m,missing[m][0],missing[m][1]))
+		out.write('%s\t%s\t%s\t%s\n' % (m,missing[m][0],missing[m][1],missing[m][2]))
 	out.close()
 	print('  wrote %d (%.4f) mismapped nodes to %s' % (len(missing),len(missing)/len(interactions),outfile))
 	sys.stdout.flush()
@@ -361,8 +391,6 @@ def get_STRING_interactions_in_reactome(interactions,uniprot2pc,infix,nodes,opts
 
 def get_STRING_channel_interactions(f):
 	print('FILE %s' % (f))
-	name = f.replace(PROCESSED_STRING_DIR,'').replace('.txt','')
-	print('NAME %s' % (name))
 	interactions = []
 	missing = {}
 	with open(f) as fin:
@@ -370,7 +398,7 @@ def get_STRING_channel_interactions(f):
 			row = line.strip().split()
 			interactions.append([row[2],row[3],int(row[4])])
 	print('  %d INTERACTIONS' % (len(interactions)))
-	return name,interactions
+	return interactions
 
 #############################
 ## VIZ FUNCTIONS

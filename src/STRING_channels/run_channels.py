@@ -1,5 +1,5 @@
 import sys
-#import hgraph_utils
+import hgraph_utils
 from halp import directed_hypergraph
 from halp.algorithms import directed_paths as hpaths
 from halp.utilities import directed_statistics as stats
@@ -18,7 +18,7 @@ def main(inprefix,hedge_connectivity_file,pathway_prefix,infix,run_all):
 	H, identifier2id, id2identifier = hgraph_utils.make_hypergraph(inprefix,keep_singleton_nodes=True)
 	H = hgraph_utils.add_entity_set_info(H)
 	G = transform.to_networkx_digraph(H)
-	b_visit_dict = hgraph_utils.make_b_visit_dict(hedge_connectivity_file,identifier2id)
+	
 	nodes = set() ## get proteins and complex members.
 	node_membership = {}
 	num_complexes = 0
@@ -58,7 +58,7 @@ def main(inprefix,hedge_connectivity_file,pathway_prefix,infix,run_all):
 	print('%d files:' % (len(files)),files)
 
 	processed_nodes = {}
-
+	files = ['../../data/STRING/processed/cooccurence.txt']
 	for f in files:
 		print('FILE %s' % (f))
 		name = f.replace('../../data/STRING/processed/','').replace('.txt','')
@@ -119,6 +119,7 @@ def main(inprefix,hedge_connectivity_file,pathway_prefix,infix,run_all):
 		sys.stdout.flush()
 
 		## NOTE: to do whole thing replace "intearactions-in_pathways" with "interactions-in_reactome"
+		b_visit_dict = hgraph_utils.make_b_visit_dict(hedge_connectivity_file,identifier2id)
 		brelax_dicts,processed_nodes = preprocess_brelax_dicts(H,interactions_in_pathways,node_membership,b_visit_dict,processed_nodes)
 		interactions_brelax = get_bconn_interactions(brelax_dicts,interactions_in_pathways,node_membership)
 		interactions_bipartite = list(interactions_brelax.keys())
