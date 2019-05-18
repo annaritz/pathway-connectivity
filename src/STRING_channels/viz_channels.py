@@ -13,7 +13,7 @@ from matplotlib.collections import PatchCollection
 
 def main(infix):
 	files = glob.glob('outfiles/%s-*-positive_sets.txt' % (infix))
-	#files = ['outfiles/small_molecule_filter_allpathways-cooccurence-positive_sets.txt']
+	files = ['outfiles/small_molecule_filter_allpathways-cooccurence-positive_sets.txt']
 	print('FILES:',files)
 	for f in files:
 		print('FILE %s' % (f))
@@ -164,7 +164,7 @@ def viz(interactions,pos_sets,short_names,pos_names,prefix,name,brelax=None):
 		print('  %d: dimensions are %d and %d' % (i,len(xs_recall[i]),len(xs_fpr[i])))
 
 	if brelax:
-		print('brelax')
+		print('brelax...')
 		for i in range(len(brelax_thresholds)):
 			b_tpr[i] = []
 			b_fpr[i] = []
@@ -182,7 +182,7 @@ def viz(interactions,pos_sets,short_names,pos_names,prefix,name,brelax=None):
 				if len(b_fpr[i]) == 0 or not ( abs(b_fpr[i][-1]-FP/(FP+TN)) <= resolution and abs(b_tpr[i][-1]-TP/(TP+FN)) <= resolution ):
 					b_fpr[i].append(FP/(FP+TN))
 					b_tpr[i].append(TP/(TP+FN))
-			print('  %d: dimensions are %d' % (i,len(b_tpr[i])))
+			#print('  %d: dimensions are %d' % (i,len(b_tpr[i])))
 
 
 	ax = plt.subplot(2,2,2)
