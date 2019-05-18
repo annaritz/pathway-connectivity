@@ -1,5 +1,5 @@
 import sys
-import hgraph_utils
+#import hgraph_utils
 from halp import directed_hypergraph
 from halp.algorithms import directed_paths as hpaths
 from halp.utilities import directed_statistics as stats
@@ -113,7 +113,7 @@ def main(inprefix,hedge_connectivity_file,pathway_prefix,infix,run_all):
 		print('  wrote %d mismapped nodes to outfiles/%s-%s-mismapped.txt' % (len(missing),infix,name))
 		sys.stdout.flush()
 
-		interactions_in_pathways,interactions_in_same_pathway = get_pathway_interactions(interactions_in_reactome,pathway_prefix,pathway_nodes,all_pathway_nodes)
+		interactions_in_pathways,interactions_in_same_pathway = get_pathway_interactions(interactions_in_reactome,pathway_nodes,all_pathway_nodes)
 		print('  %d INTERACTIONS HAVE BOTH NODES IN THE REACTOME PATHWAYS' % (len(interactions_in_pathways)))
 		print('  %d INTERACTIONS HAVE BOTH NODES IN SAME REACTOME PATHWAY' % (len(interactions_in_same_pathway)))
 		sys.stdout.flush()
@@ -201,7 +201,7 @@ def get_bconn_interactions(brelax_dicts,interactions_in_pathways,node_membership
 
 	return interactions_brelax
 
-def get_pathway_interactions(interactions_in_reactome,pathway_prefix,pathway_nodes,all_pathway_nodes):
+def get_pathway_interactions(interactions_in_reactome,pathway_nodes,all_pathway_nodes):
 
 	interactions_in_pathways = set()
 	interactions_in_same_pathway = set()

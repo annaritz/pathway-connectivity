@@ -42,7 +42,7 @@ def main(infix):
 				if int(row[5]) == 1:
 					connected[edge] = int(row[6])
 
-		file_infix = '%s-%s' % (infix,name)
+		file_infix = 'outfiles/%s-%s-viz' % (infix,name)
 		connected_set = set(connected.keys())
 		bconn_set = set([key for key in connected.keys() if connected[key]==0])
 		print('%d total; %d any pathway; %d same pathway; %d connected' % (len(interactions),len(any_pathway),len(same_pathway),len(connected_set)))
@@ -53,24 +53,25 @@ def main(infix):
 		#sys.exit()
 	return
 
-def viz(interactions,pos_sets,short_names,pos_names,infix,name,brelax=None):
+def viz(interactions,pos_sets,short_names,pos_names,prefix,name,brelax=None):
 	plt.figure(figsize=(10,10))
 	#resolution=0.001 ## set to 0 to keep all data points.
 	resolution=0.0
 
 	ax = plt.subplot(2,2,1)
 	vd = venn3(pos_sets[:3],set_labels=tuple(short_names[:3]))
-	# reposition labels	
-	lbl = vd.get_label_by_id('A')
-	x, y = lbl.get_position()
-	lbl.set_position((x, y-0.1))
-	lbl = vd.get_label_by_id('B')
-	x, y = lbl.get_position()
-	lbl.set_position((x-0.1, y-0.1))
+	# # reposition labels	
+	# lbl = vd.get_label_by_id('A')
+	# x, y = lbl.get_position()
+	# lbl.set_position((x, y-0.1))
+	# lbl = vd.get_label_by_id('B')
+	# x, y = lbl.get_position()
+	# lbl.set_position((x-0.1, y-0.1))
 	plt.title('STRING\'s "%s" channel\n(%d interactions map to Reactome)\n' % (name,len(interactions)))
 	
 
 	### NEW: Make the "Pair in Any Pathway" the universe
+	print('NEW: Make the "Pair in Any Pathway" the universe for plotting.')
 	interactions = {e:interactions[e] for e in pos_sets[0]}
 	pos_sets = pos_sets[1:]
 	pos_names = pos_names[1:]
@@ -123,9 +124,9 @@ def viz(interactions,pos_sets,short_names,pos_names,infix,name,brelax=None):
 		b_fpr = [0]*len(brelax_thresholds)
 
 	for i in range(len(pos_sets)):
-		tmp_file = 'tmpfiles/'+infix+'-%d.txt' % (i)
-		tmp_out = open(tmp_file,'w')
-		tmp_out.write('#%s\n' % (pos_names[i]))
+		# tmp_file = 'tmpfiles/'+infix+'-%d.txt' % (i)
+		# tmp_out = open(tmp_file,'w')
+		# tmp_out.write('#%s\n' % (pos_names[i]))
 		xs_recall[i] = []
 		xs_fpr[i] = []
 		ys_prec[i] = []
@@ -142,7 +143,7 @@ def viz(interactions,pos_sets,short_names,pos_names,infix,name,brelax=None):
 			FN = P-TP
 			TN = N-FP
 			
-			tmp_out.write('j=%d: P=%d, N=%d, TP=%d, FP=%d, FN=%d, TN=%d\n' % (j,P,N,TP,FP,FN,TN))
+			#tmp_out.write('j=%d: P=%d, N=%d, TP=%d, FP=%d, FN=%d, TN=%d\n' % (j,P,N,TP,FP,FN,TN))
 
 			if len(xs_recall[i]) == 0 or not ( abs(xs_recall[i][-1]-TP/(TP+FN)) <= resolution and abs(ys_prec[i][-1]-TP/(TP+FP)) <= resolution ):
 				xs_recall[i].append(TP/(TP+FN))
@@ -150,16 +151,16 @@ def viz(interactions,pos_sets,short_names,pos_names,infix,name,brelax=None):
 					ys_prec[i].append(0)
 				else:	
 					ys_prec[i].append(TP/(TP+FP))
-				tmp_out.write('     REC=%.2f, PREC=%.2f\n' % (xs_recall[i][-1],ys_prec[i][-1]))
+				#tmp_out.write('     REC=%.2f, PREC=%.2f\n' % (xs_recall[i][-1],ys_prec[i][-1]))
 			if len(xs_fpr[i]) == 0 or not ( abs(xs_fpr[i][-1]-FP/(FP+TN)) <= resolution and abs(ys_tpr[i][-1]-TP/(TP+FN)) <= resolution ):
 				xs_fpr[i].append(FP/(FP+TN))
 				ys_tpr[i].append(TP/(TP+FN))
 				
-				tmp_out.write('     FPR=%.2f, TPR=%.2f\n' % (xs_fpr[i][-1],ys_tpr[i][-1]))
+				#tmp_out.write('     FPR=%.2f, TPR=%.2f\n' % (xs_fpr[i][-1],ys_tpr[i][-1]))
 
 			assert ys_tpr[i][-1] == xs_recall[i][-1]
-		tmp_out.close()
-		print('wrote to %s' % (tmp_file))
+		#tmp_out.close()
+		#print('wrote to %s' % (tmp_file))
 		print('  %d: dimensions are %d and %d' % (i,len(xs_recall[i]),len(xs_fpr[i])))
 
 	if brelax:
@@ -248,7 +249,7 @@ def viz(interactions,pos_sets,short_names,pos_names,infix,name,brelax=None):
 	ax.legend()
 
 	plt.tight_layout()
-	filename = 'outfiles/%s-viz.png' % (infix)
+	filename = '%s.png' % (prefix)
 	plt.savefig(filename)
 	print('wrote to '+filename)
 	filename = filename.replace('png','pdf')

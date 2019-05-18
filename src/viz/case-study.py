@@ -10,8 +10,6 @@ import glob
 from viz_utils import *
 
 #pathways_to_highlight = ['Integrin-signaling','Signaling-by-MET','Signaling-by-MST1','Signaling-by-EGFR', 'Signaling-by-ERBB2', 'Signaling-by-ERBB4','Signaling-by-GPCR']
-pathways_to_highlight = ['Signaling-by-Activin', 'Signaling-by-TGF-beta-Receptor-Complex','Signaling-by-BMP']
-#pathways_to_highlight = ['Signaling-by-MET','Signaling-by-MST1','ERK1-ERK2-pathway','PI3K-AKT-Signaling']
 
 
 
