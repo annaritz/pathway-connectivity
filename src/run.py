@@ -7,6 +7,7 @@ import os
 import networkx as nx  ## TODO verify version 
 import time
 import random
+import glob
 from multiprocessing import Pool ## https://docs.python.org/3.4/library/multiprocessing.html?highlight=process
 import matplotlib.pyplot as plt
 from matplotlib import cm
@@ -18,6 +19,8 @@ import viz.viz_utils as viz_utils
 import viz.cumulative_histogram as cumulative_histogram
 import viz.connectivity_survey_parameterized as heatmap_viz
 import viz.significant_pathway_scores as permutation_viz
+import STRING_channels.run_channels as run_channels
+import STRING_channels.viz_channels as viz_channels
 
 # TODO cplex is broken for python 3.7 on home laptop
 import hypergraph_code.ILP.shortest_hyperpath as shortest_hyperpath 
@@ -35,20 +38,19 @@ HGRAPH_SMALLMOL_PREFIX = '../hypergraph/reactome_hypergraph_full/small_molecule_
 PATHWAY_HGRAPH_ENTITIES = '../hypergraph/reactome_hypergraphs/'
 PATHWAY_HGRAPH_PREFIX = '../hypergraph/reactome_hypergraphs_parsed/'
 BLACKLIST_FILE = '../data/blacklist.txt'
+PROCESSED_STRING_DIR = '../data/STRING/processed/' ## TODO incorporate code for processing string
 
 ## outdirectories
 OUT_TXT_DIR = 'out_txt/'
-if not os.path.isdir(OUT_TXT_DIR):
-	os.system('mkdir %s' % (OUT_TXT_DIR))
 OUT_PERM_DIR = 'out_txt/permutations/'
-if not os.path.isdir(OUT_PERM_DIR):
-	os.system('mkdir %s' % (OUT_PERM_DIR))
 OUT_PATHWAY_DIR = 'out_txt/pathway_survey/'
-if not os.path.isdir(OUT_PATHWAY_DIR):
-	os.system('mkdir %s' % (OUT_PATHWAY_DIR))
+OUT_TXT_CHANNEL_DIR = 'out_txt/STRING_channels/'
 OUT_VIZ_DIR = 'out_viz/'
-if not os.path.isdir(OUT_VIZ_DIR):
-	os.system('mkdir %s' % (OUT_VIZ_DIR))
+OUT_VIZ_CHANNEL_DIR = 'out_viz/STRING_channels/'
+DIRS = [OUT_TXT_DIR,OUT_PERM_DIR,OUT_PATHWAY_DIR,OUT_VIZ_DIR,OUT_TXT_CHANNEL_DIR,OUT_VIZ_CHANNEL_DIR]
+for d in DIRS:
+	if not os.path.isdir(d):
+		os.system('mkdir %s' % (d))
 
 ## global variables (will be set with parse_options)
 FORCE = False
@@ -56,6 +58,9 @@ PRINT_ONLY = False
 
 PATHWAYS = viz_utils.sorted_pathways 
 PATHWAY_NAMES = viz_utils.NAMES
+
+LARGE_VAL = 10000000
+
 #############################
 ## MAIN FUNCTION
 #############################
@@ -99,10 +104,8 @@ def main():
 
 		viz_histograms(sif_graph_file,bipartite_graph_file,bipartite_graph_file,hypergraph_file,brelax_file,opts)
 
-
-	########## Run permutation tests
-	if opts.perm_test:
-
+	########## read pathway file from hypergraph in certain cases
+	if opts.perm_test or opts.case_studies:
 		## Get pathway files
 		pathwayfile = make_outfile(opts,OUT_TXT_DIR,'pathways-from-hypergraph')
 		if FORCE or not os.path.isfile(pathwayfile):
@@ -111,6 +114,10 @@ def main():
 			force_print_statement(pathwayfile)
 		pathway_members = read_pathway_members(pathwayfile)
 
+	########## Run permutation tests
+	if opts.perm_test:
+
+		## read SIF pathway file too.
 		sif_pathwayfile = make_outfile(opts,OUT_TXT_DIR,'pathways-from-sif')
 		if FORCE or not os.path.isfile(sif_pathwayfile):
 			make_pathways_from_sif_graph(sif_graph,pathwayfile,sif_pathwayfile)
@@ -189,8 +196,181 @@ def main():
 		else:
 			print('not running any args. Use --force to run.')
 
-		viz_permutations(scores_file,'sif_graph',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,6,7,8,9,10])		
+		viz_permutations(scores_file,'sif_graph',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,6,7,8,9,10])
+
+	## visualize case studies for hypergraph
+	if opts.case_studies:
+		# run two batches
+		pathways_to_highlight = ['Signaling-by-Activin', 'Signaling-by-TGF-beta-Receptor-Complex','Signaling-by-BMP']
+		viz_influence_histogram(hypergraph,id2identifier,identifier2id,pathway_members,pathways_to_highlight,opts,[50,250,50])
+
+		pathways_to_highlight = ['Signaling-by-MET','Signaling-by-MST1','ERK1-ERK2-pathway','PI3K-AKT-Signaling']
+		viz_influence_histogram(hypergraph,id2identifier,identifier2id,pathway_members,pathways_to_highlight,opts,[250,50,250,300])
+
+	## run STRING channels (all 200 signaling pathways)
+	if opts.string_channels:
+		pathway_nodes,all_pathway_nodes = get_pathways_for_STRING_analysis(opts)
+
+		## add entity set info and get node memberships
+		hypergraph = hgraph_utils.add_entity_set_info(hypergraph)
+		nodes,node_membership = get_node_memberships(hypergraph)
+
+		# get pathway Identifiers to Uniprot ID
+		pc2uniprot,uniprot2pc = hgraph_utils.get_id_map(PATHWAY_HGRAPH_ENTITIES)
+
+		files = glob.glob('%s*.txt' % (PROCESSED_STRING_DIR))
+		processed_nodes = {}
+		for f in files:
+			name,interactions = get_STRING_channel_interactions(f)
+
+			outfile = make_outfile(opts,OUT_TXT_CHANNEL_DIR,name)
+			if FORCE or not os.path.isfile(outfile):
+				interactions_in_reactome = get_STRING_interactions_in_reactome(interactions,uniprot2pc,name,nodes,opts)
+				interactions_in_pathways,interactions_in_same_pathway = run_channels.get_pathway_interactions(interactions_in_reactome,pathway_nodes,all_pathway_nodes)
+				print('  %d INTERACTIONS HAVE BOTH NODES IN THE REACTOME PATHWAYS' % (len(interactions_in_pathways)))
+				print('  %d INTERACTIONS HAVE BOTH NODES IN SAME REACTOME PATHWAY' % (len(interactions_in_same_pathway)))
+				sys.stdout.flush()
+
+				b_visit_dict = get_bvisit_dict(hypergraph,id2identifier,identifier2id,opts)
+				brelax_dicts,processed_nodes = run_channels.preprocess_brelax_dicts(hypergraph,interactions_in_pathways,node_membership,b_visit_dict,processed_nodes)
+				interactions_brelax = run_channels.get_bconn_interactions(brelax_dicts,interactions_in_pathways,node_membership)
+				interactions_bipartite = list(interactions_brelax.keys())
+				interactions_bconn = [e for e in interactions_bipartite if interactions_brelax[e] == 0]
+
+				print('  %d INTERACTIONS ARE Bipartite CONNECTED IN REACTOME' % (len(interactions_bipartite)))
+				print('  %d INTERACTIONS ARE B-CONNECTED IN REACTOME' % (len(interactions_bconn)))
+				sys.stdout.flush()
+				
+				write_channel_output(interactions_in_reactome,interactions_in_pathways,interactions_in_same_pathway,interactions_brelax,outfile)
+				## ensure that variables are the right type for viz
+				interactions_in_reactome = {(n1,n2):val for n1,n2,val in interactions_in_reactome} 
+				interactions_in_pathways = set(interactions_in_pathways)
+				interactions_in_same_pathway = set(interactions_in_same_pathway)
+			else:
+				force_print_statement(outfile)
+				interactions_in_reactome = {}
+				interactions_in_pathways = set()
+				interactions_in_same_pathway = set()
+				interactions_brelax = {}
+				with open(outfile) as fin:
+					for line in fin:
+						if line[0] == '#':
+							continue
+						row = line.strip().split()
+						key = (row[0],row[1])
+						#    0      1       2       3           4             5         6
+						# '#Node1\tNode2\tScore\tAnyPathway\tSamePathway\tBipartite\tBRelaxDist\n'
+						interactions_in_reactome[key] = int(row[2])
+						if row[3] == '1':
+							interactions_in_pathways.add(key)
+						if row[4] == '1':
+							interactions_in_same_pathway.add(key)
+						if row[5] == '1':
+							interactions_brelax[key] = int(row[6])
+			connected_set = set(interactions_brelax.keys())
+			bconn_set = set([key for key in interactions_brelax.keys() if interactions_brelax[key]==0])
+			outfile = make_outfile(opts,OUT_VIZ_CHANNEL_DIR,name,filetype='')
+			viz_channels.viz(interactions_in_reactome,[interactions_in_pathways,interactions_in_same_pathway,connected_set,bconn_set],\
+			['Pair in\nAny Pathway','Pair in\nSame Pathway','Pair\nConnected','Pair\nB-Connected'],\
+			['Pair in Any Pathway','Pair in Same Pathway','Pair Connected','Pair B-Connected'],outfile,name,brelax=interactions_brelax)
 	return
+
+
+#############################
+## STRING CHANNEL FUNCTIONS
+#############################
+
+def write_channel_output(interactions_in_reactome,interactions_in_pathways,interactions_in_same_pathway,interactions_brelax,outfile):
+	out = open(outfile,'w')
+	out.write('#Node1\tNode2\tScore\tAnyPathway\tSamePathway\tBipartite\tBRelaxDist\n')
+	for n1,n2,val in interactions_in_reactome:
+		a = 1 if (n1,n2) in interactions_in_pathways else 0
+		b = 1 if (n1,n2) in interactions_in_same_pathway else 0
+		c = 1 if (n1,n2) in interactions_brelax else 0
+		d = interactions_brelax[(n1,n2)] if (n1,n2) in interactions_brelax else -1
+		out.write('%s\t%s\t%s\t%d\t%d\t%d\t%d\n' % (n1,n2,val,a,b,c,d))
+	out.close()
+	print('  wrote outfile to %s' % (outfile))
+	sys.stdout.flush()
+	return
+
+def get_node_memberships(H):
+	nodes = set() ## get proteins and complex members.
+	node_membership = {}
+	num_complexes = 0
+	num_entitysets = 0
+	for n in H.get_node_set():
+		attrs = H.get_node_attributes(n)		
+		if attrs['is_hypernode']:
+			nodes.update(attrs['hypernode_members'])
+			for m in attrs['hypernode_members']:
+				if m not in node_membership:
+					node_membership[m] = set()
+				node_membership[m].add(n)
+			num_complexes+=1
+		if attrs['is_entityset']:
+			nodes.update(attrs['entityset_members'])
+			for m in attrs['entityset_members']:
+				if m not in node_membership:
+					node_membership[m] = set()
+				node_membership[m].add(n)
+			num_entitysets+=1
+		nodes.add(n)
+		if n not in node_membership:
+			node_membership[n] = set([n])
+	print('%d complexes and %d entity sets' % (num_complexes,num_entitysets))
+	print('%d nodes including hypernode and entity set members' % (len(nodes)))	
+	return nodes,node_membership
+
+def get_STRING_interactions_in_reactome(interactions,uniprot2pc,infix,nodes,opts):
+	interactions_in_reactome = []
+	mismapped = 0
+	notinreactome = 0
+	missing = {}
+	for n1,n2,val in interactions:
+		if n1 in uniprot2pc and n2 in uniprot2pc:
+			un1 = uniprot2pc[n1]
+			un2 = uniprot2pc[n2]
+		else:
+			if n1 not in uniprot2pc:
+				missing[n1] = ('NA','NotInPC')
+			if n2 not in uniprot2pc:
+				missing[n2] = ('NA','NotInPC')
+			mismapped+=1
+			continue
+		
+		if un1 in nodes and un2 in nodes:
+			interactions_in_reactome.append([un1,un2,val])
+		else:
+			if un1 not in nodes:
+				missing[n1] = (un1,'NotInHypergraph')
+			if un2 not in nodes:
+				missing[n2] = (un2,'NotInHypergraph')
+			notinreactome+=1
+
+	print('  %d INTERACTIONS HAVE BOTH NODES IN REACTOME\n  %d interactions not in PathwayCommons Reactome mapping\n  %d interactions are not in this hypergraph' % (len(interactions_in_reactome),mismapped,notinreactome))
+	outfile = make_outfile(opts,OUT_TXT_CHANNEL_DIR,infix+'-mismapped')
+	out = open(outfile,'w')
+	out.write('#UniProtID\tPathwayCommonsID\tMismappingReason\n')
+	for m in missing:
+		out.write('%s\t%s\t%s\n' % (m,missing[m][0],missing[m][1]))
+	out.close()
+	print('  wrote %d (%.4f) mismapped nodes to %s' % (len(missing),len(missing)/len(interactions),outfile))
+	sys.stdout.flush()
+	return interactions_in_reactome
+
+def get_STRING_channel_interactions(f):
+	print('FILE %s' % (f))
+	name = f.replace(PROCESSED_STRING_DIR,'').replace('.txt','')
+	print('NAME %s' % (name))
+	interactions = []
+	missing = {}
+	with open(f) as fin:
+		for line in fin:
+			row = line.strip().split()
+			interactions.append([row[2],row[3],int(row[4])])
+	print('  %d INTERACTIONS' % (len(interactions)))
+	return name,interactions
 
 #############################
 ## VIZ FUNCTIONS
@@ -304,7 +484,6 @@ def viz_permutations(scores_file,perm_infix,num_perms,opts,k_vals=[0,1,2,3,4,5],
 		plt.close()
 	return
 		
-
 def read_influence_scores_file(scores_file):
 	scores = {}  # pathwayA pathwayB k: float
 	with open(scores_file) as fin:
@@ -319,6 +498,118 @@ def read_influence_scores_file(scores_file):
 			for k in range(2,len(row)):
 				scores[row[0]][row[1]][k-3] = float(row[k]) # pathwayA pathwayB k: float
 	return scores
+
+def viz_influence_histogram(H,id2identifier,identifier2id,pathway_members,pathways_to_highlight,opts,buffs):
+	COLORS = {'Signaling-by-MET':'#FA7171',
+	'Signaling-by-MST1':'#95A5D5',
+	'PI3K-AKT-Signaling':'#A8381A',
+	'Signaling-by-BMP':'#0008AF',
+	'Signaling-by-ERBB4':'#AF0060',
+	'ERK1-ERK2-pathway':'#47AF00',
+	'Integrin-signaling':'#A27A9B',
+	'Signaling-by-Activin':'#FA7171',
+	'Signaling-by-TGF-beta-Receptor-Complex':'#95A5D5'
+	}
+
+	for p in range(len(pathways_to_highlight)):
+		pathway = pathways_to_highlight[p]
+		buff = buffs[p]
+		suffix = 'case_study_%s' % (pathway)
+		print('  PATHWAY %s' % (pathway))
+
+		brelax_sets = survey_hgraph_single_pathway(H,id2identifier,identifier2id,pathway_members[pathway],suffix,opts)
+		overlap,running_tot = compute_brelax_overlaps(brelax_sets,pathway_members)
+		max_k = 10
+		running_tot = running_tot[:max_k+1]
+		for p2 in overlap:
+			overlap[p2] = overlap[p2][:max_k+1]
+
+		ax = plt.subplot(1,1,1)
+		x = range(max_k+1) ## max_k+1 for max_k
+		i=0
+		text_list = []
+		for n in PATHWAYS:
+			if n == pathway:
+				continue
+			num = len(pathway_members[pathway])
+			perc = int(overlap[n][-1]/num*10000)/100.0
+			if n in pathways_to_highlight:
+				ax.plot(x,overlap[n],color=COLORS[n],lw=3,label='_nolegend_',zorder=2)
+				text_list.append([n,i,perc,overlap[n][-1]])
+				i+=1
+			else:
+				ax.plot(x,overlap[n],color=[0.8,0.8,0.8],lw=1,label='_nolegend_',zorder=1)
+
+		# adjust text_list to be at least 3 spaces apart
+		text_list = space(text_list,buff)	
+		for i in range(len(text_list)):
+			label = '%s' % (PATHWAY_NAMES[text_list[i][0]])
+			ax.text(max_k+.25,text_list[i][3],label,backgroundcolor=COLORS[text_list[i][0]],color='w',fontsize=12)
+			ax.plot([max_k,max_k+.25],[overlap[text_list[i][0]][-1],text_list[i][3]],color=COLORS[text_list[i][0]],label='_nolegend_')
+
+		
+		ax.plot(range(len(running_tot)),running_tot,'--k',label='_nolegend_')
+		print('RUNNING:TOT',running_tot)
+		if max_k <= 5:
+			ax.text(max_k+.25,running_tot[-1],'All Nodes',backgroundcolor='k',color='w',fontsize=12)
+			ax.plot([max_k,max_k+.25],[running_tot[-1],running_tot[-1]],color='k',label='_nolegend_')
+		else:
+			ax.text(max_k+1,running_tot[-1],'All Nodes',backgroundcolor='k',color='w',fontsize=12)
+			ax.plot([max_k,max_k+1],[running_tot[-1],running_tot[-1]],color='k',label='_nolegend_')
+
+		#ax.legend(ncol=2,bbox_to_anchor=(.9, -.15),fontsize=10)
+		ax.set_title('Source Pathway %s' % (PATHWAY_NAMES[pathway]),fontsize=18)
+		ax.set_xlabel('$k$',fontsize=14)
+		ax.set_xticks(range(max_k+1))
+		for tick in ax.xaxis.get_major_ticks():
+			tick.label.set_fontsize(12)
+		for tick in ax.yaxis.get_major_ticks():
+			tick.label.set_fontsize(12) 
+		#ax.set_xtick_labels(range(max_k+1))
+		ax.set_ylabel('# of Nodes',fontsize=14)
+		#plt.tight_layout()
+		outprefix = make_outfile(opts,OUT_VIZ_DIR,suffix,filetype='')
+		plt.savefig(outprefix+'.png')
+		print('  saved to '+outprefix+'.png')
+		plt.savefig(outprefix+'.pdf')
+		os.system('pdfcrop %s.pdf %s.pdf' % (outprefix,outprefix))
+		print('  saved to '+outprefix+'.pdf')
+		plt.close()
+		
+	return
+
+def space(text_list,buff):
+	text_list.sort(key=lambda x:x[3])
+	median=0
+	jump = 1
+
+	for i in range(len(text_list)):
+		if i < median:
+			while text_list[i][3] > text_list[i+1][3]-buff:
+				for j in range(i+1):
+					if text_list[j][3] > text_list[i+1][3]-(i-j+1)*buff:
+						text_list[j][3] = text_list[j][3] - jump
+		if i > median:
+			while text_list[i][3] < text_list[i-1][3]+buff:
+				for j in range(i,len(text_list)):
+					if text_list[j][3] < text_list[i-1][3]+(i-j+1)*buff:
+						text_list[j][3] = text_list[j][3] + jump
+	return text_list
+
+def compute_brelax_overlaps(brelax_sets,pathway_members):
+	max_k = max(brelax_sets.keys())
+	overlap = {}
+	for pathway in PATHWAYS:
+		overlap[pathway] = []
+		running_total = [] # this will be recomputed over and over but it's oK!
+		cumu_p = set()
+		for k in range(max_k+1): # skip -1 (init set)
+			cumu_p.update(brelax_sets[k])
+			running_total.append(len(cumu_p))
+			overlap[pathway].append(len(cumu_p.intersection(set(pathway_members[pathway]))))
+	return overlap, running_total
+
+
 #############################
 ## SURVEY FUNCTIONS
 #############################
@@ -566,32 +857,35 @@ def survey_hgraph_pathways(H,id2identifier,identifier2id,pathway_members,suffix,
 		force_print_statement(outfile)
 	return
 
-def survey_hgraph_pathways_old(H,id2identifier,identifier2id,pathway_members,suffix,opts,verbose=False):
-	if verbose:
-		print('%d pathways' % (len(pathway_members)))
-	b_visit_dict = {}
-	for pathway in pathway_members:
-		if verbose:
-			print('  Pathway "%s"' % (pathway))
-		outfile = make_outfile(opts,OUT_PATHWAY_DIR,pathway+suffix)
-		if FORCE or not os.path.isfile(outfile):
-			if len(b_visit_dict) == 0:
-				b_visit_dict = get_bvisit_dict(H,id2identifier,identifier2id,opts)
-			dist_dict,traversed = hpaths.b_relaxation(H,pathway_members[pathway],b_visit_dict=b_visit_dict)
-			hist_dict = graph_utils.dist2hist(dist_dict)
-			out = open(outfile,'w')
-			out.write('#k\t#Members\tMembers\tIncidentNodes\n')
-			out.write('-1\t%d\t%s\t%s\n' % (len(pathway_members[pathway]),';'.join(pathway_members[pathway]),'None')) # write original set
-			for dist in range(max(hist_dict)+1):
-				if dist in hist_dict:
-					out.write('%d\t%d\t%s\t%s\n' % (dist,len(hist_dict[dist]),';'.join(hist_dict[dist]),';'.join(traversed[dist])))
-				else:
-					out.write('%s\t0\t\t\t\n' % (dist))
-			out.close()
-			print('wrote to %s' % (outfile))
-		else:
-			force_print_statement(outfile)
-	return 
+def survey_hgraph_single_pathway(H,id2identifier,identifier2id,members,suffix,opts):
+	outfile = make_outfile(opts,OUT_PATHWAY_DIR,suffix)
+	to_return = {}
+	if FORCE or not os.path.isfile(outfile):
+		b_visit_dict = get_bvisit_dict(H,id2identifier,identifier2id,opts)
+		dist_dict,ignore = hpaths.b_relaxation(H,members,b_visit_dict=b_visit_dict)
+		hist_dicts = graph_utils.dist2hist(dist_dict)
+		max_dist = max(hist_dicts.keys())
+		out = open(outfile,'w')
+		out.write('#k\tNumInSet\tMembers\n')
+		out.write('-1\t%d\t%s\n'% (len(members),';'.join(members)))
+		to_return[-1] = set(members)
+		for k in range(max_dist+1):
+			if k in hist_dicts:
+				out.write('%d\t%d\t%s\n' % (k,len(hist_dicts[k]),';'.join(hist_dicts[k])))
+				to_return[k] = set(hist_dicts[k])
+			else:
+				out.write('%d\t0\t\n' % (k))
+				to_return[k] = set()
+		out.close()
+	else:
+		force_print_statement(outfile)
+		with open(outfile) as fin:
+			for line in fin:
+				if line[0] == '#':
+					continue
+				row = line.strip().split()
+				to_return[int(row[0])] = set(row[2].split(';'))
+	return to_return
 
 #############################
 ## PATHWAY & PERMUTATION FUNCTIONS
@@ -678,6 +972,75 @@ def asymmetric_jaccard(initp1,initp2):
 	jaccard = len(initp1.intersection(initp2))/len(initp1)
 	return jaccard
 
+def get_pathways_for_STRING_analysis(opts):
+
+	# these are the "top lvel" reactome pathways - they are too general. Ignore.
+	TO_IGNORE = ['Circadian-Clock', 'Cell-Cycle', 'Disease',  'Programmed-Cell-Death',  'Extracellular-matrix-organization',  'Vesicle-mediated-transport', \
+	 'Cellular-responses-to-external-stimuli',  'Organelle-biogenesis-and-maintenance',  'Neuronal-System',  'NICD-traffics-to-nucleus',  'Signaling-Pathways',  \
+	 'Metabolism-of-RNA',  'DNA-Repair',  'Metabolism',  'Mitophagy',  'Gene-expression-(Transcription)',  'Developmental-Biology',  'Chromatin-organization', \
+	 'Transport-of-small-molecules',  'Immune-System',  'Metabolism-of-proteins',  'Muscle-contraction',  'Digestion-and-absorption',  'Reproduction', \
+	  'Hemostasis',  'Cell-Cell-communication']
+
+	pathway_nodes = {}
+	outfile = make_outfile(opts,OUT_TXT_DIR,'pathways-for-STRING')
+	if FORCE or not os.path.isfile(outfile):
+		files = glob.glob('%s/*-hypernodes.txt' % (PATHWAY_HGRAPH_PREFIX))
+		print('%d files' % (len(files)))
+		for f in files:
+			name = f.replace(PATHWAY_HGRAPH_PREFIX,'').replace('-hypernodes.txt','')
+			#print(name)
+			pathway_nodes[name] = set()
+			with open(f) as fin:
+				for line in fin:
+					if line[0] == '#':
+						continue
+					row = line.strip().split()
+					#print(row)
+					pathway_nodes[name].add(row[0])
+					if len(row) > 1: ## to be safe, add all hypernodes AND members. Add everything.
+						pathway_nodes[name].update(row[1].split(';'))
+		print('%d pathways in total' % (len(pathway_nodes)))
+
+		for i in TO_IGNORE:
+			del pathway_nodes[i]
+		print('%d pathways after removing top-level pathways' % (len(pathway_nodes)))
+
+		#to remove redundants
+		to_remove = set()
+		pathway_list = list(pathway_nodes.keys())
+		for i in pathway_list:
+			for j in pathway_list:
+				if i != j and len(pathway_nodes[i].intersection(pathway_nodes[j])) == len(pathway_nodes[i]):
+					to_remove.add(i)
+					break
+		print('Removing %d redundant sets' % (len(to_remove)))
+		for t in to_remove:
+			del pathway_nodes[t]
+
+
+		print('%d pathways remain' % (len(pathway_nodes)))
+		out = open(outfile,'w')
+		out.write('#Pathway\tNumMembers\tMembers\n')
+		for p in pathway_nodes:
+			out.write('%s\t%d\t%s\n' % (p,len(pathway_nodes[p]),';'.join(pathway_nodes[p])))
+		out.close()
+		print('Wrote to %s' % outfile)
+
+	else:
+		force_print_statement(outfile)
+		with open(outfile) as fin:
+			for line in fin:
+				if line[0] == '#':
+					continue
+				row = line.strip().split()
+				pathway_nodes[row[0]] = set(row[2].split(';'))
+	
+	all_pathway_nodes = set()
+	for p in pathway_nodes:
+		all_pathway_nodes.update(pathway_nodes[p])
+
+	return pathway_nodes,all_pathway_nodes
+
 #############################
 ## DATA READERS AND UTILITY FUNCTIONS
 #############################
@@ -763,9 +1126,6 @@ def compress_and_remove_files(tarfile,regex):
 	return
 
 
-
-
-
 #############################
 ## OPTION PARSER
 #############################
@@ -800,19 +1160,15 @@ def parse_options():
 		help='pathway influence permutation test with #PERMS number of permutations.')
 	group3.add_argument('--set_seed', action='store_true',default=False,
 		help='Set the seed of the random number generator to 123456. Default False.')
-	group3.add_argument('--case_study_A', metavar='NAME', type=str, default=None,
-		help='pathway influence case study "upstream" pathway')
-	group3.add_argument('--case_study_B', metavar='NAME', type=str, default=None,
-		help='pathway influence case study "downstream" pathway')
+	group3.add_argument('--case_studies',  action='store_true',default=False,
+		help='pathway influence case studies (hard-coded)')
 	group3.add_argument('--string_channels',action='store_true',default=False,
 		help='run STRING channel assessment.')
+	## TODO hub survey
 
 	opts = parser.parse_args()
 
 	## run checks
-	if (opts.case_study_A and not opts.case_study_B) or (opts.case_study_B and not opts.case_study_A):
-		sys.exit('ERROR: case studies requires both --case_study_A and --case_study_B.')
-
 	if opts.small_molecule_filter and opts.blacklist_filter:
 		sys.exit('ERROR: cannot filter by both small molecules and the blacklisted set.')
 
