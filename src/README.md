@@ -1,11 +1,18 @@
-Runs
+The `run.py` script runs (nearly) all figures that are presented in the following paper:
 
-To test:
+
+## Experiments
+
+### Compute Statistics
+
 ```
-python run.py --test
+python3 run.py --stats
+python3 run.py --stats --small_molecule_filter
+python3 run.py --stats --blacklist_filter
 ```
 
-To run on Wnt:
-```
-python run.py --single ../hypergraph/Signaling-by-WNT --strict
-```
+### Generate Connectivity Survey Histograms
+
+### Run Permutation Tests
+
+### 

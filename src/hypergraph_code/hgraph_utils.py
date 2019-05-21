@@ -3,6 +3,7 @@ from halp.utilities import directed_statistics as stats
 from halp.utilities import directed_graph_transformations as transform
 import glob
 import networkx as nx
+import sys
 
 def make_hypergraph(file_prefix,delim=';',sep='\t',keep_singleton_nodes=False):
 	hypernodes = {}
@@ -19,7 +20,7 @@ def make_hypergraph(file_prefix,delim=';',sep='\t',keep_singleton_nodes=False):
 	print('%d hypernodes from hypernodes file' % (len(hypernodes)))
 	identifier2id = {}
 	id2identifier = {}
-	H = directed_hypergraph.DirectedHypergraph()	
+	H = directed_hypergraph.DirectedHypergraph()
 	if keep_singleton_nodes:
 		for n in hypernodes:
 			H.add_node(n)
@@ -76,17 +77,82 @@ def make_hypergraph(file_prefix,delim=';',sep='\t',keep_singleton_nodes=False):
 
 	return H, identifier2id, id2identifier
 
-def add_entity_set_info(H):
+def check_singleton_nodes(H,file_prefix,entityset_prefix,outfile=None,sep='\t'):
+	# get entity set 
+	
+	candidate_nodes = set()
+	candidate_members = set()
+	files = glob.glob('%s*-entitysets.txt' % (entityset_prefix))
+	#print('checking %s*-entitysets.txt' % (entityset_prefix))
+	for f in files:
+		with open(f) as fin:
+			for line in fin:
+				if line[0] == '#':
+					continue
+				row = line.strip().split()
+				candidate_nodes.add(row[0])
+				candidate_members.update(set(row[2].split(';')))
+	files = glob.glob('%s*-complexes.txt' % (entityset_prefix))
+	#print('checking %s*-entitysets.txt' % (entityset_prefix))
+	for f in files:
+		with open(f) as fin:
+			for line in fin:
+				if line[0] == '#':
+					continue
+				row = line.strip().split()
+				candidate_nodes.add(row[0])
+				candidate_members.update(set(row[4].split(';')))
+
+	singleton_nodes = set()
+	nodes = H.get_node_set()
+	i=0
+	num_members=0
+	num_rsa_id = 0
+	others=0
+	with open(file_prefix+'-hypernodes.txt') as fin:
+		for line in fin:
+			i+=1
+			if line[0] == '#': 
+				continue
+			row = line.strip().split(sep)
+			n = row[0]
+			if n not in nodes or (n in nodes and len(H.get_backward_star(n))==0 and len(H.get_backward_star(n))==0):
+				## singleton candidate. in ES?  
+				if n in candidate_nodes:
+					singleton_nodes.add(n)
+				elif n in candidate_members:
+					num_members +=1
+				elif 'R-HSA' in n:
+					num_rsa_id+=1
+				else:
+					
+					others+=1
+
+	print('%d singleton nodes (%.2f)' % (len(singleton_nodes),len(singleton_nodes)/i))
+	print('%d nodes are members of entity sets or complexes but NOT entity sets themselves.' % (num_members))
+	print('%d nodes have R-HSA ids and will be ignored (these are reactions, not entities' % (num_rsa_id))
+	print('%d are "other"' % (others))
+	if outfile:
+		out = open(outfile,'w')
+		for n in singleton_nodes:
+			out.write('%s\n' % n)
+		out.close()
+		print('wrote to %s' % (outfile))
+	return
+
+
+def add_entity_set_info(H,prefix):
 	## adds entity set information (like complexes)
 	## hard -coded in for now. 
-	entitysetfile = '/Users/aritz/Documents/github/pathway-connectivity/reactome-entitysets.txt'
+	files = glob.glob('%s*-entitysets.txt' % (prefix))
 	es = {}
-	with open(entitysetfile) as fin:
-		for line in fin:
-			if line[0] == '#':
-				continue
-			row = line.strip().split()
-			es[row[0]] = row[2].split(';')
+	for f in files:
+		with open(f) as fin:
+			for line in fin:
+				if line[0] == '#':
+					continue
+				row = line.strip().split()
+				es[row[0]] = row[2].split(';')
 	for node in H.get_node_set():
 		if node in es:
 			H.add_node(node,is_entityset=True,entityset_members=es[row[0]])

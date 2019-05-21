@@ -20,7 +20,7 @@ def cumulative_histogram(graph_file,bipartite_file,compound_file,hgraph_file,out
 	#plot_ax(ax3,graph_file,bipartite_file,compound_file,hgraph_file,False,True,'Cumulative Connectivity')
 	#plot_ax(ax4,graph_file,bipartite_file,compound_file,hgraph_file,True,True,'Cumulative Connectivity')
 
-	fig, (ax1,ax2,ax3) = plt.subplots(ncols=3, nrows=1, figsize=(12,5))
+	fig, (ax1,ax2,ax3) = plt.subplots(ncols=3, nrows=1, figsize=(12,4))
 	plot_ax(ax1,graph_file,bipartite_file,compound_file,hgraph_file,False,False,'Unreachable s-t Paths',zero=True)
 	plot_ax(ax2,graph_file,bipartite_file,compound_file,hgraph_file,False,False,'Reachable s-t Paths')
 	plot_ax(ax3,graph_file,bipartite_file,compound_file,hgraph_file,True,True,'Cumulative Reachable s-t Paths')
@@ -46,10 +46,10 @@ def plot_ax(ax,graph_file,bipartite_file,compound_file,hgraph_file,norm,cumulati
 		#print(num1,num2,num3,num4)
 		#print(num1**2,num2**2,num3**2,num4**2)
 		#print(zeros1/num1**2,zeros2/num2**2,zeros3/num3**2,zeros4/num4**2)
-		ax.bar([0],[zeros1/float(num1**2)],.8)
-		ax.bar([1],[zeros3/float(num3**2)],.8)
-		ax.bar([2],[zeros2/float(num2**2)],.8)
-		ax.bar([3],[zeros4/float(num4**2)],.8)
+		ax.bar([0],[zeros1/float(num1**2)],.6)
+		ax.bar([1],[zeros3/float(num3**2)],.6)
+		ax.bar([2],[zeros2/float(num2**2)],.6)
+		ax.bar([3],[zeros4/float(num4**2)],.6)
 		ax.set_title(title)
 		ax.set_ylabel('Proportion of Unreachable s-t Paths')
 		ax.set_ylim(0,1)
@@ -57,10 +57,15 @@ def plot_ax(ax,graph_file,bipartite_file,compound_file,hgraph_file,norm,cumulati
 		ax.set_xticklabels(['Graph\n(%.3f)' % (zeros1/num1**2),'Compound\nGraph\n(%.3f)' % (zeros3/num3**2),'Bipartite\nGraph\n(%.3f)' % (zeros2/num2**2),'Hypergraph\n(%.5f)' % (zeros4/num4**2)])
 		return
 
-	ax.plot(data1,'-o',lw=1,ms=5,label='Graph\n(%d nodes)' % (num1))
-	ax.plot(data3,'-o',lw=1,ms=5,label='Compound Graph\n(%d nodes)' % (num3))
-	ax.plot(data2,'-o',lw=1,ms=5,label='Bipartite Graph\n(%d nodes)' % (num2))
-	ax.plot(data4,'-o',lw=1,ms=5,label='Hypergraph\n(%d nodes)' % (num4))
+	# ax.plot(data1,'-o',lw=1,ms=5,label='Graph\n(%d nodes)' % (num1))
+	# ax.plot(data3,'-o',lw=1,ms=5,label='Compound Graph\n(%d nodes)' % (num3))
+	# ax.plot(data2,'-o',lw=1,ms=5,label='Bipartite Graph\n(%d nodes)' % (num2))
+	# ax.plot(data4,'-o',lw=1,ms=5,label='Hypergraph\n(%d nodes)' % (num4))
+
+	ax.plot(data1,'-',lw=3,label='Graph\n(%d nodes)' % (num1))
+	ax.plot(data3,'-',lw=3,label='Compound Graph\n(%d nodes)' % (num3))
+	ax.plot(data2,'-',lw=3,label='Bipartite Graph\n(%d nodes)' % (num2))
+	ax.plot(data4,'-',lw=3,label='Hypergraph\n(%d nodes)' % (num4))
 	
 	ax.set_title(title)
 

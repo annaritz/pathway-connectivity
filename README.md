@@ -1,106 +1,56 @@
-# pathway-connectivity
+## Connectivity Measures for Signaling Pathway Topologies
 
-## [Pathway Commons](https://www.pathwaycommons.org/)
+Data and source code for (nearly) all figures and experiments from 
 
-PC v10 files available [here](http://www.pathwaycommons.org/archives/PC2/v10/).  Start by looking at 'Signaling by Wnt' Reactome files.  this will use the [RESTful webservice API](http://www.pathwaycommons.org/pc2/#get). In a browser, 
+Connectivity Measures for Signaling Pathway Topologies
+Franzese, Groce, Murali, and Ritz
+[bioRxiv 2019](https://doi.org/10.1101/593913](https://doi.org/10.1101/593913)
 
+_May 2019:_ This repo is still a little rough, Anna plans to refactor code and update instructions for data acquisition and processing in the next few weeks. Email her if you have questions.
+
+### Dependencies
+
+- Python (tested with v3.5.1)
+- [Hypergraph Algorithms Library in Python (HALP)](http://murali-group.github.io/halp/)
+- [NetworkX](https://networkx.github.io/) (v1.11, should work with v2.1)
+- [IBM ILOG CPLEX optimizer Python module](https://www.ibm.com/analytics/cplex-optimizer) (for shortest B-hyperpath - academic license available)
+
+### Datasets
+
+Reactome Pathway available via [PathwayCommons](http://www.pathwaycommons.org/).  PC v10 files available [here](http://www.pathwaycommons.org/archives/PC2/v10/).  Download the SIF and BioPAX formats of Reactome. More details coming...
+
+### 
 ```
-http://www.pathwaycommons.org/pc2/get?uri=http://identifiers.org/reactome/R-HSA-195721&subpw=true
-```
+python3 run.py -h
+usage: run.py [-h] [--force] [--printonly] [--keep_singletons]
+              [--small_molecule_filter] [--blacklist_filter] [--stats]
+              [--histograms] [--perm_test #PERMS] [--set_seed]
+              [--case_studies] [--string_channels]
 
-where `subpw=true` will report all sub-pathways of the pathway.  Move this file to `reactome-signaling-by-wnt.owl` for now. Copied `paxtools.jar` from v10 files, to convert to all other possible files:
+Run experiments for pathway connectivity. The four represenations are "SIF-
+Graph","Compound Graph","Bipartite Graph", and "Hypergraph"
 
-```
-java -jar paxtools.jar toSIF reactome-signaling-by-wnt.owl reactome-signaling-by-wnt.extended -extended  -andSIF seqDb=uniprot 
-java -jar paxtools.jar toSBGN reactome-signaling-by-wnt.owl reactome-signaling-by-wnt.sbgn
-java -jar paxtools.jar toGSEA reactome-signaling-by-wnt.owl reactome-signaling-by-wnt.gmt uniprot -subPathways
-```
+optional arguments:
+  -h, --help            show this help message and exit
 
-To make a [SIF graph](http://www.pathwaycommons.org/pc2/formats#sif_relations), use the directionality rules from the URL. Ignore "neighborhood of" relationships.
+General Arguments:
+  --force               force existing files to be overwritten (default=False)
+  --printonly           print the commands instead of running them
+                        (default=False)
 
+Dataset Arguments:
+  --keep_singletons     Keep singleton nodes. Default False.
+  --small_molecule_filter
+                        Filter by small molecule nodes
+  --blacklist_filter    Filter by PathwayCommons blacklist filtered nodes
 
-## Parsing Hypergraph
-
-java PathwayCommonsParser In `/Users/aritz/git/biopax-parsers/java/bin`:
-
-```
- /Users/aritz/Documents/github/pathway-connectivity/reactome-signaling-by-wnt.owl /Users/aritz/Documents/github/pathway-connectivity/hypergraph/ http://identifiers.org/reactome/R-HSA-195721 verbose
-```
-
-Back in this directory:
-
-```
-python src/make-signaling-hypergraph.py hypergraph/ hypergraph/
-```
-
-Makes `Signaling-by-WNT-hyperedges.txt` and `Signaling-by-WNT-hypernodes.txt` files in the `hypergraph/` directory.
-
-## Get example from the HALP poster
-
-```
-http://www.pathwaycommons.org/pc2/get?uri=http://identifiers.org/reactome/R-HSA-4641262&subpw=true
-mv ~/Downloads/get destruction-complex-disassembly.owl
-java -jar paxtools.jar toSIF destruction-complex-disassembly.owl destruction-complex-disassembly.extended -extended  -andSIF seqDb=uniprot 
-cd /Users/aritz/git/biopax-parsers/java/bin
-java PathwayCommonsParser /Users/aritz/Documents/github/pathway-connectivity/destruction-complex-disassembly.owl /Users/aritz/Documents/github/pathway-connectivity/hypergraph/ http://identifiers.org/reactome/R-HSA-4641262 verbose
-cd /Users/aritz/Documents/github/pathway-connectivity/
-python src/make-signaling-hypergraph.py hypergraph/ hypergraph/
-```
-
-Make the OWL and SIF formats consistent (remove CHEBI elements; remove things with non-UniProt)
-
-```
-python3 src/make-formats-consistent.py hypergraph/Disassembly-of-the-destruction-complex-and-recruitment-of-AXIN-to-the-membrane-hyperedges.txt hypergraph/Disassembly-of-the-destruction-complex-and-recruitment-of-AXIN-to-the-membrane-hypernodes.txt destruction-complex-disassembly.extended.sif consistent-destruction-complex-assembly
-```
-
-## Get single reaction
-
-http://www.pathwaycommons.org/pc2/get?uri=http://identifiers.org/reactome/R-HSA-201717&subpw=true
-mv ~/Downloads/get R-HSA-201717.owl
-java -jar paxtools.jar toSIF R-HSA-201717.owl R-HSA-201717.extended -extended  -andSIF seqDb=uniprot 
-cd /Users/aritz/git/biopax-parsers/java/bin
-java PathwayCommonsParser /Users/aritz/Documents/github/pathway-connectivity/R-HSA-201717.owl /Users/aritz/Documents/github/pathway-connectivity/hypergraph/ http://identifiers.org/reactome/R-HSA-201717 verbose
-cd /Users/aritz/Documents/github/pathway-connectivity/
-python src/make-signaling-hypergraph.py hypergraph/ hypergraph/
-
-## Receptors
-
-Looking at Reactome `*-entitysets.txt` and `*-elements.txt` files; taking one ID for each protein/group.  Read through the description of the pathway (e.g. [Reactome's description of Wnt signaling](https://reactome.org/content/detail/R-HSA-195721)). Considering proteins at the cell membrane, if there are options.  Not considering ubiquitinated proteins/groups.
-
-## Multiple Data Sources (in the future)
-
-The `pathways.txt` file contains two parts: the pathways and then the pathways broken by data source.  First get the point when the pathways are broken down by data source:
-```
-$ grep -n 'URI' pathways.txt 
-1:PATHWAY_URI	DISPLAY_NAME	DIRECT_SUB_PATHWAY_URIS	ALL_SUB_PATHWAY_URIS
-53763:PATHWAY_URI	DATASOURCE	DISPLAY_NAME	ALL_NAMES	NUM_DIRECT_COMPONENT_OR_STEP_PROCESSES
-```
-Then count all the pathways listed:
-```
-$ tail -n +53763 pathways.txt | cut -f 2 | sort | uniq -c
-   1 DATASOURCE
- 242 HumanCyc
- 774 INOH
- 122 KEGG
-  27 NetPath
- 295 PANTHER
-2216 Reactome
-49006 SMPDB
- 333 WikiPathways
- 745 pid
-```
-I am interested in all pathway sources except for the [Small Molecule Pathway Database](http://smpdb.ca/) (SMPDB) and [Integrating Network Objects with Hierarchies](http://inoh.hgc.jp/), which has a broken link.
-
-## Entire Reactome
-
-```
-# mv and gunzip PathwayCommons10.reactome.BIOPAX.owl
-cd /Users/aritz/git/biopax-parsers/java/bin
-java PathwayCommonsParser /Users/aritz/Documents/github/pathway-connectivity/data/OWL/PathwayCommons10.reactome.BIOPAX.owl /Users/aritz/Documents/github/pathway-connectivity/hypergraph/reactome_hypergraphs/ verbose > /Users/aritz/Documents/github/pathway-connectivity/hypergraph/reactome_hypergraphs/out.log
-python src/hypergraph/make-signaling-hypergraph.py hypergraph/reactome_hypergraphs/ hypergraph/reactome_hypergraphs_parsed/
-cd /Users/aritz/Documents/github/pathway-connectivity/hypergraph/reactome_hypergraph_full
-cat ../reactome_hypergraphs_parsed/*-hypernodes.txt | sort -u > reactome-hypernodes.txt
-cat ../reactome_hypergraphs_parsed/*-hyperedges.txt | sort -u > reactome-hyperedges.txt
-cd ../../
-cat hypergraph/reactome_hypergraphs/*-entitysets.txt | sort -u > reactome-entitysets.txt
-```
+Experiment Arguments:
+  --stats               print statistics about each representation.
+  --histograms          print histograms and heatmaps for each representation.
+  --perm_test #PERMS    pathway influence permutation test with #PERMS number
+                        of permutations.
+  --set_seed            Set the seed of the random number generator to 123456.
+                        Default False.
+  --case_studies        pathway influence case studies (hard-coded)
+  --string_channels     run STRING channel assessment.
+  ```

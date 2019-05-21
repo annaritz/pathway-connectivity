@@ -40,6 +40,7 @@ PATHWAY_HGRAPH_ENTITIES = '../hypergraph/reactome_hypergraphs/'
 PATHWAY_HGRAPH_PREFIX = '../hypergraph/reactome_hypergraphs_parsed/'
 BLACKLIST_FILE = '../data/blacklist.txt'
 PROCESSED_STRING_DIR = '../data/STRING/processed/' ## TODO incorporate code for processing string
+BIOPAXSTREAM_FILE = 'BioPAXStream/output/reactome_parameterized_filtered.txt'
 
 ## outdirectories
 OUT_TXT_DIR = 'out_txt/'
@@ -73,10 +74,13 @@ def main():
 
 	## get representations no matter what
 	sif_graph,compound_graph,bipartite_graph,compact_bipartite_graph,hypergraph,identifier2id,id2identifier = \
-		get_representations(opts.small_molecule_filter,opts.blacklist_filter,opts.keep_singletons)
+		get_representations(opts.small_molecule_filter,opts.blacklist_filter,opts.keep_singletons,opts)
 
 	## TODO: add hypergraph building into this script.
-	## TODO CHECK WHAT HAPPENS IF WE KEEP SINGLETON NODES -- SO many singleton nodes oof.
+	## TODO CHECK WHAT HAPPENS IF WE KEEP SINGLETON NODES -- SO many singleton nodes oof. (update - 
+	## singletons are often members of entity sets or complexes that actually aren't nodes. We were
+	## pretty liberal in generating the hyperedge files.  Running WITHOUT the --keep_singletons filetr
+	## for the paper.
 
 	######### Print statistics for table
 	if opts.stats: 
@@ -97,13 +101,17 @@ def main():
 		survey_graph(sif_graph,sif_graph_file)
 		bipartite_graph_file = make_outfile(opts,OUT_TXT_DIR,'bipartite-graph-survey')
 		survey_graph(bipartite_graph,bipartite_graph_file)
-		## TODO: this is broken. Copy files from work laptop over before continuing.
+		## TODO: this is broken on home laptop. Copy files from work laptop over before continuing.
 		hypergraph_file = make_outfile(opts,OUT_TXT_DIR,'hypergraph-survey')
 		survey_hgraph(hypergraph,hypergraph_file)
 		brelax_file = make_outfile(opts,OUT_TXT_DIR,'hypergraph-brelax-survey')
 		survey_hgraph_brelax(hypergraph,brelax_file,id2identifier,identifier2id,opts)
 
-		viz_histograms(sif_graph_file,bipartite_graph_file,bipartite_graph_file,hypergraph_file,brelax_file,opts)
+		if opts.small_molecule_filter or opts.blacklist_filter:
+			viz_histograms(sif_graph_file,bipartite_graph_file,None,hypergraph_file,brelax_file,opts)
+		else:	
+			compound_graph_file = BIOPAXSTREAM_FILE
+			viz_histograms(sif_graph_file,bipartite_graph_file,compound_graph_file,hypergraph_file,brelax_file,opts)
 
 	########## read pathway file from hypergraph in certain cases
 	if opts.perm_test or opts.case_studies:
@@ -153,7 +161,8 @@ def main():
 		else:
 			print('not running any args. Use --force to run.')
 
-		viz_permutations(scores_file,'hypergraph',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,10,15,20,25,30])
+		viz_permutations(scores_file,'hypergraph',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,10,15,20,25,30],plot_singles=False,viz_jaccard=False)
+		
 
 		####### BIPARTITE GRAPH
 		# calculate original bipartite pathway survey first
@@ -175,7 +184,8 @@ def main():
 		else:
 			print('not running any args. Use --force to run.')
 
-		viz_permutations(scores_file,'bipartite',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,10,20,30,40,50,60])
+		# note: coule go to 60
+		viz_permutations(scores_file,'bipartite',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,10,20,30,40,50],plot_singles=False,viz_jaccard=False)
 		########### SIF GRAPH
 
 		# calculate original SIF pathway survey first
@@ -197,7 +207,7 @@ def main():
 		else:
 			print('not running any args. Use --force to run.')
 
-		viz_permutations(scores_file,'sif_graph',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,6,7,8,9,10])
+		viz_permutations(scores_file,'sif_graph',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,6,7,8,9,10],plot_singles=False,viz_jaccard=False)
 
 	## visualize case studies for hypergraph
 	if opts.case_studies:
@@ -213,7 +223,7 @@ def main():
 		pathway_nodes,all_pathway_nodes = get_pathways_for_STRING_analysis(opts)
 
 		## add entity set info and get node memberships
-		hypergraph = hgraph_utils.add_entity_set_info(hypergraph)
+		hypergraph = hgraph_utils.add_entity_set_info(hypergraph,PATHWAY_HGRAPH_ENTITIES)
 		nodes,node_membership = get_node_memberships(hypergraph)
 
 		# get pathway Identifiers to Uniprot ID
@@ -404,15 +414,24 @@ def get_STRING_channel_interactions(f):
 ## VIZ FUNCTIONS
 #############################
 
-def viz_histograms(sif_graph_file,compound_graph_file,bipartite_graph_file,hypergraph_file,brelax_file,opts):
+def viz_histograms(sif_graph_file,bipartite_graph_file,compound_graph_file,hypergraph_file,brelax_file,opts):
 
-	cumulative_file = make_outfile(opts,OUT_VIZ_DIR,'cumulative-histogram',filetype='')
-	cumulative_histogram.cumulative_histogram(sif_graph_file,bipartite_graph_file,bipartite_graph_file,hypergraph_file,cumulative_file)
+	if compound_graph_file != None:
+		# graph_file,bipartite_file,compound_file,hgraph_file
+		cumulative_file = make_outfile(opts,OUT_VIZ_DIR,'cumulative-histogram',filetype='')
+		cumulative_histogram.cumulative_histogram(sif_graph_file,bipartite_graph_file,compound_graph_file,hypergraph_file,cumulative_file)
 
 	heatmap_file_unnorm = make_outfile(opts,OUT_VIZ_DIR,'cumulative_heatmap',filetype='')
 	heatmap_file_norm = make_outfile(opts,OUT_VIZ_DIR,'cumulative_heatmap_normalized',filetype='')
-	heatmap_viz.three_panel(sif_graph_file,compound_graph_file,bipartite_graph_file,hypergraph_file,heatmap_file_unnorm)
-	heatmap_viz.three_panel_percentage(sif_graph_file,compound_graph_file,bipartite_graph_file,hypergraph_file,heatmap_file_norm)
+	if compound_graph_file == None:
+		# graph_file,bipartite_file,hgraph_file
+		heatmap_viz.three_panel(sif_graph_file,bipartite_graph_file,hypergraph_file,heatmap_file_unnorm)
+		heatmap_viz.three_panel_Proportion(sif_graph_file,bipartite_graph_file,hypergraph_file,heatmap_file_norm)
+	else:
+		# graph_file,bipartite_file,compound_file,hgraph_file
+		heatmap_viz.four_panel(sif_graph_file,bipartite_graph_file,compound_graph_file,hypergraph_file,heatmap_file_unnorm)
+		heatmap_viz.four_panel_Proportion(sif_graph_file,bipartite_graph_file,compound_graph_file,hypergraph_file,heatmap_file_norm)
+
 
 	# make singles
 	infiles = [sif_graph_file,compound_graph_file,bipartite_graph_file,hypergraph_file,brelax_file]
@@ -423,37 +442,40 @@ def viz_histograms(sif_graph_file,compound_graph_file,bipartite_graph_file,hyper
 		make_outfile(opts,OUT_VIZ_DIR,'hypergraph_heatmap',filetype=''), \
 		make_outfile(opts,OUT_VIZ_DIR,'brelax_heatmap',filetype='')]
 	for i in range(len(infiles)):
+		if infiles[i] == None:
+			continue
 		heatmap_viz.single_panel(infiles[i],titles[i],outprefixes[i],norm=False)
 		heatmap_viz.single_panel(infiles[i],titles[i],outprefixes[i]+'_normalized',norm=True)
 	return
 
-def viz_permutations(scores_file,perm_infix,num_perms,opts,k_vals=[0,1,2,3,4,5],viz_jaccard=True):
+def viz_permutations(scores_file,perm_infix,num_perms,opts,k_vals=[0,1,2,3,4,5],viz_jaccard=True,plot_singles=True):
 	# read scores file
 	scores = read_influence_scores_file(scores_file)
 
 	## visualize jaccard overlap
-	M = [0]*len(PATHWAYS)
-	for i in range(len(PATHWAYS)):
-		M[i] = [0]*len(PATHWAYS)
-		for j in range(len(PATHWAYS)):
-			M[i][j] = scores[PATHWAYS[i]][PATHWAYS[j]][-1]
-	fig, ax = plt.subplots(ncols=1, nrows=1, figsize=(6,6))
-	ca = ax.matshow(M, aspect='auto', vmin=0.0, vmax=1,cmap=plt.get_cmap('Blues'))
-	fig.colorbar(ca,ax=ax)
-	ax.set_title('%s Pathway Overlap' % (perm_infix))
-	ax.xaxis.set_ticks_position('bottom')
-	ax.set_xticks(range(len(PATHWAYS)))
-	ax.set_yticks(range(len(PATHWAYS)))
-	ax.set_xticklabels([PATHWAY_NAMES[p] for p in PATHWAYS], rotation=270, fontsize=9)
-	ax.set_yticklabels([PATHWAY_NAMES[p] for p in PATHWAYS], fontsize=9)
+	if viz_jaccard:
+		M = [0]*len(PATHWAYS)
+		for i in range(len(PATHWAYS)):
+			M[i] = [0]*len(PATHWAYS)
+			for j in range(len(PATHWAYS)):
+				M[i][j] = scores[PATHWAYS[i]][PATHWAYS[j]][-1]
+		fig, ax = plt.subplots(ncols=1, nrows=1, figsize=(6,6))
+		ca = ax.matshow(M, aspect='auto', vmin=0.0, vmax=1,cmap=plt.get_cmap('Blues'))
+		fig.colorbar(ca,ax=ax)
+		ax.set_title('%s Pathway Overlap' % (perm_infix))
+		ax.xaxis.set_ticks_position('bottom')
+		ax.set_xticks(range(len(PATHWAYS)))
+		ax.set_yticks(range(len(PATHWAYS)))
+		ax.set_xticklabels([PATHWAY_NAMES[p] for p in PATHWAYS], rotation=270, fontsize=9)
+		ax.set_yticklabels([PATHWAY_NAMES[p] for p in PATHWAYS], fontsize=9)
 
-	plt.tight_layout()
-	outprefix = make_outfile(opts,OUT_VIZ_DIR,perm_infix+'_jaccard',filetype='')
-	plt.savefig(outprefix+'.png')
-	print('saved to '+outprefix+'.png')
-	plt.savefig(outprefix+'.pdf')
-	os.system('pdfcrop %s.pdf %s.pdf' % (outprefix,outprefix))
-	print('saved to '+outprefix+'.pdf')
+		plt.tight_layout()
+		outprefix = make_outfile(opts,OUT_VIZ_DIR,perm_infix+'_jaccard',filetype='')
+		plt.savefig(outprefix+'.png')
+		print('saved to '+outprefix+'.png')
+		plt.savefig(outprefix+'.pdf')
+		os.system('pdfcrop %s.pdf %s.pdf' % (outprefix,outprefix))
+		print('saved to '+outprefix+'.pdf')
 
 	## get permutation scores
 	X = {}
@@ -476,7 +498,55 @@ def viz_permutations(scores_file,perm_infix,num_perms,opts,k_vals=[0,1,2,3,4,5],
 						X[k][i][j] += 1/num_perms
 
 	## visualize significant scores for selected values of k
-	for k in k_vals:
+	if plot_singles:
+		for k in k_vals:
+			## make grid of scatter plots.
+			x = []
+			y = []
+			areas = []
+			colors = []
+			for i in range(len(PATHWAYS)):
+				for j in range(len(PATHWAYS)):
+					## here's the thing: influence score is (pathwayA,pathwayB,k,score)
+					## pathwayA is on the ROWS and pathwayB is on the COLUMNS
+					## so pathwayA is the Y-AXIS and pathwayB is the X-AXIS
+					x.append(j)
+					y.append(i)
+					areas.append(permutation_viz.get_area(X[k][i][j]))
+					colors.append(scores[PATHWAYS[i]][PATHWAYS[j]][k])
+			fig, ax = plt.subplots(ncols=1, nrows=1, figsize=(6.1,6))
+			plt.gca().invert_yaxis()
+			plt.gca().invert_xaxis()
+			ca = ax.scatter(x,y,s=areas,c=colors,cmap=cm.get_cmap('Blues'),vmin=0,vmax=1.0, edgecolors='k',linewidths=0.1)
+			ax.set_xlim(-0.5,len(PATHWAYS)-0.5)
+			ax.set_ylim(len(PATHWAYS)-0.5,-0.5)
+			ax.set_xticks(range(len(PATHWAYS)))
+			ax.set_yticks(range(len(PATHWAYS)))
+			ax.set_xticklabels([PATHWAY_NAMES[p] for p in PATHWAYS], rotation=270, fontsize=9)
+			ax.set_yticklabels([PATHWAY_NAMES[p] for p in PATHWAYS], fontsize=9)
+			fig.colorbar(ca, ax=ax, fraction=0.1, aspect=30)
+			plt.tight_layout()
+			outprefix = make_outfile(opts,OUT_VIZ_DIR,perm_infix+'_k_%d' % (k),filetype='')
+			plt.savefig(outprefix+'.png')
+			print('saved to '+outprefix+'.png')
+			plt.savefig(outprefix+'.pdf')
+			os.system('pdfcrop %s.pdf %s.pdf' % (outprefix,outprefix))
+			print('saved to '+outprefix+'.pdf')
+			plt.close()
+
+	## visualize significant scores for selected values of k
+	fig, axes1 = plt.subplots(ncols=6, nrows=2, figsize=(10,4.5))
+	axes = []
+	for a in axes1:
+		for b in a:
+			axes.append(b)
+	if len(k_vals) < 12:
+		for i in range(len(k_vals),12):
+			axes[i].set_visible(False)
+
+	for i in range(len(k_vals)):
+		k = k_vals[i]
+		ax = axes[i]
 		## make grid of scatter plots.
 		x = []
 		y = []
@@ -489,27 +559,25 @@ def viz_permutations(scores_file,perm_infix,num_perms,opts,k_vals=[0,1,2,3,4,5],
 				## so pathwayA is the Y-AXIS and pathwayB is the X-AXIS
 				x.append(j)
 				y.append(i)
-				areas.append(permutation_viz.get_area(X[k][i][j]))
+				areas.append(permutation_viz.get_area(X[k][i][j],factor=5))
 				colors.append(scores[PATHWAYS[i]][PATHWAYS[j]][k])
-		fig, ax = plt.subplots(ncols=1, nrows=1, figsize=(6.1,6))
+		
 		plt.gca().invert_yaxis()
 		plt.gca().invert_xaxis()
-		ca = ax.scatter(x,y,s=areas,c=colors,cmap=cm.get_cmap('Blues'),vmin=0,vmax=1.0, edgecolors='k',linewidths=0.1)
+		ca = ax.scatter(x,y,s=areas,c=colors,cmap=cm.get_cmap('Blues'),vmin=0,vmax=1.0, edgecolors='k',linewidths=0.01)
 		ax.set_xlim(-0.5,len(PATHWAYS)-0.5)
 		ax.set_ylim(len(PATHWAYS)-0.5,-0.5)
-		ax.set_xticks(range(len(PATHWAYS)))
-		ax.set_yticks(range(len(PATHWAYS)))
-		ax.set_xticklabels([PATHWAY_NAMES[p] for p in PATHWAYS], rotation=270, fontsize=9)
-		ax.set_yticklabels([PATHWAY_NAMES[p] for p in PATHWAYS], fontsize=9)
-		fig.colorbar(ca, ax=ax, fraction=0.1, aspect=30)
-		plt.tight_layout()
-		outprefix = make_outfile(opts,OUT_VIZ_DIR,perm_infix+'_k_%d' % (k),filetype='')
-		plt.savefig(outprefix+'.png')
-		print('saved to '+outprefix+'.png')
-		plt.savefig(outprefix+'.pdf')
-		os.system('pdfcrop %s.pdf %s.pdf' % (outprefix,outprefix))
-		print('saved to '+outprefix+'.pdf')
-		plt.close()
+		ax.set_xticks([])
+		ax.set_yticks([])
+		ax.set_title('$s_{%d}$' % (k),fontsize=14)
+	plt.tight_layout()
+	outprefix = make_outfile(opts,OUT_VIZ_DIR,perm_infix+'_summary',filetype='')
+	plt.savefig(outprefix+'.png')
+	print('saved to '+outprefix+'.png')
+	plt.savefig(outprefix+'.pdf')
+	os.system('pdfcrop %s.pdf %s.pdf' % (outprefix,outprefix))
+	print('saved to '+outprefix+'.pdf')
+	plt.close()
 	return
 		
 def read_influence_scores_file(scores_file):
@@ -1072,7 +1140,7 @@ def get_pathways_for_STRING_analysis(opts):
 #############################
 ## DATA READERS AND UTILITY FUNCTIONS
 #############################
-def get_representations(small_molecule_filter,blacklist_filter,keep_singletons):
+def get_representations(small_molecule_filter,blacklist_filter,keep_singletons,opts):
 	## SIF graph is an edges file; by definition there are no singletons.
 	sif_graph = graph_utils.read_graph(SIF_FILE,SIF_CONV_FILE)
 	nodes = sif_graph.nodes()
@@ -1110,10 +1178,14 @@ def get_representations(small_molecule_filter,blacklist_filter,keep_singletons):
 	# compound graph later
 	if small_molecule_filter:
 		hypergraph, identifier2id, id2identifier = hgraph_utils.make_hypergraph(HGRAPH_SMALLMOL_PREFIX,keep_singleton_nodes=keep_singletons)
+		#hgraph_utils.check_singleton_nodes(hypergraph,HGRAPH_SMALLMOL_PREFIX,PATHWAY_HGRAPH_ENTITIES,outfile=make_outfile(opts,OUT_TXT_DIR,'hypergraph-singletons'))
 	elif blacklist_filter:
 		hypergraph, identifier2id, id2identifier = hgraph_utils.make_hypergraph(HGRAPH_BLACKLIST_PREFIX,keep_singleton_nodes=keep_singletons)
+		#hgraph_utils.check_singleton_nodes(hypergraph,HGRAPH_BLACKLIST_PREFIX,PATHWAY_HGRAPH_ENTITIES,outfile=make_outfile(opts,OUT_TXT_DIR,'hypergraph-singletons'))
 	else:
 		hypergraph, identifier2id, id2identifier = hgraph_utils.make_hypergraph(HGRAPH_PREFIX,keep_singleton_nodes=keep_singletons)
+		#hgraph_utils.check_singleton_nodes(hypergraph,HGRAPH_PREFIX,PATHWAY_HGRAPH_ENTITIES,outfile=make_outfile(opts,OUT_TXT_DIR,'hypergraph-singletons'))
+
 	bipartite_graph = hgraph_utils.to_bipartite_graph(hypergraph)
 	compact_bipartite_graph = hgraph_utils.to_digraph(hypergraph)
 	return sif_graph,None,bipartite_graph,compact_bipartite_graph,hypergraph,identifier2id,id2identifier
