@@ -1,10 +1,11 @@
 ## Connectivity Measures for Signaling Pathway Topologies
 
-Data and source code for (nearly) all figures and experiments from 
+Data and source code for (nearly) all figures and experiments from a paper on [bioRxiv](https://doi.org/10.1101/593913):
 
-Connectivity Measures for Signaling Pathway Topologies
-Franzese, Groce, Murali, and Ritz
-[bioRxiv 2019](https://doi.org/10.1101/593913)
+**Connectivity Measures for Signaling Pathway Topologies**  
+Nick Franzese, Adam Groce, T.M. Murali, and Anna Ritz  
+
+This work was presented at GLBio 2019, and will be a poster at ISMB 2019. A long version is (soon-to-be) submitted.
 
 _May 2019:_ This repo is still a little rough, Anna plans to refactor code and update instructions for data acquisition and processing in the next few weeks. Email her if you have questions.
 
