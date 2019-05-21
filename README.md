@@ -4,7 +4,7 @@ Data and source code for (nearly) all figures and experiments from
 
 Connectivity Measures for Signaling Pathway Topologies
 Franzese, Groce, Murali, and Ritz
-[bioRxiv 2019](https://doi.org/10.1101/593913](https://doi.org/10.1101/593913)
+[bioRxiv 2019](https://doi.org/10.1101/593913)
 
 _May 2019:_ This repo is still a little rough, Anna plans to refactor code and update instructions for data acquisition and processing in the next few weeks. Email her if you have questions.
 
