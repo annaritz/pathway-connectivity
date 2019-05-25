@@ -138,7 +138,7 @@ def main():
 		num_swaps = 10000 
 		generate_pathway_permutations(sif_pathway_members,num_swaps,opts,'sif_graph')
 		generate_pathway_permutations(pathway_members,num_swaps,opts,'hypergraph')
-
+		
 		####### HYPERGRAPH
 		# calculate original pathway survey first
 		survey_hgraph_pathways(hypergraph,id2identifier,identifier2id,pathway_members,'hypergraph',opts,verbose=True)
@@ -161,7 +161,9 @@ def main():
 		else:
 			print('not running any args. Use --force to run.')
 
-		viz_permutations(scores_file,'hypergraph',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,10,15,20,25,30],plot_singles=False,viz_jaccard=False)
+		print('\n----HYPERGRAPH STATS')
+		permutation_stats(scores_file)
+		#viz_permutations(scores_file,'hypergraph',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,10,15,20,25,30],plot_singles=False,viz_jaccard=False)
 		
 
 		####### BIPARTITE GRAPH
@@ -185,7 +187,10 @@ def main():
 			print('not running any args. Use --force to run.')
 
 		# note: coule go to 60
-		viz_permutations(scores_file,'bipartite',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,10,20,30,40,50],plot_singles=False,viz_jaccard=False)
+		print('\n----BIPARTITE STATS')
+		permutation_stats(scores_file)
+		
+		#viz_permutations(scores_file,'bipartite',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,10,20,30,40,50],plot_singles=False,viz_jaccard=False)
 		########### SIF GRAPH
 
 		# calculate original SIF pathway survey first
@@ -207,7 +212,10 @@ def main():
 		else:
 			print('not running any args. Use --force to run.')
 
-		viz_permutations(scores_file,'sif_graph',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,6,7,8,9,10],plot_singles=False,viz_jaccard=False)
+		print('\n----GRAPH STATS')
+		permutation_stats(scores_file)
+		
+		#viz_permutations(scores_file,'sif_graph',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,6,7,8,9,10],plot_singles=False,viz_jaccard=False)
 
 	## visualize case studies for hypergraph
 	if opts.case_studies:
@@ -215,8 +223,16 @@ def main():
 		pathways_to_highlight = ['Signaling-by-Activin', 'Signaling-by-TGF-beta-Receptor-Complex','Signaling-by-BMP']
 		viz_influence_histogram(hypergraph,id2identifier,identifier2id,pathway_members,pathways_to_highlight,opts,[50,250,50])
 
+		print('NEW: do bipartite graph')
+		viz_influence_histogram(compact_bipartite_graph,id2identifier,identifier2id,pathway_members,pathways_to_highlight,opts,[50,250,50],is_graph=True,double_distances=True)
+
+
 		pathways_to_highlight = ['Signaling-by-MET','Signaling-by-MST1','ERK1-ERK2-pathway','PI3K-AKT-Signaling']
 		viz_influence_histogram(hypergraph,id2identifier,identifier2id,pathway_members,pathways_to_highlight,opts,[250,50,250,300])
+
+		### NEW do bipartite graph
+		print('NEW: do bipartite graph')
+		viz_influence_histogram(compact_bipartite_graph,id2identifier,identifier2id,pathway_members,pathways_to_highlight,opts,[250,50,250,300],is_graph=True,double_distances=True)
 
 	## run STRING channels (all 200 signaling pathways)
 	if opts.string_channels:
@@ -230,6 +246,7 @@ def main():
 		pc2uniprot,uniprot2pc = hgraph_utils.get_id_map(PATHWAY_HGRAPH_ENTITIES)
 
 		files = glob.glob('%s*.txt' % (PROCESSED_STRING_DIR))
+		#files = ['../data/STRING/processed/combined_score.txt']
 		processed_nodes = {}
 		for f in files:
 			name = f.replace(PROCESSED_STRING_DIR,'').replace('.txt','')
@@ -281,10 +298,21 @@ def main():
 							interactions_in_same_pathway.add(key)
 						if row[5] == '1':
 							interactions_brelax[key] = int(row[6])
+				print('read from file')
 			connected_set = set(interactions_brelax.keys())
 			bconn_set = set([key for key in interactions_brelax.keys() if interactions_brelax[key]==0])
 			outfile = make_outfile(opts,OUT_VIZ_CHANNEL_DIR,name,filetype='')
 			#viz_channels.viz(interactions_in_reactome,[interactions_in_pathways,interactions_in_same_pathway,connected_set,bconn_set],\
+			#['Pair in\nAny Pathway','Pair in\nSame Pathway','Pair\nConnected','Pair\nB-Connected'],\
+			#['Pair in Any Pathway','Pair in Same Pathway','Pair Connected','Pair B-Connected'],outfile,name,brelax=interactions_brelax)
+			
+			outfile = make_outfile(opts,OUT_VIZ_CHANNEL_DIR,name+'_box_plot',filetype='')
+			viz_channels.viz_box_plot(interactions_in_reactome,[interactions_in_pathways,interactions_in_same_pathway,connected_set,bconn_set],\
+			['Pair in\nAny Pathway','Pair in\nSame Pathway','Pair\nConnected','Pair\nB-Connected'],\
+			['Pair in Any Pathway','Pair in Same Pathway','Pair Connected','Pair B-Connected'],outfile,name)
+
+			#outfile = make_outfile(opts,OUT_VIZ_CHANNEL_DIR,name+'_box_plot_brelax',filetype='')
+			#viz_channels.viz_box_plot(interactions_in_reactome,[interactions_in_pathways,interactions_in_same_pathway,connected_set,bconn_set],\
 			#['Pair in\nAny Pathway','Pair in\nSame Pathway','Pair\nConnected','Pair\nB-Connected'],\
 			#['Pair in Any Pathway','Pair in Same Pathway','Pair Connected','Pair B-Connected'],outfile,name,brelax=interactions_brelax)
 	return
@@ -579,7 +607,50 @@ def viz_permutations(scores_file,perm_infix,num_perms,opts,k_vals=[0,1,2,3,4,5],
 	print('saved to '+outprefix+'.pdf')
 	plt.close()
 	return
-		
+
+def permutation_stats(scores_file):
+	# read scores file
+	#for i in range(len(PATHWAYS)):
+	#	print(i,PATHWAYS[i])
+	
+	#22 Signaling-by-BMP
+	#23 Signaling-by-Activin
+	#18 Signaling-by-TGF-beta-Receptor-Complex
+	#4 Signaling-by-MET
+	#32 Signaling-by-MST1
+	pairs_to_record = [['Signaling-by-MST1','Signaling-by-MET'],\
+		['Signaling-by-BMP','Signaling-by-TGF-beta-Receptor-Complex'],\
+		['Signaling-by-Activin','Signaling-by-TGF-beta-Receptor-Complex']]
+	num_pairs = len(pairs_to_record)
+	# p1,p2,k
+	scores = read_influence_scores_file(scores_file)
+
+	max_scores = [0]*num_pairs
+	k_val = [0]*num_pairs
+	max_score_total = 0
+	k_total = 0
+	max_pairs_total = []
+	for p1 in scores:
+		for p2 in scores[p1]:
+			if p1 == p2:
+				continue
+			for k in scores[p1][p2].keys():
+				if k==-1:
+					continue
+				if scores[p1][p2][k] > max_score_total:
+					max_score_total = scores[p1][p2][k]
+					k_total = k
+					max_pairs_total = [p1,p2]
+				for i in range(num_pairs):
+					p = pairs_to_record[i]
+					if p1 == p[0] and p2 == p[1] and scores[p1][p2][k] > max_scores[i]:
+						max_scores[i] = scores[p1][p2][k]
+						k_val[i] = k
+	print('OVERAL MAX: %s -> %s: k=%d val=%.2f' % (max_pairs_total[0],max_pairs_total[1],k_total,max_score_total))
+	for i in range(num_pairs):
+		print('  PAIR %s -> %s: k=%d val=%.2f' % (pairs_to_record[i][0],pairs_to_record[i][1],k_val[i],max_scores[i]))
+	return	
+
 def read_influence_scores_file(scores_file):
 	scores = {}  # pathwayA pathwayB k: float
 	with open(scores_file) as fin:
@@ -595,7 +666,7 @@ def read_influence_scores_file(scores_file):
 				scores[row[0]][row[1]][k-3] = float(row[k]) # pathwayA pathwayB k: float
 	return scores
 
-def viz_influence_histogram(H,id2identifier,identifier2id,pathway_members,pathways_to_highlight,opts,buffs):
+def viz_influence_histogram(H,id2identifier,identifier2id,pathway_members,pathways_to_highlight,opts,buffs,is_graph=False,double_distances=False):
 	COLORS = {'Signaling-by-MET':'#FA7171',
 	'Signaling-by-MST1':'#95A5D5',
 	'PI3K-AKT-Signaling':'#A8381A',
@@ -610,12 +681,42 @@ def viz_influence_histogram(H,id2identifier,identifier2id,pathway_members,pathwa
 	for p in range(len(pathways_to_highlight)):
 		pathway = pathways_to_highlight[p]
 		buff = buffs[p]
-		suffix = 'case_study_%s' % (pathway)
+		if is_graph and double_distances:
+			suffix = 'case_study_bipartite_%s' % (pathway)
+		elif is_graph:
+			suffix = 'case_study_graph_%s' % (pathway)
+		else:
+			suffix = 'case_study_%s' % (pathway)
 		print('  PATHWAY %s' % (pathway))
+		if is_graph:
+			dist_dict = graph_connectivity_set(H,pathway_members[pathway])
+			brelax_sets = graph_utils.dist2hist(dist_dict)
+			if double_distances: # for bipartite graph
+				doubled = {}
+				for d in brelax_sets:
+					doubled[d*2] = brelax_sets[d]
+				brelax_sets = doubled
+			max_val = max(brelax_sets.keys())
+			for i in range(max_val+1):
+				if i not in brelax_sets:
+					brelax_sets[i] = set()
+		else:
+			brelax_sets = survey_hgraph_single_pathway(H,id2identifier,identifier2id,pathway_members[pathway],suffix,opts)
+			max_val = max(brelax_sets.keys())
 
-		brelax_sets = survey_hgraph_single_pathway(H,id2identifier,identifier2id,pathway_members[pathway],suffix,opts)
+		outprefix = make_outfile(opts,OUT_TXT_DIR,suffix)
+		outfile = open(outprefix,'w')
+		outfile.write('k\tNum\tMembers\n')
+		for k in range(max_val+1):
+			outfile.write('%d\t%d\t%s\n' % (k,len(brelax_sets[k]),';'.join(brelax_sets[k])))
+		outfile.close()
+		print('wrote values to %s' % (outprefix))
+
 		overlap,running_tot = compute_brelax_overlaps(brelax_sets,pathway_members)
-		max_k = 10
+		if is_graph:
+			max_k = 30
+		else:
+			max_k = 10
 		running_tot = running_tot[:max_k+1]
 		for p2 in overlap:
 			overlap[p2] = overlap[p2][:max_k+1]
@@ -656,7 +757,11 @@ def viz_influence_histogram(H,id2identifier,identifier2id,pathway_members,pathwa
 		#ax.legend(ncol=2,bbox_to_anchor=(.9, -.15),fontsize=10)
 		ax.set_title('Source Pathway %s' % (PATHWAY_NAMES[pathway]),fontsize=18)
 		ax.set_xlabel('$k$',fontsize=14)
-		ax.set_xticks(range(max_k+1))
+		if is_graph:
+			ax.set_xticks(range(0,max_k+1,2))
+		else:
+			ax.set_xticks(range(max_k+1))
+		
 		for tick in ax.xaxis.get_major_ticks():
 			tick.label.set_fontsize(12)
 		for tick in ax.yaxis.get_major_ticks():
@@ -793,6 +898,8 @@ def survey_graph_pathways(G,pathway_members,suffix,opts,double_distances=True,ve
 	else:
 		force_print_statement(outfile)
 	return
+
+
 
 def graph_connectivity_set(G,pathway_members):
 	## fast BFS
