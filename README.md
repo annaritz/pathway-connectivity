@@ -28,7 +28,14 @@ If you want to post graphs to GraphSpace,
 
 ### Datasets
 
-Reactome Pathway available via [PathwayCommons](http://www.pathwaycommons.org/).  PC v10 files available [here](http://www.pathwaycommons.org/archives/PC2/v10/).  Download the SIF and BioPAX formats of Reactome. More details coming...
+The data is generated from the Reactome Pathway, available via [PathwayCommons](http://www.pathwaycommons.org/).  PC v10 files available [here](http://www.pathwaycommons.org/archives/PC2/v10/).  See details in the `data/` and `src/biopax_parser/` directories for more information.
+
+To run all analyses, you must generate the following datasets:
+- Simple Interaction Format (SIF, instructions in `data/`)
+- Hypergraph, Bipartite Graph, and Compound Graph (OWL, instructions in `data/`)
+
+To generate all representations, you need to run the following scripts:
+
 
 ### Usage Information
 
