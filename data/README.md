@@ -24,9 +24,6 @@ unzip PathwayCommons10.reactome.hgnc.sif.gz
 ### Pathways
 
 This directory contains list of Reactome pathways according to different reprentations. See the `README.md` file there for more information.
-=======
-
-### Pathways
 
 ### STRING
 
