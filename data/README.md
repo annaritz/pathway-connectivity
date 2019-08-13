@@ -1,7 +1,7 @@
 
 ## Datasets
 
-Reactome Pathway available via [PathwayCommons](http://www.pathwaycommons.org/).  PC v10 files available [here](http://www.pathwaycommons.org/archives/PC2/v10/).
+Reactome Pathway available via [PathwayCommons](http://www.pathwaycommons.org/).  PC v10 files available [here](http://www.pathwaycommons.org/archives/PC2/v10/) - all files downloaded with the last modified date of `2019-02-19`.
 
 ### OWL
 
@@ -9,7 +9,7 @@ The BioPAX OWL file of Reactome, available from PathwayCommons. Make an `OWL/` d
 
 ```
 wget http://www.pathwaycommons.org/archives/PC2/v10/PathwayCommons10.reactome.BIOPAX.owl.gz
-unzip PathwayCommons10.reactome.BIOPAX.owl.gz
+gunzip PathwayCommons10.reactome.BIOPAX.owl.gz
 ```
 
 ### SIF
@@ -18,7 +18,7 @@ Simple Interaction Format (SIF) file of Reactome, available from PathwayCommons.
 
 ```
 wget http://www.pathwaycommons.org/archives/PC2/v10/PathwayCommons10.reactome.hgnc.sif.gz
-unzip PathwayCommons10.reactome.hgnc.sif.gz
+gunzip PathwayCommons10.reactome.hgnc.sif.gz
 ```
 
 ### Pathways

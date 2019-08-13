@@ -27,13 +27,13 @@ This is used to make a `conversion-types.txt` file that manually determines whic
 
 ## Run Graph Survey on the SIF-Formatted graph
 ```
+mkdir outfiles
 python3 GraphSurvey.py ../../data/SIF/PathwayCommons10.reactome.hgnc.sif outfiles/reactome.txt conversion-types.txt 
 ```
 
 We also filter by small molecules:
 
 ```
-mkdir outfiles
 python3 GraphSurvey.py ../../data/SIF/PathwayCommons10.reactome.hgnc.sif outfiles/reactome_filtered.txt conversion-types.txt true
 ```
 
