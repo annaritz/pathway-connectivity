@@ -20,9 +20,9 @@ def main(inprefix,outprefix,num_perms,num_swaps):
 
 	return
 
-def run_permutation(G,pathways,set_names,fname,num_swaps):
+def run_permutation(G,pathways,set_names,fname,num_swaps,verbose=True):
 	# swap edges
-	H = swap_edges(G,set_names,num_swaps)
+	H = swap_edges(G,set_names,num_swaps,verbose)
 
 	# check to make sure they're different. They are!
 	#CHECK = nx.difference(G,H)
@@ -81,7 +81,7 @@ def generate_graph(pathways):
 	print('%d edges in bipartite graph' % (nx.number_of_edges(G)))
 	return G,set_names,node_membership
 
-def swap_edges(G,set_names,num_swaps):
+def swap_edges(G,set_names,num_swaps,verbose=True):
 	
 	# start with a new copy of the graph
 	H = nx.Graph()
@@ -99,9 +99,9 @@ def swap_edges(G,set_names,num_swaps):
 	n = 0
 	while successful_swaps < num_swaps:
 		n+=1
-		if n % int(num_swaps/10) == 0:
+		if n % int(num_swaps/10) == 0 and verbose:
 			print('%d tries & %d successful swaps' % (n,successful_swaps))
-		if n > MAX_TRIES:
+		if n > MAX_TRIES and verbose:
 			print('MAX TRIES REACHED!! Quitting.')
 			sys.exit()
 
@@ -126,7 +126,8 @@ def swap_edges(G,set_names,num_swaps):
 		H.remove_edge(x,y)
 		successful_swaps+=1
 		#print('swapped (%s,%s) and (%s,%s)' % (u,v,x,y))		
-	print('FINAL: %d tries and %d successful swaps' % (n,successful_swaps))
+	if verbose:
+		print('FINAL: %d tries and %d successful swaps' % (n,successful_swaps))
 	return H
 
 def make_set_label(pathway_set):
