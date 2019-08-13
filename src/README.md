@@ -1,5 +1,8 @@
-The `run.py` script runs (nearly) all figures that are presented in the following paper:
+## Directory Contents
 
+The `run.py` script runs all subsequent experiments, and requires that the datasets and Reactome representations have already been generated. Datasets are described in the top-level `README.md` file and in the `data/` directory.
+
+## Reactome pathway representations 
 
 ## Experiments
 

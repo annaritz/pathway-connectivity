@@ -34,9 +34,14 @@ To run all analyses, you must generate the following datasets:
 - Simple Interaction Format (SIF, instructions in `data/`)
 - Hypergraph, Bipartite Graph, and Compound Graph (OWL, instructions in `data/`)
 
+### Reactome Representations
+
 To generate all representations, you need to run the following scripts:
 
+
 ### Usage Information
+
+The main function is `run.py` in the `src/` directory:
 
 ```
 python3 run.py -h
