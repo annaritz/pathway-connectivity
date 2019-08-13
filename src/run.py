@@ -33,7 +33,7 @@ from halp.utilities import directed_statistics as stats
 from halp.algorithms import directed_paths as hpaths
 
 ## TODO: make these options or a config file
-SIF_FILE = 'SIF/PathwayCommons10.reactome.hgnc.sif'
+SIF_FILE = '../data/SIF/PathwayCommons10.reactome.hgnc.sif'
 SIF_CONV_FILE = 'SIF/conversion-types.txt'
 HGRAPH_PREFIX = '../hypergraph/reactome_hypergraph_full/reactome'
 HGRAPH_BLACKLIST_PREFIX = '../hypergraph/reactome_hypergraph_full/blacklist_filter'

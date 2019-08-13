@@ -1,1 +1,0 @@
-python3 parameterized-shortest-paths.py ../../../hypergraph/reactome_hypergraph_full/reactome ../output/reactome-bconn-parameterized.txt ../output/reactome_hedges.txt 
