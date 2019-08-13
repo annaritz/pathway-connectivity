@@ -41,8 +41,9 @@ Check how many small molecules were removed (in `hypergraph/reactome_hypergraphs
 
 ```
 cat *-elements.txt | cut -f 4 | sort -u | grep hgnc | sed 's/.*symbol://g' | sed 's/;.*//g' | sort -u > proteins.txt
-``
+```
 Use `proteins.txt` to determine the number of small proteins removed:
+
 ```
 Graph has 12086 nodes and 444204 edges
 Graph has 10225 nodes and 393980 edges
