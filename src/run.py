@@ -11,6 +11,7 @@ import glob
 from multiprocessing import Pool ## https://docs.python.org/3.4/library/multiprocessing.html?highlight=process
 import matplotlib.pyplot as plt
 from matplotlib import cm
+import xlsxwriter ## for writing excel files
 
 ## custom code
 import SIF.graph_utils as graph_utils
@@ -22,10 +23,11 @@ import viz.significant_pathway_scores as permutation_viz
 import STRING_channels.run_channels as run_channels
 import STRING_channels.viz_channels as viz_channels
 
-# TODO cplex is broken for python 3.7 on home laptop
+## TODO cplex is broken for python 3.7 on home laptop
 ## TODO there's one reaction off in reactome files. Fix.
 import hypergraph_code.ILP.shortest_hyperpath as shortest_hyperpath 
 import hypergraph_code.permutation_test as permutation_test
+
 ## halp
 from halp.utilities import directed_statistics as stats
 from halp.algorithms import directed_paths as hpaths
@@ -57,10 +59,8 @@ for d in DIRS:
 ## global variables (will be set with parse_options)
 FORCE = False
 PRINT_ONLY = False
-
 PATHWAYS = viz_utils.sorted_pathways 
 PATHWAY_NAMES = viz_utils.NAMES
-
 LARGE_VAL = 10000000
 
 #############################
@@ -80,7 +80,7 @@ def main():
 	## TODO CHECK WHAT HAPPENS IF WE KEEP SINGLETON NODES -- SO many singleton nodes oof. (update - 
 	## singletons are often members of entity sets or complexes that actually aren't nodes. We were
 	## pretty liberal in generating the hyperedge files.  Running WITHOUT the --keep_singletons filetr
-	## for the paper.
+	## for the paper.)
 
 	######### Print statistics for table
 	if opts.stats: 
@@ -164,8 +164,8 @@ def main():
 		print('\n----HYPERGRAPH STATS')
 		permutation_stats(scores_file)
 		#viz_permutations(scores_file,'hypergraph',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,10,15,20,25,30],plot_singles=False,viz_jaccard=False)
+		#write_permutation_excel(scores_file,'hypergraph',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,10,15,20,25,30])
 		
-
 		####### BIPARTITE GRAPH
 		# calculate original bipartite pathway survey first
 		survey_graph_pathways(compact_bipartite_graph,pathway_members,'bipartite',opts,verbose=True)
@@ -505,25 +505,7 @@ def viz_permutations(scores_file,perm_infix,num_perms,opts,k_vals=[0,1,2,3,4,5],
 		os.system('pdfcrop %s.pdf %s.pdf' % (outprefix,outprefix))
 		print('saved to '+outprefix+'.pdf')
 
-	## get permutation scores
-	X = {}
-	for k in k_vals:
-		X[k] = [0]*len(PATHWAYS)
-		for i in range(len(PATHWAYS)):
-			X[k][i] = [0]*len(PATHWAYS)
-	for p in range(num_perms):
-		perm_outfile = make_outfile(opts,OUT_PATHWAY_DIR,'%s_%d_perms_10000_swaps' % (perm_infix,p))	
-		perm_scores = read_influence_scores_file(perm_outfile)
-		for i in range(len(PATHWAYS)):
-			for j in range(len(PATHWAYS)):
-				for k in k_vals:
-					if k not in perm_scores[PATHWAYS[i]][PATHWAYS[j]]:
-						print('PERM_OUTFILE_ERROR:',p,perm_outfile)
-						sys.exit()
-					if k not in scores[PATHWAYS[i]][PATHWAYS[j]]:
-						print('ORIG_SCORE ERROR:',p.scores_file)
-					if perm_scores[PATHWAYS[i]][PATHWAYS[j]][k] >= scores[PATHWAYS[i]][PATHWAYS[j]][k]:
-						X[k][i][j] += 1/num_perms
+	X = get_permutation_scores(scores,k_vals,perm_infix,num_perms,opts)
 
 	## visualize significant scores for selected values of k
 	if plot_singles:
@@ -607,6 +589,28 @@ def viz_permutations(scores_file,perm_infix,num_perms,opts,k_vals=[0,1,2,3,4,5],
 	print('saved to '+outprefix+'.pdf')
 	plt.close()
 	return
+
+def get_permutation_scores(scores,k_vals,perm_infix,num_perms,opts):
+	## get permutation scores
+	X = {}
+	for k in k_vals:
+		X[k] = [0]*len(PATHWAYS)
+		for i in range(len(PATHWAYS)):
+			X[k][i] = [0]*len(PATHWAYS)
+	for p in range(num_perms):
+		perm_outfile = make_outfile(opts,OUT_PATHWAY_DIR,'%s_%d_perms_10000_swaps' % (perm_infix,p))	
+		perm_scores = read_influence_scores_file(perm_outfile)
+		for i in range(len(PATHWAYS)):
+			for j in range(len(PATHWAYS)):
+				for k in k_vals:
+					if k not in perm_scores[PATHWAYS[i]][PATHWAYS[j]]:
+						print('PERM_OUTFILE_ERROR:',p,perm_outfile)
+						sys.exit()
+					if k not in scores[PATHWAYS[i]][PATHWAYS[j]]:
+						print('ORIG_SCORE ERROR:',p.scores_file)
+					if perm_scores[PATHWAYS[i]][PATHWAYS[j]][k] >= scores[PATHWAYS[i]][PATHWAYS[j]][k]:
+						X[k][i][j] += 1/num_perms
+	return X
 
 def permutation_stats(scores_file):
 	# read scores file
@@ -899,8 +903,6 @@ def survey_graph_pathways(G,pathway_members,suffix,opts,double_distances=True,ve
 		force_print_statement(outfile)
 	return
 
-
-
 def graph_connectivity_set(G,pathway_members):
 	## fast BFS
 	ss = 'ss'
@@ -1156,7 +1158,7 @@ def generate_pathway_permutations(pathways,num_swaps,opts,infix):
 		fname = make_outfile(opts,OUT_PERM_DIR,'%s_%d_perms_%d_swaps' % (infix,permutation,num_swaps))
 		if FORCE or not os.path.isfile(fname):
 			print('__PERMUTATION__%d__of__%d__' % (permutation+1,opts.perm_test))
-			permutation_test.run_permutation(G,pathways,set_names,fname,num_swaps)
+			permutation_test.run_permutation(G,pathways,set_names,fname,num_swaps,verbose=False)
 		else:
 			force_print_statement(fname)
 	print('done with %d permutations' % (permutation))
@@ -1332,6 +1334,68 @@ def compress_and_remove_files(tarfile,regex):
 	os.system(cmd)
 	return
 
+def write_permutation_excel(scores_file,perm_infix,num_perms,opts,k_vals=[0,1,2,3,4,5]):
+	print('writing values to excel file')
+	print('reading influence scores...')
+	scores = read_influence_scores_file(scores_file)
+	print('getting permutation scores...')
+	perms = get_permutation_scores(scores,k_vals,perm_infix,num_perms,opts)
+	print('writing file...')
+	outfile = make_outfile(opts,OUT_TXT_DIR,perm_infix+'_summary',filetype='.xlsx')
+	#https://xlsxwriter.readthedocs.io/example_demo.html#ex-demo
+	workbook = xlsxwriter.Workbook(outfile)
+	bold = workbook.add_format({'bold': True})
+
+	## README
+	worksheet = workbook.add_worksheet('README')
+	worksheet.write(0,0,'Pathway Influence for %s' % (perm_infix),bold)
+	worksheet.write(2,0,'PathwayJaccardOverlap',bold)
+	worksheet.write(2,3,'Asymmetric jaccard of the pathway member overlap (node sets from Reactome).')
+	worksheet.write(3,0,'k0_scores',bold)
+	worksheet.write(3,3,'Influence scores for B_0 (B-connectivity)')
+	worksheet.write(4,0,'k0_perms',bold)
+	worksheet.write(4,3,'Proportion of permutations with scores greater than or equal to observed score (%d permutations)' % (num_perms))
+	worksheet.write(5,0,'k1,k2,...',bold)
+	worksheet.write(5,3,'Influence scores and permutation proportions for other values of k')
+
+	## jaccard
+	# worksheet = workbook.add_worksheet('PathwayJaccardOverlap2')
+	# for i in range(len(PATHWAYS)):
+	# 	worksheet.write(0,i+1,PATHWAYS[i],bold)
+
+	# for i in range(len(PATHWAYS)):
+	# 	worksheet.write(i+1,0,PATHWAYS[i],bold)
+	# 	for j in range(len(PATHWAYS)):
+	# 		worksheet.write(i+1,j+1,scores[PATHWAYS[i]][PATHWAYS[j]][-1])
+
+	worksheet = workbook.add_worksheet('PathwayJaccardOverlap')
+	write_sheet(worksheet,scores,-1,bold)
+	
+	## scores & permutations
+	for k in k_vals:
+		print(' writing k=%d' % (k))
+		worksheet = workbook.add_worksheet('k%d_scores' % (k))
+		write_sheet(worksheet,scores,k,bold)
+
+		worksheet = workbook.add_worksheet('k%d_perms' % (k))
+		write_sheet(worksheet,perms,k,bold,inds=True)
+
+	workbook.close()
+	print('Wrote to %s' % (outfile))
+	return
+
+def write_sheet(worksheet,dictionary,k,bold,inds=False):
+	for i in range(len(PATHWAYS)):
+		worksheet.write(0,i+1,PATHWAYS[i],bold)
+
+	for i in range(len(PATHWAYS)):
+		worksheet.write(i+1,0,PATHWAYS[i],bold)
+		for j in range(len(PATHWAYS)):
+			if inds:  ## this is a PERMUTATIONS dictionary
+				worksheet.write(i+1,j+1,dictionary[k][i][j])
+			else: ## this is a SCORES dictionary
+				worksheet.write(i+1,j+1,dictionary[PATHWAYS[i]][PATHWAYS[j]][k])
+	return
 
 #############################
 ## OPTION PARSER
