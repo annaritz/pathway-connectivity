@@ -1,7 +1,7 @@
 
 ## Datasets
 
-Reactome Pathway available via [PathwayCommons](http://www.pathwaycommons.org/) ([Cerami et al., NAR 2011](http://nar.oxfordjournals.org/content/early/2010/11/10/nar.gkq1039.abstract).  PC v10 files available [here](http://www.pathwaycommons.org/archives/PC2/v10/) - all files downloaded with the last modified date of `2019-02-19`.
+Reactome Pathway available via [PathwayCommons](http://www.pathwaycommons.org/) ([Cerami et al., NAR 2011](http://nar.oxfordjournals.org/content/early/2010/11/10/nar.gkq1039.abstract)).  PC v10 files available [here](http://www.pathwaycommons.org/archives/PC2/v10/) - all files downloaded with the last modified date of `2019-02-19`.
 
 ### OWL
 
@@ -27,7 +27,7 @@ This directory contains list of Reactome pathways according to different reprent
 
 ### STRING
 
-This directory contains interactions from the [STRING database](https://string-db.org/) ([von Mering et al., NAR 2005](https://www.ncbi.nlm.nih.gov/pubmed/15608232); [Szklarczyk et al., NAR 2019](https://www.ncbi.nlm.nih.gov/pubmed/30476243)); see the `README.md` file there for more information.
+This directory contains interactions from the [STRING database](https://string-db.org/) ([von Mering et al., NAR 2005](https://www.ncbi.nlm.nih.gov/pubmed/15608232)); ([Szklarczyk et al., NAR 2019](https://www.ncbi.nlm.nih.gov/pubmed/30476243)); see the `README.md` file there for more information.
 
 ### Blacklisted Molecules
 
