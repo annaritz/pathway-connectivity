@@ -18,3 +18,4 @@ python3 get-uniprot-pathways.py
 
 ### BioPAX Parser output (deprecated)
 `reactome-pathways.txt` is from BioPAX Parser.  
+

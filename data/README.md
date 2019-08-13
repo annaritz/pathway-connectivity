@@ -12,7 +12,6 @@ wget http://www.pathwaycommons.org/archives/PC2/v10/PathwayCommons10.reactome.BI
 unzip PathwayCommons10.reactome.BIOPAX.owl.gz
 ```
 
-
 ### SIF
 
 Simple Interaction Format (SIF) file of Reactome, available from PathwayCommons. In the `SIF/` directory:
@@ -25,6 +24,9 @@ unzip PathwayCommons10.reactome.hgnc.sif.gz
 ### Pathways
 
 This directory contains list of Reactome pathways according to different reprentations. See the `README.md` file there for more information.
+=======
+
+### Pathways
 
 ### STRING
 
