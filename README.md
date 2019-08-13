@@ -7,7 +7,7 @@ Nick Franzese, Adam Groce, T.M. Murali, and Anna Ritz
 
 This work was presented at GLBio 2019 (accepted paper) ISMB 2019 (accepted poster), and is under review at PLOS Computational Biology.
 
-_Aug 2019:_ Full dependencies, code for generating pathway representations (hypergraphs, bipartite graphs, compound graphs, and directed graphs) are now here.  Third-party datasets are also documented.  Email Anna with any questions.
+_Aug 2019:_ Full dependencies, code for generating _almost_ all pathway representations (hypergraphs, bipartite graphs, compound graphs, and directed graphs) are now here.  Third-party datasets are also documented.  Email Anna with any questions.
 
 TODO: dockerize this whole thing.
 
@@ -25,7 +25,7 @@ If you want to implement shortest B-hyperpath on directed graphs, it is implemen
 
 ### Datasets
 
-The data is generated from the Reactome Pathway, available via [PathwayCommons](http://www.pathwaycommons.org/).  PC v10 files available [here](http://www.pathwaycommons.org/archives/PC2/v10/).  See details in the `data/` and `src/biopax_parser/` directories for more information.
+The data is generated from the Reactome Pathway, available via [PathwayCommons](http://www.pathwaycommons.org/).  PC v10 files available [here](http://www.pathwaycommons.org/archives/PC2/v10/).  See details in the `data/` directory for more information.
 
 To run all analyses, you must generate the following datasets:
 - Simple Interaction Format (SIF, instructions in `data/`)

@@ -5,8 +5,7 @@ The `run.py` script runs all subsequent experiments, and requires that the datas
 ## Reactome pathway representations
 1. Directed Graph -- SIF-formatted graph is in `data/`, see the `SIF/` directory for extracting conversion types and the file used to determine which types are directed, undirected, and ignored.
 
-2. Compound Graph -- This is the BioPAXSTREAM code from [Using Biological Pathway Data with Paxtools
-](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003194) (Demir et al., PLOS Computational Biology, 2013).  See the `BioPAXSTREAM/` directory for more information.
+2. Compound Graph -- This is the BioPAXSTREAM code from [Algorithms for effective querying of compound graph-based pathway databases](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-10-376) (Dogrusoz et al., 2009), which is also described in [Using Biological Pathway Data with Paxtools](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003194) (Demir et al., PLOS Computational Biology, 2013).  See the `BioPAXSTREAM/` directory for more information about running this method (which is part of `paxtools`).
 
 3. Hypergraph and Bipartite Graph - **this has to be updated**
 
