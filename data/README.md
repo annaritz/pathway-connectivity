@@ -3,6 +3,16 @@
 
 Reactome Pathway available via [PathwayCommons](http://www.pathwaycommons.org/).  PC v10 files available [here](http://www.pathwaycommons.org/archives/PC2/v10/).
 
+### OWL
+
+The BioPAX OWL file of Reactome, available from PathwayCommons. In the `OWL/` directory:
+
+```
+wget http://www.pathwaycommons.org/archives/PC2/v10/PathwayCommons10.reactome.BIOPAX.owl.gz
+unzip PathwayCommons10.reactome.BIOPAX.owl.gz
+```
+
+
 ### SIF
 
 Simple Interaction Format (SIF) file of Reactome, available from PathwayCommons. In the `SIF/` directory:
