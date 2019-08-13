@@ -18,13 +18,10 @@ Most of the experiment options require these tools:
 - [Hypergraph Algorithms Library in Python (HALP)](http://murali-group.github.io/halp/)
   - Check out `annabranch` (this passes all `pytest` tests; there are currently some issues with Travis CI)
 - [NetworkX](https://networkx.github.io/) (v1.11, should work with v2.1)
+- [xlsxwriter](https://xlsxwriter.readthedocs.io/) to write permutation test information to an Excel file.
 
 If you want to implement shortest B-hyperpath on directed graphs, it is implemented as a `cplex` integer linear program.
 - [IBM ILOG CPLEX optimizer Python module](https://www.ibm.com/analytics/cplex-optimizer) (academic license available)
-
-If you want to post graphs to GraphSpace,
-- Make an account on [GraphSpace](http://graphspace.org/)
-- Install the [Python GraphSpace module](http://manual.graphspace.org/projects/graphspace-python/en/latest/)
 
 ### Datasets
 
@@ -34,14 +31,9 @@ To run all analyses, you must generate the following datasets:
 - Simple Interaction Format (SIF, instructions in `data/`)
 - Hypergraph, Bipartite Graph, and Compound Graph (OWL, instructions in `data/`)
 
-### Reactome Representations
-
-To generate all representations, you need to run the following scripts:
-
-
 ### Usage Information
 
-The main function is `run.py` in the `src/` directory:
+To re-generate all representations, you can run the scripts outlined in the `src/` directory.  The main function is `run.py` in the `src/` directory:
 
 ```
 python3 run.py -h
