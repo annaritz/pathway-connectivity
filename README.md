@@ -31,9 +31,11 @@ To run all analyses, you must generate the following datasets:
 - Simple Interaction Format (SIF, instructions in `data/`)
 - Hypergraph, Bipartite Graph, and Compound Graph (OWL, instructions in `data/`)
 
+The four data representations (hypergraph, bipartite graph, directed graph, and compound graph) are available in this repo.  To re-generate all representations, you can run the scripts outlined in the `src/` directory.  
+
 ### Usage Information
 
-To re-generate all representations, you can run the scripts outlined in the `src/` directory.  The main function is `run.py` in the `src/` directory:
+The main function is `run.py` in the `src/` directory:
 
 ```
 python3 run.py -h
