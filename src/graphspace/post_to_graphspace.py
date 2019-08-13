@@ -1,5 +1,5 @@
 from graphspace_python.api.client import GraphSpace
-graphspace = GraphSpace('aritz@reed.edu', 'platypus')
+graphspace = GraphSpace('compbio@reed.edu', 'compbio')
 from graphspace_python.graphs.classes.gsgraph import GSGraph
 import sys 
 
