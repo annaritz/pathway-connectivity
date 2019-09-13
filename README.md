@@ -7,7 +7,7 @@ Nick Franzese, Adam Groce, T.M. Murali, and Anna Ritz
 
 This work was presented at GLBio 2019 (accepted paper) ISMB 2019 (accepted poster), and is under review at PLOS Computational Biology.
 
-_Aug 2019:_ Full dependencies, code for generating _almost_ all pathway representations (hypergraphs, bipartite graphs, compound graphs, and directed graphs) are now here.  Third-party datasets are also documented.  Email Anna with any questions.
+_Sep 2019:_ Code to parse the Reactome OWL files into hypergraphs are now documented in `src/hypergraph_code/hypergraph_parser/`.  Email Anna with any questions.
 
 ### Dependencies
 
