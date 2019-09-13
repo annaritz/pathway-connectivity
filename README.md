@@ -9,8 +9,6 @@ This work was presented at GLBio 2019 (accepted paper) ISMB 2019 (accepted poste
 
 _Aug 2019:_ Full dependencies, code for generating _almost_ all pathway representations (hypergraphs, bipartite graphs, compound graphs, and directed graphs) are now here.  Third-party datasets are also documented.  Email Anna with any questions.
 
-TODO: dockerize this whole thing.
-
 ### Dependencies
 
 Most of the experiment options require these tools:
@@ -72,3 +70,17 @@ Experiment Arguments:
   --string_channels     run STRING channel assessment.
   ```
 Refer to the `README.md` files for more commands to generate data, run experiments, etc.
+
+### Developer Notes 
+
+- We need to put this in a virtual environment or dockerize it.  
+- TravisCI testing fails for the hypergraph algorithms library (halp). However, the `annabranch` branch (which includes tests for B-Relaxation Distance) have all unit tests passing.
+- There are two places where we describe PaxTools and downloading the JAR (src/BioPAXSTREAM and src/hypergraph_code/hypergraph_parser).Further, there are two versions of the JAR file needed.  Combine this (or better yet wrap it into an easy install script).
+- `src/BioPAXSTREAM/` code still has some hard-coded lines in it. Currently users are instructed to replace these lines; they should be put in a command-line-argument.
+- The `hypergraph/` directory at the top level is out of place (for historical reasons).  It needs to be movable and other scripts shouldn't have it hard-coded.
+
+#### Developer Log
+_Aug 2019:_ Full dependencies, code for generating _almost_ all pathway representations (hypergraphs, bipartite graphs, compound graphs, and directed graphs) are now here.  Third-party datasets are also documented.  Email Anna with any questions.
+
+_May 2019:_ This repo is still a little rough, Anna plans to refactor code and update instructions for data acquisition and processing in the next few weeks. Email her if you have questions.
+

@@ -36,7 +36,7 @@ public class PathwayCommonsParser {
 	public static String filename;
 	public static String fileprefix;
 	public static boolean verbose = false;
-	public static String USAGE = "java PathwayCommonsParser <Reactome.owl> <outprefix> [<pathway-id>] [<verbose>]\n\t<Reactome.owl>: BioPAX Level 3 file (.owl format).\n\t<outprefix>: Output prefix of all signaling pathways.\n\t<pathway-id> (optional): if specified, only runs that pathway id.\n\t<verbose> (optional): the word 'verbose' to print additional information to screen. Optional.\n\nNote: to run from Java source, ReactomeParser requires paxtools-4.2.1-no-jena.jar in your CLASSPATH. If running from the JAR file (using java -jar), it should not be required\n";
+	public static String USAGE = "java PathwayCommonsParser <Reactome.owl> <outprefix> [<pathway-id>] [<verbose>]\n\t<Reactome.owl>: BioPAX Level 3 file (.owl format).\n\t<outprefix>: Output prefix of all signaling pathways.\n\t<pathway-id> (optional): if specified, only runs that pathway id.\n\t<verbose> (optional): the word 'verbose' to print additional information to screen. Optional.\n\nNote: to run from Java source, PathwayCommonsParser requires paxtools-4.2.1-no-jena.jar in your CLASSPATH. If running from the JAR file (using java -jar), it should not be required\n";
 
 	/**
 	 * Main method.
