@@ -4,7 +4,7 @@ from __future__ import print_function
 import argparse
 import sys
 import os
-import networkx as nx  ## TODO verify version 
+import networkx as nx  ## TODO verify version
 import time
 import random
 import glob
@@ -23,9 +23,7 @@ import viz.significant_pathway_scores as permutation_viz
 import STRING_channels.run_channels as run_channels
 import STRING_channels.viz_channels as viz_channels
 
-## TODO cplex is broken for python 3.7 on home laptop
 ## TODO there's one reaction off in reactome files. Fix.
-import hypergraph_code.ILP.shortest_hyperpath as shortest_hyperpath 
 import hypergraph_code.permutation_test as permutation_test
 
 ## halp
@@ -36,11 +34,11 @@ from halp.algorithms import directed_paths as hpaths
 SIF_FILE = '../data/SIF/PathwayCommons10.reactome.hgnc.sif'
 SIF_CONV_FILE = 'SIF/conversion-types.txt'
 HGRAPH_PREFIX = '../hypergraph/reactome_hypergraph_full/reactome'
-HGRAPH_BLACKLIST_PREFIX = '../hypergraph/reactome_hypergraph_full/blacklist_filter'
+HGRAPH_UBIQUITOUS_PREFIX = '../hypergraph/reactome_hypergraph_full/ubiquitous_filter'
 HGRAPH_SMALLMOL_PREFIX = '../hypergraph/reactome_hypergraph_full/small_molecule_filter'
 PATHWAY_HGRAPH_ENTITIES = '../hypergraph/reactome_hypergraphs/'
 PATHWAY_HGRAPH_PREFIX = '../hypergraph/reactome_hypergraphs_parsed/'
-BLACKLIST_FILE = '../data/blacklist.txt'
+UBIQUITOUS_FILE = '../data/ubiquitous.txt'
 PROCESSED_STRING_DIR = '../data/STRING/processed/' ## TODO incorporate code for processing string
 BIOPAXSTREAM_FILE = 'BioPAXStream/output/reactome_parameterized_filtered.txt'
 
@@ -59,7 +57,7 @@ for d in DIRS:
 ## global variables (will be set with parse_options)
 FORCE = False
 PRINT_ONLY = False
-PATHWAYS = viz_utils.sorted_pathways 
+PATHWAYS = viz_utils.sorted_pathways
 PATHWAY_NAMES = viz_utils.NAMES
 LARGE_VAL = 10000000
 
@@ -74,19 +72,19 @@ def main():
 
 	## get representations no matter what
 	sif_graph,compound_graph,bipartite_graph,compact_bipartite_graph,hypergraph,identifier2id,id2identifier = \
-		get_representations(opts.small_molecule_filter,opts.blacklist_filter,opts.keep_singletons,opts)
+		get_representations(opts.small_molecule_filter,opts.ubiquitous_filter,opts.keep_singletons,opts)
 
 	## TODO: add hypergraph building into this script.
-	## TODO CHECK WHAT HAPPENS IF WE KEEP SINGLETON NODES -- SO many singleton nodes oof. (update - 
+	## TODO CHECK WHAT HAPPENS IF WE KEEP SINGLETON NODES -- SO many singleton nodes oof. (update -
 	## singletons are often members of entity sets or complexes that actually aren't nodes. We were
 	## pretty liberal in generating the hyperedge files.  Running WITHOUT the --keep_singletons filetr
 	## for the paper.)
 
 	######### Print statistics for table
-	if opts.stats: 
+	if opts.stats:
 		print()
 		print('------ STATS -------')
-		print('KEEP_SINGLETONS:',opts.keep_singletons,'SMALL_MOL FILTER:',opts.small_molecule_filter,'BLACKLIST FILTER:',opts.blacklist_filter)
+		print('KEEP_SINGLETONS:',opts.keep_singletons,'SMALL_MOL FILTER:',opts.small_molecule_filter,'UBIQUITOUS FILTER:',opts.ubiquitous_filter)
 		print('SIF Graph: %d nodes and %d edges' % (nx.number_of_nodes(sif_graph),nx.number_of_edges(sif_graph)))
 		print('Bipartite Graph: %d nodes and %d edges' % (nx.number_of_nodes(bipartite_graph),nx.number_of_edges(bipartite_graph)))
 		print('Compact Bipartite Graph: %d nodes and %d edges' % (nx.number_of_nodes(compact_bipartite_graph),nx.number_of_edges(compact_bipartite_graph)))
@@ -107,9 +105,9 @@ def main():
 		brelax_file = make_outfile(opts,OUT_TXT_DIR,'hypergraph-brelax-survey')
 		survey_hgraph_brelax(hypergraph,brelax_file,id2identifier,identifier2id,opts)
 
-		if opts.small_molecule_filter or opts.blacklist_filter:
+		if opts.small_molecule_filter or opts.ubiquitous_filter:
 			viz_histograms(sif_graph_file,bipartite_graph_file,None,hypergraph_file,brelax_file,opts)
-		else:	
+		else:
 			compound_graph_file = BIOPAXSTREAM_FILE
 			viz_histograms(sif_graph_file,bipartite_graph_file,compound_graph_file,hypergraph_file,brelax_file,opts)
 
@@ -133,12 +131,12 @@ def main():
 		else:
 			force_print_statement(pathwayfile)
 		sif_pathway_members = read_pathway_members(sif_pathwayfile)
-		
-		# calculate permutation tests with 10,000 swaps each. 
-		num_swaps = 10000 
+
+		# calculate permutation tests with 10,000 swaps each.
+		num_swaps = 10000
 		generate_pathway_permutations(sif_pathway_members,num_swaps,opts,'sif_graph')
 		generate_pathway_permutations(pathway_members,num_swaps,opts,'hypergraph')
-		
+
 		####### HYPERGRAPH
 		# calculate original pathway survey first
 		survey_hgraph_pathways(hypergraph,id2identifier,identifier2id,pathway_members,'hypergraph',opts,verbose=True)
@@ -165,7 +163,7 @@ def main():
 		permutation_stats(scores_file)
 		#viz_permutations(scores_file,'hypergraph',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,10,15,20,25,30],plot_singles=False,viz_jaccard=False)
 		#write_permutation_excel(scores_file,'hypergraph',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,10,15,20,25,30])
-		
+
 		####### BIPARTITE GRAPH
 		# calculate original bipartite pathway survey first
 		survey_graph_pathways(compact_bipartite_graph,pathway_members,'bipartite',opts,verbose=True)
@@ -189,7 +187,7 @@ def main():
 		# note: coule go to 60
 		print('\n----BIPARTITE STATS')
 		permutation_stats(scores_file)
-		
+
 		#viz_permutations(scores_file,'bipartite',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,10,20,30,40,50],plot_singles=False,viz_jaccard=False)
 		########### SIF GRAPH
 
@@ -214,7 +212,7 @@ def main():
 
 		print('\n----GRAPH STATS')
 		permutation_stats(scores_file)
-		
+
 		#viz_permutations(scores_file,'sif_graph',opts.perm_test,opts,k_vals=[0,1,2,3,4,5,6,7,8,9,10],plot_singles=False,viz_jaccard=False)
 
 	## visualize case studies for hypergraph
@@ -271,10 +269,10 @@ def main():
 				print('  %d INTERACTIONS ARE Bipartite CONNECTED IN REACTOME' % (len(interactions_bipartite)))
 				print('  %d INTERACTIONS ARE B-CONNECTED IN REACTOME' % (len(interactions_bconn)))
 				sys.stdout.flush()
-				
+
 				write_channel_output(interactions_in_reactome,interactions_in_pathways,interactions_in_same_pathway,interactions_brelax,outfile)
 				## ensure that variables are the right type for viz
-				interactions_in_reactome = {(n1,n2):val for n1,n2,val in interactions_in_reactome} 
+				interactions_in_reactome = {(n1,n2):val for n1,n2,val in interactions_in_reactome}
 				interactions_in_pathways = set(interactions_in_pathways)
 				interactions_in_same_pathway = set(interactions_in_same_pathway)
 			else:
@@ -305,7 +303,7 @@ def main():
 			#viz_channels.viz(interactions_in_reactome,[interactions_in_pathways,interactions_in_same_pathway,connected_set,bconn_set],\
 			#['Pair in\nAny Pathway','Pair in\nSame Pathway','Pair\nConnected','Pair\nB-Connected'],\
 			#['Pair in Any Pathway','Pair in Same Pathway','Pair Connected','Pair B-Connected'],outfile,name,brelax=interactions_brelax)
-			
+
 			outfile = make_outfile(opts,OUT_VIZ_CHANNEL_DIR,name+'_box_plot',filetype='')
 			viz_channels.viz_box_plot(interactions_in_reactome,[interactions_in_pathways,interactions_in_same_pathway,connected_set,bconn_set],\
 			['Pair in\nAny Pathway','Pair in\nSame Pathway','Pair\nConnected','Pair\nB-Connected'],\
@@ -342,7 +340,7 @@ def get_node_memberships(H):
 	num_complexes = 0
 	num_entitysets = 0
 	for n in H.get_node_set():
-		attrs = H.get_node_attributes(n)		
+		attrs = H.get_node_attributes(n)
 		if attrs['is_hypernode']:
 			nodes.update(attrs['hypernode_members'])
 			for m in attrs['hypernode_members']:
@@ -361,15 +359,15 @@ def get_node_memberships(H):
 		if n not in node_membership:
 			node_membership[n] = set([n])
 	print('%d complexes and %d entity sets' % (num_complexes,num_entitysets))
-	print('%d nodes including hypernode and entity set members' % (len(nodes)))	
+	print('%d nodes including hypernode and entity set members' % (len(nodes)))
 	return nodes,node_membership
 
 def get_STRING_interactions_in_reactome(interactions,uniprot2pc,infix,nodes,opts):
 	## check to see if these are singletons.  Get all nodes from singletons.
 	if opts.small_molecule_filter:
 		H_singletons, ignore, ignore= hgraph_utils.make_hypergraph(HGRAPH_SMALLMOL_PREFIX,keep_singleton_nodes=True)
-	elif opts.blacklist_filter:
-		H_singletons, ignore, ignore = hgraph_utils.make_hypergraph(HGRAPH_BLACKLIST_PREFIX,keep_singleton_nodes=True)
+	elif opts.ubiquitous_filter:
+		H_singletons, ignore, ignore = hgraph_utils.make_hypergraph(HGRAPH_UBIQUITOUS_PREFIX,keep_singleton_nodes=True)
 	else:
 		H_singletons, ignore, ignore = hgraph_utils.make_hypergraph(HGRAPH_PREFIX,keep_singleton_nodes=True)
 	singleton_nodes = H_singletons.get_node_set()
@@ -390,7 +388,7 @@ def get_STRING_interactions_in_reactome(interactions,uniprot2pc,infix,nodes,opts
 				missing[n2] = ('NA','NotInPC','NA')
 			mismapped+=1
 			continue
-		
+
 		if un1 in nodes and un2 in nodes:
 			interactions_in_reactome.append([un1,un2,val])
 		else:
@@ -404,7 +402,7 @@ def get_STRING_interactions_in_reactome(interactions,uniprot2pc,infix,nodes,opts
 
 			if un2 not in nodes:
 				if un2 in singleton_nodes:
-					missing[n2] = (un2,'NotInHypergraph','YES')	
+					missing[n2] = (un2,'NotInHypergraph','YES')
 					s = True
 				else:
 					missing[n2] = (un2,'NotInHypergraph','NO')
@@ -571,7 +569,7 @@ def viz_permutations(scores_file,perm_infix,num_perms,opts,k_vals=[0,1,2,3,4,5],
 				y.append(i)
 				areas.append(permutation_viz.get_area(X[k][i][j],factor=5))
 				colors.append(scores[PATHWAYS[i]][PATHWAYS[j]][k])
-		
+
 		plt.gca().invert_yaxis()
 		plt.gca().invert_xaxis()
 		ca = ax.scatter(x,y,s=areas,c=colors,cmap=cm.get_cmap('Blues'),vmin=0,vmax=1.0, edgecolors='k',linewidths=0.01)
@@ -598,7 +596,7 @@ def get_permutation_scores(scores,k_vals,perm_infix,num_perms,opts):
 		for i in range(len(PATHWAYS)):
 			X[k][i] = [0]*len(PATHWAYS)
 	for p in range(num_perms):
-		perm_outfile = make_outfile(opts,OUT_PATHWAY_DIR,'%s_%d_perms_10000_swaps' % (perm_infix,p))	
+		perm_outfile = make_outfile(opts,OUT_PATHWAY_DIR,'%s_%d_perms_10000_swaps' % (perm_infix,p))
 		perm_scores = read_influence_scores_file(perm_outfile)
 		for i in range(len(PATHWAYS)):
 			for j in range(len(PATHWAYS)):
@@ -616,7 +614,7 @@ def permutation_stats(scores_file):
 	# read scores file
 	#for i in range(len(PATHWAYS)):
 	#	print(i,PATHWAYS[i])
-	
+
 	#22 Signaling-by-BMP
 	#23 Signaling-by-Activin
 	#18 Signaling-by-TGF-beta-Receptor-Complex
@@ -653,7 +651,7 @@ def permutation_stats(scores_file):
 	print('OVERAL MAX: %s -> %s: k=%d val=%.2f' % (max_pairs_total[0],max_pairs_total[1],k_total,max_score_total))
 	for i in range(num_pairs):
 		print('  PAIR %s -> %s: k=%d val=%.2f' % (pairs_to_record[i][0],pairs_to_record[i][1],k_val[i],max_scores[i]))
-	return	
+	return
 
 def read_influence_scores_file(scores_file):
 	scores = {}  # pathwayA pathwayB k: float
@@ -742,13 +740,13 @@ def viz_influence_histogram(H,id2identifier,identifier2id,pathway_members,pathwa
 				ax.plot(x,overlap[n],color=[0.8,0.8,0.8],lw=1,label='_nolegend_',zorder=1)
 
 		# adjust text_list to be at least 3 spaces apart
-		text_list = space(text_list,buff)	
+		text_list = space(text_list,buff)
 		for i in range(len(text_list)):
 			label = '%s' % (PATHWAY_NAMES[text_list[i][0]])
 			ax.text(max_k+.25,text_list[i][3],label,backgroundcolor=COLORS[text_list[i][0]],color='w',fontsize=12)
 			ax.plot([max_k,max_k+.25],[overlap[text_list[i][0]][-1],text_list[i][3]],color=COLORS[text_list[i][0]],label='_nolegend_')
 
-		
+
 		ax.plot(range(len(running_tot)),running_tot,'--k',label='_nolegend_')
 		print('RUNNING:TOT',running_tot)
 		if max_k <= 5:
@@ -765,11 +763,11 @@ def viz_influence_histogram(H,id2identifier,identifier2id,pathway_members,pathwa
 			ax.set_xticks(range(0,max_k+1,2))
 		else:
 			ax.set_xticks(range(max_k+1))
-		
+
 		for tick in ax.xaxis.get_major_ticks():
 			tick.label.set_fontsize(12)
 		for tick in ax.yaxis.get_major_ticks():
-			tick.label.set_fontsize(12) 
+			tick.label.set_fontsize(12)
 		#ax.set_xtick_labels(range(max_k+1))
 		ax.set_ylabel('# of Nodes',fontsize=14)
 		#plt.tight_layout()
@@ -780,7 +778,7 @@ def viz_influence_histogram(H,id2identifier,identifier2id,pathway_members,pathwa
 		os.system('pdfcrop %s.pdf %s.pdf' % (outprefix,outprefix))
 		print('  saved to '+outprefix+'.pdf')
 		plt.close()
-		
+
 	return
 
 def space(text_list,buff):
@@ -837,7 +835,7 @@ def survey_graph(G,outfile):
 			print(' %d of %d' % (i,nx.number_of_nodes(G)))
 		# if this node is a hyperedge_node (from bipartite graph), ignore.
 		attrs = nx.get_node_attributes(G,s)
-		if 'hedge_node' in G.node[s] and G.node[s]['hedge_node']: 
+		if 'hedge_node' in G.node[s] and G.node[s]['hedge_node']:
 			continue
 		processed+=1
 		dist_sets = graph_utils.bfs_histogram(G,s)
@@ -864,7 +862,7 @@ def survey_graph_pathways(G,pathway_members,suffix,opts,double_distances=True,ve
 		for pathway in pathway_members:
 			if verbose:
 				print('  Pathway "%s"' % (pathway))
-		
+
 			dist_dict = graph_connectivity_set(G,pathway_members[pathway])
 			hist_dicts[pathway] = graph_utils.dist2hist(dist_dict)
 			if double_distances: # for bipartite graph
@@ -915,13 +913,16 @@ def graph_connectivity_set(G,pathway_members):
 		if d == ss:
 			continue
 		dist_dict[d]=this_dist_dict[d]-1
-		
+
 	for node in pathway_members:
 		G.remove_edge(ss,node)
 	G.remove_node(ss)
 	return dist_dict
 
 def survey_hgraph(H,outfile):
+	## TODO cplex is broken for python 3.7 on home laptop
+	import hypergraph_code.ILP.shortest_hyperpath as shortest_hyperpath
+	
 	## TODO cplex doesn't work on home laptop
 	if not FORCE and os.path.isfile(outfile):
 		force_print_statement(outfile)
@@ -944,7 +945,7 @@ def survey_hgraph(H,outfile):
 		G = H.get_induced_subhypergraph(bconn)
 
 		dist_dict = {}
-		for t in bconn:		
+		for t in bconn:
 			# get distance from node to t using ILP
 			dist_dict[t] = shortest_hyperpath.runILP(G,node,t)
 
@@ -984,7 +985,7 @@ def survey_hgraph_brelax(H,outfile,id2identifier,identifier2id,opts):
 	if not FORCE and os.path.isfile(outfile):
 		force_print_statement(outfile)
 		return
-	
+
 	out = open(outfile,'w')
 	out.write('#Name\td=1\td=2\td=3\t...\n')
 	i = 0
@@ -1032,7 +1033,7 @@ def survey_hgraph_pathways(H,id2identifier,identifier2id,pathway_members,suffix,
 		for pathway in pathway_members:
 			if verbose:
 				print('  Pathway "%s"' % (pathway))
-		
+
 			dist_dict,ignore = hpaths.b_relaxation(H,pathway_members[pathway],b_visit_dict=b_visit_dict)
 			hist_dicts[pathway] = graph_utils.dist2hist(dist_dict)
 			max_dist = max(max_dist,max(hist_dicts[pathway].keys()))
@@ -1164,7 +1165,7 @@ def generate_pathway_permutations(pathways,num_swaps,opts,infix):
 	print('done with %d permutations' % (permutation))
 
 def influence_score_fast(initp1,initp2,cumulative1,cumulative2):
-	init_intersection = initp1.intersection(initp2)	
+	init_intersection = initp1.intersection(initp2)
 	numerator = len(cumulative1.intersection(initp2).difference(init_intersection))
 	denominator = len(cumulative1.difference(init_intersection))
 	score = numerator/denominator
@@ -1239,7 +1240,7 @@ def get_pathways_for_STRING_analysis(opts):
 					continue
 				row = line.strip().split()
 				pathway_nodes[row[0]] = set(row[2].split(';'))
-	
+
 	all_pathway_nodes = set()
 	for p in pathway_nodes:
 		all_pathway_nodes.update(pathway_nodes[p])
@@ -1249,11 +1250,11 @@ def get_pathways_for_STRING_analysis(opts):
 #############################
 ## DATA READERS AND UTILITY FUNCTIONS
 #############################
-def get_representations(small_molecule_filter,blacklist_filter,keep_singletons,opts):
+def get_representations(small_molecule_filter,ubiquitous_filter,keep_singletons,opts):
 	## SIF graph is an edges file; by definition there are no singletons.
 	sif_graph = graph_utils.read_graph(SIF_FILE,SIF_CONV_FILE)
 	nodes = sif_graph.nodes()
-	
+
 	pcid2hgnc, hgnc2pcid = hgraph_utils.get_id_map(PATHWAY_HGRAPH_ENTITIES,common_name=True)
 	nodes_to_keep = set()
 
@@ -1268,29 +1269,29 @@ def get_representations(small_molecule_filter,blacklist_filter,keep_singletons,o
 				nodes_to_keep.add(n)
 			if n in hgnc2pcid and (hgnc2pcid[n] in ADDITIONAL_MOLECULES or 'SmallMolecule' in hgnc2pcid[n]):
 				print('skipping small mol node',n)
-	elif blacklist_filter:
-		blacklisted = set()
-		with open(BLACKLIST_FILE) as fin:
-			for line in fin: # take first column of blacklist file
-				blacklisted.add(line.strip().split()[0])
+	elif ubiquitous_filter:
+		ubiquitous = set()
+		with open(UBIQUITOUS_FILE) as fin:
+			for line in fin: # take first column of ubiquitous file
+				ubiquitous.add(line.strip().split()[0])
 		for n in nodes:
-			if n in hgnc2pcid and hgnc2pcid[n] not in blacklisted:
+			if n in hgnc2pcid and hgnc2pcid[n] not in ubiquitous:
 				nodes_to_keep.add(n)
-			if n in hgnc2pcid and hgnc2pcid[n] in blacklisted:
-				print('skippig blacklisted node',n)
+			if n in hgnc2pcid and hgnc2pcid[n] in ubiquitous:
+				print('skippig ubiquitous node',n)
 	else: # make sure nodes are in pcid
-		nodes_to_keep = set([n for n in nodes if n in hgnc2pcid.keys()])	
+		nodes_to_keep = set([n for n in nodes if n in hgnc2pcid.keys()])
 	sif_graph = sif_graph.subgraph(nodes_to_keep)
 	print('filtering to keep %d nodes' % (len(nodes_to_keep)))
 	print('Graph after filtering by PCID: %d nodes' % (len(sif_graph.nodes())))
-	
+
 	# compound graph later
 	if small_molecule_filter:
 		hypergraph, identifier2id, id2identifier = hgraph_utils.make_hypergraph(HGRAPH_SMALLMOL_PREFIX,keep_singleton_nodes=keep_singletons)
 		#hgraph_utils.check_singleton_nodes(hypergraph,HGRAPH_SMALLMOL_PREFIX,PATHWAY_HGRAPH_ENTITIES,outfile=make_outfile(opts,OUT_TXT_DIR,'hypergraph-singletons'))
-	elif blacklist_filter:
-		hypergraph, identifier2id, id2identifier = hgraph_utils.make_hypergraph(HGRAPH_BLACKLIST_PREFIX,keep_singleton_nodes=keep_singletons)
-		#hgraph_utils.check_singleton_nodes(hypergraph,HGRAPH_BLACKLIST_PREFIX,PATHWAY_HGRAPH_ENTITIES,outfile=make_outfile(opts,OUT_TXT_DIR,'hypergraph-singletons'))
+	elif ubiquitous_filter:
+		hypergraph, identifier2id, id2identifier = hgraph_utils.make_hypergraph(HGRAPH_UBIQUITOUS_PREFIX,keep_singleton_nodes=keep_singletons)
+		#hgraph_utils.check_singleton_nodes(hypergraph,HGRAPH_UBIQUITOUS_PREFIX,PATHWAY_HGRAPH_ENTITIES,outfile=make_outfile(opts,OUT_TXT_DIR,'hypergraph-singletons'))
 	else:
 		hypergraph, identifier2id, id2identifier = hgraph_utils.make_hypergraph(HGRAPH_PREFIX,keep_singleton_nodes=keep_singletons)
 		#hgraph_utils.check_singleton_nodes(hypergraph,HGRAPH_PREFIX,PATHWAY_HGRAPH_ENTITIES,outfile=make_outfile(opts,OUT_TXT_DIR,'hypergraph-singletons'))
@@ -1320,8 +1321,8 @@ def make_outfile(opts,dir_prefix,infix,filetype='.txt'):
 		outfile+='_with-singletons'
 	if opts.small_molecule_filter:
 		outfile+='_small-molecule-filter'
-	if opts.blacklist_filter:
-		outfile+='_blacklist-filter'
+	if opts.ubiquitous_filter:
+		outfile+='_ubiquitous-filter'
 	outfile += filetype
 	return outfile
 
@@ -1370,7 +1371,7 @@ def write_permutation_excel(scores_file,perm_infix,num_perms,opts,k_vals=[0,1,2,
 
 	worksheet = workbook.add_worksheet('PathwayJaccardOverlap')
 	write_sheet(worksheet,scores,-1,bold)
-	
+
 	## scores & permutations
 	for k in k_vals:
 		print(' writing k=%d' % (k))
@@ -1402,7 +1403,7 @@ def write_sheet(worksheet,dictionary,k,bold,inds=False):
 #############################
 def parse_options():
 	parser = argparse.ArgumentParser(description='Run experiments for pathway connectivity. The four represenations are "SIF-Graph","Compound Graph","Bipartite Graph", and "Hypergraph"')
-	
+
 	## general arguments
 	group1 = parser.add_argument_group('General Arguments')
 	group1.add_argument('--force', action='store_true', default=False,
@@ -1416,8 +1417,8 @@ def parse_options():
 		help='Keep singleton nodes. Default False.')
 	group2.add_argument('--small_molecule_filter',action='store_true',default=False,
 		help='Filter by small molecule nodes')
-	group2.add_argument('--blacklist_filter',action='store_true',default=False,
-		help='Filter by PathwayCommons blacklist filtered nodes')
+	group2.add_argument('--ubiquitous_filter',action='store_true',default=False,
+		help='Filter by PathwayCommons ubiquitous filtered nodes')
 	#group2.add_argument('--common_nodes',action='store_true',default=False,
 	#	help='Filter representations so they have a similar node set (filter graph).')
 
@@ -1440,8 +1441,8 @@ def parse_options():
 	opts = parser.parse_args()
 
 	## run checks
-	if opts.small_molecule_filter and opts.blacklist_filter:
-		sys.exit('ERROR: cannot filter by both small molecules and the blacklisted set.')
+	if opts.small_molecule_filter and opts.ubiquitous_filter:
+		sys.exit('ERROR: cannot filter by both small molecules and the ubiquitous set.')
 
 	if not opts.perm_test and opts.set_seed:
 		sys.exit('ERROR: setting the seed is only useful when --perm_test is specified.')

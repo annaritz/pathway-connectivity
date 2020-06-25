@@ -3,7 +3,8 @@ import sys
 import os
 import matplotlib.pyplot as plt
 from math import log
-from scipy.misc import comb
+#from scipy.misc import comb
+from scipy.special import comb
 
 # tutorial from http://blog.nextgenetics.net/?e=43
 # and http://code.activestate.com/recipes/578175-hierarchical-clustering-heatmap-python/
@@ -66,7 +67,7 @@ def plot_ax(ax,graph_file,bipartite_file,compound_file,hgraph_file,norm,cumulati
 	ax.plot(data3,'-',lw=3,label='Compound Graph\n(%d nodes)' % (num3))
 	ax.plot(data2,'-',lw=3,label='Bipartite Graph\n(%d nodes)' % (num2))
 	ax.plot(data4,'-',lw=3,label='Hypergraph\n(%d nodes)' % (num4))
-	
+
 	ax.set_title(title)
 
 	ax.set_xlabel('Distance')
@@ -81,7 +82,7 @@ def plot_ax(ax,graph_file,bipartite_file,compound_file,hgraph_file,norm,cumulati
 def get_hist(infile,norm=False,cumulative=False):
 	print('making histogram from %s...' % infile)
 
-	
+
 	# first get max distance - this is used later.
 	max_dist =0
 	num_datapoints = 0
@@ -96,13 +97,13 @@ def get_hist(infile,norm=False,cumulative=False):
 	num_zeros = 0
 	with open(infile) as fin:
 		for line in fin:
-			if line[0] == '#': 
+			if line[0] == '#':
 				continue
-			
+
 			row =line.strip().split('\t')
 			row = [int(i) for i in row[1:]] # skip first element (hid name)
 
-			for i in range(len(row)):  
+			for i in range(len(row)):
 				if i==0:
 					data[i] += row[i]
 				else: # row is cumulative -- "undo" that for this.
@@ -115,7 +116,7 @@ def get_hist(infile,norm=False,cumulative=False):
 
 	## append num_zeros to data
 	## data = [num_zeros] + data
-			
+
 	print('ORIG:',data[:10])
 	if cumulative:
 		for i in range(1,len(data)):
@@ -129,7 +130,7 @@ def get_hist(infile,norm=False,cumulative=False):
 	return data, num_datapoints, max_dist, num_zeros
 
 if __name__ == '__main__':
-	
+
 	## hard-coded for now.
 	graph_file = '../SIF/outfiles/reactome.txt.parameterized'
 	bipartite_file = '../hypergraph_code/output/graph-reactome.txt.parameterized'

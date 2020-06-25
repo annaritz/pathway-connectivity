@@ -9,7 +9,7 @@ def make_hypergraph(file_prefix,delim=';',sep='\t',keep_singleton_nodes=False):
 	hypernodes = {}
 	with open(file_prefix+'-hypernodes.txt') as fin:
 		for line in fin:
-			if line[0] == '#': 
+			if line[0] == '#':
 				continue
 			row = line.strip().split(sep)
 			## TODO fix -- this happens when a complex contains other complexes
@@ -48,7 +48,7 @@ def make_hypergraph(file_prefix,delim=';',sep='\t',keep_singleton_nodes=False):
 			hedge_id = row[4]
 
 			## THIS IS A HACK FOR NOW ( should be incorporated in the make-hypergraph.py code)
-			## IGnore any reactions that have a Reactome Identifier (e.g. has "HSA") instead of 
+			## IGnore any reactions that have a Reactome Identifier (e.g. has "HSA") instead of
 			## a PAthway Commons identifier.
 			if any(['HSA' in s for s in tail]+['HSA' in s for s in head]):
 				skipped1+=1
@@ -56,9 +56,9 @@ def make_hypergraph(file_prefix,delim=';',sep='\t',keep_singleton_nodes=False):
 				skipped2+=1
 			else:
 				hid = H.add_hyperedge(tail,head,identifier=hedge_id)
-				identifier2id[hedge_id] = hid 
+				identifier2id[hedge_id] = hid
 				id2identifier[hid] = hedge_id
-				
+
 	print('%d reactions skipped because of Reactome identifier' % (skipped1))
 	print('%d reactions skipped because of an empty tail or head' % (skipped2))
 	## annotate nodes
@@ -72,14 +72,14 @@ def make_hypergraph(file_prefix,delim=';',sep='\t',keep_singleton_nodes=False):
 
 		H.add_node(node)
 
-	print('Hypergraph has %d hyperedges and %d nodes (%d of these are hypernodes)' % 
+	print('Hypergraph has %d hyperedges and %d nodes (%d of these are hypernodes)' %
 		(stats.number_of_hyperedges(H),stats.number_of_nodes(H),num_hypernodes))
 
 	return H, identifier2id, id2identifier
 
 def check_singleton_nodes(H,file_prefix,entityset_prefix,outfile=None,sep='\t'):
-	# get entity set 
-	
+	# get entity set
+
 	candidate_nodes = set()
 	candidate_members = set()
 	files = glob.glob('%s*-entitysets.txt' % (entityset_prefix))
@@ -112,12 +112,12 @@ def check_singleton_nodes(H,file_prefix,entityset_prefix,outfile=None,sep='\t'):
 	with open(file_prefix+'-hypernodes.txt') as fin:
 		for line in fin:
 			i+=1
-			if line[0] == '#': 
+			if line[0] == '#':
 				continue
 			row = line.strip().split(sep)
 			n = row[0]
 			if n not in nodes or (n in nodes and len(H.get_backward_star(n))==0 and len(H.get_backward_star(n))==0):
-				## singleton candidate. in ES?  
+				## singleton candidate. in ES?
 				if n in candidate_nodes:
 					singleton_nodes.add(n)
 				elif n in candidate_members:
@@ -125,7 +125,7 @@ def check_singleton_nodes(H,file_prefix,entityset_prefix,outfile=None,sep='\t'):
 				elif 'R-HSA' in n:
 					num_rsa_id+=1
 				else:
-					
+
 					others+=1
 
 	print('%d singleton nodes (%.2f)' % (len(singleton_nodes),len(singleton_nodes)/i))
@@ -143,7 +143,7 @@ def check_singleton_nodes(H,file_prefix,entityset_prefix,outfile=None,sep='\t'):
 
 def add_entity_set_info(H,prefix):
 	## adds entity set information (like complexes)
-	## hard -coded in for now. 
+	## hard -coded in for now.
 	files = glob.glob('%s*-entitysets.txt' % (prefix))
 	es = {}
 	for f in files:
@@ -181,8 +181,8 @@ def to_bipartite_graph(H):
 	return G
 
 def make_b_visit_dict(hedge_connectivity_file,identifier2id):
-	# make a dictionary where the key is a hyperedge ID and the value is a 
-	# 3-tuple of (bconnected nodes, traversed hedges, restrictive hedges). 
+	# make a dictionary where the key is a hyperedge ID and the value is a
+	# 3-tuple of (bconnected nodes, traversed hedges, restrictive hedges).
 	b_visit_dict = {}
 	with open(hedge_connectivity_file) as fin:
 		for line in fin:
@@ -211,26 +211,26 @@ def make_b_visit_dict(hedge_connectivity_file,identifier2id):
 	#print('%d hyperedges processed' % (len(b_visit_dict)))
 	return b_visit_dict
 
-def filter_by_blacklisted_entities(H,blacklist_file,outfile=None):
-	blacklisted = set()
-	with open(blacklist_file) as fin:
-		for line in fin: # take first column of blacklist file
-			blacklisted.add(line.strip().split()[0])
-	print('%d entities blacklisted' % (len(blacklisted)))
+def filter_by_ubiquitous_entities(H,ubiquitous_file,outfile=None):
+	ubiquitous = set()
+	with open(ubiquitous_file) as fin:
+		for line in fin: # take first column of ubiquitous file
+			ubiquitous.add(line.strip().split()[0])
+	print('%d entities in ubiquitous file' % (len(ubiquitous)))
 
-	## remove blacklisted entities, retaining hyperedges if they have nonempty
+	## remove ubiquitous entities, retaining hyperedges if they have nonempty
 	## heads and tails. Can't use the halp remove_node() function because that
 	## removes any hyperedge that contains the node.
-	## also have to check hypernodes, removing them if all members are blacklisted.
+	## also have to check hypernodes, removing them if all members are ubiquitous.
 	nodes_to_remove = set()
 	for node in H.get_node_set():
-		if node in blacklisted: # node is in blacklisted set
+		if node in ubiquitous: # node is in ubiquitous set
 			nodes_to_remove.add(node)
 		if H.get_node_attribute(node,'is_hypernode'):
 			#print('checking hypernode %s' % (node))
 			members = H.get_node_attribute(node,'hypernode_members')
-			num_blacklisted = sum([e in blacklisted for e in members])
-			if num_blacklisted == len(members):
+			num_ubiquitous = sum([e in ubiquitous for e in members])
+			if num_ubiquitous == len(members):
 				nodes_to_remove.add(node)
 				print('adding hypernode to removed nodes.')
 	print('set to remove %d nodes' % (len(nodes_to_remove)))
@@ -245,7 +245,7 @@ def filter_by_blacklisted_entities(H,blacklist_file,outfile=None):
 
 
 def get_id_map(prefix,common_name=False):
-	## reads ALL of reactome pathways and generates a PC2 identifier to uniprot.  
+	## reads ALL of reactome pathways and generates a PC2 identifier to uniprot.
 	pcid2uid = {}
 	uid2pcid = {}
 	files = glob.glob('%s*-elements.txt' % (prefix))

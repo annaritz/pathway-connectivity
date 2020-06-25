@@ -29,10 +29,12 @@ This directory contains list of Reactome pathways according to different reprent
 
 This directory contains interactions from the [STRING database](https://string-db.org/) ([von Mering et al., NAR 2005](https://www.ncbi.nlm.nih.gov/pubmed/15608232)); ([Szklarczyk et al., NAR 2019](https://www.ncbi.nlm.nih.gov/pubmed/30476243)); see the `README.md` file there for more information.
 
-### Blacklisted Molecules
+### Ubiquitous Molecules
 
-The `blacklist.txt` file contains ubiquitous molecules from PathwayCommons:
+The `ubiquitous.txt` file contains ubiquitous molecules from PathwayCommons:
 
 ```
 wget http://www.pathwaycommons.org/archives/PC2/v10/blacklist.txt
 ```
+
+This file was renamed from `blacklist.txt` to `ubiquitous.txt` to remove the racist connotations - see the Developer Notes in the `README.md` file one diretory up.

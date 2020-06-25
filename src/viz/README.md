@@ -9,16 +9,15 @@ python3 connectivity-transformations.py ../hypergraph/output/reactome.txt ../hyp
 ## HUB SURVEY
 python3 hub-survey.py ../hypergraph_code/output/reactome_hubs.txt hub-histogram
 
-
 ## BRELAX
-python3 brelax-survey.py ../hypergraph_code/output/b_relax_reactome.txt  ../hypergraph_code/output/blacklist_filter_b_relax.txt b_relax-histogram
+python3 brelax-survey.py ../hypergraph_code/output/b_relax_reactome.txt  ../hypergraph_code/output/ubiquitous_filter_b_relax.txt b_relax-histogram
 
-python3 brelax-survey.py ../hypergraph_code/output/b_relax_reactome.txt  ../hypergraph_code/output/blacklist_filter_b_relax.txt ../hypergraph_code/output/small_molecule_filter_b_relax.txt b_relax-histogram_threepanel
+python3 brelax-survey.py ../hypergraph_code/output/b_relax_reactome.txt  ../hypergraph_code/output/ubiquitous_filter_b_relax.txt ../hypergraph_code/output/small_molecule_filter_b_relax.txt b_relax-histogram_threepanel
 
 ## PATHWAY INFLUENCE
 python3 pathway-influence.py ../hypergraph_code/output/pathways/full_reactome_ influence-output/full_reactome
 python3 pathway-influence.py ../hypergraph_code/output/pathways/small_molecule_filter_ influence-output/small_molecule_filter
-##python3 pathway-influence.py ../hypergraph_code/output/pathways/blacklist_filter_ influence-output/blacklist_filter
+##python3 pathway-influence.py ../hypergraph_code/output/pathways/ubiquitous_filter_ influence-output/ubiquitous_filter
 
 ## PERMUTATION TEST!!
 python3 significant-pathway-influence.py ../hypergraph_code/output/pathways/small_molecule_filter_ influence-output/significant_small_molecule_filter_ ../hypergraph_code/output/pathways/permutations/small_molecule_filter_ 100 1000
@@ -47,4 +46,3 @@ python3 significant-pathway-scores.py single influence-output/reactome_filtered_
 
 ## CASE STUDY
 python3 case-study.py ../hypergraph_code/output/pathways/small_molecule_filter_ case-study-output/small_molecule_filter_
-
